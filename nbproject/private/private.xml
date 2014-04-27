@@ -3,17 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/ricardopereira/Development/Java/EightMinutes/src/pt/eightminutes/logic/Accao.java</file>
-            <file>file:/Users/ricardopereira/Development/Java/EightMinutes/src/pt/eightminutes/logic/Jogador.java</file>
-            <file>file:/Users/ricardopereira/Development/Java/EightMinutes/src/pt/eightminutes/logic/Regiao.java</file>
-            <file>file:/Users/ricardopereira/Development/Java/EightMinutes/src/pt/eightminutes/logic/Carta.java</file>
-            <file>file:/Users/ricardopereira/Development/Java/EightMinutes/src/pt/isec/EightMinutes.java</file>
-            <file>file:/Users/ricardopereira/Development/Java/EightMinutes/src/pt/eightminutes/logic/Cidade.java</file>
-            <file>file:/Users/ricardopereira/Development/Java/EightMinutes/src/pt/eightminutes/logic/Mapa.java</file>
-            <file>file:/Users/ricardopereira/Development/Java/EightMinutes/src/pt/eightminutes/logic/Exercito.java</file>
-            <file>file:/Users/ricardopereira/Development/Java/EightMinutes/src/pt/eightminutes/logic/Jogo.java</file>
-            <file>file:/Users/ricardopereira/Development/Java/EightMinutes/src/pt/eightminutes/logic/Continente.java</file>
-            <file>file:/Users/ricardopereira/Development/Java/EightMinutes/src/pt/eightminutes/logic/Recurso.java</file>
+            <file>file:/Users/goncaloserrano/Dropbox/ISEC/2Ano/2Semestre/PA/Trabalho/java.EightMinutes/src/pt/eightminutes/logic/Jogador.java</file>
+            <file>file:/Users/goncaloserrano/Dropbox/ISEC/2Ano/2Semestre/PA/Trabalho/java.EightMinutes/src/pt/eightminutes/logic/Cidade.java</file>
+            <file>file:/Users/goncaloserrano/Dropbox/ISEC/2Ano/2Semestre/PA/Trabalho/java.EightMinutes/src/pt/Estados/AguardaColocaExercito.java</file>
+            <file>file:/Users/goncaloserrano/Dropbox/ISEC/2Ano/2Semestre/PA/Trabalho/java.EightMinutes/src/pt/Estados/AguardaDestroiExercito.java</file>
+            <file>file:/Users/goncaloserrano/Dropbox/ISEC/2Ano/2Semestre/PA/Trabalho/java.EightMinutes/src/pt/Estados/IEstados.java</file>
+            <file>file:/Users/goncaloserrano/Dropbox/ISEC/2Ano/2Semestre/PA/Trabalho/java.EightMinutes/src/pt/Estados/AguardaEscolheCarta.java</file>
+            <file>file:/Users/goncaloserrano/Dropbox/ISEC/2Ano/2Semestre/PA/Trabalho/java.EightMinutes/src/pt/Estados/AguardaColocaCidade.java</file>
+            <file>file:/Users/goncaloserrano/Dropbox/ISEC/2Ano/2Semestre/PA/Trabalho/java.EightMinutes/src/pt/Estados/AguardaMoveExercitoAgua.java</file>
+            <file>file:/Users/goncaloserrano/Dropbox/ISEC/2Ano/2Semestre/PA/Trabalho/java.EightMinutes/src/pt/eightminutes/logic/Jogo.java</file>
+            <file>file:/Users/goncaloserrano/Dropbox/ISEC/2Ano/2Semestre/PA/Trabalho/java.EightMinutes/src/pt/Interface/IUTexto.java</file>
+            <file>file:/Users/goncaloserrano/Dropbox/ISEC/2Ano/2Semestre/PA/Trabalho/java.EightMinutes/src/pt/Estados/AdaptadorEstados.java</file>
+            <file>file:/Users/goncaloserrano/Dropbox/ISEC/2Ano/2Semestre/PA/Trabalho/java.EightMinutes/src/pt/Estados/AguardaMoveExercito.java</file>
+            <file>file:/Users/goncaloserrano/Dropbox/ISEC/2Ano/2Semestre/PA/Trabalho/java.EightMinutes/src/pt/eightminutes/logic/Regiao.java</file>
+            <file>file:/Users/goncaloserrano/Dropbox/ISEC/2Ano/2Semestre/PA/Trabalho/java.EightMinutes/src/pt/Estados/AguardaEscolheAccao.java</file>
+            <file>file:/Users/goncaloserrano/Dropbox/ISEC/2Ano/2Semestre/PA/Trabalho/java.EightMinutes/src/pt/eightminutes/logic/Mapa.java</file>
         </group>
     </open-files>
 </project-private>

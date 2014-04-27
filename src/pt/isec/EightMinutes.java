@@ -6,22 +6,22 @@
 
 package pt.isec;
 
+import java.io.IOException;
+import pt.Estados.AguardaFinalJogo;
 import pt.eightminutes.logic.*;
+import pt.Interface.*;
 
-/**
- *
- * @author ricardopereira
- */
+
 public class EightMinutes {
     
-    Jogo jogo = new Jogo();
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-        System.out.print("Game");
+    public static void main(String[] args) throws IOException, InterruptedException {
+        Jogo jogo = new Jogo();       
+        IUTexto iuTexto = new IUTexto(jogo);
+        iuTexto.iniciaJogo();
+        while(jogo.getEstadoActual() != null)
+        {
+           iuTexto.executaInterface();
+        }
     }
     
 }

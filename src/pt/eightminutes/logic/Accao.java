@@ -6,10 +6,67 @@
 
 package pt.eightminutes.logic;
 
-/**
- *
- * @author ricardopereira
- */
-public class Accao {
+import java.io.Serializable;
+
+public abstract class Accao implements Serializable{
+    private String nome;
+    private int qtd;
+    private boolean usada;
+    
+   public Accao(String nome, int qtd){
+        this.nome = nome;
+        this.qtd = qtd;
+    } 
+
+    /**
+     * @return the nome
+     */
+    public String getNome() {
+        return nome;
+    }
+
+    /**
+     * @param nome the nome to set
+     */
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    /**
+     * @return the qtd
+     */
+    public int getQtd() {
+        return qtd;
+    }
+
+    /**
+     * @param qtd the qtd to set
+     */
+    public void setQtd(int qtd) {
+        this.qtd = qtd;
+        if(qtd==0)
+            setUsada(true);
+    }
+
+    /**
+     * @return the usada
+     */
+    public boolean isUsada() {
+        return usada;
+    }
+
+    /**
+     * @param usada the usada to set
+     */
+    public void setUsada(boolean usada) {
+        this.usada = usada;
+    }
+    
+    @Override
+    public String toString() {
+        String s = "";
+        s += "  "+ getNome()+" "+getQtd()+" vezes";        
+        return s;
+    }      
     
 }

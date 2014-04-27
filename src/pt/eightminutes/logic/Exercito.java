@@ -6,12 +6,25 @@
 
 package pt.eightminutes.logic;
 
-/**
- *
- * @author ricardopereira
- */
-public class Exercito {
+import java.io.Serializable;
+
+
+public class Exercito extends Peca{
+
+    public Exercito(Cor cor) {
+        super("Exercito", null,cor);
+    }
     
-    // Regiao
+    public void moveExercito(Regiao regiao){
+        setRegiao(regiao);
+    }
     
+    public void colocaExercito(Regiao regiao){        
+        setRegiao(regiao);
+    }
+    
+    public void destroiExercito(){
+        setRegiao(null);
+    }
+        
 }

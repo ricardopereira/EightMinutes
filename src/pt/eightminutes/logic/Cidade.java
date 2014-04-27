@@ -6,12 +6,15 @@
 
 package pt.eightminutes.logic;
 
-/**
- *
- * @author ricardopereira
- */
-public class Cidade {
+
+public class Cidade extends Peca{
+
+    public Cidade(Cor cor) {
+        super("Cidade", null,cor);
+    }    
     
-    // Regiao
+    public void colocaCidade(Regiao regiao){
+        setRegiao(regiao);
+    }
     
 }
