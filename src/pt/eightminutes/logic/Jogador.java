@@ -48,9 +48,9 @@ public class Jogador implements Serializable{
     public void colocaExercito(Regiao regiao, ArrayList<Exercito> exercitos){
         if(regiao!=null)
         {
-            for(int i=0;i<exercitos.size();i++){
-                for(int m=0;m<getListaExercitos().size();m++){
-                    if(getListaExercitos().get(m)==exercitos.get(i))
+            for (int i=0;i<exercitos.size();i++){
+                for (int m=0;m<getListaExercitos().size();m++){
+                    if (getListaExercitos().get(m)==exercitos.get(i))
                     {
                         getListaExercitos().get(m).colocaExercito(regiao);
                         if(getCartaActiva()!=null)
@@ -65,11 +65,23 @@ public class Jogador implements Serializable{
     }
     
     public void moveExercito(Regiao regiao, ArrayList<Exercito> exercitos){
+        // Lista de exercitos a mover
         for(int i=0;i<exercitos.size();i++){
+            // Lista de exercitos do Jogador
             for(int m=0;m<getListaExercitos().size();m++){
-                if(getListaExercitos().get(m)==exercitos.get(i)){
-                    getListaExercitos().get(m).moveExercito(regiao);
-                    if(getCartaActiva()!=null)
+                // Encontrar o exército a mover na lista de exercitos do Jogador
+                Exercito exercito = getListaExercitos().get(m);
+                if (exercito == exercitos.get(i)){
+                    // Encontrou exercito
+                    exercito.moveExercito(regiao);
+                    
+                    //getMenorMovimento
+                    //ArrayList<Regiao> r = new ArrayList<Regiao>();
+                    
+                    
+                    
+                    
+                    if (getCartaActiva() != null && getCartaActiva().getAccaoActiva() instanceof AccaoMoveExercito)
                         getCartaActiva().getAccaoActiva().setQtd(getCartaActiva().getAccaoActiva().getQtd()-1);
                     
                     bloqueiaAccaoExtra();

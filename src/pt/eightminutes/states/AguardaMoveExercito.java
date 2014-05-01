@@ -20,8 +20,13 @@ public class AguardaMoveExercito extends EstadosAdapter{
     }
  
     @Override
-    public IEstados moveExercito(Regiao regiao, ArrayList<Exercito> exercitos) {         
+    public IEstados moveExercito(Regiao regiao, ArrayList<Exercito> exercitos) {
+        // Executa acção da carta
+        
+        // ToDo: Refactoring
         getJogo().getJogadorActivo().moveExercito(regiao, exercitos);
+        
+        // Próximo estado
         if(getJogo().getEstadoAnterior() instanceof AguardaEscolheAccao)
             return new AguardaEscolheAccao(getJogo());
         else
