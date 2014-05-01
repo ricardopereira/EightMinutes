@@ -22,6 +22,31 @@ public class Continente implements Serializable{
         getRegioes().add(regiao);       
     }
 
+    public Jogador getJogadorControlaContinente(Jogo jogo){
+        int myQtdExerc=0;        
+        int myQtdMax=0;
+        Jogador jogadorControla=null;
+        
+        for(int m=0;m<jogo.getJogadores().size();m++){            
+            myQtdExerc = 0;
+            for(int i=0;i<getRegioes().size();i++){
+                if(getRegioes().get(i).getJogadorControlaRegiao(jogo) == jogo.getJogadores().get(m)){
+                    myQtdExerc++;
+                }
+            }
+            if (myQtdExerc>myQtdMax){
+                // se tiver mais do que o ultimo verificado passa a ser o jogador que controla a regiao
+                jogadorControla = jogo.getJogadores().get(m);
+            }
+            else
+            if(myQtdExerc==myQtdMax){
+                //se tiver o mesmo numero do jogador que controla deixam os dois de controlar
+                jogadorControla = null;
+            }
+        }
+        
+        return jogadorControla;
+    }
     /**
      * @return the nome
      */
