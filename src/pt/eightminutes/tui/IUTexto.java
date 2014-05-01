@@ -111,7 +111,7 @@ public class IUTexto {
             System.out.println("Definir nome do jogador(Exit-para sair do jogo):");                      
             opStr = obterString();            
             if(opStr.compareTo("Exit")==0)
-                iniciaJogo();           
+                iniciaJogo();
             
             jogo.criaJogador(opStr, Cor.preto);
         }    
@@ -367,7 +367,7 @@ public class IUTexto {
         for(int i=0;i<jogo.getJogadorActivo().getPecas().size();i++){
             if(jogo.getJogadorActivo().getPecas().get(i) instanceof Exercito){
                 if(jogo.getJogadorActivo().getPecas().get(i)!=null){
-                    if(jogo.getJogadorActivo().getPecas().get(i).getRegiao()!=null){               
+                    if(jogo.getJogadorActivo().getPecas().get(i).getRegiao()!=null){
                         myCont++;
                         System.out.print("Exército:"+myCont);                      
                         System.out.print(jogo.getJogadorActivo().getPecas().get(i).getRegiao());                           
@@ -418,7 +418,7 @@ public class IUTexto {
 
             System.out.println("\nEscolha uma Região(0-"+(regioesPossiveis.size()-1)+"):");           
             do {                                        
-                opInt = obterNumero();                                    
+                opInt = obterNumero();
             } while (opInt < 0 || opInt >(regioesPossiveis.size()-1));       
 
             myRegiao = regioesPossiveis.get(opInt);

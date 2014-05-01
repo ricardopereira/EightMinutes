@@ -13,7 +13,7 @@ public abstract class Accao implements Serializable{
     private int qtd;
     private boolean usada;
     
-   public Accao(String nome, int qtd){
+    public Accao(String nome, int qtd){
         this.nome = nome;
         this.qtd = qtd;
     } 
