@@ -297,10 +297,9 @@ public class Jogo implements Serializable{
         for(int i=0;i<jogadores.size();i++)
         {            
             exercitoAux.clear();
-            for(int m=0;m<jogadores.get(i).getPecas().size();m++){
-                if(jogadores.get(i).getPecas().get(m) instanceof Exercito){                
-                    exercitoAux.add((Exercito)jogadores.get(i).getPecas().get(m));
-                }
+            for(int m=0;m<jogadores.get(i).getListaExercitos().size();m++){                
+                exercitoAux.add((Exercito)jogadores.get(i).getListaExercitos().get(m));                
+                
                 if(exercitoAux.size()==3)
                     break;
             }

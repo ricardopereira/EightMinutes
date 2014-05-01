@@ -261,14 +261,12 @@ public class IUTexto {
         System.out.print("Cidade:2");                      
         System.out.print(jogo.getMapa().getRegiaoInicial());  
         
-        for(int i=0;i<jogo.getJogadorActivo().getPecas().size();i++){
-            if(jogo.getJogadorActivo().getPecas().get(i) instanceof Cidade){
-                if(jogo.getJogadorActivo().getPecas().get(i)!=null){
-                    if(jogo.getJogadorActivo().getPecas().get(i).getRegiao()!=null){
-                        myCont++;
-                        System.out.print("Cidade:"+myCont);                      
-                        System.out.print(jogo.getJogadorActivo().getPecas().get(i).getRegiao());   
-                    }
+        for(int i=0;i<jogo.getJogadorActivo().getListaCidades().size();i++){
+            if(jogo.getJogadorActivo().getListaCidades().get(i)!=null){
+                if(jogo.getJogadorActivo().getListaCidades().get(i).getRegiao()!=null){
+                    myCont++;
+                    System.out.print("Cidade:"+myCont);                      
+                    System.out.print(jogo.getJogadorActivo().getListaCidades().get(i).getRegiao());   
                 }
             }
         }
@@ -299,16 +297,14 @@ public class IUTexto {
             } while (opInt < 0|| opInt >myAccao.getQtd());
 
 
-            for(int m=0;m<jogo.getJogadorActivo().getPecas().size();m++){
+            for(int m=0;m<jogo.getJogadorActivo().getListaCidades().size();m++){
                 if(opInt==0)
                     break;
-
-                if(jogo.getJogadorActivo().getPecas().get(m) instanceof Exercito){
-                    if(jogo.getJogadorActivo().getPecas().get(m)!=null){
-                        exercitos.add((Exercito)jogo.getJogadorActivo().getPecas().get(m));
-                        opInt--;
-                    }
-                }
+            
+                if(jogo.getJogadorActivo().getListaExercitos().get(m)!=null){
+                    exercitos.add((Exercito)jogo.getJogadorActivo().getListaExercitos().get(m));
+                    opInt--;
+                }               
             }
 
             jogo.colocaExercito(myRegiao, exercitos);   
@@ -364,15 +360,13 @@ public class IUTexto {
         System.out.println("Passa vez:0");                      
         System.out.println("Muda acção:1");
         
-        for(int i=0;i<jogo.getJogadorActivo().getPecas().size();i++){
-            if(jogo.getJogadorActivo().getPecas().get(i) instanceof Exercito){
-                if(jogo.getJogadorActivo().getPecas().get(i)!=null){
-                    if(jogo.getJogadorActivo().getPecas().get(i).getRegiao()!=null){
-                        myCont++;
-                        System.out.print("Exército:"+myCont);                      
-                        System.out.print(jogo.getJogadorActivo().getPecas().get(i).getRegiao());                           
-                    }
-                }
+        for(int i=0;i<jogo.getJogadorActivo().getListaExercitos().size();i++){
+            if(jogo.getJogadorActivo().getListaExercitos().get(i)!=null){
+                if(jogo.getJogadorActivo().getListaExercitos().get(i).getRegiao()!=null){
+                    myCont++;
+                    System.out.print("Exército:"+myCont);                      
+                    System.out.print(jogo.getJogadorActivo().getListaExercitos().get(i).getRegiao());                           
+                }                
             }
         }
           
@@ -393,16 +387,14 @@ public class IUTexto {
 
             myCont=0;
             opInt = opInt-2;//retirados opções antes do exercito
-            for(int i=0;i<jogo.getJogadorActivo().getPecas().size();i++){
-                if(jogo.getJogadorActivo().getPecas().get(i) instanceof Exercito){
-                    if(jogo.getJogadorActivo().getPecas().get(i)!=null){
-                        if(jogo.getJogadorActivo().getPecas().get(i).getRegiao()!=null){                        
-                            if(myCont==opInt){
-                                exercitos.add((Exercito)jogo.getJogadorActivo().getPecas().get(i));
-                                myRegiao = jogo.getJogadorActivo().getPecas().get(i).getRegiao();
-                            } 
-                            myCont++;
-                        }
+            for(int i=0;i<jogo.getJogadorActivo().getListaExercitos().size();i++){                
+                if(jogo.getJogadorActivo().getListaExercitos().get(i)!=null){
+                    if(jogo.getJogadorActivo().getListaExercitos().get(i).getRegiao()!=null){                        
+                        if(myCont==opInt){
+                            exercitos.add((Exercito)jogo.getJogadorActivo().getListaExercitos().get(i));
+                            myRegiao = jogo.getJogadorActivo().getListaExercitos().get(i).getRegiao();
+                        } 
+                        myCont++;
                     }
                 }
             }
@@ -440,14 +432,12 @@ public class IUTexto {
         System.out.println("Passa vez:0");                      
         System.out.println("Muda acção:1");
         
-        for(int i=0;i<jogo.getJogadorActivo().getPecas().size();i++){
-            if(jogo.getJogadorActivo().getPecas().get(i) instanceof Exercito){
-                if(jogo.getJogadorActivo().getPecas().get(i)!=null){
-                    if(jogo.getJogadorActivo().getPecas().get(i).getRegiao()!=null){               
-                        myCont++;
-                        System.out.print("Exército:"+myCont);                      
-                        System.out.print(jogo.getJogadorActivo().getPecas().get(i).getRegiao());                           
-                    }
+        for(int i=0;i<jogo.getJogadorActivo().getListaExercitos().size();i++){
+            if(jogo.getJogadorActivo().getListaExercitos().get(i)!=null){
+                if(jogo.getJogadorActivo().getListaExercitos().get(i).getRegiao()!=null){               
+                    myCont++;
+                    System.out.print("Exército:"+myCont);                      
+                    System.out.print(jogo.getJogadorActivo().getListaExercitos().get(i).getRegiao());                           
                 }
             }
         }
@@ -468,16 +458,14 @@ public class IUTexto {
         {
             myCont=0;
             opInt = opInt-2;//retirados opções antes do exercito
-            for(int i=0;i<jogo.getJogadorActivo().getPecas().size();i++){
-                if(jogo.getJogadorActivo().getPecas().get(i) instanceof Exercito){
-                    if(jogo.getJogadorActivo().getPecas().get(i)!=null){
-                        if(jogo.getJogadorActivo().getPecas().get(i).getRegiao()!=null){                        
-                            if(myCont==opInt){
-                                exercitos.add((Exercito)jogo.getJogadorActivo().getPecas().get(i));
-                                myRegiao = jogo.getJogadorActivo().getPecas().get(i).getRegiao();
-                            } 
-                            myCont++;
-                        }
+            for(int i=0;i<jogo.getJogadorActivo().getListaExercitos().size();i++){
+                if(jogo.getJogadorActivo().getListaExercitos().get(i)!=null){
+                    if(jogo.getJogadorActivo().getListaExercitos().get(i).getRegiao()!=null){                        
+                        if(myCont==opInt){
+                            exercitos.add((Exercito)jogo.getJogadorActivo().getListaExercitos().get(i));
+                            myRegiao = jogo.getJogadorActivo().getListaExercitos().get(i).getRegiao();
+                        } 
+                        myCont++;
                     }
                 }
             }

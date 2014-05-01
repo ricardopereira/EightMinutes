@@ -15,7 +15,8 @@ public class Jogador implements Serializable{
     private int moedas;
     private int aposta;
     private ArrayList<Carta> cartas = new ArrayList<>();
-    private ArrayList<Peca> pecas = new ArrayList<>();
+    private ArrayList<Exercito> listaExercitos = new ArrayList<>();
+    private ArrayList<Cidade> listaCidades = new ArrayList<>();    
     private Carta cartaActiva;
     
     public Jogador(){
@@ -26,10 +27,10 @@ public class Jogador implements Serializable{
         this.nome = nome;
         this.moedas = moedas;
         for(int i=0;i<qtdExercito;i++)
-            pecas.add(new Exercito(cor));
+            listaExercitos.add(new Exercito(cor));
         
         for(int m=0;m<qtdCidades;m++)
-            pecas.add(new Cidade(cor));                   
+            listaCidades.add(new Cidade(cor));                   
     }
     
     public void bloqueiaAccaoExtra(){
@@ -48,10 +49,10 @@ public class Jogador implements Serializable{
         if(regiao!=null)
         {
             for(int i=0;i<exercitos.size();i++){
-                for(int m=0;m<pecas.size();m++){
-                    if((pecas.get(m) instanceof Exercito)&&(pecas.get(m)==exercitos.get(i)))
+                for(int m=0;m<getListaExercitos().size();m++){
+                    if(getListaExercitos().get(m)==exercitos.get(i))
                     {
-                        ((Exercito)pecas.get(m)).colocaExercito(regiao);
+                        getListaExercitos().get(m).colocaExercito(regiao);
                         if(getCartaActiva()!=null)
                             getCartaActiva().getAccaoActiva().setQtd(getCartaActiva().getAccaoActiva().getQtd()-1);                                                    
                         
@@ -65,9 +66,9 @@ public class Jogador implements Serializable{
     
     public void moveExercito(Regiao regiao, ArrayList<Exercito> exercitos){
         for(int i=0;i<exercitos.size();i++){
-            for(int m=0;m<pecas.size();m++){
-                if((pecas.get(m) instanceof Exercito)&&(pecas.get(m)==exercitos.get(i))){
-                    ((Exercito)pecas.get(m)).moveExercito(regiao);
+            for(int m=0;m<getListaExercitos().size();m++){
+                if(getListaExercitos().get(m)==exercitos.get(i)){
+                    getListaExercitos().get(m).moveExercito(regiao);
                     if(getCartaActiva()!=null)
                         getCartaActiva().getAccaoActiva().setQtd(getCartaActiva().getAccaoActiva().getQtd()-1);
                     
@@ -80,9 +81,9 @@ public class Jogador implements Serializable{
     
     public void moveExercitoAgua(Regiao regiao, ArrayList<Exercito> exercitos){
         for(int i=0;i<exercitos.size();i++){
-            for(int m=0;m<pecas.size();m++){
-                if((pecas.get(m) instanceof Exercito)&&(pecas.get(m)==exercitos.get(i))){
-                    ((Exercito)pecas.get(m)).moveExercito(regiao);
+            for(int m=0;m<getListaExercitos().size();m++){
+                if(getListaExercitos().get(m)==exercitos.get(i)){
+                    getListaExercitos().get(m).moveExercito(regiao);
                     if(getCartaActiva()!=null)
                         getCartaActiva().getAccaoActiva().setQtd(getCartaActiva().getAccaoActiva().getQtd()-1);
                     
@@ -94,11 +95,10 @@ public class Jogador implements Serializable{
     }
     
     public void destroiExercito(Exercito exercito){
-        ArrayList<Exercito> exercitosAux = getListaExercitos();
-        int myIdx=exercitosAux.indexOf(exercito);
+        int myIdx=getListaExercitos().indexOf(exercito);
         
         if(myIdx!=-1){           
-            exercitosAux.get(myIdx).destroiExercito();
+            getListaExercitos().get(myIdx).destroiExercito();
             if(getCartaActiva()!=null)
                 getCartaActiva().getAccaoActiva().setQtd(getCartaActiva().getAccaoActiva().getQtd()-1);
                 
@@ -107,11 +107,10 @@ public class Jogador implements Serializable{
     }
     
     public void colocaCidade(Regiao regiao){
-        ArrayList<Cidade> cidadesAux = getListaCidades();
         
-        for(int m=0;m<cidadesAux.size();m++){
-            if(cidadesAux.get(m).getRegiao()==null){
-                cidadesAux.get(m).colocaCidade(regiao);
+        for(int m=0;m<getListaCidades().size();m++){
+            if(getListaCidades().get(m).getRegiao()==null){
+                getListaCidades().get(m).colocaCidade(regiao);
                 
                 if(getCartaActiva()!=null)
                     getCartaActiva().getAccaoActiva().setQtd(getCartaActiva().getAccaoActiva().getQtd()-1);
@@ -120,29 +119,7 @@ public class Jogador implements Serializable{
                 break;
             }
         }                                 
-    }
-    
-    public ArrayList<Exercito> getListaExercitos(){
-        ArrayList<Exercito> exercitosAux= new ArrayList<>();
-        
-        for(int m=0;m<pecas.size();m++){
-            if((pecas.get(m) instanceof Exercito)&&(pecas.get(m)!=null)){
-                exercitosAux.add((Exercito)pecas.get(m));
-            }
-        }
-        return exercitosAux;
-    }        
-    
-    public ArrayList<Cidade> getListaCidades(){
-        ArrayList<Cidade> cidadesAux= new ArrayList<>();
-        
-        for(int m=0;m<pecas.size();m++){
-            if((pecas.get(m) instanceof Cidade)&&(pecas.get(m)!=null)){
-                cidadesAux.add((Cidade)pecas.get(m));
-            }
-        }
-        return cidadesAux;
-    }
+    }             
             
     public void gastaMoedas(int qtd){      
         setMoedas(getMoedas()-qtd);
@@ -169,10 +146,10 @@ public class Jogador implements Serializable{
     
     public Cidade getCidade(int idx){
         int cont=0;
-        for(int m=0;m<pecas.size();m++){
-            if((pecas.get(m) instanceof Cidade)&&(pecas.get(m).getRegiao()!=null)){
+        for(int m=0;m<getListaCidades().size();m++){
+            if(getListaCidades().get(m).getRegiao()!=null){
                 if(cont==idx)
-                    return (Cidade)pecas.get(m);
+                    return getListaCidades().get(m);
                 else
                     cont++;
             }
@@ -222,19 +199,6 @@ public class Jogador implements Serializable{
         this.cartas = cartas;
     }
 
-    /**
-     * @return the pecas
-     */
-    public ArrayList<Peca> getPecas() {
-        return pecas;
-    }
-
-    /**
-     * @param pecas the pecas to set
-     */
-    public void setPecas(ArrayList<Peca> pecas) {
-        this.pecas = pecas;
-    }
 
     /**
      * @return the aposta
@@ -262,5 +226,33 @@ public class Jogador implements Serializable{
      */
     public void setCartaActiva(Carta cartaActiva) {
         this.cartaActiva = cartaActiva;
+    }
+
+    /**
+     * @return the listaExercitos
+     */
+    public ArrayList<Exercito> getListaExercitos() {
+        return listaExercitos;
+    }
+
+    /**
+     * @param listaExercitos the listaExercitos to set
+     */
+    public void setListaExercitos(ArrayList<Exercito> listaExercitos) {
+        this.listaExercitos = listaExercitos;
+    }
+
+    /**
+     * @return the listaCidades
+     */
+    public ArrayList<Cidade> getListaCidades() {
+        return listaCidades;
+    }
+
+    /**
+     * @param listaCidades the listaCidades to set
+     */
+    public void setListaCidades(ArrayList<Cidade> listaCidades) {
+        this.listaCidades = listaCidades;
     }
 }
