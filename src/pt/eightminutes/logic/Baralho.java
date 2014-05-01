@@ -84,7 +84,8 @@ public class Baralho implements Serializable{
     }
     
     private void adicionaCarta(Recurso recurso, int qtdRecursos,boolean execTodasAccoes,Accao accao1, Accao accao2, int numCartas){
-        accoesAux.clear();      
+        accoesAux.clear();
+        // Accao pode ser nula
         accoesAux.add(accao1);
         accoesAux.add(accao2);
         
@@ -94,31 +95,7 @@ public class Baralho implements Serializable{
        
     private void baralhaCartas(){
         Collections.shuffle(getCartas());
-    }
-
-    public int getCustoPorIdx(int idx){
-        int myCusto = 0;
-        
-        switch (idx){
-            case 0: myCusto = 0;
-                    break;
-            case 1: myCusto = 1;
-                    break;
-            case 2: myCusto = 1;
-                    break;
-            case 3: myCusto = 2;
-                    break;
-            case 4: myCusto = 2;
-                    break;
-            case 5: myCusto = 3;
-                    break;
-            default: myCusto= 0;
-                     break;
-        }
-            
-        return myCusto;        
-    }
-    
+    }    
     
     /**
      * @return the cartas

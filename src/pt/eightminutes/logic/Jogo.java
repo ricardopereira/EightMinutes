@@ -15,6 +15,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
+
 import pt.eightminutes.states.AguardaPreparaJogo;
 import pt.eightminutes.states.IEstados;
 
@@ -163,8 +164,8 @@ public class Jogo implements Serializable{
             if(cartasViradas.get(i)!=null)
             {
                 if(i==idx){
-                    getJogadorActivo().adicionaCarta(cartasViradas.get(i),baralho.getCustoPorIdx(idx));   
-                    cartasViradas.get(i).setComprada(true);                    
+                    getJogadorActivo().adicionaCarta(cartasViradas.get(i),getCustoPorIdx(idx));   
+                    cartasViradas.get(i).setComprada(true);                   
                     break;
                 }                                             
             }
@@ -342,6 +343,30 @@ public class Jogo implements Serializable{
             }
         }
     }
+    
+    public int getCustoPorIdx(int idx){
+        int myCusto = 0;
+        
+        switch (idx) {
+            case 0: myCusto = 0;
+                    break;
+            case 1: myCusto = 1;
+                    break;
+            case 2: myCusto = 1;
+                    break;
+            case 3: myCusto = 2;
+                    break;
+            case 4: myCusto = 2;
+                    break;
+            case 5: myCusto = 3;
+                    break;
+            default: myCusto= 0;
+                     break;
+        }
+            
+        return myCusto;        
+    }
+    
     /**
      * @return the numJogadores
      */
