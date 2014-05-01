@@ -115,16 +115,32 @@ public class Jogador implements Serializable{
                 Exercito exercito = getListaExercitos().get(m);
                 if (exercito == exercitos.get(i)){
                     // Encontrou exercito
-                    exercito.moveExercito(regiao);
                     
                     //getMenorMovimento
                     //ArrayList<Regiao> r = new ArrayList<Regiao>();
                     
+                    // Origem
+                    Regiao origem = exercito.getRegiao();
+                    // Destino
+                    Regiao destino = regiao;
                     
+                    boolean isVizinho = false;
+                    // Verificar se o destino é um vizinho da Origem
+                    for (Regiao item : origem.getRegioesVizinhas()){
+                        if (item == regiao){
+                            isVizinho = true;
+                        }
+                    }
                     
+                    if (!isVizinho){
+                        
+                    }
+
+                    //if (getCartaActiva() != null && getCartaActiva().getAccaoActiva() instanceof AccaoMoveExercito)
+                    //    getCartaActiva().getAccaoActiva().setQtd(getCartaActiva().getAccaoActiva().getQtd()-1);
                     
-                    if (getCartaActiva() != null && getCartaActiva().getAccaoActiva() instanceof AccaoMoveExercito)
-                        getCartaActiva().getAccaoActiva().setQtd(getCartaActiva().getAccaoActiva().getQtd()-1);
+                    // Efectua a alteração
+                    exercito.moveExercito(regiao);
                     
                     bloqueiaAccaoExtra();
                     break;

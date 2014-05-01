@@ -41,47 +41,47 @@ public class Mapa implements Serializable{
         continente1.adicionaRegiao(new Regiao("6",continente1));
         continente1.adicionaRegiao(new Regiao("7",continente1));
         //define regioes vizinhas
-        regioesAux.add(continente1.getRegioes().get(1));
-        regioesAux.add(continente1.getRegioes().get(2));
-        regioesAux.add(continente1.getRegioes().get(3));
-        continente1.getRegioes().get(0).adicionaRegiaoVizinha(regioesAux);
+        regioesAux.add(continente1.getRegioes().get(1)); //R2
+        regioesAux.add(continente1.getRegioes().get(2)); //R3
+        regioesAux.add(continente1.getRegioes().get(3)); //R4
+        continente1.getRegioes().get(0).adicionaRegiaoVizinha(regioesAux); //R1
         regioesAux.clear();
-        regioesAux.add(continente1.getRegioes().get(0));
-        regioesAux.add(continente1.getRegioes().get(2));       
-        continente1.getRegioes().get(1).adicionaRegiaoVizinha(regioesAux);
+        regioesAux.add(continente1.getRegioes().get(0)); //R1
+        regioesAux.add(continente1.getRegioes().get(2)); //R3       
+        continente1.getRegioes().get(1).adicionaRegiaoVizinha(regioesAux); //R2
         regioesAux.clear();
-        regioesAux.add(continente1.getRegioes().get(0));        
-        regioesAux.add(continente1.getRegioes().get(2));
-        regioesAux.add(continente1.getRegioes().get(4));
-        continente1.getRegioes().get(2).adicionaRegiaoVizinha(regioesAux);
+        regioesAux.add(continente1.getRegioes().get(0)); //R1
+        regioesAux.add(continente1.getRegioes().get(2)); //R3
+        regioesAux.add(continente1.getRegioes().get(4)); //R5
+        continente1.getRegioes().get(2).adicionaRegiaoVizinha(regioesAux); //R3
         regioesAux.clear();
-        regioesAux.add(continente1.getRegioes().get(0));
-        regioesAux.add(continente1.getRegioes().get(1));
-        regioesAux.add(continente1.getRegioes().get(2));
-        regioesAux.add(continente1.getRegioes().get(4));
-        continente1.getRegioes().get(3).adicionaRegiaoVizinha(regioesAux);
+        regioesAux.add(continente1.getRegioes().get(0)); //R1
+        regioesAux.add(continente1.getRegioes().get(1)); //R2
+        regioesAux.add(continente1.getRegioes().get(2)); //R3
+        regioesAux.add(continente1.getRegioes().get(4)); //R5
+        continente1.getRegioes().get(3).adicionaRegiaoVizinha(regioesAux); //R4
         regioesAux.clear();
-        regioesAux.add(continente1.getRegioes().get(2));
-        regioesAux.add(continente1.getRegioes().get(3));
-        continente1.getRegioes().get(4).adicionaRegiaoVizinha(regioesAux);        
+        regioesAux.add(continente1.getRegioes().get(2)); //R3
+        regioesAux.add(continente1.getRegioes().get(3)); //R4
+        continente1.getRegioes().get(4).adicionaRegiaoVizinha(regioesAux); //R5
         regioesAux.clear();
-        regioesAux.add(continente1.getRegioes().get(2));
-        regioesAux.add(continente1.getRegioes().get(6));
-        continente1.getRegioes().get(5).adicionaRegiaoVizinha(regioesAux);        
+        regioesAux.add(continente1.getRegioes().get(2)); //R3
+        regioesAux.add(continente1.getRegioes().get(6)); //R7
+        continente1.getRegioes().get(5).adicionaRegiaoVizinha(regioesAux); //R6
         regioesAux.clear();
-        regioesAux.add(continente1.getRegioes().get(5));        
-        continente1.getRegioes().get(6).adicionaRegiaoVizinha(regioesAux);        
+        regioesAux.add(continente1.getRegioes().get(5)); //R6
+        continente1.getRegioes().get(6).adicionaRegiaoVizinha(regioesAux); //R7
         
         Continente continente2 = new Continente("Continente 2");
         continentes.add(continente2);
         continente2.adicionaRegiao(new Regiao("8",continente2));
         continente2.adicionaRegiao(new Regiao("9",continente2));
         regioesAux.clear();
-        regioesAux.add(continente2.getRegioes().get(1));        
-        continente2.getRegioes().get(0).adicionaRegiaoVizinha(regioesAux); 
+        regioesAux.add(continente2.getRegioes().get(1)); //R
+        continente2.getRegioes().get(0).adicionaRegiaoVizinha(regioesAux); //R
         regioesAux.clear();
-        regioesAux.add(continente2.getRegioes().get(0));        
-        continente2.getRegioes().get(1).adicionaRegiaoVizinha(regioesAux);    
+        regioesAux.add(continente2.getRegioes().get(0)); //R
+        continente2.getRegioes().get(1).adicionaRegiaoVizinha(regioesAux); //R
         
         Continente continente3 = new Continente("Continente 3");
         continentes.add(continente3);
@@ -98,18 +98,18 @@ public class Mapa implements Serializable{
         continente3.adicionaRegiao(new Regiao("20",continente3));
         //define regioes vizinhas
         regioesAux.clear();
-        regioesAux.add(continente3.getRegioes().get(1));
-        continente3.getRegioes().get(0).adicionaRegiaoVizinha(regioesAux);
+        regioesAux.add(continente3.getRegioes().get(1)); //R
+        continente3.getRegioes().get(0).adicionaRegiaoVizinha(regioesAux); //R
         regioesAux.clear();
-        regioesAux.add(continente3.getRegioes().get(0));
-        regioesAux.add(continente3.getRegioes().get(2));       
-        regioesAux.add(continente3.getRegioes().get(3));       
-        continente3.getRegioes().get(1).adicionaRegiaoVizinha(regioesAux);
+        regioesAux.add(continente3.getRegioes().get(0)); //R
+        regioesAux.add(continente3.getRegioes().get(2)); //R
+        regioesAux.add(continente3.getRegioes().get(3)); //R
+        continente3.getRegioes().get(1).adicionaRegiaoVizinha(regioesAux); //R
         regioesAux.clear();
-        regioesAux.add(continente3.getRegioes().get(1));        
-        regioesAux.add(continente3.getRegioes().get(3));
-        regioesAux.add(continente3.getRegioes().get(8));
-        continente3.getRegioes().get(2).adicionaRegiaoVizinha(regioesAux);
+        regioesAux.add(continente3.getRegioes().get(1)); //R
+        regioesAux.add(continente3.getRegioes().get(3)); //R
+        regioesAux.add(continente3.getRegioes().get(8)); //R
+        continente3.getRegioes().get(2).adicionaRegiaoVizinha(regioesAux); //R
         regioesAux.clear();
         regioesAux.add(continente3.getRegioes().get(1));
         regioesAux.add(continente3.getRegioes().get(2));
@@ -168,7 +168,7 @@ public class Mapa implements Serializable{
         regioesAux.add(continente4.getRegioes().get(1));        
         continente4.getRegioes().get(2).adicionaRegiaoVizinha(regioesAux); 
         
-        //Define vizinhos agua
+        //Define vizinhos marítimos
         regioesAux.clear();
         regioesAux.add(continente3.getRegioes().get(0));        
         continente1.getRegioes().get(1).adicionaRegiaoVizinha(regioesAux); 
@@ -209,7 +209,6 @@ public class Mapa implements Serializable{
         regioesAux.add(continente3.getRegioes().get(9));        
         continente4.getRegioes().get(2).adicionaRegiaoVizinha(regioesAux); 
     }
-
     
     /**
      * @return the continentes
