@@ -364,8 +364,8 @@ public class IUTexto {
             if(jogo.getJogadorActivo().getListaExercitos().get(i)!=null){
                 if(jogo.getJogadorActivo().getListaExercitos().get(i).getRegiao()!=null){
                     myCont++;
-                    System.out.print("Exército:"+myCont);                      
-                    System.out.print(jogo.getJogadorActivo().getListaExercitos().get(i).getRegiao());                           
+                    System.out.print("Exército:"+myCont);
+                    System.out.print("  R"+jogo.getJogadorActivo().getListaExercitos().get(i).getRegiao());                           
                 }                
             }
         }
@@ -377,20 +377,23 @@ public class IUTexto {
             opInt = obterNumero();                                    
         } while (opInt < 0|| opInt >myCont);
         
-        if(opInt==0)
+        // Verificar opção tomada
+        if(opInt == 0)
             jogo.passaVez();
         else
-        if(opInt==1)
+        if(opInt == 1)
             jogo.mudaAccao();
         else
         {
-
+            // Criar lista de exercitos seleccionados
+            // Obter região pertencem
             myCont=0;
-            opInt = opInt-2;//retirados opções antes do exercito
+            // ToDo: melhorar esta situação
+            opInt = opInt-2; //retirados opções antes do exercito
             for(int i=0;i<jogo.getJogadorActivo().getListaExercitos().size();i++){                
-                if(jogo.getJogadorActivo().getListaExercitos().get(i)!=null){
-                    if(jogo.getJogadorActivo().getListaExercitos().get(i).getRegiao()!=null){                        
-                        if(myCont==opInt){
+                if(jogo.getJogadorActivo().getListaExercitos().get(i) != null){
+                    if(jogo.getJogadorActivo().getListaExercitos().get(i).getRegiao() != null){
+                        if(myCont == opInt){
                             exercitos.add((Exercito)jogo.getJogadorActivo().getListaExercitos().get(i));
                             myRegiao = jogo.getJogadorActivo().getListaExercitos().get(i).getRegiao();
                         } 
@@ -398,8 +401,13 @@ public class IUTexto {
                     }
                 }
             }
+            
+            // ToDo: validar número de movimentos
+            
+            // Neste caso: quantidade significa número de movimentos
             System.out.println("Pode mover "+myAccao.getQtd()+" vezes");
 
+            // Listar movimentos possíveis
             ArrayList<Regiao> regioesPossiveis = new ArrayList<>();
             jogo.getRegioesPossiveisTerra(myRegiao, myAccao.getQtd(), regioesPossiveis);
 
@@ -408,6 +416,7 @@ public class IUTexto {
                 System.out.println(regioesPossiveis.get(i));
             }
 
+            // Escolha da região
             System.out.println("\nEscolha uma Região(0-"+(regioesPossiveis.size()-1)+"):");           
             do {                                        
                 opInt = obterNumero();
