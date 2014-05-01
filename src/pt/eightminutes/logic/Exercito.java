@@ -11,8 +11,8 @@ import java.io.Serializable;
 
 public class Exercito extends Peca{
 
-    public Exercito(Cor cor) {
-        super("Exercito", null,cor);
+    public Exercito(Cor cor,Jogador jogador) {
+        super("Exercito", null,cor,jogador);
     }
     
     public void moveExercito(Regiao regiao){

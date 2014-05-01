@@ -9,8 +9,8 @@ package pt.eightminutes.logic;
 
 public class Cidade extends Peca{
 
-    public Cidade(Cor cor) {
-        super("Cidade", null,cor);
+    public Cidade(Cor cor,Jogador jogador) {
+        super("Cidade", null,cor,jogador);
     }    
     
     public void colocaCidade(Regiao regiao){

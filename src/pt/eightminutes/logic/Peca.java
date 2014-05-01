@@ -12,11 +12,13 @@ public abstract class Peca implements Serializable{
     private String nome;
     private Regiao regiao;
     private Cor cor;
+    private Jogador jogador;
 
-    public Peca(String nome,Regiao regiao,Cor cor){
+    public Peca(String nome,Regiao regiao,Cor cor,Jogador jogador){
         this.nome = nome;
         this.regiao = regiao;
         this.cor = cor;
+        this.jogador = jogador;
     }
     /**
      * @return the nome
@@ -44,6 +46,20 @@ public abstract class Peca implements Serializable{
      */
     public void setRegiao(Regiao regiao) {
         this.regiao = regiao;
+    }
+
+    /**
+     * @return the jogador
+     */
+    public Jogador getJogador() {
+        return jogador;
+    }
+
+    /**
+     * @param jogador the jogador to set
+     */
+    public void setJogador(Jogador jogador) {
+        this.jogador = jogador;
     }
     
 }
