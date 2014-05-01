@@ -27,7 +27,34 @@ public class Regiao implements Serializable{
             regioesVizinhas.add(regioes.get(i));
         }
     }
-    
+        
+    public Jogador getJogadorControlaRegiao(Jogo jogo){
+        int myQtdExerc=0;        
+        int myQtdMax=0;
+        Jogador jogadorControla=null;
+        
+        for(int m=0;m<jogo.getJogadores().size();m++){            
+            myQtdExerc = 0;
+            for(int i=0;i<getPecas().size();i++){
+                if(getPecas().get(i) instanceof Exercito){
+                    if(getPecas().get(i).getJogador() == jogo.getJogadores().get(m)){
+                        myQtdExerc++;
+                    }
+                }
+            }
+            if (myQtdExerc>myQtdMax){
+                // se tiver mais do que o ultimo verificado passa a ser o jogador que controla a regiao
+                jogadorControla = jogo.getJogadores().get(m);
+            }
+            else
+            if(myQtdExerc==myQtdMax){
+                //se tiver o mesmo numero do jogador que controla deixam os dois de controlar
+                jogadorControla = null;
+            }
+        }
+        
+        return jogadorControla;
+    }
     /**
      * @return the continente
      */

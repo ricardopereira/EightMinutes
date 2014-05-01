@@ -27,10 +27,52 @@ public class Jogador implements Serializable{
         this.nome = nome;
         this.moedas = moedas;
         for(int i=0;i<qtdExercito;i++)
-            listaExercitos.add(new Exercito(cor));
+            listaExercitos.add(new Exercito(cor,this));
         
         for(int m=0;m<qtdCidades;m++)
-            listaCidades.add(new Cidade(cor));                   
+            listaCidades.add(new Cidade(cor,this));                   
+    }
+    
+    //Pontuação= pontuação de recursos + Pontuação de Regiões + Pontuação Continente
+    public int getPontuacao(){
+        int myPontos=0;
+        
+        myPontos = getPontuacaoRecursos();
+        
+        return myPontos;
+    }
+    
+    private int getPontuacaoRecursos(){
+        
+        ArrayList<Recurso> recursos = new ArrayList<>();
+        int myPontos=0;
+        
+        //adiciona os recursos que tem na cartas ignorando os duplicados
+        for(int i=0;i< getCartas().size();i++){
+            if(recursos.indexOf(getCartas().get(i).getRecurso())==-1){
+                recursos.add(getCartas().get(i).getRecurso());
+            }
+        }
+        
+        for(int i=0;i< recursos.size();i++){
+            //pergunta ao recurso qual é a sua pontuação consoante o número de cartas que tem daquele recurso
+            myPontos = myPontos + recursos.get(i).getPontuacao(getQtdCartasRecurso(recursos.get(i)));
+        }
+        
+        return myPontos;
+    }
+    
+    //vai buscar o numero de cartas com o recurso XPTO e tem atenção pois existem cartas com mais do que um recurso
+    private int getQtdCartasRecurso(Recurso recurso){
+        int myQtd=0;
+        
+        for(int i=0;i<getCartas().size();i++){
+            if(getCartas().get(i).getRecurso() == recurso){
+                myQtd = myQtd +getCartas().get(i).getQtdRecurso();
+            }
+        }      
+        
+        return myQtd;
     }
     
     public void bloqueiaAccaoExtra(){
