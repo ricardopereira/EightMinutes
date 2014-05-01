@@ -33,11 +33,32 @@ public class Jogador implements Serializable{
             listaCidades.add(new Cidade(cor,this));                   
     }
     
-    //Pontuação= pontuação de recursos + Pontuação de Regiões + Pontuação Continente
-    public int getPontuacao(){
+    //Pontuação= pontuação de recursos + Pontuação do mapa(regioes e continentes)
+    public int getPontuacao(Jogo jogo){
         int myPontos=0;
         
         myPontos = getPontuacaoRecursos();
+        myPontos = myPontos + getPontosMapa(jogo);
+        
+        return myPontos;
+    }
+    
+    private int getPontosMapa(Jogo jogo){
+        Continente continenteAux=null;
+        int myPontos=0;
+        
+        for(int i=0;i< jogo.getMapa().getContinentes().size();i++){
+            continenteAux = jogo.getMapa().getContinentes().get(i);
+            if(continenteAux.getJogadorControlaContinente(jogo) == this){
+                myPontos++;
+            }
+             
+            for(int m=0;m<continenteAux.getRegioes().size();i++){
+                if(continenteAux.getRegioes().get(m).getJogadorControlaRegiao(jogo)==this){
+                    myPontos ++;
+                }
+            }
+        }
         
         return myPontos;
     }

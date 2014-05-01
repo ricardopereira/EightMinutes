@@ -33,6 +33,24 @@ public class Jogo implements Serializable{
         mapa = new Mapa();
     }
     
+    public Jogador getJogadorVencedor(){
+        Jogador jogadorAux=null;
+        int myPontos=0;
+        int myPontosMax=0;
+        for(int i=0;i<getJogadores().size();i++){
+            myPontos = getJogadores().get(i).getPontuacao(this);
+            if(myPontos>myPontosMax){
+                jogadorAux = getJogadores().get(i);
+            }
+            else
+            if(myPontos==myPontosMax){
+                jogadorAux = null;
+            }    
+        }
+        
+        return jogadorAux;
+    }
+    
     public void ficheiroJogo(){
         setEstado(estadoActual.gravarJogo());
     }
