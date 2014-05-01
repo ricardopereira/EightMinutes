@@ -15,6 +15,7 @@ public class Cidade extends Peca{
     
     public void colocaCidade(Regiao regiao){
         setRegiao(regiao);
+        regiao.getPecas().add(this);
     }
     
 }

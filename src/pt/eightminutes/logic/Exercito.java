@@ -17,14 +17,17 @@ public class Exercito extends Peca{
     
     public void moveExercito(Regiao regiao){
         setRegiao(regiao);
+        regiao.getPecas().add(this);
     }
     
     public void colocaExercito(Regiao regiao){        
         setRegiao(regiao);
+        regiao.getPecas().add(this);        
     }
     
     public void destroiExercito(){
-        setRegiao(null);
+        this.getRegiao().getPecas().remove(this);
+        setRegiao(null);        
     }
         
 }
