@@ -6,10 +6,9 @@
 
 package pt.isec;
 
+import pt.eightminutes.tui.IUTexto;
 import java.io.IOException;
-import pt.Estados.AguardaFinalJogo;
 import pt.eightminutes.logic.*;
-import pt.Interface.*;
 
 
 public class EightMinutes {
