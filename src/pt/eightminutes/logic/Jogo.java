@@ -15,8 +15,8 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
-import pt.Estados.AguardaPreparaJogo;
-import pt.Estados.IEstados;
+import pt.eightminutes.states.AguardaPreparaJogo;
+import pt.eightminutes.states.IEstados;
 
 public class Jogo implements Serializable{
     private IEstados estadoActual; 
