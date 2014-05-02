@@ -70,24 +70,56 @@ public class IUTexto {
         }
     }
 
-    public void iniciaJogo(){                
+    public void iniciaJogo(){              
         int opInt;
-       
+        
+        if (Jogo.debugMode) {
+            System.out.println("DEBUG MODE");
+            
+            if (Jogo.debugShowMapa)
+                listarMapa();
+        }
+        
+        // Carregar todas as dependências do jogo
+        try {
+            jogo.verificarDependencias();
+        } catch (IOException e) {
+            System.err.println(e);
+        }
+        
         System.out.println("#####################################");
         System.out.println("##Bem vindo ao eight minutes empire##");
         System.out.println("#####################################");
         System.out.println("1->Jogar");
-        System.out.println("2->Terminar");            
+        System.out.println("2->Terminar");
         System.out.println("Opção: ");
         opInt = obterNumero();
-        if (opInt == 1) {               
+        
+        if (opInt == 1) {           
             jogo.preparaJogo();
-        }        
+        }
     }
 
     public void preparaJogo(){
         menuDefineNumeroJogadores();
         menuDefineNomeJogadores(jogo.getNumJogadores());
+    }
+    
+    private void listarMapa(){
+        System.out.print("\nMAPA");
+        // Para efeitos de teste
+        for (Continente itemContinente : jogo.getMapa().getContinentes()){
+            System.out.println("\n\n"+itemContinente.getNome());
+            System.out.println("---------------------------------");
+            for (Regiao itemRegiao : itemContinente.getRegioes()){
+                System.out.println("\nRegião: "+itemRegiao.getNome());
+                //System.out.println("Vizinhos:");
+                int i = 0;
+                for (Regiao itemVizinho : itemRegiao.getRegioesVizinhas())
+                    System.out.println("V"+ (++i) +": "+itemVizinho.getNome());
+            }
+        }
+        System.out.print("\n");
     }
     
     public void menuDefineNumeroJogadores(){                

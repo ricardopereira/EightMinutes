@@ -9,14 +9,17 @@ package pt.eightminutes.logic;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Regiao implements Serializable{
+public class Regiao implements Serializable {
+    
     private String nome;
+    private int mapIndex;
     private Continente continente;
     private ArrayList<Regiao> regioesVizinhas = new ArrayList<>();
     private ArrayList<Peca> pecas = new ArrayList<>();
     
-    public Regiao(String nome,Continente continente){
+    public Regiao(String nome, int mapIndex, Continente continente){
         this.nome = nome;
+        this.mapIndex = mapIndex;
         this.continente = continente;
     }
     
@@ -109,6 +112,14 @@ public class Regiao implements Serializable{
      */
     public void setNome(String nome) {
         this.nome = nome;
+    }
+    
+    public int getMapIndex() {
+        return mapIndex;
+    }
+    
+    public int getIndex() {
+        return mapIndex-1;
     }
     
     @Override

@@ -19,7 +19,8 @@ import java.util.Random;
 import pt.eightminutes.states.AguardaPreparaJogo;
 import pt.eightminutes.states.IEstados;
 
-public class Jogo implements Serializable{
+public class Jogo extends Base implements Serializable {
+    
     private IEstados estadoActual; 
     private IEstados estadoAnterior;
     private int numJogadores;
@@ -31,6 +32,11 @@ public class Jogo implements Serializable{
 
     public Jogo(){
         mapa = new Mapa();
+    }
+
+    public void verificarDependencias() throws FileNotFoundException, IOException {
+        // Trajectos possiveis
+        mapa.lerTrajectos();
     }
     
     public Jogador getJogadorVencedor(){
@@ -100,8 +106,8 @@ public class Jogo implements Serializable{
     }
     
     public void criaJogador(String nome,Cor cor){
-        int moedasPorJogador= getMoedasPorJogador();
-        jogadores.add(new Jogador(nome,cor,moedasPorJogador,14,3));             
+        int moedasPorJogador = getMoedasPorJogador();
+        jogadores.add(new Jogador(this,nome,cor,moedasPorJogador,14,3));             
     }
     
     public void defineApostasJogadores(int numMoedas) {

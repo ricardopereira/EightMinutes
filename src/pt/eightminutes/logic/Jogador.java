@@ -10,7 +10,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class Jogador implements Serializable{
+public class Jogador extends Base implements Serializable {
+    
+    private Object owner;
     private String nome;
     private int moedas;
     private int aposta;
@@ -19,13 +21,12 @@ public class Jogador implements Serializable{
     private ArrayList<Cidade> listaCidades = new ArrayList<>();    
     private Carta cartaActiva;
     
-    public Jogador(){
-        
-    }
-    
-    public Jogador(String nome,Cor cor, int moedas, int qtdExercito, int qtdCidades){
+    public Jogador(Object owner, String nome,Cor cor, int moedas, int qtdExercito, int qtdCidades){
+        super();
+        this.owner = owner;
         this.nome = nome;
         this.moedas = moedas;
+        
         for(int i=0;i<qtdExercito;i++)
             listaExercitos.add(new Exercito(cor,this));
         
@@ -127,19 +128,15 @@ public class Jogador implements Serializable{
         }        
     }
     
-    public void moveExercito(Regiao regiao, ArrayList<Exercito> exercitos){
+    public void moveExercito(Regiao regiao, ArrayList<Exercito> exercitos) {
         // Lista de exercitos a mover
         for(int i=0;i<exercitos.size();i++){
             // Lista de exercitos do Jogador
             for(int m=0;m<getListaExercitos().size();m++){
                 // Encontrar o exército a mover na lista de exercitos do Jogador
                 Exercito exercito = getListaExercitos().get(m);
+                // Encontrar exercito
                 if (exercito == exercitos.get(i)){
-                    // Encontrou exercito
-                    
-                    //getMenorMovimento
-                    //ArrayList<Regiao> r = new ArrayList<Regiao>();
-                    
                     // Origem
                     Regiao origem = exercito.getRegiao();
                     // Destino
@@ -147,14 +144,50 @@ public class Jogador implements Serializable{
                     
                     boolean isVizinho = false;
                     // Verificar se o destino é um vizinho da Origem
-                    for (Regiao item : origem.getRegioesVizinhas()){
-                        if (item == regiao){
-                            isVizinho = true;
+                    // ToDo: Usar equals?
+                    if (origem == destino) {
+                        continue;
+                    } else {
+                        for (Regiao item : origem.getRegioesVizinhas()){
+                            if (item == destino) {
+                                isVizinho = true;
+                                break;
+                            }
                         }
                     }
                     
-                    if (!isVizinho){
+                    if (!isVizinho && owner instanceof Jogo) {
+                        // TESTE: owner
+                        Jogo j = (Jogo)owner;
                         
+                        if (debugMode) {
+                            ArrayList<Regiao> trajecto = j.getMapa().getTrajecto(origem, destino);
+                            // Encontrou trajecto?
+                            if (trajecto != null) {
+                                // Escrever trajecto a fazer
+                                Regiao regiaoAux = null;
+                                int idx;
+                                
+                                for (idx=0; idx<trajecto.size(); idx++) {
+                                    regiaoAux = trajecto.get(idx);
+                                    System.out.println("Movimento "+ (idx+1) +": "+ regiaoAux.getNome());
+                                }
+                                if (regiaoAux != null) {
+                                    //Ultima regiao do trajecto
+                                    for (Regiao item : regiaoAux.getRegioesVizinhas()){
+                                        if (item == destino) {
+                                            System.out.println("Movimento "+ (idx+1) +": "+ item.getNome());
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }    
+                    }
+                    else {
+                        if (debugMode) {
+                            System.out.println("Movimentar para: "+destino.getNome());
+                        }
                     }
 
                     //if (getCartaActiva() != null && getCartaActiva().getAccaoActiva() instanceof AccaoMoveExercito)
@@ -170,19 +203,9 @@ public class Jogador implements Serializable{
         }       
     }
     
-    public void moveExercitoAgua(Regiao regiao, ArrayList<Exercito> exercitos){
-        for(int i=0;i<exercitos.size();i++){
-            for(int m=0;m<getListaExercitos().size();m++){
-                if(getListaExercitos().get(m)==exercitos.get(i)){
-                    getListaExercitos().get(m).moveExercito(regiao);
-                    if(getCartaActiva()!=null)
-                        getCartaActiva().getAccaoActiva().setQtd(getCartaActiva().getAccaoActiva().getQtd()-1);
-                    
-                    bloqueiaAccaoExtra();
-                    break;
-                }
-            }                           
-        }       
+    public void moveExercitoAgua(Regiao regiao, ArrayList<Exercito> exercitos) {
+        // ToDo: Verificar este metodo mais tarde
+        moveExercito(regiao,exercitos);
     }
     
     public void destroiExercito(Exercito exercito){
