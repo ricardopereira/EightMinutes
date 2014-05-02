@@ -73,8 +73,12 @@ public class IUTexto {
     public void iniciaJogo(){              
         int opInt;
         
-        if (Jogo.debugMode)
+        if (Jogo.debugMode) {
             System.out.println("DEBUG MODE");
+            
+            if (Jogo.debugShowMapa)
+                listarMapa();
+        }
         
         // Carregar todas as dependências do jogo
         try {
@@ -102,9 +106,10 @@ public class IUTexto {
     }
     
     private void listarMapa(){
+        System.out.print("\nMAPA");
         // Para efeitos de teste
         for (Continente itemContinente : jogo.getMapa().getContinentes()){
-            System.out.println("\n\nContinente: "+itemContinente.getNome());
+            System.out.println("\n\n"+itemContinente.getNome());
             System.out.println("---------------------------------");
             for (Regiao itemRegiao : itemContinente.getRegioes()){
                 System.out.println("\nRegião: "+itemRegiao.getNome());
@@ -114,6 +119,7 @@ public class IUTexto {
                     System.out.println("V"+ (++i) +": "+itemVizinho.getNome());
             }
         }
+        System.out.print("\n");
     }
     
     public void menuDefineNumeroJogadores(){                

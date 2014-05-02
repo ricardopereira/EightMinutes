@@ -16,7 +16,8 @@ public class EightMinutes {
     public static void main(String[] args) throws IOException, InterruptedException {
         // Fase de Desenvolvimento
         Jogo.debugMode = true;
-        Jogo.debugShowMapFile = true;
+        Jogo.debugShowMapa = true;
+        Jogo.debugShowMapaTrajectos = true;
         
         Jogo jogo = new Jogo();
         IUTexto iuTexto = new IUTexto(jogo);

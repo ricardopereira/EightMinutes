@@ -17,9 +17,9 @@ public class Continente implements Serializable{
         this.nome = nome; 
     }
    
-    
-    public void adicionaRegiao(Regiao regiao){
-        getRegioes().add(regiao);       
+    public Regiao adicionaRegiao(Regiao regiao){
+        getRegioes().add(regiao);
+        return regiao;
     }
 
     public Jogador getJogadorControlaContinente(Jogo jogo){

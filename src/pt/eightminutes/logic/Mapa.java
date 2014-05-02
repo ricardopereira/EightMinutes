@@ -20,13 +20,11 @@ public class Mapa extends Base implements Serializable {
     
     private Regiao regiaoInicial;
     private ArrayList<Continente> continentes = new ArrayList<>();
-    private ArrayList<Regiao> regioesAux = new ArrayList<>();
+    private ArrayList<Regiao> regioes = new ArrayList<>();
     
     // Trajectos de cada Região
     private List[][] trajectos;
     private static final int totalMapCols = 3;
-    // ToDo - Rever esta constante
-    public static final int totalRegioes = 23;
     
     public Mapa(){
         defineMapa();
@@ -42,16 +40,23 @@ public class Mapa extends Base implements Serializable {
     }
     
     public void defineMapa(){
-        // Mapa
+        // Auxiliar
+        ArrayList<Regiao> regioesAux = new ArrayList<>();
+
+        regioes.clear();
+        continentes.clear();
+        
+        // Mapa        
+        // CONTINENTE 1
         Continente continente1 = new Continente("Continente 1");
         continentes.add(continente1);
-        continente1.adicionaRegiao(new Regiao("1",continente1));
-        continente1.adicionaRegiao(new Regiao("2",continente1));
-        continente1.adicionaRegiao(new Regiao("3",continente1));
-        continente1.adicionaRegiao(new Regiao("4",continente1));
-        continente1.adicionaRegiao(new Regiao("5",continente1));
-        continente1.adicionaRegiao(new Regiao("6",continente1));
-        continente1.adicionaRegiao(new Regiao("7",continente1));
+        regioes.add(continente1.adicionaRegiao(new Regiao("1",continente1)));
+        regioes.add(continente1.adicionaRegiao(new Regiao("2",continente1)));
+        regioes.add(continente1.adicionaRegiao(new Regiao("3",continente1)));
+        regioes.add(continente1.adicionaRegiao(new Regiao("4",continente1)));
+        regioes.add(continente1.adicionaRegiao(new Regiao("5",continente1)));
+        regioes.add(continente1.adicionaRegiao(new Regiao("6",continente1)));
+        regioes.add(continente1.adicionaRegiao(new Regiao("7",continente1)));
         // Define regioes vizinhas
         regioesAux.add(continente1.getRegioes().get(1)); //R2
         regioesAux.add(continente1.getRegioes().get(2)); //R3
@@ -85,10 +90,11 @@ public class Mapa extends Base implements Serializable {
         regioesAux.add(continente1.getRegioes().get(5)); //R6
         continente1.getRegioes().get(6).adicionaRegiaoVizinha(regioesAux); //R7
         
+        // CONTINENTE 2
         Continente continente2 = new Continente("Continente 2");
         continentes.add(continente2);
-        continente2.adicionaRegiao(new Regiao("8",continente2));
-        continente2.adicionaRegiao(new Regiao("9",continente2));
+        regioes.add(continente2.adicionaRegiao(new Regiao("8",continente2)));
+        regioes.add(continente2.adicionaRegiao(new Regiao("9",continente2)));
         // Define regioes vizinhas
         regioesAux.clear();
         regioesAux.add(continente2.getRegioes().get(1)); //R7
@@ -97,19 +103,20 @@ public class Mapa extends Base implements Serializable {
         regioesAux.add(continente2.getRegioes().get(0)); //R8
         continente2.getRegioes().get(1).adicionaRegiaoVizinha(regioesAux); //R9
         
+        // CONTINENTE 3
         Continente continente3 = new Continente("Continente 3");
-        continentes.add(continente3);
-        continente3.adicionaRegiao(new Regiao("10",continente3));
-        continente3.adicionaRegiao(new Regiao("11",continente3));
-        continente3.adicionaRegiao(new Regiao("12",continente3));
-        continente3.adicionaRegiao(new Regiao("13",continente3));
-        continente3.adicionaRegiao(new Regiao("14",continente3));
-        continente3.adicionaRegiao(new Regiao("15",continente3));
-        continente3.adicionaRegiao(new Regiao("16",continente3));
-        continente3.adicionaRegiao(new Regiao("17",continente3));
-        continente3.adicionaRegiao(new Regiao("18",continente3));
-        continente3.adicionaRegiao(new Regiao("19",continente3));
-        continente3.adicionaRegiao(new Regiao("20",continente3));
+        continentes.add(continente3);       
+        regioes.add(continente3.adicionaRegiao(new Regiao("10",continente3)));
+        regioes.add(continente3.adicionaRegiao(new Regiao("11",continente3)));
+        regioes.add(continente3.adicionaRegiao(new Regiao("12",continente3)));
+        regioes.add(continente3.adicionaRegiao(new Regiao("13",continente3)));
+        regioes.add(continente3.adicionaRegiao(new Regiao("14",continente3)));
+        regioes.add(continente3.adicionaRegiao(new Regiao("15",continente3)));
+        regioes.add(continente3.adicionaRegiao(new Regiao("16",continente3)));
+        regioes.add(continente3.adicionaRegiao(new Regiao("17",continente3)));
+        regioes.add(continente3.adicionaRegiao(new Regiao("18",continente3)));
+        regioes.add(continente3.adicionaRegiao(new Regiao("19",continente3)));
+        regioes.add(continente3.adicionaRegiao(new Regiao("20",continente3)));
         // Define regioes vizinhas
         regioesAux.clear();
         regioesAux.add(continente3.getRegioes().get(1)); //R11
@@ -166,11 +173,12 @@ public class Mapa extends Base implements Serializable {
         regioesAux.add(continente3.getRegioes().get(7)); //R17
         continente3.getRegioes().get(10).adicionaRegiaoVizinha(regioesAux); //R20
         
+        // CONTINENTE 4
         Continente continente4 = new Continente("Continente 4");
         continentes.add(continente4);
-        continente4.adicionaRegiao(new Regiao("21",continente4));
-        continente4.adicionaRegiao(new Regiao("22",continente4));
-        continente4.adicionaRegiao(new Regiao("23",continente4));
+        regioes.add(continente4.adicionaRegiao(new Regiao("21",continente4)));
+        regioes.add(continente4.adicionaRegiao(new Regiao("22",continente4)));
+        regioes.add(continente4.adicionaRegiao(new Regiao("23",continente4)));
         // Define regioes vizinhas
         regioesAux.clear();
         regioesAux.add(continente4.getRegioes().get(1)); //R22
@@ -236,9 +244,10 @@ public class Mapa extends Base implements Serializable {
         int idx = 0;
         int row = 0;
         int col = 0;
-                
-        // Total de Regioes
-        trajectos = new ArrayList[totalRegioes][totalRegioes];
+        int totalRegioes = regioes.size();
+        
+        if (totalRegioes == 0)
+            return 0;
         
         // Ler linha a linha
         while ((line = br.readLine()) != null) {
@@ -248,18 +257,32 @@ public class Mapa extends Base implements Serializable {
             if (fields.length < totalMapCols) break;
             
             // Origem
-            //fields[0]
+            //fields[0] - row
             
             // Destino
-            //fields[1]
+            //fields[1] - col
                         
             // Trajecto
             String[] values = fields[2].split(",");
-            trajectos[row][col] = new ArrayList<>();
-            trajectos[row][col].add(values[0]);
             
-            //trajectos[row][col] = values.length;
+            if (getTrajectos()[row][col] == null)
+                getTrajectos()[row][col] = new ArrayList<>();
+            else
+                getTrajectos()[row][col].clear();
             
+            // Para cada regiao do trajecto
+            for (String regiaoAux : values) {
+                // ToDo: Utilizar Iterators!!
+                // Pesquisar instancia Regiao
+                for (Regiao item : regioes) {
+                    if (item.getNome().equals(regiaoAux)) {
+                        // Adiciona a instancia da regiao para lista do trajecto
+                        getTrajectos()[row][col].add(item);
+                        break;
+                    }
+                }
+            }
+                        
             // Proximo valor
             col++;
             idx++;
@@ -274,7 +297,7 @@ public class Mapa extends Base implements Serializable {
             if (row + 1 > totalRegioes) break;
         }
         
-        if (debugMode && debugShowMapFile) {
+        if (debugMode && debugShowMapaTrajectos) {
             // Verificar a leitura
             if (idx != totalRegioes*totalRegioes) {
                 System.err.println("Ocorreu um erro");
@@ -283,7 +306,10 @@ public class Mapa extends Base implements Serializable {
                 idx = 0;
                 for (row=0; row<totalRegioes; row++)
                     for (col=0; col<totalRegioes; col++) {
-                        System.out.println(""+ ++idx +": "+trajectos[row][col].get(0));
+                        System.out.print(""+ ++idx +": ");
+                        for (Object item : getTrajectos()[row][col])
+                            System.out.print(((Regiao)item).getNome()+",");
+                        System.out.print("\n");
                     }
             }
         }
@@ -292,6 +318,12 @@ public class Mapa extends Base implements Serializable {
         br.close();
         // Retorna as linhas lidas
         return idx;
+    }
+    
+    private List[][] getTrajectos() {
+        if (trajectos == null)
+            trajectos = new ArrayList[regioes.size()][regioes.size()];
+        return trajectos;
     }
     
     /**

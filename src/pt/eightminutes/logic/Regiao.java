@@ -15,7 +15,7 @@ public class Regiao implements Serializable{
     private ArrayList<Regiao> regioesVizinhas = new ArrayList<>();
     private ArrayList<Peca> pecas = new ArrayList<>();
     
-    public Regiao(String nome,Continente continente){
+    public Regiao(String nome, Continente continente){
         this.nome = nome;
         this.continente = continente;
     }
