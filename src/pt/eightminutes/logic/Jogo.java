@@ -33,7 +33,7 @@ public class Jogo extends Base implements Serializable {
     public Jogo(){
         mapa = new Mapa();
     }
-    
+
     public void verificarDependencias() throws FileNotFoundException, IOException {
         // Trajectos possiveis
         mapa.lerTrajectos();
