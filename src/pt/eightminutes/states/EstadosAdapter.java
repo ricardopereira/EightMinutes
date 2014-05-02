@@ -88,17 +88,20 @@ public class EstadosAdapter implements IEstados {
     public IEstados moveExercitoAguaCont(Regiao regiao, ArrayList<Exercito> exercitos) { return this; }
 
     @Override
-    public IEstados abandonaJogo() { return this; }
-
-    @Override
     public IEstados passaVez() { return this; }
     
     @Override
     public IEstados mudaAccao() { return this; }
     
     @Override
-    public IEstados gravarJogo() { return this; }
+    public IEstados novoJogo() { return this; };
     
     @Override
     public IEstados retomarJogo() { return this; }
+    
+    @Override
+    public IEstados gravaJogo() { return this; }
+    
+    @Override
+    public IEstados abandonaJogo() { return this; }
 }

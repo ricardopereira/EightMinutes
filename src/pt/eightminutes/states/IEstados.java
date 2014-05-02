@@ -8,7 +8,7 @@ public interface IEstados {
     IEstados defineDadosJogadores(String nome, Cor cor);
     IEstados comecaApostas();
     IEstados defineApostasJogadores(int numMoedas);
-    IEstados comecaJogo();    
+    IEstados comecaJogo();  
     IEstados escolheCartas(int idx);    
     IEstados verificaPontuacao();
     IEstados compraCarta();
@@ -23,7 +23,8 @@ public interface IEstados {
     IEstados destroiExercito(Exercito exercito);
     IEstados moveExercitoAgua(Regiao regiao, ArrayList<Exercito> exercitos);
     IEstados moveExercitoAguaCont(Regiao regiao, ArrayList<Exercito> exercitos);
-    IEstados abandonaJogo();
-    IEstados gravarJogo();
+    IEstados novoJogo();
     IEstados retomarJogo();
+    IEstados gravaJogo();
+    IEstados abandonaJogo();
 }

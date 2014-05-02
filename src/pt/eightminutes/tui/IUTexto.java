@@ -61,8 +61,9 @@ public class IUTexto {
             menuFinalJogo();
         }
         else
-        if(jogo.getEstadoActual().getClass() == AguardaFicheiroJogo.class) {
-            menuFicheiroJogo();
+        if(jogo.getEstadoActual().getClass() == AguardaOpcoesJogo.class) {
+            menuOpcoesJogo();
+            // ToDo: Terminar
         }
         else
         if(jogo.getEstadoActual().getClass() == AguardaPontuacao.class) {
@@ -87,17 +88,7 @@ public class IUTexto {
             System.err.println(e);
         }
         
-        System.out.println("#####################################");
-        System.out.println("##Bem vindo ao eight minutes empire##");
-        System.out.println("#####################################");
-        System.out.println("1->Jogar");
-        System.out.println("2->Terminar");
-        System.out.println("Opção: ");
-        opInt = obterNumero();
-        
-        if (opInt == 1) {           
-            jogo.preparaJogo();
-        }
+        jogo.opcoesJogo();
     }
 
     public void preparaJogo(){
@@ -167,12 +158,32 @@ public class IUTexto {
         jogo.comecaJogo();
     }
     
-    public void menuFicheiroJogo() throws InterruptedException{                
+    public int menuOpcoesJogo() throws InterruptedException{                
         int opInt;
+        
+        // OPÇÕES
+        System.out.println("#####################################");
+        System.out.println("##Bem vindo ao eight minutes empire##");
+        System.out.println("#####################################");
+        System.out.println("1->Novo jogo");
+        System.out.println("2->Retomar jogo");
+        // ToDo: Verificacao do Estado anterior
+        System.out.println("3->Gravar jogo");
+        System.out.println("0->Terminar");
+        System.out.println("Opção: ");
+        opInt = obterNumero(0,3);
+        
+        switch (opInt) {
+            case 1:
+                jogo.novoJogo();
+                break;
+            case 2:
                 
-        System.out.println("############## Ficheiro Jogo ##############");        
-        Thread.sleep(1000);
-        jogo.passaVez();
+                break;
+            default:
+                break;
+        }
+        return opInt;
     }
     
     public void menuFinalJogo() throws InterruptedException{                
@@ -197,10 +208,10 @@ public class IUTexto {
         System.out.println("########## Escolher Carta ###########");
         System.out.println("### Jogador:"+jogo.getJogadorActivo().getNome()+"(Moedas:"+jogo.getJogadorActivo().getMoedas()+") ###");
         System.out.println("### Jogadas:"+jogo.getJogadorActivo().getCartas().size()+" ###");
-        System.out.println("Gravar jogo:0");
+        System.out.println("Opções:0");
         for(int i=0; i<jogo.getCartasViradas().size();i++){
             System.out.println("Carta:"+(i+1));
-            System.out.print(jogo.getCartasViradas().get(i)); 
+            System.out.print(jogo.getCartasViradas().get(i));
         }
            
         System.out.println("Seleccione uma opcção(0-6):");           
@@ -209,8 +220,8 @@ public class IUTexto {
        } while (opInt < 0 || opInt > 6);
         
         
-       if(opInt==0)
-           jogo.ficheiroJogo();
+       if (opInt == 0)
+           jogo.opcoesJogo();
        else               
            jogo.escolheCarta(opInt-1);
     }
@@ -539,6 +550,15 @@ public class IUTexto {
         Scanner s = new Scanner(System.in);   
         while (!s.hasNextInt()) {
             s.next();
+        }
+        return s.nextInt();
+    }
+    
+    private int obterNumero(int de, int ate) {
+        Scanner s = new Scanner(System.in);
+        int nr = de-1;
+        while (!s.hasNextInt() && (nr < de || nr > ate)) {
+            nr = s.nextInt();
         }
         return s.nextInt();
     }

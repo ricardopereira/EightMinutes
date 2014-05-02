@@ -16,7 +16,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
-import pt.eightminutes.states.AguardaPreparaJogo;
+import pt.eightminutes.states.AguardaOpcoesJogo;
 import pt.eightminutes.states.IEstados;
 
 public class Jogo extends Base implements Serializable {
@@ -56,10 +56,6 @@ public class Jogo extends Base implements Serializable {
         
         return jogadorAux;
     }
-    
-    public void ficheiroJogo(){
-        setEstado(estadoActual.gravarJogo());
-    }
        
     public void gravaJogo() throws FileNotFoundException, IOException{
         FileOutputStream fo = new FileOutputStream("jogo");
@@ -82,9 +78,14 @@ public class Jogo extends Base implements Serializable {
         this.setEstadoAnterior(this.estadoActual);
         this.setEstadoActual(estado);
     }
+    
+    public void opcoesJogo() {
+        // Primeiro estado da máquina
+        setEstado(new AguardaOpcoesJogo(this));
+    }
 
-    public void preparaJogo(){
-        setEstado(new AguardaPreparaJogo(this));
+    public void novoJogo() {
+        setEstado(estadoActual.novoJogo());
     }
     
     public void iniciaJogo(){

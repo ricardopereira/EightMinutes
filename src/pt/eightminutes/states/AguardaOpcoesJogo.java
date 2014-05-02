@@ -11,22 +11,27 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import pt.eightminutes.logic.Jogo;
 
-public class AguardaFicheiroJogo extends EstadosAdapter{
+public class AguardaOpcoesJogo extends EstadosAdapter {
 
-    public AguardaFicheiroJogo(Jogo jogo) {
+    public AguardaOpcoesJogo(Jogo jogo) {
         super(jogo);
     }
     
     @Override
-    public IEstados retomarJogo() { 
+    public IEstados novoJogo() {
+        return new AguardaPreparaJogo(getJogo());
+    }
+    
+    @Override
+    public IEstados retomarJogo() {
         try {
             setJogo(getJogo().carregaJogo());
         } catch (IOException ex) {
-            Logger.getLogger(AguardaFicheiroJogo.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AguardaOpcoesJogo.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AguardaFicheiroJogo.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AguardaOpcoesJogo.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return new AguardaEscolheCarta(getJogo());           
-    }        
-    
+        return new AguardaEscolheCarta(getJogo());
+    }
+
 }

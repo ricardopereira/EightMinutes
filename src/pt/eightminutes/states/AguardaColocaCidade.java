@@ -17,8 +17,9 @@ public class AguardaColocaCidade extends EstadosAdapter{
     }
     
     @Override
-    public IEstados colocaCidade(Regiao regiao) { 
-        getJogo().getJogadorActivo().colocaCidade(regiao); 
+    public IEstados colocaCidade(Regiao regiao) {
+        getJogo().getJogadorActivo().colocaCidade(regiao);
+        
         if(getJogo().getEstadoAnterior() instanceof AguardaEscolheAccao)
             return new AguardaEscolheAccao(getJogo());
         else
@@ -30,7 +31,7 @@ public class AguardaColocaCidade extends EstadosAdapter{
     
     @Override
     public IEstados abandonaJogo() {
-        return new AguardaFinalJogo(getJogo()); 
+        return new AguardaFinalJogo(getJogo());
     }
     
     @Override
