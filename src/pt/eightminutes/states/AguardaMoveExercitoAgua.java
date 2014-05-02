@@ -20,7 +20,14 @@ public class AguardaMoveExercitoAgua extends EstadosAdapter{
     
     @Override
     public IEstados moveExercitoAgua(Regiao regiao, ArrayList<Exercito> exercitos) { 
-        getJogo().getJogadorActivo().moveExercitoAgua(regiao, exercitos);
+        // Executa acção da carta
+        ArrayList<Object> params = new ArrayList<>();
+        params.add(regiao);
+        params.add(exercitos);
+        getJogo().getJogadorActivo().getCartaActiva().getAccaoActiva().executa(getJogo(),params);
+        
+        // ToDo: Testar proximo passo
+        
         if(getJogo().getEstadoAnterior() instanceof AguardaEscolheAccao)
             return new AguardaEscolheAccao(getJogo());
         else
@@ -32,7 +39,8 @@ public class AguardaMoveExercitoAgua extends EstadosAdapter{
     
     @Override
     public IEstados moveExercitoAguaCont(Regiao regiao, ArrayList<Exercito> exercitos) { 
-        getJogo().getJogadorActivo().moveExercitoAgua(regiao, exercitos);
+        // ToDo: Verificar esta situacao
+        //getJogo().getJogadorActivo().moveExercitoAgua(regiao, exercitos);
         return this;           
     }
     

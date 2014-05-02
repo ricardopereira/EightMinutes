@@ -22,8 +22,7 @@ public class AguardaMoveExercito extends EstadosAdapter{
     @Override
     public IEstados moveExercito(Regiao regiao, ArrayList<Exercito> exercitos) {
         // Executa acção da carta
-        // ToDo: Validar com o Serrano
-        ArrayList<Object> params = new ArrayList<Object>();
+        ArrayList<Object> params = new ArrayList<>();
         params.add(regiao);
         params.add(exercitos);
         getJogo().getJogadorActivo().getCartaActiva().getAccaoActiva().executa(getJogo(),params);
@@ -42,7 +41,8 @@ public class AguardaMoveExercito extends EstadosAdapter{
     
     @Override
     public IEstados moveExercitoCont(Regiao regiao, ArrayList<Exercito> exercitos) {         
-        getJogo().getJogadorActivo().moveExercito(regiao, exercitos);
+        // ToDo: Verificar esta situacao
+        //getJogo().getJogadorActivo().moveExercito(regiao, exercitos);
         return this;      
     }    
     

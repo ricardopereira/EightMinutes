@@ -20,52 +20,52 @@ public class IUTexto {
         this.jogo = jogo;
     }
     
-    public void executaInterface() throws IOException, InterruptedException{
-        if(jogo.getEstadoActual() instanceof  AguardaPreparaJogo){
+    public void executaInterface() throws IOException, InterruptedException {
+        if(jogo.getEstadoActual().getClass() == AguardaPreparaJogo.class) {
             preparaJogo();
         }
         else
-        if(jogo.getEstadoActual() instanceof  AguardaAposta){
+        if(jogo.getEstadoActual().getClass() == AguardaAposta.class) {
             menuAposta();
         }
         else
-        if(jogo.getEstadoActual() instanceof  AguardaEscolheCarta){
+        if(jogo.getEstadoActual().getClass() == AguardaEscolheCarta.class) {
             menuEscolheCarta();
         }
         else
-        if(jogo.getEstadoActual() instanceof  AguardaEscolheAccao){
+        if(jogo.getEstadoActual().getClass() == AguardaEscolheAccao.class) {
             menuEscolheAccao();
         }
         else
-        if(jogo.getEstadoActual() instanceof  AguardaColocaCidade){
+        if(jogo.getEstadoActual().getClass() == AguardaColocaCidade.class) {
             menuColocaCidade();
         }
         else
-        if(jogo.getEstadoActual() instanceof  AguardaColocaExercito){
+        if(jogo.getEstadoActual().getClass() == AguardaColocaExercito.class) {
             menuColocaExercito();
         }
         else
-        if(jogo.getEstadoActual() instanceof  AguardaMoveExercito){
+        if(jogo.getEstadoActual().getClass() == AguardaMoveExercito.class) {
             menuMoveExercitoTerra();
         }
         else
-        if(jogo.getEstadoActual() instanceof  AguardaMoveExercitoAgua){
+        if(jogo.getEstadoActual().getClass() == AguardaMoveExercitoAgua.class) {
             menuMoveExercitoAgua();
         }
         else
-        if(jogo.getEstadoActual() instanceof  AguardaDestroiExercito){
+        if(jogo.getEstadoActual().getClass() == AguardaDestroiExercito.class) {
             menuDestroiExercito();
         }
         else
-        if(jogo.getEstadoActual() instanceof  AguardaFinalJogo){
+        if(jogo.getEstadoActual().getClass() == AguardaFinalJogo.class) {
             menuFinalJogo();
         }
         else
-        if(jogo.getEstadoActual() instanceof  AguardaFicheiroJogo){
+        if(jogo.getEstadoActual().getClass() == AguardaFicheiroJogo.class) {
             menuFicheiroJogo();
         }
         else
-        if(jogo.getEstadoActual() instanceof  AguardaPontuacao){
+        if(jogo.getEstadoActual().getClass() == AguardaPontuacao.class) {
             menuPontuacaoJogo();
         }
     }

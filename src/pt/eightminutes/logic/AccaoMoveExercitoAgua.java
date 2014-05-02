@@ -9,15 +9,11 @@ package pt.eightminutes.logic;
 import java.util.List;
 
 
-public class AccaoMoveExercitoAgua extends Accao{
+public class AccaoMoveExercitoAgua extends AccaoMoveExercito {
 
     public AccaoMoveExercitoAgua(int qtd) {
-        super("Move Exército na Água",qtd);
+        super(qtd);
+        setNome("Move Exército na Água");
     }
-    
-    public int executa(Object sender, List params) {
-        // ToDo: Implementação
-        return 0;
-    }
-    
+
 }

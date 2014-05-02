@@ -97,7 +97,10 @@ public class Jogador extends Base implements Serializable {
         return myQtd;
     }
     
-    public void bloqueiaAccaoExtra(){
+    public void bloqueiaAccaoExtra() {
+        // ToDo: O bloqueio tem que ser na accao
+        //Metodo copiado para classe Carta, dona das Accoes
+        //Remover este metdo quando a execucao de todas as accoes sairem da classe Jogador
         if(getCartaActiva()!=null){
             if(!getCartaActiva().isExecutaTodasAccoes())
             {
@@ -127,96 +130,7 @@ public class Jogador extends Base implements Serializable {
             }
         }        
     }
-    
-    public void moveExercito(Regiao regiao, ArrayList<Exercito> exercitos) {
-        // ToDo: Implementar Hashing e Iterators
-        // Lista de exercitos a mover
-        for (int i=0;i<exercitos.size();i++){
-            // Lista de exercitos do Jogador
-            for (int m=0;m<getListaExercitos().size();m++){
-                // Encontrar o exército a mover na lista de exercitos do Jogador
-                Exercito exercito = getListaExercitos().get(m);
-                // Encontrar exercito
-                if (exercito == exercitos.get(i)) {
-                    // Trajecto
-                    ArrayList<Regiao> trajecto = null;
-                    // Origem
-                    Regiao origem = exercito.getRegiao();
-                    // Destino
-                    Regiao destino = regiao;
-                    
-                    // ToDo: Usar equals?
-                    if (origem == destino) {
-                        // Verificar se o destino é igual à origem
-                        break;
-                    } else {
-                        // Verificar se o destino é um vizinho da Origem
-                        for (Regiao item : origem.getRegioesVizinhas()){
-                            if (item == destino) {
-                                trajecto = new ArrayList<Regiao>();
-                                // Movimento directo
-                                trajecto.add(destino);
-                                break;
-                            }
-                        }
-                    }
-                    
-                    // TESTE: owner como Jogo para aceder ao mapa
-                    if (trajecto == null && owner instanceof Jogo) {
-                        Jogo j = (Jogo)owner;
-                        
-                        // As regioes só sao criadas uma vez, logo podemos usar o ==
-                        // Sao as mesmas instancias para todo o programa
-                        trajecto = j.getMapa().getTrajecto(origem, destino);
-                        // Encontrou trajecto?
-                        if (trajecto != null && trajecto.size() > 0) {
-                            //Ultima regiao do trajecto
-                            Regiao lastRegiao = trajecto.get(trajecto.size()-1);
-                            // Verificar se já NÃO está em cache
-                            if (lastRegiao != null && lastRegiao != destino) {
-                                for (Regiao item : lastRegiao.getRegioesVizinhas()) {
-                                    if (item == destino) {
-                                        // Adicionar para evitar uma nova pesquisa da proxima vez: cache
-                                        trajecto.add(destino);
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    
-                    // Efectuar os movimentos
-                    if (trajecto != null) {
-                        int idx = 0;
-                        for (Regiao item : trajecto) {
-                            // ToDo: É necessario validar o numero de movimentos?!
-                            
-                            // ToDo: Decrementa movimentos possiveis
-                            if (getCartaActiva() != null && getCartaActiva().getAccaoActiva() instanceof AccaoMoveExercito)
-                                getCartaActiva().getAccaoActiva().setQtd(getCartaActiva().getAccaoActiva().getQtd()-1);
-
-                            // Efectua a alteração
-                            exercito.moveExercito(regiao);
-                            
-                            // Escrever trajecto a fazer
-                            if (debugMode)
-                                System.out.println("Movimento "+ (++idx) +": "+ item.getNome());
-                        }
-                    }
-                    
-                    // ToDo: Confunde, alterar para verificaBloquearProximaAccao();
-                    bloqueiaAccaoExtra();
-                    break;
-                }
-            }                           
-        }       
-    }
-    
-    public void moveExercitoAgua(Regiao regiao, ArrayList<Exercito> exercitos) {
-        // ToDo: Verificar este metodo mais tarde
-        moveExercito(regiao,exercitos);
-    }
-    
+        
     public void destroiExercito(Exercito exercito){
         int myIdx=getListaExercitos().indexOf(exercito);
         
