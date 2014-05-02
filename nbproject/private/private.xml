@@ -5,6 +5,7 @@
         <group>
             <file>file:/Users/ricardopereira/GitHub/java.EightMinutes/src/pt/eightminutes/tui/IUTexto.java</file>
             <file>file:/Users/ricardopereira/GitHub/java.EightMinutes/src/pt/eightminutes/logic/Jogo.java</file>
+            <file>file:/Users/ricardopereira/GitHub/java.EightMinutes/src/pt/eightminutes/states/AguardaMoveExercito.java</file>
             <file>file:/Users/ricardopereira/GitHub/java.EightMinutes/src/pt/isec/EightMinutes.java</file>
             <file>file:/Users/ricardopereira/GitHub/java.EightMinutes/src/pt/eightminutes/logic/Mapa.java</file>
             <file>file:/Users/ricardopereira/GitHub/java.EightMinutes/src/pt/eightminutes/logic/Jogador.java</file>

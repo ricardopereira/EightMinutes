@@ -189,6 +189,8 @@ public class Jogador extends Base implements Serializable {
                             System.out.println("Movimentar para: "+destino.getNome());
                         }
                     }
+                    
+                    // ToDo: Falta efectuar os movimentos e decrementar os passos dados
 
                     //if (getCartaActiva() != null && getCartaActiva().getAccaoActiva() instanceof AccaoMoveExercito)
                     //    getCartaActiva().getAccaoActiva().setQtd(getCartaActiva().getAccaoActiva().getQtd()-1);
