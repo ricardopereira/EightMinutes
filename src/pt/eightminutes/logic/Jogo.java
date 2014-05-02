@@ -106,8 +106,8 @@ public class Jogo extends Base implements Serializable {
     }
     
     public void criaJogador(String nome,Cor cor){
-        int moedasPorJogador= getMoedasPorJogador();
-        jogadores.add(new Jogador(nome,cor,moedasPorJogador,14,3));             
+        int moedasPorJogador = getMoedasPorJogador();
+        jogadores.add(new Jogador(this,nome,cor,moedasPorJogador,14,3));             
     }
     
     public void defineApostasJogadores(int numMoedas) {
