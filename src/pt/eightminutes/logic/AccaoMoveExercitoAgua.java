@@ -6,11 +6,14 @@
 
 package pt.eightminutes.logic;
 
+import java.util.List;
 
-public class AccaoMoveExercitoAgua extends Accao{
+
+public class AccaoMoveExercitoAgua extends AccaoMoveExercito {
 
     public AccaoMoveExercitoAgua(int qtd) {
-        super("Move Exército na Água",qtd);
+        super(qtd);
+        setNome("Move Exército na Água");
     }
-    
+
 }

@@ -23,32 +23,33 @@ public class AguardaEscolheCarta extends EstadosAdapter{
         
     @Override
     public IEstados escolheCartas(int idx) {
-        if(getJogo().validaNumCartasFinal())
+        if (getJogo().validaNumCartasFinal()) {
             return new AguardaPontuacao(getJogo());
-        else
-        {
+        } else {
             Carta cartaAux;
+            
             getJogo().compraCarta(idx);
-            cartaAux = getJogo().getJogadorActivo().getCartaActiva();        
-            if(cartaAux.getAccoes().get(1)==null){
+            cartaAux = getJogo().getJogadorActivo().getCartaActiva();
+            
+            if (cartaAux.getAccoes().get(1) == null) {
                 getJogo().getJogadorActivo().getCartaActiva().setAccaoActiva(cartaAux.getAccoes().get(0));
                 
-                if(cartaAux.getAccoes().get(0) instanceof AccaoMoveExercito)
+                if(cartaAux.getAccoes().get(0).getClass() == AccaoMoveExercito.class)
                     return new AguardaMoveExercito(getJogo());
                 else
-                if(cartaAux.getAccoes().get(0) instanceof AccaoMoveExercitoAgua)
+                if(cartaAux.getAccoes().get(0).getClass() == AccaoMoveExercitoAgua.class)
                     return new AguardaMoveExercitoAgua(getJogo());
                 else
-                if(cartaAux.getAccoes().get(0) instanceof AccaoDestroiExercito)
+                if(cartaAux.getAccoes().get(0).getClass() == AccaoDestroiExercito.class)
                     return new AguardaDestroiExercito(getJogo());
                 else
-                if(cartaAux.getAccoes().get(0) instanceof AccaoColocaExercito)
+                if(cartaAux.getAccoes().get(0).getClass() == AccaoColocaExercito.class)
                     return new AguardaColocaExercito(getJogo());
                 else
-                if(cartaAux.getAccoes().get(0) instanceof AccaoColocaCidade)
-                    return new AguardaColocaCidade(getJogo());    
+                if(cartaAux.getAccoes().get(0).getClass() == AccaoColocaCidade.class)
+                    return new AguardaColocaCidade(getJogo());
                 else
-                    return new AguardaEscolheAccao(getJogo()); 
+                    return new AguardaEscolheAccao(getJogo());
             }
             else
                 return new AguardaEscolheAccao(getJogo()); 

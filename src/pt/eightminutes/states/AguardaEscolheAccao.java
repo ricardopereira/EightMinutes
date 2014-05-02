@@ -15,24 +15,24 @@ public class AguardaEscolheAccao extends EstadosAdapter{
     }
    
     @Override
-    public IEstados escolheAccao(Accao accao) {                
-        if(accao!=null)
+    public IEstados escolheAccao(Accao accao) {           
+        if (accao != null)
         {            
             getJogo().getJogadorActivo().getCartaActiva().setAccaoActiva(accao);
             
-            if(accao instanceof AccaoMoveExercito)
+            if (accao.getClass() == AccaoMoveExercito.class)
                 return new AguardaMoveExercito(getJogo());
             else
-            if(accao instanceof AccaoMoveExercitoAgua)
+            if (accao.getClass() == AccaoMoveExercitoAgua.class)
                 return new AguardaMoveExercitoAgua(getJogo());
             else
-            if(accao instanceof AccaoDestroiExercito)
+            if (accao.getClass() == AccaoDestroiExercito.class)
                 return new AguardaDestroiExercito(getJogo());
             else
-            if(accao instanceof AccaoColocaExercito)
+            if (accao.getClass() == AccaoColocaExercito.class)
                 return new AguardaColocaExercito(getJogo());
             else
-            if(accao instanceof AccaoColocaCidade)
+            if (accao.getClass() == AccaoColocaCidade.class)
                 return new AguardaColocaCidade(getJogo());
             else               
                 return this;

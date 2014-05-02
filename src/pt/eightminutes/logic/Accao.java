@@ -7,8 +7,10 @@
 package pt.eightminutes.logic;
 
 import java.io.Serializable;
+import java.util.List;
 
-public abstract class Accao extends Base implements Serializable{
+public abstract class Accao extends Base implements Serializable {
+    
     private String nome;
     private int qtd;
     private boolean usada;
@@ -28,7 +30,7 @@ public abstract class Accao extends Base implements Serializable{
     /**
      * @param nome the nome to set
      */
-    public void setNome(String nome) {
+    protected void setNome(String nome) {
         this.nome = nome;
     }
 
@@ -67,6 +69,8 @@ public abstract class Accao extends Base implements Serializable{
         String s = "";
         s += "  "+ getNome()+" "+getQtd()+" vezes";        
         return s;
-    }      
+    }
     
+    public abstract int executa(Object sender, List params);
+
 }
