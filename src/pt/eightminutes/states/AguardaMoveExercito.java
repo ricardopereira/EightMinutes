@@ -22,12 +22,16 @@ public class AguardaMoveExercito extends EstadosAdapter{
     @Override
     public IEstados moveExercito(Regiao regiao, ArrayList<Exercito> exercitos) {
         // Executa acção da carta
+        // ToDo: Validar com o Serrano
+        ArrayList<Object> params = new ArrayList<Object>();
+        params.add(regiao);
+        params.add(exercitos);
+        getJogo().getJogadorActivo().getCartaActiva().getAccaoActiva().executa(getJogo(),params);
         
-        // ToDo: Refactoring
-        getJogo().getJogadorActivo().moveExercito(regiao, exercitos);
+        // ToDo: Testar proximo passo
         
         // Próximo estado
-        if(getJogo().getEstadoAnterior() instanceof AguardaEscolheAccao)
+        if (getJogo().getEstadoAnterior() instanceof AguardaEscolheAccao)
             return new AguardaEscolheAccao(getJogo());
         else
         {

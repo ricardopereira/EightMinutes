@@ -191,7 +191,7 @@ public class Jogador extends Base implements Serializable {
                         for (Regiao item : trajecto) {
                             // ToDo: É necessario validar o numero de movimentos?!
                             
-                            // ToDo: decrementa movimentos possiveis
+                            // ToDo: Decrementa movimentos possiveis
                             if (getCartaActiva() != null && getCartaActiva().getAccaoActiva() instanceof AccaoMoveExercito)
                                 getCartaActiva().getAccaoActiva().setQtd(getCartaActiva().getAccaoActiva().getQtd()-1);
 

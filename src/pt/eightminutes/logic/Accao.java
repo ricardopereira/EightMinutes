@@ -7,6 +7,7 @@
 package pt.eightminutes.logic;
 
 import java.io.Serializable;
+import java.util.List;
 
 public abstract class Accao extends Base implements Serializable{
     private String nome;
@@ -67,6 +68,8 @@ public abstract class Accao extends Base implements Serializable{
         String s = "";
         s += "  "+ getNome()+" "+getQtd()+" vezes";        
         return s;
-    }      
+    }
+    
+    public abstract int executa(Object sender, List params);
     
 }
