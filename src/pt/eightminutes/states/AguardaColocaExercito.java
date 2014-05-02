@@ -19,7 +19,6 @@ public class AguardaColocaExercito extends EstadosAdapter{
         super(jogo);
     }
     
-    
     @Override
     public IEstados colocaExercito(Regiao regiao, ArrayList<Exercito> exercitos) {         
         getJogo().getJogadorActivo().colocaExercito(regiao, exercitos);  

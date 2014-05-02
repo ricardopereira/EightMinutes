@@ -57,20 +57,25 @@ public class AguardaEscolheCarta extends EstadosAdapter{
     }
     
     @Override
-    public IEstados verificaPontuacao() { 
-        if(getJogo().validaNumCartasFinal())
+    public IEstados verificaPontuacao() {
+        if (getJogo().validaNumCartasFinal())
             return new AguardaFinalJogo(getJogo());
         else
             return this;
     }
     
     @Override
-    public IEstados gravarJogo() {         
-        return new AguardaFicheiroJogo(getJogo());           
+    public IEstados gravaJogo() {
+        return new AguardaOpcoesJogo(getJogo());
     }
     
     @Override
-    public IEstados passaVez() {         
+    public IEstados abandonaJogo() {
+        return new AguardaOpcoesJogo(getJogo());
+    }
+    
+    @Override
+    public IEstados passaVez() {
         return this;           
     }
 }
