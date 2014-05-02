@@ -8,7 +8,7 @@ package pt.eightminutes.logic;
 
 import java.io.Serializable;
 
-public abstract class Accao implements Serializable{
+public abstract class Accao extends Base implements Serializable{
     private String nome;
     private int qtd;
     private boolean usada;

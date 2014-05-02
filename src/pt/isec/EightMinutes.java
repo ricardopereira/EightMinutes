@@ -14,10 +14,15 @@ import pt.eightminutes.logic.*;
 public class EightMinutes {
     
     public static void main(String[] args) throws IOException, InterruptedException {
-        Jogo jogo = new Jogo();       
+        // Fase de Desenvolvimento
+        Jogo.debugMode = true;
+        Jogo.debugShowMapFile = true;
+        
+        Jogo jogo = new Jogo();
         IUTexto iuTexto = new IUTexto(jogo);
+        // Start
         iuTexto.iniciaJogo();
-        while(jogo.getEstadoActual() != null)
+        while (jogo.getEstadoActual() != null)
         {
            iuTexto.executaInterface();
         }

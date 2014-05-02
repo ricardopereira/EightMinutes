@@ -70,24 +70,50 @@ public class IUTexto {
         }
     }
 
-    public void iniciaJogo(){                
+    public void iniciaJogo(){              
         int opInt;
-       
+        
+        if (Jogo.debugMode)
+            System.out.println("DEBUG MODE");
+        
+        // Carregar todas as dependências do jogo
+        try {
+            jogo.verificarDependencias();
+        } catch (IOException e) {
+            System.err.println(e);
+        }
+        
         System.out.println("#####################################");
         System.out.println("##Bem vindo ao eight minutes empire##");
         System.out.println("#####################################");
         System.out.println("1->Jogar");
-        System.out.println("2->Terminar");            
+        System.out.println("2->Terminar");
         System.out.println("Opção: ");
         opInt = obterNumero();
-        if (opInt == 1) {               
+        
+        if (opInt == 1) {           
             jogo.preparaJogo();
-        }        
+        }
     }
 
     public void preparaJogo(){
         menuDefineNumeroJogadores();
         menuDefineNomeJogadores(jogo.getNumJogadores());
+    }
+    
+    private void listarMapa(){
+        // Para efeitos de teste
+        for (Continente itemContinente : jogo.getMapa().getContinentes()){
+            System.out.println("\n\nContinente: "+itemContinente.getNome());
+            System.out.println("---------------------------------");
+            for (Regiao itemRegiao : itemContinente.getRegioes()){
+                System.out.println("\nRegião: "+itemRegiao.getNome());
+                //System.out.println("Vizinhos:");
+                int i = 0;
+                for (Regiao itemVizinho : itemRegiao.getRegioesVizinhas())
+                    System.out.println("V"+ (++i) +": "+itemVizinho.getNome());
+            }
+        }
     }
     
     public void menuDefineNumeroJogadores(){                

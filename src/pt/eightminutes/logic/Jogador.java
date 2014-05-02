@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class Jogador implements Serializable{
+public class Jogador extends Base implements Serializable{
     private String nome;
     private int moedas;
     private int aposta;
