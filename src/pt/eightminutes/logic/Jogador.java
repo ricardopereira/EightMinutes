@@ -194,6 +194,54 @@ public class Jogador extends Base implements Serializable {
         
         return null;
     }
+    
+    //Lista de cidades que ja foram atribuidas a alguma região
+    public ArrayList<Cidade> getListaCidadeComRegiao(){
+        ArrayList<Cidade> cidadeAux = new ArrayList<>();
+        
+        for(int i=0;i<listaCidades.size();i++){
+            if(listaCidades.get(i).getRegiao()!=null)
+                cidadeAux.add(listaCidades.get(i));
+        }
+        
+        return cidadeAux;
+    }
+    
+    //Lista de cidades que ainda não foram atribuidas a nenhuma regiao
+    public ArrayList<Cidade> getListaCidadeSemRegiao(){
+        ArrayList<Cidade> cidadeAux = new ArrayList<>();
+        
+        for(int i=0;i<listaCidades.size();i++){
+            if(listaCidades.get(i).getRegiao()==null)
+                cidadeAux.add(listaCidades.get(i));
+        }
+        
+        return cidadeAux;
+    }
+    
+    //Lista de exercitos que ja foram atribuidos a uma regiao
+    public ArrayList<Exercito> getListaExercitoComRegiao(){
+        ArrayList<Exercito> exercitosAux = new ArrayList<>();
+        
+        for(int i=0;i<listaExercitos.size();i++){
+            if(listaExercitos.get(i).getRegiao()!=null)
+                exercitosAux.add(listaExercitos.get(i));
+        }
+        
+        return exercitosAux;
+    }
+    
+    //Lista de Exercitos que ainda não foram atribuidos a nenhuma regiao
+    public ArrayList<Exercito> getListaExercitoSemRegiao(){
+        ArrayList<Exercito> exercitosAux = new ArrayList<>();
+        
+        for(int i=0;i<listaExercitos.size();i++){
+            if(listaExercitos.get(i).getRegiao()==null)
+                exercitosAux.add(listaExercitos.get(i));
+        }
+        
+        return exercitosAux;
+    }
     /**
      * @return the nome
      */

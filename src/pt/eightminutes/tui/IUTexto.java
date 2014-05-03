@@ -265,33 +265,51 @@ public class IUTexto {
     public void menuColocaCidade(){                
         int opInt=0;
         int myIdxCont=0;
+        int myCont=0;
+        ArrayList<Continente> continentesAux = new ArrayList<>();
+        ArrayList<Regiao> regioesAux = new ArrayList<>();
              
         System.out.println("########## Coloca Cidade ############"); 
         System.out.println("###Jogador:"+jogo.getJogadorActivo().getNome()+"(Moedas:"+jogo.getJogadorActivo().getMoedas()+") ###");
+        System.out.println("Passar a vez:0");
         
-        for(int i=0; i<jogo.getMapa().getContinentes().size();i++){
-            System.out.print("Continente:"+i);                      
-            System.out.print(jogo.getMapa().getContinentes().get(i));
+        continentesAux = jogo.getMapa().getContinentesComRegiaoTemExercitosDoJogador(jogo.getJogadorActivo(),false);
+        
+        for(int i=0; i<continentesAux.size();i++){
+            myCont++;
+            System.out.print("Continente:"+myCont);                      
+            System.out.print(continentesAux.get(i));
         }
-           
-        System.out.println("\nEscolha um Continente(0-"+(jogo.getMapa().getContinentes().size()-1)+"):");           
-        do {                                        
-            opInt = obterNumero();                                    
-        } while (opInt < 0 || opInt >jogo.getMapa().getContinentes().size()-1);
-       
-        myIdxCont = opInt;
-        for(int i=0;i<jogo.getMapa().getContinentes().get(myIdxCont).getRegioes().size();i++)
+        
+        while(regioesAux.size()==0||opInt==0){
+            System.out.println("\nEscolha uma opção(0-"+(myCont)+"):");           
+            do {                                        
+                opInt = obterNumero();                                    
+            } while (opInt < 0 || opInt >continentesAux.size());
+
+            myIdxCont = opInt-1;
+
+            continentesAux.get(myIdxCont).getListaRegioesComExercitosPorJogador(jogo.getMapa(),jogo.getJogadorActivo(),regioesAux,false);
+        }
+        
+        if(opInt==0){
+            jogo.passaVez();
+        }
+        else
         {
-            System.out.print("Região:"+i);                      
-            System.out.print(jogo.getMapa().getContinentes().get(myIdxCont).getRegioes().get(i));
+            for(int i=0;i<regioesAux.size();i++)
+            {
+                System.out.print("Região:"+i);                      
+                System.out.print(regioesAux.get(i));
+            }
+
+            System.out.println("\nEscolha uma Região(0-"+(regioesAux.size()-1)+"):");           
+            do {                                        
+                opInt = obterNumero();                                    
+            } while (opInt < 0 || opInt >continentesAux.get(myIdxCont).getRegioes().size()-1);
+
+            jogo.colocaCidade(regioesAux.get(opInt)); 
         }
-        
-        System.out.println("\nEscolha uma Região(0-"+(jogo.getMapa().getContinentes().get(myIdxCont).getRegioes().size()-1)+"):");           
-        do {                                        
-            opInt = obterNumero();                                    
-        } while (opInt < 0 || opInt >jogo.getMapa().getContinentes().get(myIdxCont).getRegioes().size()-1);
-        
-        jogo.colocaCidade(jogo.getMapa().getContinentes().get(myIdxCont).getRegioes().get(opInt));
     }
      
     public void menuColocaExercito(){                

@@ -12,9 +12,11 @@ import java.util.ArrayList;
 public class Continente implements Serializable{    
     private String nome;
     private ArrayList<Regiao> regioes = new ArrayList<>();
+    private Mapa mapa;
     
-    public Continente(String nome){        
+    public Continente(String nome, Mapa mapa){        
         this.nome = nome; 
+        this.mapa = mapa;
     }
    
     public Regiao adicionaRegiao(Regiao regiao){
@@ -47,6 +49,28 @@ public class Continente implements Serializable{
         
         return jogadorControla;
     }
+    
+        public void getListaRegioesComExercitosPorJogador(Mapa mapa,Jogador jogador,ArrayList<Regiao> regioesAux,boolean addRegiaoInicial){
+        
+        for(int i=0;i<this.getRegioes().size();i++){               
+            for(int m=0;m<this.getRegioes().get(i).getPecas().size();m++){
+                if(this.getRegioes().get(i).getContinente() == this){
+                    if(this.getRegioes().get(i).getPecas().get(m).getJogador()==jogador){                        
+                        if(regioesAux.indexOf(this.getRegioes().get(i))==-1){
+                            if(addRegiaoInicial)                           
+                                regioesAux.add(this.getRegioes().get(i));                
+                            else
+                            {
+                                if(this.getMapa().getRegiaoInicial()!=this.getRegioes().get(i))
+                                    regioesAux.add(this.getRegioes().get(i));
+                            }
+                        }    
+                    } 
+                }
+            }           
+        }
+    }
+    
     /**
      * @return the nome
      */
@@ -89,4 +113,18 @@ public class Continente implements Serializable{
         s+=" "+getNome()+"\n";        
         return s;
     } 
+
+    /**
+     * @return the mapa
+     */
+    public Mapa getMapa() {
+        return mapa;
+    }
+
+    /**
+     * @param mapa the mapa to set
+     */
+    private void setMapa(Mapa mapa) {
+        this.mapa = mapa;
+    }
 }

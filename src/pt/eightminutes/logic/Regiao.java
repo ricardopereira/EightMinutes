@@ -58,6 +58,19 @@ public class Regiao implements Serializable {
         
         return jogadorControla;
     }
+    
+    
+    public boolean RegiaoTemExercitosDoJogador(Jogador jogador){
+        boolean myResult=false;
+        for(int i=0;i<getPecas().size();i++){
+            if(getPecas().get(i).getJogador()==jogador){
+                myResult = true;
+                break;
+            }
+        }
+
+        return myResult;        
+    }
     /**
      * @return the continente
      */
