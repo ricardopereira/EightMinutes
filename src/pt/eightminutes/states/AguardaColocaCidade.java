@@ -6,7 +6,6 @@
 
 package pt.eightminutes.states;
 
-import pt.eightminutes.logic.Accao;
 import pt.eightminutes.logic.Jogo;
 import pt.eightminutes.logic.Regiao;
 
@@ -20,7 +19,7 @@ public class AguardaColocaCidade extends EstadosAdapter{
     public IEstados colocaCidade(Regiao regiao) {
         getJogo().getJogadorActivo().colocaCidade(regiao);
         
-        if(getJogo().getEstadoAnterior() instanceof AguardaEscolheAccao)
+        if(getJogo().getEstadoAnterior().getClass() == AguardaEscolheAccao.class)
             return new AguardaEscolheAccao(getJogo());
         else
         {
@@ -31,7 +30,9 @@ public class AguardaColocaCidade extends EstadosAdapter{
     
     @Override
     public IEstados abandonaJogo() {
-        return new AguardaFinalJogo(getJogo());
+        // ToDo: Verificar com o Serrano
+        //Abandonar jogo vai para as Opções ou para a Pontuação?
+        return new AguardaOpcoesJogo(getJogo());
     }
     
     @Override

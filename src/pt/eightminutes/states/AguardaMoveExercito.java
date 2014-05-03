@@ -30,7 +30,7 @@ public class AguardaMoveExercito extends EstadosAdapter{
         // ToDo: Testar proximo passo
         
         // Próximo estado
-        if (getJogo().getEstadoAnterior() instanceof AguardaEscolheAccao)
+        if (getJogo().getEstadoAnterior().getClass() == AguardaEscolheAccao.class)
             return new AguardaEscolheAccao(getJogo());
         else
         {
@@ -48,7 +48,9 @@ public class AguardaMoveExercito extends EstadosAdapter{
     
     @Override
     public IEstados abandonaJogo() {
-        return new AguardaFinalJogo(getJogo()); 
+        // ToDo: Verificar com o Serrano
+        //Abandonar jogo vai para as Opções ou para a Pontuação?
+        return new AguardaOpcoesJogo(getJogo());
     }
     
     @Override

@@ -59,7 +59,7 @@ public class AguardaEscolheCarta extends EstadosAdapter{
     @Override
     public IEstados verificaPontuacao() {
         if (getJogo().validaNumCartasFinal())
-            return new AguardaFinalJogo(getJogo());
+            return new AguardaPontuacao(getJogo());
         else
             return this;
     }
@@ -71,6 +71,8 @@ public class AguardaEscolheCarta extends EstadosAdapter{
     
     @Override
     public IEstados abandonaJogo() {
+        // ToDo: Verificar com o Serrano
+        //Abandonar jogo vai para as Opções ou para a Pontuação?
         return new AguardaOpcoesJogo(getJogo());
     }
     

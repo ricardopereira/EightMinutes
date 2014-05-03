@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import pt.eightminutes.logic.Exercito;
 import pt.eightminutes.logic.Jogo;
 import pt.eightminutes.logic.Regiao;
-import pt.eightminutes.logic.AccaoColocaExercito;
 
 
 public class AguardaColocaExercito extends EstadosAdapter{
@@ -22,7 +21,7 @@ public class AguardaColocaExercito extends EstadosAdapter{
     @Override
     public IEstados colocaExercito(Regiao regiao, ArrayList<Exercito> exercitos) {         
         getJogo().getJogadorActivo().colocaExercito(regiao, exercitos);  
-        if(getJogo().getEstadoAnterior() instanceof AguardaEscolheAccao)
+        if(getJogo().getEstadoAnterior().getClass() == AguardaEscolheAccao.class)
             return new AguardaEscolheAccao(getJogo());
         else
         {
@@ -39,7 +38,9 @@ public class AguardaColocaExercito extends EstadosAdapter{
     
     @Override
     public IEstados abandonaJogo() {
-        return new AguardaFinalJogo(getJogo()); 
+        // ToDo: Verificar com o Serrano
+        //Abandonar jogo vai para as Opções ou para a Pontuação?
+        return new AguardaOpcoesJogo(getJogo());
     }
     
     @Override

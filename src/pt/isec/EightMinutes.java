@@ -19,11 +19,10 @@ public class EightMinutes {
         Jogo.debugShowMapa = false;
         Jogo.debugShowMapaTrajectos = false;
         
-        Jogo jogo = new Jogo();
-        IUTexto iuTexto = new IUTexto(jogo);
+        IUTexto iuTexto = new IUTexto(new Jogo());
         // Start
-        iuTexto.iniciaJogo();
-        while (jogo.getEstadoActual() != null)
+        iuTexto.iniciaInterface();
+        while (iuTexto.getJogo().getEstadoActual() != null)
         {
            iuTexto.executaInterface();
         }

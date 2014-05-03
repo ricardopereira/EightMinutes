@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import pt.eightminutes.logic.*;
 
 public interface IEstados {
+    Jogo getJogo();
+    
     IEstados defineNumJogadores(int numJogadores);
     IEstados defineDadosJogadores(String nome, Cor cor);
     IEstados comecaApostas();
@@ -24,7 +26,7 @@ public interface IEstados {
     IEstados moveExercitoAgua(Regiao regiao, ArrayList<Exercito> exercitos);
     IEstados moveExercitoAguaCont(Regiao regiao, ArrayList<Exercito> exercitos);
     IEstados novoJogo();
-    IEstados retomarJogo();
+    IEstados carregaJogo();
     IEstados gravaJogo();
     IEstados abandonaJogo();
 }

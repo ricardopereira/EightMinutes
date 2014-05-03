@@ -57,16 +57,16 @@ public class Jogo extends Base implements Serializable {
         return jogadorAux;
     }
        
-    public void gravaJogo() throws FileNotFoundException, IOException{
-        FileOutputStream fo = new FileOutputStream("jogo");
+    public void gravaInstanciaJogo() throws FileNotFoundException, IOException{
+        FileOutputStream fo = new FileOutputStream("jogo.db");
         ObjectOutputStream oo = new ObjectOutputStream(fo);
         oo.writeObject(this);
         oo.close();
     }
     
-    public Jogo carregaJogo() throws FileNotFoundException, IOException, ClassNotFoundException{
+    public Jogo carregaInstanciaJogo() throws FileNotFoundException, IOException, ClassNotFoundException{
         Jogo jogoAux;
-        FileInputStream fi = new FileInputStream("jogo");
+        FileInputStream fi = new FileInputStream("jogo.db");
         ObjectInputStream oi = new ObjectInputStream(fi);
         jogoAux = ((Jogo) oi.readObject());
         oi.close();
@@ -86,6 +86,22 @@ public class Jogo extends Base implements Serializable {
 
     public void novoJogo() {
         setEstado(estadoActual.novoJogo());
+    }
+    
+    public Jogo carregaJogo() {
+        // ToDo: Amanhã rever este procedimento: "está a ficar pedra"
+        IEstados proximoEstado = estadoActual.carregaJogo();
+        setEstado(proximoEstado);
+        // Nova instancia do Jogo
+        return proximoEstado.getJogo();
+    }
+    
+    public void gravaJogo() {
+        setEstado(estadoActual.gravaJogo());
+    }
+    
+    public void terminaJogo() {
+        setEstado(null);
     }
     
     public void iniciaJogo(){
@@ -240,7 +256,6 @@ public class Jogo extends Base implements Serializable {
         
         return numCartasFinal;
     }
-     
     
     public void colocaCidade(Regiao regiao){                
         setEstado(estadoActual.colocaCidade(regiao));
@@ -252,7 +267,6 @@ public class Jogo extends Base implements Serializable {
         else
             setEstado(estadoActual.colocaExercito(regiao, exercitos));
     }
-        
     
     public void moveExercito(Regiao regiao, ArrayList<Exercito> exercitos){                
         setEstado(estadoActual.moveExercito(regiao, exercitos));
@@ -520,5 +534,9 @@ public class Jogo extends Base implements Serializable {
      */
     public void setEstadoAnterior(IEstados estadoAnterior) {
         this.estadoAnterior = estadoAnterior;
+    }
+    
+    public boolean isEstadoAnterior(Class estado) {
+        return estadoAnterior != null && estadoAnterior.getClass() == estado;
     }
 }

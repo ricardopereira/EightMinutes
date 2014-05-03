@@ -6,15 +6,11 @@
 
 package pt.eightminutes.states;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-import pt.eightminutes.logic.Accao;
-import pt.eightminutes.logic.Carta;
-import pt.eightminutes.logic.Cor;
-import pt.eightminutes.logic.Exercito;
-import pt.eightminutes.logic.Jogo;
-import pt.eightminutes.logic.Regiao;
+import pt.eightminutes.logic.*;
 
-public class EstadosAdapter implements IEstados {
+public class EstadosAdapter implements IEstados, Serializable {
     
     private Jogo jogo;
     
@@ -22,9 +18,7 @@ public class EstadosAdapter implements IEstados {
         this.jogo = jogo;
     }   
 
-    /**
-     * @return the jogo
-     */
+    @Override
     public Jogo getJogo() {
         return jogo;
     }
@@ -33,6 +27,8 @@ public class EstadosAdapter implements IEstados {
      * @param jogo the jogo to set
      */
     public void setJogo(Jogo jogo) {
+        if (jogo == null) return;
+        if (jogo == this.jogo) return;
         this.jogo = jogo;
     }
 
@@ -97,7 +93,7 @@ public class EstadosAdapter implements IEstados {
     public IEstados novoJogo() { return this; };
     
     @Override
-    public IEstados retomarJogo() { return this; }
+    public IEstados carregaJogo() { return this; }
     
     @Override
     public IEstados gravaJogo() { return this; }

@@ -20,6 +20,26 @@ public class IUTexto {
         this.jogo = jogo;
     }
     
+    public void iniciaInterface() {
+        int opInt;
+        
+        if (Jogo.debugMode) {
+            System.out.println("DEBUG MODE");
+            
+            if (Jogo.debugShowMapa)
+                listarMapa();
+        }
+        
+        // Carregar todas as dependências do jogo
+        try {
+            jogo.verificarDependencias();
+        } catch (IOException e) {
+            System.err.println(e);
+        }
+        
+        jogo.opcoesJogo();
+    }
+    
     public void executaInterface() throws IOException, InterruptedException {
         if(jogo.getEstadoActual().getClass() == AguardaPreparaJogo.class) {
             preparaJogo();
@@ -57,38 +77,13 @@ public class IUTexto {
             menuDestroiExercito();
         }
         else
-        if(jogo.getEstadoActual().getClass() == AguardaFinalJogo.class) {
-            menuFinalJogo();
-        }
-        else
         if(jogo.getEstadoActual().getClass() == AguardaOpcoesJogo.class) {
             menuOpcoesJogo();
-            // ToDo: Terminar
         }
         else
         if(jogo.getEstadoActual().getClass() == AguardaPontuacao.class) {
             menuPontuacaoJogo();
         }
-    }
-
-    public void iniciaJogo(){              
-        int opInt;
-        
-        if (Jogo.debugMode) {
-            System.out.println("DEBUG MODE");
-            
-            if (Jogo.debugShowMapa)
-                listarMapa();
-        }
-        
-        // Carregar todas as dependências do jogo
-        try {
-            jogo.verificarDependencias();
-        } catch (IOException e) {
-            System.err.println(e);
-        }
-        
-        jogo.opcoesJogo();
     }
 
     public void preparaJogo(){
@@ -103,7 +98,7 @@ public class IUTexto {
             System.out.println("\n\n"+itemContinente.getNome());
             System.out.println("---------------------------------");
             for (Regiao itemRegiao : itemContinente.getRegioes()){
-                System.out.println("\nRegião: "+itemRegiao.getNome());
+                System.out.println("\nRegião"+itemRegiao.getMapIndex()+": "+itemRegiao.getNome());
                 //System.out.println("Vizinhos:");
                 int i = 0;
                 for (Regiao itemVizinho : itemRegiao.getRegioesVizinhas())
@@ -130,12 +125,10 @@ public class IUTexto {
     public void menuDefineNomeJogadores(int numJogadores){                
         String opStr;  
         int opInt;
-        for(int i=0;i<numJogadores;i++){             
-            System.out.println("Definir nome do jogador(Exit-para sair do jogo):");                      
-            opStr = obterString();            
-            if(opStr.compareTo("Exit")==0)
-                iniciaJogo();
-            
+        
+        for (int i=0; i<numJogadores; i++) {
+            System.out.println("Definir nome do jogador:");                      
+            opStr = obterString();
             jogo.criaJogador(opStr, Cor.preto);
         }    
         
@@ -158,8 +151,9 @@ public class IUTexto {
         jogo.comecaJogo();
     }
     
-    public int menuOpcoesJogo() throws InterruptedException{                
+    public void menuOpcoesJogo() throws InterruptedException{                
         int opInt;
+        boolean isEstadoAnteriorEscolheCarta = jogo.isEstadoAnterior(AguardaEscolheCarta.class);
         
         // OPÇÕES
         System.out.println("#####################################");
@@ -167,31 +161,42 @@ public class IUTexto {
         System.out.println("#####################################");
         System.out.println("1->Novo jogo");
         System.out.println("2->Retomar jogo");
-        // ToDo: Verificacao do Estado anterior
-        System.out.println("3->Gravar jogo");
+        if (isEstadoAnteriorEscolheCarta)
+            System.out.println("3->Gravar jogo");
         System.out.println("0->Terminar");
         System.out.println("Opção: ");
-        opInt = obterNumero(0,3);
+        
+        if (isEstadoAnteriorEscolheCarta)
+            opInt = obterNumero(0,3);
+        else
+            opInt = obterNumero(0,2);
         
         switch (opInt) {
+            case 0:
+                jogo.terminaJogo();
+                break;
             case 1:
                 jogo.novoJogo();
                 break;
             case 2:
-                
+                // Retoma o jogo
+                jogo = jogo.carregaJogo();
+                // Debug
+                if (Jogo.debugMode) {
+                    System.out.println("DEBUG MODE: Jogo carregado");
+                    System.out.println("Trajectos carregados: "+jogo.getMapa().getTrajectosCount());
+                    if (Jogo.debugShowMapa)
+                        listarMapa();
+                }
+                break;
+            case 3:
+                // Gravar jogo
+                if (isEstadoAnteriorEscolheCarta)
+                    jogo.gravaJogo();
                 break;
             default:
                 break;
         }
-        return opInt;
-    }
-    
-    public void menuFinalJogo() throws InterruptedException{                
-        int opInt;
-                
-        System.out.println("############## Final ##############");        
-        Thread.sleep(1000);
-        jogo.passaVez();
     }
     
     public void menuPontuacaoJogo() throws InterruptedException{                
@@ -561,5 +566,9 @@ public class IUTexto {
             nr = s.nextInt();
         }
         return s.nextInt();
+    }
+    
+    public Jogo getJogo() {
+        return jogo;
     }
 }

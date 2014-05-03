@@ -8,7 +8,6 @@ package pt.eightminutes.states;
 
 import pt.eightminutes.logic.Exercito;
 import pt.eightminutes.logic.Jogo;
-import pt.eightminutes.logic.Regiao;
 
 
 public class AguardaDestroiExercito extends EstadosAdapter{
@@ -21,7 +20,7 @@ public class AguardaDestroiExercito extends EstadosAdapter{
     @Override
     public IEstados destroiExercito(Exercito exercito) { 
         getJogo().getJogadorActivo().destroiExercito(exercito);
-        if(getJogo().getEstadoAnterior() instanceof AguardaEscolheAccao)
+        if(getJogo().getEstadoAnterior().getClass() == AguardaEscolheAccao.class)
             return new AguardaEscolheAccao(getJogo());
         else
         {
@@ -32,6 +31,8 @@ public class AguardaDestroiExercito extends EstadosAdapter{
     
     @Override
     public IEstados abandonaJogo() {
-        return new AguardaFinalJogo(getJogo()); 
+        // ToDo: Verificar com o Serrano
+        //Abandonar jogo vai para as Opções ou para a Pontuação?
+        return new AguardaOpcoesJogo(getJogo());
     }
 }

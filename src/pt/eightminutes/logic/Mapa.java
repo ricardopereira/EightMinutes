@@ -308,8 +308,9 @@ public class Mapa extends Base implements Serializable {
                 for (row=0; row<totalRegioes; row++)
                     for (col=0; col<totalRegioes; col++) {
                         System.out.print(""+ ++idx +": ");
-                        for (Object item : getTrajectos()[row][col])
-                            System.out.print(((Regiao)item).getNome()+",");
+                        if (getTrajectos()[row][col] != null)
+                            for (Object item : getTrajectos()[row][col])
+                                System.out.print(((Regiao)item).getNome()+",");
                         System.out.print("\n");
                     }
             }
@@ -338,6 +339,17 @@ public class Mapa extends Base implements Serializable {
 
         // Obtem o trajecto: origem ate destino
         return (ArrayList<Regiao>)getTrajectos()[origem.getIndex()][destino.getIndex()];        
+    }
+    
+    public int getTrajectosCount() {
+        int row, col, c = 0;
+        // Escreve o trajecto para debug
+        for (row=0; row<getTrajectos().length; row++)
+            for (col=0; col<getTrajectos().length; col++) {
+                if (getTrajectos()[row][col] != null)
+                    c++;
+            }
+        return c;
     }
     
     /**

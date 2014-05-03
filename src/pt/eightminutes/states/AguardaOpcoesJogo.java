@@ -23,15 +23,29 @@ public class AguardaOpcoesJogo extends EstadosAdapter {
     }
     
     @Override
-    public IEstados retomarJogo() {
+    public IEstados carregaJogo() {
         try {
-            setJogo(getJogo().carregaJogo());
-        } catch (IOException ex) {
-            Logger.getLogger(AguardaOpcoesJogo.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AguardaOpcoesJogo.class.getName()).log(Level.SEVERE, null, ex);
+            setJogo(getJogo().carregaInstanciaJogo());
+        } catch (IOException | ClassNotFoundException ex) {
+            // ToDo: Deverá mostrar erros no interface
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         }
-        return new AguardaEscolheCarta(getJogo());
+        // Como o jogo foi gravado com o estado OpçõesJogo, é preciso forçar o novo estado
+        getJogo().setEstadoActual(new AguardaEscolheCarta(getJogo()));
+        // Retorno não interessa porque o Jogo vai ser substituído
+        return this;
+    }
+    
+    @Override
+    public IEstados gravaJogo() {
+        try {
+            getJogo().gravaInstanciaJogo();
+        } catch (IOException ex) {
+            // ToDo: Deverá mostrar erros no interface
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);            
+        }
+        // Fica onde estava
+        return this;
     }
 
 }
