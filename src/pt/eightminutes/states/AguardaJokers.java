@@ -8,9 +8,9 @@ package pt.eightminutes.states;
 
 import pt.eightminutes.logic.Jogo;
 
-public class AguardaPontuacao extends EstadosAdapter{
+public class AguardaJokers extends EstadosAdapter{
 
-    public AguardaPontuacao(Jogo jogo) {
+    public AguardaJokers(Jogo jogo) {
         super(jogo);
     }
     

@@ -24,7 +24,7 @@ public class AguardaEscolheCarta extends EstadosAdapter{
     @Override
     public IEstados escolheCartas(int idx) {
         if (getJogo().validaNumCartasFinal()) {
-            return new AguardaPontuacao(getJogo());
+            return new AguardaJokers(getJogo());
         } else {
             Carta cartaAux;
             
@@ -59,7 +59,7 @@ public class AguardaEscolheCarta extends EstadosAdapter{
     @Override
     public IEstados verificaPontuacao() {
         if (getJogo().validaNumCartasFinal())
-            return new AguardaPontuacao(getJogo());
+            return new AguardaJokers(getJogo());
         else
             return this;
     }

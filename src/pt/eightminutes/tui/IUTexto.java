@@ -81,7 +81,7 @@ public class IUTexto {
             menuOpcoesJogo();
         }
         else
-        if(jogo.getEstadoActual().getClass() == AguardaPontuacao.class) {
+        if(jogo.getEstadoActual().getClass() == AguardaJokers.class) {
             menuPontuacaoJogo();
         }
     }
