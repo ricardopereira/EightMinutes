@@ -53,11 +53,18 @@ public class Continente implements Serializable{
     public void carregaListaRegioesComExercitosPorJogador(Mapa mapa,Jogador jogador,ArrayList<Regiao> regioesAux,boolean addRegiaoInicial){
         if (regioesAux == null)
             regioesAux = new ArrayList<>();
+        
+        ArrayList<Peca> pecas;
             
-        for(int i=0;i<this.getRegioes().size();i++){               
-            for(int m=0;m<this.getRegioes().get(i).getPecas().size();m++){
+        for(int i=0;i<this.getRegioes().size();i++){
+            pecas = this.getRegioes().get(i).getPecas();
+            
+            for(int m=0;m<pecas.size();m++){
+                
                 if(this.getRegioes().get(i).getContinente() == this){
-                    if(this.getRegioes().get(i).getPecas().get(m).getJogador()==jogador){                        
+                    
+                    if(this.getRegioes().get(i).getPecas().get(m).getJogador()==jogador){
+                        
                         if(regioesAux.indexOf(this.getRegioes().get(i))==-1){
                             if(addRegiaoInicial)                           
                                 regioesAux.add(this.getRegioes().get(i));                
@@ -66,11 +73,21 @@ public class Continente implements Serializable{
                                 if(this.getMapa().getRegiaoInicial()!=this.getRegioes().get(i))
                                     regioesAux.add(this.getRegioes().get(i));
                             }
-                        }    
+                        }
+                        
                     } 
                 }
             }           
         }
+    }
+    
+    public boolean temExercitosDoJogador(Jogador jogador) {
+        if (jogador == null) return false;
+        for (Exercito item : jogador.getListaExercitos()) {
+            if (item.getRegiao() != null && item.getRegiao().getContinente() == this)
+                return true;
+        }
+        return false;
     }
     
     /**

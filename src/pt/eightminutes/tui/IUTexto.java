@@ -279,7 +279,7 @@ public class IUTexto {
             opcoes++;
         }
         
-        listaContinentesAux = jogo.getMapa().getContinentesOndeRegiaoTemExercitosDoJogador(jogo.getJogadorActivo(),false);        
+        listaContinentesAux = jogo.getMapa().getContinentesOndeRegiaoTemExercitosDoJogador(jogo.getJogadorActivo());      
         // Mostra os continentes
         if (listaContinentesAux != null) {
             for(int i=0; i<listaContinentesAux.size();i++){
@@ -295,10 +295,10 @@ public class IUTexto {
         
         // Obter a escolha do Continente do jogador
         while (listaRegioesAux.isEmpty()) {
-            System.out.println("\nEscolha uma opção(0-"+(totalOpcoes)+"):");
+            System.out.println("\n\nEscolha uma opção(0-"+(totalOpcoes-1)+"):");
             do {
                 opInt = obterNumero();
-            } while (opInt < 0 || opInt > totalOpcoes);
+            } while (opInt < 0 || opInt > totalOpcoes-1);
             
             if (opInt == 0)
                 break;
@@ -308,7 +308,7 @@ public class IUTexto {
             // Obter indice do continente
             myIdxCont = opInt - opcoes;
             // Lista de regioes do continente escolhido
-            if (listaContinentesAux != null) {
+            if (listaContinentesAux != null && myIdxCont >= 0) {
                 continenteAux = listaContinentesAux.get(myIdxCont);
                 if (continenteAux != null)
                     continenteAux.carregaListaRegioesComExercitosPorJogador(jogo.getMapa(),jogo.getJogadorActivo(),listaRegioesAux,false);
