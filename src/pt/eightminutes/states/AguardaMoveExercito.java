@@ -38,14 +38,7 @@ public class AguardaMoveExercito extends EstadosAdapter{
             return new AguardaEscolheCarta(getJogo());
         }
     }
-    
-    @Override
-    public IEstados moveExercitoCont(Regiao regiao, ArrayList<Exercito> exercitos) {         
-        // ToDo: Verificar esta situacao
-        //getJogo().getJogadorActivo().moveExercito(regiao, exercitos);
-        return this;      
-    }    
-    
+
     @Override
     public IEstados abandonaJogo() {
         // ToDo: Verificar com o Serrano

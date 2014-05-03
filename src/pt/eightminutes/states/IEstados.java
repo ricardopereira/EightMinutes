@@ -20,10 +20,8 @@ public interface IEstados {
     IEstados colocaCidade(Regiao regiao);
     IEstados colocaExercito(Regiao regiao, Integer qtd);
     IEstados moveExercito(Regiao regiao, ArrayList<Exercito> exercitos);
-    IEstados moveExercitoCont(Regiao regiao, ArrayList<Exercito> exercitos);
     IEstados destroiExercito(Exercito exercito);
     IEstados moveExercitoAgua(Regiao regiao, ArrayList<Exercito> exercitos);
-    IEstados moveExercitoAguaCont(Regiao regiao, ArrayList<Exercito> exercitos);
     IEstados novoJogo();
     IEstados carregaJogo();
     IEstados gravaJogo();
