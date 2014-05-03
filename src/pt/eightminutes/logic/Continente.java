@@ -50,42 +50,40 @@ public class Continente implements Serializable{
         return jogadorControla;
     }
     
-    public void carregaListaRegioesComExercitosPorJogador(Mapa mapa,Jogador jogador,ArrayList<Regiao> regioesAux,boolean addRegiaoInicial){
+    public void carregaListaRegioesComExercitosPorJogador(Jogador jogador,ArrayList<Regiao> regioesAux,boolean addRegiaoInicial){
+        Regiao regiao=null;
         if (regioesAux == null)
             regioesAux = new ArrayList<>();
         
-        ArrayList<Peca> pecas;
-            
-        for(int i=0;i<this.getRegioes().size();i++){
-            pecas = this.getRegioes().get(i).getPecas();
-            
-            for(int m=0;m<pecas.size();m++){
-                
-                if(this.getRegioes().get(i).getContinente() == this){
-                    
-                    if(this.getRegioes().get(i).getPecas().get(m).getJogador()==jogador){
-                        
-                        if(regioesAux.indexOf(this.getRegioes().get(i))==-1){
-                            if(addRegiaoInicial)                           
-                                regioesAux.add(this.getRegioes().get(i));                
-                            else
-                            {
-                                if(this.getMapa().getRegiaoInicial()!=this.getRegioes().get(i))
-                                    regioesAux.add(this.getRegioes().get(i));
-                            }
-                        }
-                        
-                    } 
+        //Lista de exercitos do jogador
+        for(int i=0;i< jogador.getListaExercitoComRegiao().size();i++){
+            regiao = jogador.getListaExercitoComRegiao().get(i).getRegiao();
+            //verifica se a regiao pertence ao continente
+            if(regiao.getContinente() == this){
+                //verifica se ja existe na lista
+                if(regioesAux.indexOf(regiao)==-1){
+                    if(addRegiaoInicial)                           
+                        regioesAux.add(regiao);                
+                    else
+                    {
+                        if(this.getMapa().getRegiaoInicial()!=regiao)
+                            regioesAux.add(regiao);
+                    }
                 }
-            }           
-        }
+            }
+        }        
     }
     
-    public boolean temExercitosDoJogador(Jogador jogador) {
+    public boolean temExercitosDoJogador(Jogador jogador, boolean addRegiaoInicial) {
         if (jogador == null) return false;
-        for (Exercito item : jogador.getListaExercitos()) {
+        for (Exercito item : jogador.getListaExercitoComRegiao()) {
             if (item.getRegiao() != null && item.getRegiao().getContinente() == this)
-                return true;
+                if(!addRegiaoInicial){
+                    if(item.getRegiao()!=this.getMapa().getRegiaoInicial())
+                        return true;
+                }
+                else
+                    return true;
         }
         return false;
     }

@@ -279,9 +279,9 @@ public class IUTexto {
             opcoes++;
         }
         
-        listaContinentesAux = jogo.getMapa().getContinentesOndeRegiaoTemExercitosDoJogador(jogo.getJogadorActivo());      
+        listaContinentesAux = jogo.getMapa().getContinentesOndeRegiaoTemExercitosDoJogador(jogo.getJogadorActivo(),false);      
         // Mostra os continentes
-        if (listaContinentesAux != null) {
+        if (!listaContinentesAux.isEmpty()) {
             for(int i=0; i<listaContinentesAux.size();i++){
                 System.out.print("Continente:"+(i+opcoes));
                 System.out.print(" C "+listaContinentesAux.get(i).getNome());
@@ -302,8 +302,10 @@ public class IUTexto {
             
             if (opInt == 0)
                 break;
-            if (opInt == 1 && opcoes == 2)
-                break;
+            if(jogo.getEstadoAnterior().getClass() == AguardaEscolheAccao.class){
+                if (opInt == 1)
+                    break;
+            }
 
             // Obter indice do continente
             myIdxCont = opInt - opcoes;
@@ -311,9 +313,13 @@ public class IUTexto {
             if (listaContinentesAux != null && myIdxCont >= 0) {
                 continenteAux = listaContinentesAux.get(myIdxCont);
                 if (continenteAux != null)
-                    continenteAux.carregaListaRegioesComExercitosPorJogador(jogo.getMapa(),jogo.getJogadorActivo(),listaRegioesAux,false);
+                    continenteAux.carregaListaRegioesComExercitosPorJogador(jogo.getJogadorActivo(),listaRegioesAux,false);
             }
         }
+        
+        //acrescente 1 ao opção senao tiver que escolher a acçã0
+        if(jogo.getEstadoAnterior().getClass() != AguardaEscolheAccao.class && opInt!=0)
+            opInt++;
         
         switch (opInt) {
             case 0:
@@ -323,6 +329,10 @@ public class IUTexto {
                 jogo.mudaAccao();
                 break;
             default:
+                //retira um acrescentado anteriormente
+                if(jogo.getEstadoAnterior().getClass() != AguardaEscolheAccao.class)
+                    opInt--;
+                
                 for (int i=0;i<listaRegioesAux.size();i++)
                 {
                     System.out.print("Região:"+i);                      

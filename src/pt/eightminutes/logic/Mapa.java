@@ -352,10 +352,10 @@ public class Mapa extends Base implements Serializable {
         return c;
     }
     
-    public ArrayList<Continente> getContinentesOndeRegiaoTemExercitosDoJogador(Jogador jogador) {
+    public ArrayList<Continente> getContinentesOndeRegiaoTemExercitosDoJogador(Jogador jogador, boolean addRegiaoInicial) {
         ArrayList<Continente> continentesAux= new ArrayList<>();
-        for (Continente item : continentes) {
-            if (item.temExercitosDoJogador(jogador))
+        for (Continente item : continentes) {            
+            if (item.temExercitosDoJogador(jogador,addRegiaoInicial))
                 continentesAux.add(item);
         }
         return continentesAux;
