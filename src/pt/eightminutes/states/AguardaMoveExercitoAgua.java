@@ -38,13 +38,6 @@ public class AguardaMoveExercitoAgua extends EstadosAdapter{
     }
     
     @Override
-    public IEstados moveExercitoAguaCont(Regiao regiao, ArrayList<Exercito> exercitos) { 
-        // ToDo: Verificar esta situacao
-        //getJogo().getJogadorActivo().moveExercitoAgua(regiao, exercitos);
-        return this;           
-    }
-    
-    @Override
     public IEstados abandonaJogo() {
         // ToDo: Verificar com o Serrano
         //Abandonar jogo vai para as Opções ou para a Pontuação?
