@@ -82,7 +82,7 @@ public class IUTexto {
         }
         else
         if(jogo.getEstadoActual().getClass() == AguardaJokers.class) {
-            menuPontuacaoJogo();
+            menuJokersJogo();
         }
     }
 
@@ -199,7 +199,7 @@ public class IUTexto {
         }
     }
     
-    public void menuPontuacaoJogo() throws InterruptedException{                
+    public void menuJokersJogo() throws InterruptedException{                
         int opInt;
                 
         System.out.println("############## Pontuação ##############");        
@@ -265,60 +265,77 @@ public class IUTexto {
     public void menuColocaCidade(){                
         int opInt=0;
         int myIdxCont=0;
-        int myCont=0;
-        ArrayList<Continente> continentesAux = new ArrayList<>();
-        ArrayList<Regiao> regioesAux = new ArrayList<>();
+        int opcoes=1;
+        int totalOpcoes;
+        Continente continenteAux;
+        ArrayList<Continente> listaContinentesAux;
+        ArrayList<Regiao> listaRegioesAux = new ArrayList<>();
              
-        System.out.println("########## Coloca Cidade ############"); 
+        System.out.println("########## Coloca Cidade ############");
         System.out.println("###Jogador:"+jogo.getJogadorActivo().getNome()+"(Moedas:"+jogo.getJogadorActivo().getMoedas()+") ###");
         System.out.println("Passar a vez:0");
         if(jogo.getEstadoAnterior().getClass() == AguardaEscolheAccao.class){
             System.out.println("Muda de acção:1");
-            myCont++;
+            opcoes++;
         }
         
-        continentesAux = jogo.getMapa().getContinentesComRegiaoTemExercitosDoJogador(jogo.getJogadorActivo(),false);
-        
-        for(int i=0; i<continentesAux.size();i++){
-            myCont++;
-            System.out.print("Continente:"+myCont);                      
-            System.out.print(continentesAux.get(i));
-        }
-        
-        while(regioesAux.size()==0||opInt==0||opInt==1){
-            System.out.println("\nEscolha uma opção(0-"+(myCont)+"):");           
-            do {                                        
-                opInt = obterNumero();                                    
-            } while (opInt < 0 || opInt >continentesAux.size()+1);
-            
-            myIdxCont = opInt-myCont;
-
-            continentesAux.get(myIdxCont).getListaRegioesComExercitosPorJogador(jogo.getMapa(),jogo.getJogadorActivo(),regioesAux,false);
-        }
-        
-        if(opInt==0){
-            jogo.passaVez();
-        }
-        else
-        {
-            if(opInt==1){
-                jogo.mudaAccao();
+        listaContinentesAux = jogo.getMapa().getContinentesOndeRegiaoTemExercitosDoJogador(jogo.getJogadorActivo(),false);        
+        // Mostra os continentes
+        if (listaContinentesAux != null) {
+            for(int i=0; i<listaContinentesAux.size();i++){
+                System.out.print("Continente:"+(i+opcoes));
+                System.out.print(" C "+listaContinentesAux.get(i).getNome());
             }
-            else
-            {    
-                for(int i=0;i<regioesAux.size();i++)
+            totalOpcoes = opcoes + listaContinentesAux.size();
+        }
+        else {
+            totalOpcoes = opcoes;
+            System.out.print("Sem continentes");
+        }
+        
+        // Obter a escolha do Continente do jogador
+        while (listaRegioesAux.isEmpty()) {
+            System.out.println("\nEscolha uma opção(0-"+(totalOpcoes)+"):");
+            do {
+                opInt = obterNumero();
+            } while (opInt < 0 || opInt > totalOpcoes);
+            
+            if (opInt == 0)
+                break;
+            if (opInt == 1 && opcoes == 2)
+                break;
+
+            // Obter indice do continente
+            myIdxCont = opInt - opcoes;
+            // Lista de regioes do continente escolhido
+            if (listaContinentesAux != null) {
+                continenteAux = listaContinentesAux.get(myIdxCont);
+                if (continenteAux != null)
+                    continenteAux.carregaListaRegioesComExercitosPorJogador(jogo.getMapa(),jogo.getJogadorActivo(),listaRegioesAux,false);
+            }
+        }
+        
+        switch (opInt) {
+            case 0:
+                jogo.passaVez();
+                break;
+            case 1:
+                jogo.mudaAccao();
+                break;
+            default:
+                for (int i=0;i<listaRegioesAux.size();i++)
                 {
                     System.out.print("Região:"+i);                      
-                    System.out.print(regioesAux.get(i));
+                    System.out.print(listaRegioesAux.get(i));
                 }
 
-                System.out.println("\nEscolha uma Região(0-"+(regioesAux.size()-1)+"):");           
+                System.out.println("\nEscolha uma Região(0-"+(listaRegioesAux.size()-1)+"):");           
                 do {                                        
                     opInt = obterNumero();                                    
-                } while (opInt < 0 || opInt >continentesAux.get(myIdxCont).getRegioes().size()-1);
+                } while (opInt < 0 || opInt > listaRegioesAux.size()-1);
 
-                jogo.colocaCidade(regioesAux.get(opInt)); 
-            }
+                jogo.colocaCidade(listaRegioesAux.get(opInt)); 
+                break;
         }
     }
      
@@ -415,6 +432,7 @@ public class IUTexto {
         int opInt=0;
         int myCont=1;
         int myIdxPeca=0;
+        
         Regiao myRegiao=null; 
         Accao myAccao;
         ArrayList<Exercito> exercitos= new ArrayList<>();
@@ -436,8 +454,10 @@ public class IUTexto {
         }
           
         myAccao = jogo.getJogadorActivo().getCartaActiva().getAccaoActiva();
+        // Neste caso: quantidade significa número de movimentos
+        System.out.println("\nPode mover "+myAccao.getQtd()+" vezes");
         
-        System.out.println("\nSeleccione uma opcção:(0-"+myCont+"):");           
+        System.out.println("Seleccione uma opcção:(0-"+myCont+"):");
         do {                                        
             opInt = obterNumero();                                    
         } while (opInt < 0|| opInt >myCont);
@@ -469,9 +489,6 @@ public class IUTexto {
             
             // ToDo: validar número de movimentos
             
-            // Neste caso: quantidade significa número de movimentos
-            System.out.println("Pode mover "+myAccao.getQtd()+" vezes");
-
             // Listar movimentos possíveis
             ArrayList<Regiao> regioesPossiveis = new ArrayList<>();
             jogo.getRegioesPossiveisTerra(myRegiao, myAccao.getQtd(), regioesPossiveis);
@@ -517,8 +534,10 @@ public class IUTexto {
         }
           
         myAccao = jogo.getJogadorActivo().getCartaActiva().getAccaoActiva();
+        // Neste caso: quantidade significa número de movimentos
+        System.out.println("\nPode mover "+myAccao.getQtd()+" vezes");
         
-        System.out.println("\nSeleccione uma opcção:(0-"+myCont+"):");           
+        System.out.println("Seleccione uma opcção:(0-"+myCont+"):");           
         do {                                        
             opInt = obterNumero();                                    
         } while (opInt < 0|| opInt >myCont);
@@ -543,7 +562,6 @@ public class IUTexto {
                     }
                 }
             }
-            System.out.println("Pode mover "+myAccao.getQtd()+" vezes");
 
             ArrayList<Regiao> regioesPossiveis = new ArrayList<>();
             jogo.getRegioesPossiveisAgua(myRegiao, myAccao.getQtd(), regioesPossiveis);

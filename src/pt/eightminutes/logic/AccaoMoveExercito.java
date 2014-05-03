@@ -16,6 +16,7 @@ public class AccaoMoveExercito extends Accao {
         super("Move Exército",qtd);
     }
     
+    @Override
     public int executa(Object sender, List params) {
         if (sender == null) return 0;
         if (params == null) return 0;

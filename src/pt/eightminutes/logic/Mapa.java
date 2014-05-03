@@ -352,11 +352,11 @@ public class Mapa extends Base implements Serializable {
         return c;
     }
     
-    public ArrayList<Continente> getContinentesComRegiaoTemExercitosDoJogador(Jogador jogador, boolean addRegiaoInicial){
+    public ArrayList<Continente> getContinentesOndeRegiaoTemExercitosDoJogador(Jogador jogador, boolean addRegiaoInicial){
         ArrayList<Continente> continentesAux= new ArrayList<>();
         ArrayList<Regiao> regioesAux = new ArrayList<>();
         for(int i=0;i<continentes.size();i++){
-            continentes.get(i).getListaRegioesComExercitosPorJogador(this,jogador,regioesAux,addRegiaoInicial);
+            continentes.get(i).carregaListaRegioesComExercitosPorJogador(this,jogador,regioesAux,addRegiaoInicial);
             for(int m=0;m<regioesAux.size();m++){
                 if((regioesAux.get(m).getContinente() == continentes.get(i)) && 
                         (continentesAux.indexOf(continentes.get(i))==-1))            

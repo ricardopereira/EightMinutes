@@ -50,8 +50,10 @@ public class Continente implements Serializable{
         return jogadorControla;
     }
     
-        public void getListaRegioesComExercitosPorJogador(Mapa mapa,Jogador jogador,ArrayList<Regiao> regioesAux,boolean addRegiaoInicial){
-        
+    public void carregaListaRegioesComExercitosPorJogador(Mapa mapa,Jogador jogador,ArrayList<Regiao> regioesAux,boolean addRegiaoInicial){
+        if (regioesAux == null)
+            regioesAux = new ArrayList<>();
+            
         for(int i=0;i<this.getRegioes().size();i++){               
             for(int m=0;m<this.getRegioes().get(i).getPecas().size();m++){
                 if(this.getRegioes().get(i).getContinente() == this){
