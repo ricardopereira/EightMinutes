@@ -344,18 +344,7 @@ public class IUTexto {
                 opInt = obterNumero();                                    
             } while (opInt < 0|| opInt >myAccao.getQtd());
 
-
-            for(int m=0;m<jogo.getJogadorActivo().getListaCidades().size();m++){
-                if(opInt==0)
-                    break;
-            
-                if(jogo.getJogadorActivo().getListaExercitos().get(m)!=null){
-                    exercitos.add((Exercito)jogo.getJogadorActivo().getListaExercitos().get(m));
-                    opInt--;
-                }               
-            }
-
-            jogo.colocaExercito(myRegiao, exercitos);   
+            jogo.colocaExercito(myRegiao, opInt);   
         }
     }
     
@@ -363,7 +352,7 @@ public class IUTexto {
         int opInt=0;
         int myCont=1;
         ArrayList<Exercito> exercitos= new ArrayList<>();
-        System.out.println("######## Move Exército Terra ########");  
+        System.out.println("######## Destroi Exercito ########");  
         System.out.println("#### Jogador:"+jogo.getJogadorActivo().getNome()+"(Moedas:"+jogo.getJogadorActivo().getMoedas()+") ###");
         System.out.println("Passa vez:0");                      
         System.out.println("Muda acção:1");
@@ -494,7 +483,7 @@ public class IUTexto {
                 if(jogo.getJogadorActivo().getListaExercitos().get(i).getRegiao()!=null){               
                     myCont++;
                     System.out.print("Exército:"+myCont);                      
-                    System.out.print(jogo.getJogadorActivo().getListaExercitos().get(i).getRegiao());                           
+                    System.out.print("  R"+jogo.getJogadorActivo().getListaExercitos().get(i).getRegiao());                            
                 }
             }
         }

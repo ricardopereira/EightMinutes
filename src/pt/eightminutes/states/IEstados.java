@@ -18,8 +18,7 @@ public interface IEstados {
     IEstados mudaAccao();
     IEstados passaVez();
     IEstados colocaCidade(Regiao regiao);
-    IEstados colocaExercito(Regiao regiao, ArrayList<Exercito> exercitos);
-    IEstados colocaExercitoCont(Regiao regiao, ArrayList<Exercito> exercitos);
+    IEstados colocaExercito(Regiao regiao, Integer qtd);
     IEstados moveExercito(Regiao regiao, ArrayList<Exercito> exercitos);
     IEstados moveExercitoCont(Regiao regiao, ArrayList<Exercito> exercitos);
     IEstados destroiExercito(Exercito exercito);

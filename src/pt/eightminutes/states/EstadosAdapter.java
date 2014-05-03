@@ -63,10 +63,7 @@ public class EstadosAdapter implements IEstados, Serializable {
     public IEstados colocaCidade(Regiao regiao) { return this; }
 
     @Override
-    public IEstados colocaExercito(Regiao regiao, ArrayList<Exercito> exercitos) { return this; }
-
-    @Override
-    public IEstados colocaExercitoCont(Regiao regiao, ArrayList<Exercito> exercitos) { return this; }
+    public IEstados colocaExercito(Regiao regiao, Integer qtd) { return this; }    
     
     @Override
     public IEstados moveExercito(Regiao regiao, ArrayList<Exercito> exercitos) { return this; }

@@ -262,8 +262,8 @@ public class Jogo extends Base implements Serializable {
         setEstado(estadoActual.colocaCidade(regiao));
     }
     
-    public void colocaExercito(Regiao regiao, ArrayList<Exercito> exercitos){                
-        setEstado(estadoActual.colocaExercito(regiao, exercitos));
+    public void colocaExercito(Regiao regiao, int qtd){                
+        setEstado(estadoActual.colocaExercito(regiao, qtd));
     }
         
     public void moveExercito(Regiao regiao, ArrayList<Exercito> exercitos){                

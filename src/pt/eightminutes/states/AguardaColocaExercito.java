@@ -7,6 +7,7 @@
 package pt.eightminutes.states;
 
 import java.util.ArrayList;
+import pt.eightminutes.logic.Accao;
 import pt.eightminutes.logic.Exercito;
 import pt.eightminutes.logic.Jogo;
 import pt.eightminutes.logic.Regiao;
@@ -19,24 +20,30 @@ public class AguardaColocaExercito extends EstadosAdapter{
     }
     
     @Override
-    public IEstados colocaExercito(Regiao regiao, ArrayList<Exercito> exercitos) {         
-        getJogo().getJogadorActivo().colocaExercito(regiao, exercitos);  
-        if(getJogo().getJogadorActivo().getCartaActiva().getAccaoActiva().isUsada()||
-                (getJogo().getEstadoAnterior().getClass() != AguardaEscolheAccao.class))
+    public IEstados colocaExercito(Regiao regiao, Integer qtd) {    
+        // Executa acção da carta
+        ArrayList<Object> params = new ArrayList<>();
+        params.add(regiao);
+        params.add(qtd);
+        Accao accao = getJogo().getJogadorActivo().getCartaActiva().getAccaoActiva();
+        if(accao==null)
+            return this;
+        
+        accao.executa(getJogo(),params);
+        
+        // ToDo: Testar proximo passo
+        
+        // Próximo estado
+        if(!accao.isUsada())
+            return this;
+        else
+        if (getJogo().getEstadoAnterior().getClass() == AguardaEscolheAccao.class)
+            return new AguardaEscolheAccao(getJogo());
+        else
         {
             getJogo().mudaJogador();
             return new AguardaEscolheCarta(getJogo());
-        }
-        else
-        {            
-            return new AguardaEscolheAccao(getJogo());        
-        }
-    }
-    
-    @Override
-    public IEstados colocaExercitoCont(Regiao regiao, ArrayList<Exercito> exercitos) {         
-        getJogo().getJogadorActivo().colocaExercito(regiao, exercitos);  
-        return this;
+        }       
     }        
     
     @Override

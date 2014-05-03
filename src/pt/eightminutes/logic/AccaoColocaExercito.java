@@ -17,6 +17,7 @@ public class AccaoColocaExercito extends Accao{
     }
     
     public int executa(Object sender, List params) {
+        Integer qtd;
         if (sender == null) return 0;
         if (params == null) return 0;
         if (!(sender instanceof Jogo)) return 0;
@@ -24,23 +25,26 @@ public class AccaoColocaExercito extends Accao{
         // Obter parametros conforme o estado AguardaColocaExercito
         //ColocaExercito(Regiao regiao, ArrayList<Exercito> exercitos)
         Regiao regiao = (Regiao)params.get(0);
-        ArrayList<Exercito> exercitos = (ArrayList<Exercito>)params.get(1);
+        if(params.get(1)!=null)
+            qtd = (Integer)params.get(1);
+        else
+            qtd =0;
         // Execução
-        internalColocaExercito(j.getJogadorActivo(),regiao,exercitos);
+        internalColocaExercito(j.getJogadorActivo(),regiao,qtd);
         // Ok
         return 0;
     }
     
-    private void internalColocaExercito(Jogador jogador, Regiao regiao, ArrayList<Exercito> exercitos) {
+    private void internalColocaExercito(Jogador jogador, Regiao regiao, Integer qtd) {
         if(regiao!=null)
         {
-            // Lista de exercitos a colocar
-            for (int i=0;i<exercitos.size();i++){
+            // Número de exercitos a colocar
+            for (int i=0;i<qtd;i++){
                 // Lista de exercitos do Jogador
                 for (int m=0;m<jogador.getListaExercitos().size();m++){
                     // Encontrar o exército a colocar na lista de exercitos do Jogador
-                    if (jogador.getListaExercitos().get(m)==exercitos.get(i))
-                    {
+                    if (jogador.getListaExercitos().get(m).getRegiao()==null)
+                    {                        
                         jogador.getListaExercitos().get(m).colocaExercito(regiao);
                         decrementaQtd();
                         break;
