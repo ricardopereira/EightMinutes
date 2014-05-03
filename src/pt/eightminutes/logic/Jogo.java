@@ -18,6 +18,7 @@ import java.util.Random;
 
 import pt.eightminutes.states.AguardaOpcoesJogo;
 import pt.eightminutes.states.IEstados;
+import pt.eightminutes.logic.*;
 
 public class Jogo extends Base implements Serializable {
     
@@ -110,7 +111,7 @@ public class Jogo extends Base implements Serializable {
     }
     
     public void defineNumJogadores(int numJogadores){
-        baralho = new Baralho(numJogadores);              
+        baralho = new Baralho(numJogadores);
         setEstado(estadoActual.defineNumJogadores(numJogadores));
     }
     
@@ -309,6 +310,7 @@ public class Jogo extends Base implements Serializable {
                             (regiao.getRegioesVizinhas().get(i)!=regiao)){
                         regioesPossiveis.add(regiao.getRegioesVizinhas().get(i));                        
                     }
+                    
                     getRegioesPossiveisTerra(regiao.getRegioesVizinhas().get(i),qtdMovimentos,regioesPossiveis);
                 }
             }
@@ -325,6 +327,7 @@ public class Jogo extends Base implements Serializable {
                         (regiao.getRegioesVizinhas().get(i)!=regiao)){
                     regioesPossiveis.add(regiao.getRegioesVizinhas().get(i));                    
                 }
+                
                 getRegioesPossiveisAgua(regiao.getRegioesVizinhas().get(i),qtdMovimentos,regioesPossiveis);
             }            
         }        

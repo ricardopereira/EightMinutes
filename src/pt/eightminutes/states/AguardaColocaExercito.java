@@ -21,12 +21,15 @@ public class AguardaColocaExercito extends EstadosAdapter{
     @Override
     public IEstados colocaExercito(Regiao regiao, ArrayList<Exercito> exercitos) {         
         getJogo().getJogadorActivo().colocaExercito(regiao, exercitos);  
-        if(getJogo().getEstadoAnterior().getClass() == AguardaEscolheAccao.class)
-            return new AguardaEscolheAccao(getJogo());
-        else
+        if(getJogo().getJogadorActivo().getCartaActiva().getAccaoActiva().isUsada()||
+                (getJogo().getEstadoAnterior().getClass() != AguardaEscolheAccao.class))
         {
             getJogo().mudaJogador();
             return new AguardaEscolheCarta(getJogo());
+        }
+        else
+        {            
+            return new AguardaEscolheAccao(getJogo());        
         }
     }
     

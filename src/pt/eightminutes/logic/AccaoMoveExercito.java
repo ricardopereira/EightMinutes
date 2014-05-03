@@ -109,10 +109,5 @@ public class AccaoMoveExercito extends Accao {
         }
         // Accao executada
         setUsada(true);
-    }
-    
-    private void decrementaQtd() {
-        setQtd(getQtd() - 1);
-    }
-    
+    }        
 }

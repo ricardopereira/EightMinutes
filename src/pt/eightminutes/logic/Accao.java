@@ -72,5 +72,9 @@ public abstract class Accao extends Base implements Serializable {
     }
     
     public abstract int executa(Object sender, List params);
+    
+    public void decrementaQtd() {
+        setQtd(getQtd() - 1);
+    }
 
 }
