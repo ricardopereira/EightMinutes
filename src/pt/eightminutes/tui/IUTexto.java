@@ -272,6 +272,10 @@ public class IUTexto {
         System.out.println("########## Coloca Cidade ############"); 
         System.out.println("###Jogador:"+jogo.getJogadorActivo().getNome()+"(Moedas:"+jogo.getJogadorActivo().getMoedas()+") ###");
         System.out.println("Passar a vez:0");
+        if(jogo.getEstadoAnterior().getClass() == AguardaEscolheAccao.class){
+            System.out.println("Muda de acção:1");
+            myCont++;
+        }
         
         continentesAux = jogo.getMapa().getContinentesComRegiaoTemExercitosDoJogador(jogo.getJogadorActivo(),false);
         
@@ -281,13 +285,13 @@ public class IUTexto {
             System.out.print(continentesAux.get(i));
         }
         
-        while(regioesAux.size()==0||opInt==0){
+        while(regioesAux.size()==0||opInt==0||opInt==1){
             System.out.println("\nEscolha uma opção(0-"+(myCont)+"):");           
             do {                                        
                 opInt = obterNumero();                                    
-            } while (opInt < 0 || opInt >continentesAux.size());
-
-            myIdxCont = opInt-1;
+            } while (opInt < 0 || opInt >continentesAux.size()+1);
+            
+            myIdxCont = opInt-myCont;
 
             continentesAux.get(myIdxCont).getListaRegioesComExercitosPorJogador(jogo.getMapa(),jogo.getJogadorActivo(),regioesAux,false);
         }
@@ -297,18 +301,24 @@ public class IUTexto {
         }
         else
         {
-            for(int i=0;i<regioesAux.size();i++)
-            {
-                System.out.print("Região:"+i);                      
-                System.out.print(regioesAux.get(i));
+            if(opInt==1){
+                jogo.mudaAccao();
             }
+            else
+            {    
+                for(int i=0;i<regioesAux.size();i++)
+                {
+                    System.out.print("Região:"+i);                      
+                    System.out.print(regioesAux.get(i));
+                }
 
-            System.out.println("\nEscolha uma Região(0-"+(regioesAux.size()-1)+"):");           
-            do {                                        
-                opInt = obterNumero();                                    
-            } while (opInt < 0 || opInt >continentesAux.get(myIdxCont).getRegioes().size()-1);
+                System.out.println("\nEscolha uma Região(0-"+(regioesAux.size()-1)+"):");           
+                do {                                        
+                    opInt = obterNumero();                                    
+                } while (opInt < 0 || opInt >continentesAux.get(myIdxCont).getRegioes().size()-1);
 
-            jogo.colocaCidade(regioesAux.get(opInt)); 
+                jogo.colocaCidade(regioesAux.get(opInt)); 
+            }
         }
     }
      
