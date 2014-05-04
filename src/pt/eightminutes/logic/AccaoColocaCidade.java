@@ -36,7 +36,7 @@ public class AccaoColocaCidade extends Accao{
         {                
             if(regiao.RegiaoTemExercitosDoJogador(jogador)){
                 if(jogador.getListaCidadeSemRegiao() != null){                
-                    jogador.getListaCidades().get(0).colocaCidade(regiao);
+                    jogador.getListaCidadeSemRegiao().get(0).colocaCidade(regiao);
                     decrementaQtd();                   
                 }                
             }                    

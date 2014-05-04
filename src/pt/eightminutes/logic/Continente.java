@@ -66,21 +66,38 @@ public class Continente implements Serializable{
                         regioesAux.add(regiao);                
                     else
                     {
+                        //Adiciona se for diferente da regiao inicial
                         if(this.getMapa().getRegiaoInicial()!=regiao)
                             regioesAux.add(regiao);
+                        //retirar se ja tiver uma cidade
+                        for (Cidade itemCidade : jogador.getListaCidadeComRegiao()) {
+                            if(regiao==itemCidade.getRegiao())
+                                regioesAux.remove(regiao);
+                        }
                     }
                 }
             }
         }        
     }
     
-    public boolean temExercitosDoJogador(Jogador jogador, boolean addRegiaoInicial) {
+    public boolean temExercitosDoJogador(Jogador jogador, boolean addRegiaoComCidade) {
+        boolean myTemCidade=true;
         if (jogador == null) return false;
+        //Listar Exercitos com regiao
         for (Exercito item : jogador.getListaExercitoComRegiao()) {
+            // verifica se não é null e se o continente é este
             if (item.getRegiao() != null && item.getRegiao().getContinente() == this)
-                if(!addRegiaoInicial){
-                    if(item.getRegiao()!=this.getMapa().getRegiaoInicial())
-                        return true;
+                if(!addRegiaoComCidade){
+                    //verifica se tem alguma cidade                   
+                    if(item.getRegiao()!=this.getMapa().getRegiaoInicial())                                               
+                       myTemCidade = true;                                            
+                    
+                    for (Cidade itemCidade : jogador.getListaCidadeComRegiao()) {
+                        if(item.getRegiao()==itemCidade.getRegiao())
+                           myTemCidade = false; 
+                    }
+                    
+                    return myTemCidade;
                 }
                 else
                     return true;
