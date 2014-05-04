@@ -417,6 +417,7 @@ public class IUTexto {
     public void menuColocaExercito(){                
         int opInt=0;
         int myCont=0;
+        int opcoes=1;
         Regiao myRegiao=null; 
         Accao myAccao;
         ArrayList<Exercito> exercitos= new ArrayList<>();
@@ -426,6 +427,7 @@ public class IUTexto {
 
         System.out.println("Passa vez:0");  
         if(jogo.getEstadoAnterior().getClass() == AguardaEscolheAccao.class){
+            opcoes++;
             myCont++;
             System.out.println("Muda acção:"+myCont);      
         }
@@ -460,14 +462,13 @@ public class IUTexto {
             jogo.mudaAccao();
         else
         {
+            if(jogo.getEstadoAnterior().getClass() != AguardaEscolheAccao.class)
+                    opInt--;
+            
             if(opInt==myCont)
                 myRegiao = jogo.getMapa().getRegiaoInicial();
-            else
-            {
-                if(jogo.getEstadoAnterior().getClass() != AguardaEscolheAccao.class)
-                    opInt--;
-                myRegiao = jogo.getJogadorActivo().getCidade((opInt-(myCont-1))).getRegiao();
-            }
+            else            
+                myRegiao = jogo.getJogadorActivo().getCidade((opInt-(opcoes))).getRegiao();           
 
             System.out.println("Pode colocar "+myAccao.getQtd()+" exercitos");
             System.out.println("Quantos exercitos deseja colocar nesta cidade?");
@@ -482,12 +483,14 @@ public class IUTexto {
     public void menuDestroiExercito(){                        
         int opInt=0;
         int myCont=0;
+        int opcoes=1;
         ArrayList<Exercito> exercitos= new ArrayList<>();
         ArrayList<Exercito> exercitosAux= new ArrayList<>();
         System.out.println("######## Destroi Exercito ########");  
         System.out.println("#### Jogador:"+jogo.getJogadorActivo().getNome()+"(Moedas:"+jogo.getJogadorActivo().getMoedas()+") ###");
         System.out.println("Passa vez:0");   
         if(jogo.getEstadoAnterior().getClass() == AguardaEscolheAccao.class){
+            opcoes++;
             myCont++;
             System.out.println("Muda acção:"+myCont);
         }
@@ -522,13 +525,14 @@ public class IUTexto {
         {
             if(jogo.getEstadoAnterior().getClass() == AguardaEscolheAccao.class)
                 opInt--;
-            jogo.destroiExercito(exercitosAux.get(opInt-(myCont-1)));        
+            jogo.destroiExercito(exercitosAux.get(opInt-(opcoes)));        
         }
     }
     
     public void menuMoveExercitoTerra(){                
         int opInt=0;
         int myCont=0;
+        int opcoes=1;
         int myIdxPeca=0;
         
         Regiao myRegiao=null; 
@@ -540,6 +544,7 @@ public class IUTexto {
                  
         System.out.println("Passa vez:0");                      
         if(jogo.getEstadoAnterior().getClass() == AguardaEscolheAccao.class){
+            opcoes++;
             myCont++;
             System.out.println("Muda acção:"+myCont);
         }
@@ -577,20 +582,11 @@ public class IUTexto {
                 opInt--;
             // Criar lista de exercitos seleccionados
             // Obter região pertencem
-            myCont=0;
             // ToDo: melhorar esta situação
-            opInt = opInt-(myCont-1); //retirados opções antes do exercito
-            for(int i=0;i<jogo.getJogadorActivo().getListaExercitoComRegiao().size();i++){                
-                if(jogo.getJogadorActivo().getListaExercitoComRegiao().get(i) != null){
-                    if(jogo.getJogadorActivo().getListaExercitoComRegiao().get(i).getRegiao() != null){
-                        if(myCont == opInt){
-                            exercitos.add((Exercito)jogo.getJogadorActivo().getListaExercitoComRegiao().get(i));
-                            myRegiao = jogo.getJogadorActivo().getListaExercitoComRegiao().get(i).getRegiao();
-                        } 
-                        myCont++;
-                    }
-                }
-            }
+            opInt = opInt-(opcoes);//retirados opções antes do exercito
+            
+            exercitos.add((Exercito)jogo.getJogadorActivo().getListaExercitoComRegiao().get(opInt));
+            myRegiao = jogo.getJogadorActivo().getListaExercitoComRegiao().get(opInt).getRegiao();             
             
             // ToDo: validar número de movimentos
             
@@ -618,6 +614,7 @@ public class IUTexto {
         int opInt=0;
         int myCont=0;
         int myIdxPeca=0;
+        int opcoes=1;
         Regiao myRegiao=null; 
         Accao myAccao;
         ArrayList<Exercito> exercitos= new ArrayList<>();
@@ -627,6 +624,7 @@ public class IUTexto {
                  
         System.out.println("Passa vez:0"); 
         if(jogo.getEstadoAnterior().getClass() == AguardaEscolheAccao.class){
+            opcoes++;
             myCont++;
             System.out.println("Muda acção:1");
         }
@@ -664,20 +662,11 @@ public class IUTexto {
             if(jogo.getEstadoAnterior().getClass() != AguardaEscolheAccao.class)
                 opInt--;
            
-            opInt = opInt-(myCont-1);//retirados opções antes do exercito
-            myCont=0;
-            
-            for(int i=0;i<jogo.getJogadorActivo().getListaExercitos().size();i++){
-                if(jogo.getJogadorActivo().getListaExercitos().get(i)!=null){
-                    if(jogo.getJogadorActivo().getListaExercitos().get(i).getRegiao()!=null){                        
-                        if(myCont==opInt){
-                            exercitos.add((Exercito)jogo.getJogadorActivo().getListaExercitos().get(i));
-                            myRegiao = jogo.getJogadorActivo().getListaExercitos().get(i).getRegiao();
-                        } 
-                        myCont++;
-                    }
-                }
-            }
+            opInt = opInt-(opcoes);//retirados opções antes do exercito
+
+            exercitos.add((Exercito)jogo.getJogadorActivo().getListaExercitos().get(opInt));
+            myRegiao = jogo.getJogadorActivo().getListaExercitos().get(opInt).getRegiao();
+                       
 
             ArrayList<Regiao> regioesPossiveis = new ArrayList<>();
             jogo.getRegioesPossiveisAgua(myRegiao, myAccao.getQtd(), regioesPossiveis);
