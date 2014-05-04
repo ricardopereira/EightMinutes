@@ -31,31 +31,40 @@ public class AguardaDestroiExercito extends EstadosAdapter{
             return this;
         
         accao.executa(getJogo(),params);
+        
         // Próximo estado
         if(!accao.isUsada())
             return this;
         else
-        if (getJogo().getEstadoAnterior().getClass() == AguardaEscolheAccao.class){
-            //Verifica o tipo de carta ("E/OU")
-            if(carta.isExecutaTodasAccoes()){
-                if(carta.isTodasAccoesUsadas()){
-                    getJogo().mudaJogador();
-                    return new AguardaEscolheCarta(getJogo());
-                }
-                else
-                    return new AguardaEscolheAccao(getJogo());
+        {
+            if(getJogo().verificaJogadoresFimDoJogo()){
+                return new AguardaJokers(getJogo());
             }
             else
             {
-                getJogo().mudaJogador();
-                return new AguardaEscolheCarta(getJogo());
+                if (getJogo().getEstadoAnterior().getClass() == AguardaEscolheAccao.class){
+                    //Verifica o tipo de carta ("E/OU")
+                    if(carta.isExecutaTodasAccoes()){
+                        if(carta.isTodasAccoesUsadas()){
+                            getJogo().mudaJogador();
+                            return new AguardaEscolheCarta(getJogo());
+                        }
+                        else
+                            return new AguardaEscolheAccao(getJogo());
+                    }
+                    else
+                    {
+                        getJogo().mudaJogador();
+                        return new AguardaEscolheCarta(getJogo());
+                    }
+                }
+                else
+                {
+                    getJogo().mudaJogador();
+                    return new AguardaEscolheCarta(getJogo());
+                }
             }
-        }
-        else
-        {
-            getJogo().mudaJogador();
-            return new AguardaEscolheCarta(getJogo());
-        }      
+        }    
     }
     
     @Override

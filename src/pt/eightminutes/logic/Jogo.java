@@ -110,6 +110,16 @@ public class Jogo extends Base implements Serializable {
         setEstado(null);
     }
     
+    public boolean verificaJogadoresFimDoJogo(){
+        boolean myResult = true;
+        
+        for(int i=0;i< getJogadores().size();i++){
+            if(getJogadores().get(i).getCartas().size()!= getNumCartasFinal())
+                myResult = false;
+        }
+        return myResult;
+    }
+    
     public void iniciaJogo(){
         defineCartasViradas();
         colocaExercitoInicial();
