@@ -19,9 +19,8 @@ public class AguardaOpcoesJogo extends EstadosAdapter {
     }
     
     @Override
-    public IEstados novoJogo() {
-        Jogo jogo=new Jogo();
-        return new AguardaPreparaJogo(jogo);
+    public IEstados novoJogo() {        
+        return new AguardaPreparaJogo(getJogo());
     }
     
     @Override
