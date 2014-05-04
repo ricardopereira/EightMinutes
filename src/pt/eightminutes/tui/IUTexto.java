@@ -211,7 +211,7 @@ public class IUTexto {
     public void menuJokersJogo() throws InterruptedException{                
         int opInt;
         Jogador jogador;
-        Carta carta;
+        Carta carta;        
                 
         System.out.println("############## Escolher Jokers ##############");        
         if(jogo.isJokersAtribuidos()){
@@ -227,11 +227,11 @@ public class IUTexto {
 
             carta  =jogador.getListaCartaJokers().get(opInt);
 
-            System.out.println("Recurso Alimento:0");
-            System.out.println("Recurso Ferro:1");
-            System.out.println("Recurso Joia:2");
-            System.out.println("Recurso Madeira:3");
-            System.out.println("Recurso Utensilio:4");
+            System.out.println("Recurso Alimento("+jogador.getQtdRecurso(new RecursoAlimento())+"):0");
+            System.out.println("Recurso Ferro("+jogador.getQtdRecurso(new RecursoFerro())+"):1");
+            System.out.println("Recurso Joia("+jogador.getQtdRecurso(new RecursoJoia())+"):2");
+            System.out.println("Recurso Madeira("+jogador.getQtdRecurso(new RecursoMadeira())+"):3");
+            System.out.println("Recurso Utensilio("+jogador.getQtdRecurso(new RecursoUtensilio())+"):4");
 
             do {                                        
                 opInt = obterNumero();                                    

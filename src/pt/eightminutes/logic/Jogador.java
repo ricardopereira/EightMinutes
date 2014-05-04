@@ -181,6 +181,19 @@ public class Jogador extends Base implements Serializable {
         return accao;              
     }
     
+    public int getQtdRecurso(Recurso recurso){
+        int myCont=0;
+        
+        for(int i=0;i<getCartas().size();i++){
+            
+            if(getCartas().get(i).getRecurso().getClass() == recurso.getClass()){
+                myCont = myCont +getCartas().get(i).getQtdRecurso();
+            }
+        }
+        
+        return myCont;
+    }
+    
     public Cidade getCidade(int idx){
         int cont=0;
         for(int m=0;m<getListaCidades().size();m++){
