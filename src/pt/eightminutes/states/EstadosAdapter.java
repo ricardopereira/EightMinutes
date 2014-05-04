@@ -6,6 +6,8 @@
 
 package pt.eightminutes.states;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import pt.eightminutes.logic.*;
@@ -84,7 +86,7 @@ public class EstadosAdapter implements IEstados, Serializable {
     public IEstados novoJogo() { return this; };
     
     @Override
-    public IEstados carregaJogo() { return this; }
+    public IEstados carregaJogo() throws FileNotFoundException, IOException { return this; }
     
     @Override
     public IEstados gravaJogo() { return this; }

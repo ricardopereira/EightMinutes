@@ -1,5 +1,7 @@
 package pt.eightminutes.states;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import pt.eightminutes.logic.*;
 
@@ -23,7 +25,7 @@ public interface IEstados {
     IEstados destroiExercito(Exercito exercito);
     IEstados moveExercitoAgua(Regiao regiao, ArrayList<Exercito> exercitos);
     IEstados novoJogo();
-    IEstados carregaJogo();
+    IEstados carregaJogo() throws FileNotFoundException, IOException;
     IEstados gravaJogo();
     IEstados abandonaJogo();
 }
