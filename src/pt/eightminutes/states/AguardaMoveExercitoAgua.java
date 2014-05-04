@@ -7,6 +7,7 @@
 package pt.eightminutes.states;
 
 import java.util.ArrayList;
+import pt.eightminutes.logic.Accao;
 import pt.eightminutes.logic.Exercito;
 import pt.eightminutes.logic.Jogo;
 import pt.eightminutes.logic.Regiao;
@@ -24,17 +25,24 @@ public class AguardaMoveExercitoAgua extends EstadosAdapter{
         ArrayList<Object> params = new ArrayList<>();
         params.add(regiao);
         params.add(exercitos);
-        getJogo().getJogadorActivo().getCartaActiva().getAccaoActiva().executa(getJogo(),params);
         
-        // ToDo: Testar proximo passo
+        Accao accao = getJogo().getJogadorActivo().getCartaActiva().getAccaoActiva();
+        if(accao==null)
+            return this;
         
-        if(getJogo().getEstadoAnterior().getClass() == AguardaEscolheAccao.class)
+        accao.executa(getJogo(),params);
+        
+        // Próximo estado
+        if(!accao.isUsada())
+            return this;
+        else
+        if (getJogo().getEstadoAnterior().getClass() == AguardaEscolheAccao.class)
             return new AguardaEscolheAccao(getJogo());
         else
         {
             getJogo().mudaJogador();
             return new AguardaEscolheCarta(getJogo());
-        }        
+        }       
     }
     
     @Override
