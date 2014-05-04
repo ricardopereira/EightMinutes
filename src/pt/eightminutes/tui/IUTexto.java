@@ -235,7 +235,7 @@ public class IUTexto {
 
             do {                                        
                 opInt = obterNumero();                                    
-            } while (opInt < 0 || opInt > jogador.getListaCartaJokers().size()-1);  
+            } while (opInt < 0 || opInt > 4);  
             
             switch (opInt) {
             case 0:

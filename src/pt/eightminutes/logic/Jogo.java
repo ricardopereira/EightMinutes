@@ -237,7 +237,8 @@ public class Jogo extends Base implements Serializable {
             {
                 if(i==idx){
                     getJogadorActivo().adicionaCarta(cartasViradas.get(i),getCustoPorIdx(idx));   
-                    cartasViradas.get(i).setComprada(true);                   
+                    cartasViradas.get(i).setComprada(true);    
+                    baralho.getCartas().remove(cartasViradas.get(i));
                     break;
                 }                                             
             }
