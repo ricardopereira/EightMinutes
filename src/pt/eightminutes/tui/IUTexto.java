@@ -6,6 +6,7 @@
 
 package pt.eightminutes.tui;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -183,7 +184,12 @@ public class IUTexto {
                 break;
             case 2:
                 // Retoma o jogo
-                jogo = jogo.carregaJogo();
+                try {
+                    jogo = jogo.carregaJogo();
+                }
+                catch (FileNotFoundException e) {
+                    System.out.println("Não existe ficheiro gravado\n");
+                }
                 // Debug
                 if (Jogo.debugMode) {
                     System.out.println("DEBUG MODE: Jogo carregado");

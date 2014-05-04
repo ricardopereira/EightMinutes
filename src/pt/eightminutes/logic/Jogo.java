@@ -58,23 +58,26 @@ public class Jogo extends Base implements Serializable {
         return jogadorAux;
     }
        
-    public void gravaInstanciaJogo() throws FileNotFoundException, IOException{
+    public void gravaInstanciaJogo() throws IOException {
         FileOutputStream fo = new FileOutputStream("jogo.db");
         ObjectOutputStream oo = new ObjectOutputStream(fo);
         oo.writeObject(this);
         oo.close();
     }
     
-    public Jogo carregaInstanciaJogo() throws FileNotFoundException, IOException, ClassNotFoundException{
+    public Jogo carregaInstanciaJogo() throws FileNotFoundException {
         Jogo jogoAux= this;
-        try{         
+        try {         
             FileInputStream fi = new FileInputStream("jogo.db");            
             ObjectInputStream oi = new ObjectInputStream(fi);
             jogoAux = ((Jogo) oi.readObject());       
             oi.close();
         }
         catch (FileNotFoundException e) {
-            // nothing to do here except log the exception
+            throw e;
+        }
+        catch (IOException | ClassNotFoundException e) {
+            // Ignora
         }
         return jogoAux;
     }
@@ -94,12 +97,21 @@ public class Jogo extends Base implements Serializable {
         setEstado(estadoActual.novoJogo());
     }
     
-    public Jogo carregaJogo() {
+    public Jogo carregaJogo() throws FileNotFoundException {
         // ToDo: Amanhã rever este procedimento: "está a ficar pedra"
-        IEstados proximoEstado = estadoActual.carregaJogo();
-        setEstado(proximoEstado);
-        // Nova instancia do Jogo
-        return proximoEstado.getJogo();
+        try {
+            IEstados proximoEstado = estadoActual.carregaJogo();
+            setEstado(proximoEstado);
+            // Nova instancia do Jogo
+            return proximoEstado.getJogo();
+        }
+        catch (FileNotFoundException e) {
+            throw e;
+        }
+        catch (IOException e) {
+            // Ignora
+        }
+        return null;
     }
     
     public void gravaJogo() {
