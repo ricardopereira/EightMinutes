@@ -48,7 +48,7 @@ public class Mapa extends Base implements Serializable {
         
         // Mapa        
         // CONTINENTE 1
-        Continente continente1 = new Continente("Continente 1",this);
+        Continente continente1 = new Continente("C1",this);
         continentes.add(continente1);
         regioes.add(continente1.adicionaRegiao(new Regiao("1",1,continente1)));
         regioes.add(continente1.adicionaRegiao(new Regiao("2",2,continente1)));
@@ -91,7 +91,7 @@ public class Mapa extends Base implements Serializable {
         continente1.getRegioes().get(6).adicionaRegiaoVizinha(regioesAux); //R7
         
         // CONTINENTE 2
-        Continente continente2 = new Continente("Continente 2",this);
+        Continente continente2 = new Continente("C2",this);
         continentes.add(continente2);
         regioes.add(continente2.adicionaRegiao(new Regiao("8",8,continente2)));
         regioes.add(continente2.adicionaRegiao(new Regiao("9",9,continente2)));
@@ -104,7 +104,7 @@ public class Mapa extends Base implements Serializable {
         continente2.getRegioes().get(1).adicionaRegiaoVizinha(regioesAux); //R9
         
         // CONTINENTE 3
-        Continente continente3 = new Continente("Continente 3",this);
+        Continente continente3 = new Continente("C3",this);
         continentes.add(continente3);       
         regioes.add(continente3.adicionaRegiao(new Regiao("10",10,continente3)));
         regioes.add(continente3.adicionaRegiao(new Regiao("11",11,continente3)));
@@ -352,10 +352,10 @@ public class Mapa extends Base implements Serializable {
         return c;
     }
     
-    public ArrayList<Continente> getContinentesOndeRegiaoTemExercitosDoJogador(Jogador jogador, boolean addRegiaoInicial) {
+    public ArrayList<Continente> getContinentesOndeRegiaoTemExercitosDoJogador(Jogador jogador, boolean addRegiaoComCidade) {
         ArrayList<Continente> continentesAux= new ArrayList<>();
         for (Continente item : continentes) {            
-            if (item.temExercitosDoJogador(jogador,addRegiaoInicial))
+            if (item.temExercitosDoJogador(jogador,addRegiaoComCidade))
                 continentesAux.add(item);
         }
         return continentesAux;

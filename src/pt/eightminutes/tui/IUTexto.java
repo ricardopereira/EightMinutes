@@ -126,10 +126,13 @@ public class IUTexto {
         String opStr;  
         int opInt;
         
-        for (int i=0; i<numJogadores; i++) {
-            System.out.println("Definir nome do jogador:");                      
+        for (int i=0; i<numJogadores; ) {
+            System.out.println("Definir nome do jogador:"+i);                      
             opStr = obterString();
-            jogo.criaJogador(opStr, Cor.preto);
+            if(!opStr.isEmpty()){
+                jogo.criaJogador(opStr, Cor.preto);
+                i++;
+            }
         }    
         
         jogo.comecaApostas();
@@ -284,7 +287,7 @@ public class IUTexto {
         if (!listaContinentesAux.isEmpty()) {
             for(int i=0; i<listaContinentesAux.size();i++){
                 System.out.print("Continente:"+(i+opcoes));
-                System.out.print(" C "+listaContinentesAux.get(i).getNome());
+                System.out.println(" - "+listaContinentesAux.get(i).getNome());
             }
             totalOpcoes = opcoes + listaContinentesAux.size();
         }
