@@ -174,7 +174,7 @@ public class Mapa extends Base implements Serializable {
         continente3.getRegioes().get(10).adicionaRegiaoVizinha(regioesAux); //R20
         
         // CONTINENTE 4
-        Continente continente4 = new Continente("Continente 4",this);
+        Continente continente4 = new Continente("C4",this);
         continentes.add(continente4);
         regioes.add(continente4.adicionaRegiao(new Regiao("21",21,continente4)));
         regioes.add(continente4.adicionaRegiao(new Regiao("22",22,continente4)));
