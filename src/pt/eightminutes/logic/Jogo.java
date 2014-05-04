@@ -139,6 +139,7 @@ public class Jogo extends Base implements Serializable {
     }
     
     public void defineNumJogadores(int numJogadores){
+        setNumJogadores(numJogadores);
         baralho = new Baralho(numJogadores);
         setEstado(estadoActual.defineNumJogadores(numJogadores));
     }

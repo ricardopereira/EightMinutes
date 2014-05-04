@@ -20,7 +20,8 @@ public class AguardaOpcoesJogo extends EstadosAdapter {
     
     @Override
     public IEstados novoJogo() {
-        return new AguardaPreparaJogo(getJogo());
+        Jogo jogo=new Jogo();
+        return new AguardaPreparaJogo(jogo);
     }
     
     @Override
