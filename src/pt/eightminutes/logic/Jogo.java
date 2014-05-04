@@ -423,6 +423,21 @@ public class Jogo extends Base implements Serializable {
         return myCusto;        
     }
     
+    public ArrayList<Jogador> getListaJogadoresJokers(){
+        ArrayList<Jogador> jogadoresAux = new ArrayList<>();
+        //Listar jogadores
+        for(int i=0;i<getJogadores().size();i++){
+            //Listar cartas por jogador
+            for(int m=0;m<getJogadores().get(i).getCartas().size();m++){
+                //Adiciona se tiverem jokers
+                if(getJogadores().get(i).getCartas().get(m).getRecurso().getClass() == RecursoJoker.class){
+                    jogadoresAux.add(getJogadores().get(i));
+                }
+            }
+        }
+        return jogadoresAux;
+    }
+    
     /**
      * @return the numJogadores
      */
