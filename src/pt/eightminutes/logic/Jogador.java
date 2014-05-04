@@ -54,7 +54,7 @@ public class Jogador extends Base implements Serializable {
                 myPontos++;
             }
              
-            for(int m=0;m<continenteAux.getRegioes().size();i++){
+            for(int m=0;m<continenteAux.getRegioes().size();m++){
                 if(continenteAux.getRegioes().get(m).getJogadorControlaRegiao(jogo)==this){
                     myPontos ++;
                 }

@@ -444,7 +444,7 @@ public class Jogo extends Base implements Serializable {
     }
     
     public boolean isJokersAtribuidos(){        
-        return (getListaJogadoresJokers().isEmpty());
+        return (!getListaJogadoresJokers().isEmpty());
     }
     
     public ArrayList<Jogador> getListaJogadoresJokers(){

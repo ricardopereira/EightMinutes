@@ -266,7 +266,7 @@ public class IUTexto {
     
     public void menuEscolheCarta() throws IOException{                
         int opInt=0;
-           
+        
         System.out.println("########## Escolher Carta ###########");
         System.out.println("### Jogador:"+jogo.getJogadorActivo().getNome()+"(Moedas:"+jogo.getJogadorActivo().getMoedas()+") ###");
         System.out.println("### Jogadas:"+jogo.getJogadorActivo().getCartas().size()+" ###");
@@ -416,7 +416,7 @@ public class IUTexto {
      
     public void menuColocaExercito(){                
         int opInt=0;
-        int myCont=2;
+        int myCont=0;
         Regiao myRegiao=null; 
         Accao myAccao;
         ArrayList<Exercito> exercitos= new ArrayList<>();
@@ -424,10 +424,11 @@ public class IUTexto {
         System.out.println("######### Coloca Exército ###########"); 
         System.out.println("### Jogador:"+jogo.getJogadorActivo().getNome()+"(Moedas:"+jogo.getJogadorActivo().getMoedas()+") ###");
 
-        System.out.println("Passa vez:0");                      
-        System.out.println("Muda acção:1");
-        System.out.print("Cidade:2");                      
-        System.out.print(jogo.getMapa().getRegiaoInicial());  
+        System.out.println("Passa vez:0");  
+        if(jogo.getEstadoAnterior().getClass() == AguardaEscolheAccao.class){
+            myCont++;
+            System.out.println("Muda acção:"+myCont);      
+        }
         
         for(int i=0;i<jogo.getJogadorActivo().getListaCidades().size();i++){
             if(jogo.getJogadorActivo().getListaCidades().get(i)!=null){
@@ -438,6 +439,9 @@ public class IUTexto {
                 }
             }
         }
+        myCont++;
+        System.out.print("Cidade:"+myCont);                      
+        System.out.print(jogo.getMapa().getRegiaoInicial());  
           
         myAccao = jogo.getJogadorActivo().getCartaActiva().getAccaoActiva();
         
@@ -446,6 +450,9 @@ public class IUTexto {
             opInt = obterNumero();                                    
         } while (opInt < 0 || opInt >myCont);
        
+        if(jogo.getEstadoAnterior().getClass() != AguardaEscolheAccao.class)
+            opInt++;
+            
         if(opInt==0)
             jogo.passaVez();
         else
@@ -453,10 +460,14 @@ public class IUTexto {
             jogo.mudaAccao();
         else
         {
-            if(opInt==2)
+            if(opInt==myCont)
                 myRegiao = jogo.getMapa().getRegiaoInicial();
             else
-                myRegiao = jogo.getJogadorActivo().getCidade((opInt-3)).getRegiao();
+            {
+                if(jogo.getEstadoAnterior().getClass() != AguardaEscolheAccao.class)
+                    opInt--;
+                myRegiao = jogo.getJogadorActivo().getCidade((opInt-(myCont-1))).getRegiao();
+            }
 
             System.out.println("Pode colocar "+myAccao.getQtd()+" exercitos");
             System.out.println("Quantos exercitos deseja colocar nesta cidade?");
@@ -470,13 +481,16 @@ public class IUTexto {
     
     public void menuDestroiExercito(){                        
         int opInt=0;
-        int myCont=1;
+        int myCont=0;
         ArrayList<Exercito> exercitos= new ArrayList<>();
         ArrayList<Exercito> exercitosAux= new ArrayList<>();
         System.out.println("######## Destroi Exercito ########");  
         System.out.println("#### Jogador:"+jogo.getJogadorActivo().getNome()+"(Moedas:"+jogo.getJogadorActivo().getMoedas()+") ###");
-        System.out.println("Passa vez:0");                      
-        System.out.println("Muda acção:1");
+        System.out.println("Passa vez:0");   
+        if(jogo.getEstadoAnterior().getClass() == AguardaEscolheAccao.class){
+            myCont++;
+            System.out.println("Muda acção:"+myCont);
+        }
         
         for(int i=0;i<jogo.getJogadores().size();i++){
             System.out.println("Exercitos do jogador:"+jogo.getJogadores().get(i).getNome());                
@@ -490,7 +504,10 @@ public class IUTexto {
                 }
             }
         }
-               
+        
+        if(jogo.getEstadoAnterior().getClass() != AguardaEscolheAccao.class)
+            opInt++;
+            
         System.out.println("Seleccione uma opcção:");
         do {                                        
             opInt = obterNumero();                                    
@@ -502,12 +519,16 @@ public class IUTexto {
         if(opInt==1)
             jogo.mudaAccao();
         else        
-            jogo.destroiExercito(exercitosAux.get(opInt-2));        
+        {
+            if(jogo.getEstadoAnterior().getClass() == AguardaEscolheAccao.class)
+                opInt--;
+            jogo.destroiExercito(exercitosAux.get(opInt-(myCont-1)));        
+        }
     }
     
     public void menuMoveExercitoTerra(){                
         int opInt=0;
-        int myCont=1;
+        int myCont=0;
         int myIdxPeca=0;
         
         Regiao myRegiao=null; 
@@ -518,8 +539,11 @@ public class IUTexto {
         System.out.println("#### Jogador:"+jogo.getJogadorActivo().getNome()+"(Moedas:"+jogo.getJogadorActivo().getMoedas()+") ###");
                  
         System.out.println("Passa vez:0");                      
-        System.out.println("Muda acção:1");
-        
+        if(jogo.getEstadoAnterior().getClass() == AguardaEscolheAccao.class){
+            myCont++;
+            System.out.println("Muda acção:"+myCont);
+        }
+              
         for(int i=0;i<jogo.getJogadorActivo().getListaExercitoComRegiao().size();i++){
             if(jogo.getJogadorActivo().getListaExercitoComRegiao().get(i)!=null){
                 if(jogo.getJogadorActivo().getListaExercitoComRegiao().get(i).getRegiao()!=null){
@@ -533,12 +557,14 @@ public class IUTexto {
         myAccao = jogo.getJogadorActivo().getCartaActiva().getAccaoActiva();
         // Neste caso: quantidade significa número de movimentos
         System.out.println("\nPode mover "+myAccao.getQtd()+" vezes");
-        
+                
         System.out.println("Seleccione uma opcção:(0-"+myCont+"):");
         do {                                        
             opInt = obterNumero();                                    
         } while (opInt < 0|| opInt >myCont);
         
+        if(jogo.getEstadoAnterior().getClass() != AguardaEscolheAccao.class)
+            opInt++;
         // Verificar opção tomada
         if(opInt == 0)
             jogo.passaVez();
@@ -547,11 +573,13 @@ public class IUTexto {
             jogo.mudaAccao();
         else
         {
+            if(jogo.getEstadoAnterior().getClass() != AguardaEscolheAccao.class)
+                opInt--;
             // Criar lista de exercitos seleccionados
             // Obter região pertencem
             myCont=0;
             // ToDo: melhorar esta situação
-            opInt = opInt-2; //retirados opções antes do exercito
+            opInt = opInt-(myCont-1); //retirados opções antes do exercito
             for(int i=0;i<jogo.getJogadorActivo().getListaExercitoComRegiao().size();i++){                
                 if(jogo.getJogadorActivo().getListaExercitoComRegiao().get(i) != null){
                     if(jogo.getJogadorActivo().getListaExercitoComRegiao().get(i).getRegiao() != null){
@@ -588,7 +616,7 @@ public class IUTexto {
     
     public void menuMoveExercitoAgua(){                
         int opInt=0;
-        int myCont=1;
+        int myCont=0;
         int myIdxPeca=0;
         Regiao myRegiao=null; 
         Accao myAccao;
@@ -597,8 +625,11 @@ public class IUTexto {
         System.out.println("######## Move Exército Terra/Água ########");  
         System.out.println("#### Jogador:"+jogo.getJogadorActivo().getNome()+"(Moedas:"+jogo.getJogadorActivo().getMoedas()+") ###");
                  
-        System.out.println("Passa vez:0");                      
-        System.out.println("Muda acção:1");
+        System.out.println("Passa vez:0"); 
+        if(jogo.getEstadoAnterior().getClass() == AguardaEscolheAccao.class){
+            myCont++;
+            System.out.println("Muda acção:1");
+        }
         
         for(int i=0;i<jogo.getJogadorActivo().getListaExercitos().size();i++){
             if(jogo.getJogadorActivo().getListaExercitos().get(i)!=null){
@@ -619,6 +650,10 @@ public class IUTexto {
             opInt = obterNumero();                                    
         } while (opInt < 0|| opInt >myCont);
         
+        
+        if(jogo.getEstadoAnterior().getClass() != AguardaEscolheAccao.class)
+            opInt++;
+            
         if(opInt==0)
             jogo.passaVez();
         else
@@ -626,8 +661,12 @@ public class IUTexto {
             jogo.mudaAccao();
         else
         {
+            if(jogo.getEstadoAnterior().getClass() != AguardaEscolheAccao.class)
+                opInt--;
+           
+            opInt = opInt-(myCont-1);//retirados opções antes do exercito
             myCont=0;
-            opInt = opInt-2;//retirados opções antes do exercito
+            
             for(int i=0;i<jogo.getJogadorActivo().getListaExercitos().size();i++){
                 if(jogo.getJogadorActivo().getListaExercitos().get(i)!=null){
                     if(jogo.getJogadorActivo().getListaExercitos().get(i).getRegiao()!=null){                        
