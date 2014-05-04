@@ -273,7 +273,7 @@ public class Jogo extends Base implements Serializable {
         int numCartasFinal=0;
         
         switch (numJog){
-            case 2: numCartasFinal = 1;
+            case 2: numCartasFinal = 13;
                     break;
             case 3: numCartasFinal = 10;
                     break;                
