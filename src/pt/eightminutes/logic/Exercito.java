@@ -26,8 +26,9 @@ public class Exercito extends Peca{
     }
     
     public void destroiExercito(){
-        this.getRegiao().getPecas().remove(this);
+        Regiao regiao = this.getRegiao();       
         setRegiao(null);        
+        regiao.getPecas().remove(this);
     }
         
 }

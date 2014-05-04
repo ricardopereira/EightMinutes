@@ -6,11 +6,14 @@
 
 package pt.eightminutes.states;
 
+import java.util.ArrayList;
+import pt.eightminutes.logic.Accao;
 import pt.eightminutes.logic.Exercito;
 import pt.eightminutes.logic.Jogo;
 
 
 public class AguardaDestroiExercito extends EstadosAdapter{
+    private Object Exercito;
 
     public AguardaDestroiExercito(Jogo jogo) {
         super(jogo);
@@ -19,14 +22,24 @@ public class AguardaDestroiExercito extends EstadosAdapter{
     
     @Override
     public IEstados destroiExercito(Exercito exercito) { 
-        getJogo().getJogadorActivo().destroiExercito(exercito);
-        if(getJogo().getEstadoAnterior().getClass() == AguardaEscolheAccao.class)
+        ArrayList<Object> params = new ArrayList<>();        
+        params.add(exercito);
+        Accao accao = getJogo().getJogadorActivo().getCartaActiva().getAccaoActiva();
+        if(accao==null)
+            return this;
+        
+        accao.executa(getJogo(),params);
+        //Próximo passo
+        if(!accao.isUsada())
+            return this;
+        else
+        if (getJogo().getEstadoAnterior().getClass() == AguardaEscolheAccao.class)
             return new AguardaEscolheAccao(getJogo());
         else
         {
             getJogo().mudaJogador();
             return new AguardaEscolheCarta(getJogo());
-        }
+        }      
     }
     
     @Override

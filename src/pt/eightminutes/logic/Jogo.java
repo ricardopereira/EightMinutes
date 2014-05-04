@@ -66,11 +66,16 @@ public class Jogo extends Base implements Serializable {
     }
     
     public Jogo carregaInstanciaJogo() throws FileNotFoundException, IOException, ClassNotFoundException{
-        Jogo jogoAux;
-        FileInputStream fi = new FileInputStream("jogo.db");
-        ObjectInputStream oi = new ObjectInputStream(fi);
-        jogoAux = ((Jogo) oi.readObject());
-        oi.close();
+        Jogo jogoAux= this;
+        try{         
+            FileInputStream fi = new FileInputStream("jogo.db");            
+            ObjectInputStream oi = new ObjectInputStream(fi);
+            jogoAux = ((Jogo) oi.readObject());       
+            oi.close();
+        }
+        catch (FileNotFoundException e) {
+            // nothing to do here except log the exception
+        }
         return jogoAux;
     }
     
@@ -275,6 +280,7 @@ public class Jogo extends Base implements Serializable {
     public void moveExercitoAgua(Regiao regiao, ArrayList<Exercito> exercitos){                
         setEstado(estadoActual.moveExercitoAgua(regiao, exercitos));
     }
+    
     
     public void destroiExercito(Exercito exercito){                
         setEstado(estadoActual.destroiExercito(exercito));

@@ -410,6 +410,7 @@ public class IUTexto {
         int opInt=0;
         int myCont=1;
         ArrayList<Exercito> exercitos= new ArrayList<>();
+        ArrayList<Exercito> exercitosAux= new ArrayList<>();
         System.out.println("######## Destroi Exercito ########");  
         System.out.println("#### Jogador:"+jogo.getJogadorActivo().getNome()+"(Moedas:"+jogo.getJogadorActivo().getMoedas()+") ###");
         System.out.println("Passa vez:0");                      
@@ -417,12 +418,13 @@ public class IUTexto {
         
         for(int i=0;i<jogo.getJogadores().size();i++){
             System.out.println("Exercitos do jogador:"+jogo.getJogadores().get(i).getNome());                
-            exercitos = jogo.getJogadores().get(i).getListaExercitos();
+            exercitos = jogo.getJogadores().get(i).getListaExercitoComRegiao();
             
             for(int m=0; m<exercitos.size();m++){
                 if(exercitos.get(m).getRegiao()!=null){
                     myCont++;
-                    System.out.println("Exercito:"+myCont);                     
+                    System.out.println("Exercito:"+myCont+" R:"+(exercitos.get(m).getRegiao().getNome()));  
+                    exercitosAux.add(exercitos.get(m));
                 }
             }
         }
@@ -438,7 +440,7 @@ public class IUTexto {
         if(opInt==1)
             jogo.mudaAccao();
         else        
-            jogo.destroiExercito(exercitos.get(opInt-2));        
+            jogo.destroiExercito(exercitosAux.get(opInt-2));        
     }
     
     public void menuMoveExercitoTerra(){                
@@ -456,12 +458,12 @@ public class IUTexto {
         System.out.println("Passa vez:0");                      
         System.out.println("Muda acção:1");
         
-        for(int i=0;i<jogo.getJogadorActivo().getListaExercitos().size();i++){
-            if(jogo.getJogadorActivo().getListaExercitos().get(i)!=null){
-                if(jogo.getJogadorActivo().getListaExercitos().get(i).getRegiao()!=null){
+        for(int i=0;i<jogo.getJogadorActivo().getListaExercitoComRegiao().size();i++){
+            if(jogo.getJogadorActivo().getListaExercitoComRegiao().get(i)!=null){
+                if(jogo.getJogadorActivo().getListaExercitoComRegiao().get(i).getRegiao()!=null){
                     myCont++;
                     System.out.print("Exército:"+myCont);
-                    System.out.print("  R"+jogo.getJogadorActivo().getListaExercitos().get(i).getRegiao());                           
+                    System.out.print("  R"+jogo.getJogadorActivo().getListaExercitoComRegiao().get(i).getRegiao());                           
                 }                
             }
         }
@@ -488,12 +490,12 @@ public class IUTexto {
             myCont=0;
             // ToDo: melhorar esta situação
             opInt = opInt-2; //retirados opções antes do exercito
-            for(int i=0;i<jogo.getJogadorActivo().getListaExercitos().size();i++){                
-                if(jogo.getJogadorActivo().getListaExercitos().get(i) != null){
-                    if(jogo.getJogadorActivo().getListaExercitos().get(i).getRegiao() != null){
+            for(int i=0;i<jogo.getJogadorActivo().getListaExercitoComRegiao().size();i++){                
+                if(jogo.getJogadorActivo().getListaExercitoComRegiao().get(i) != null){
+                    if(jogo.getJogadorActivo().getListaExercitoComRegiao().get(i).getRegiao() != null){
                         if(myCont == opInt){
-                            exercitos.add((Exercito)jogo.getJogadorActivo().getListaExercitos().get(i));
-                            myRegiao = jogo.getJogadorActivo().getListaExercitos().get(i).getRegiao();
+                            exercitos.add((Exercito)jogo.getJogadorActivo().getListaExercitoComRegiao().get(i));
+                            myRegiao = jogo.getJogadorActivo().getListaExercitoComRegiao().get(i).getRegiao();
                         } 
                         myCont++;
                     }
