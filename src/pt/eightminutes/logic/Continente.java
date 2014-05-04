@@ -89,13 +89,16 @@ public class Continente implements Serializable{
             if (item.getRegiao() != null && item.getRegiao().getContinente() == this)
                 if(!addRegiaoComCidade){
                     //verifica se tem alguma cidade                   
-                    if(item.getRegiao()!=this.getMapa().getRegiaoInicial())                                               
-                       myTemCidade = true;                                            
-                    
+                                                                                 
                     for (Cidade itemCidade : jogador.getListaCidadeComRegiao()) {
                         if(item.getRegiao()==itemCidade.getRegiao())
                            myTemCidade = false; 
                     }
+                    
+                    if(myTemCidade){
+                        if(item.getRegiao()==this.getMapa().getRegiaoInicial())                                               
+                            myTemCidade = false;     
+                    }    
                     
                     return myTemCidade;
                 }

@@ -140,19 +140,28 @@ public class IUTexto {
     }
     
     public void menuAposta(){                
-        int opInt;
+        int opInt=-1;
+        Jogador jogador=null;
+        boolean existeAposta=false;
                 
         System.out.println("############## Apostar ##############");        
         for(int i=0;i<jogo.getJogadores().size();i++){
-            System.out.println("### Jogador:"+jogo.getJogadores().get(i).getNome()+" ###");
-            do {        
-                System.out.println("Definir aposta(0-"+jogo.getMoedasPorJogador()+"):");                      
-                opInt = obterNumero();                     
-            } while (opInt < 0 || opInt > jogo.getMoedasPorJogador());
-            
-            jogo.apostaJogador(jogo.getJogadores().get(i), opInt);
-        }                
-        jogo.comecaJogo();
+            jogador = jogo.getJogadores().get(i);
+            if(jogador.getAposta()== -1){
+                existeAposta=true;
+                System.out.println("### Jogador:"+jogador.getNome()+" ###");
+                do {        
+                    System.out.println("Definir aposta(0-"+jogo.getMoedasPorJogador()+"):");                      
+                    opInt = obterNumero();                     
+                } while (opInt < 0 || opInt > jogo.getMoedasPorJogador());
+                break;
+            }           
+        } 
+        if(jogador!=null && existeAposta){
+            jogo.defineApostasJogadores(jogador, opInt);
+        }
+        else
+            jogo.comecaJogo();
     }
     
     public void menuOpcoesJogo() throws InterruptedException{                

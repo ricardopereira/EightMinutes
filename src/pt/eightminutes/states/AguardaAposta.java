@@ -6,6 +6,7 @@
 
 package pt.eightminutes.states;
 
+import pt.eightminutes.logic.Jogador;
 import pt.eightminutes.logic.Jogo;
 
 
@@ -16,13 +17,13 @@ public class AguardaAposta extends EstadosAdapter{
     }
     
     @Override
-    public IEstados defineApostasJogadores(int numMoedas) {
-        getJogo().apostaJogador(getJogo().getJogadorActivo(), numMoedas);       
+    public IEstados defineApostasJogadores(Jogador jogador,int numMoedas) {
+        getJogo().apostaJogador(jogador, numMoedas);       
         return this; 
     }
 
     @Override
-    public IEstados comecaJogo() {        
+    public IEstados comecaJogo() { 
         return new AguardaEscolheCarta(getJogo()); 
     }
     

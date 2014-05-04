@@ -44,7 +44,7 @@ public class EstadosAdapter implements IEstados, Serializable {
     public IEstados comecaApostas() {  return this; }
 
     @Override
-    public IEstados defineApostasJogadores(int numMoedas) {  return this; }
+    public IEstados defineApostasJogadores(Jogador jogador,int numMoedas) {  return this; }
 
     @Override
     public IEstados comecaJogo() { return this; }

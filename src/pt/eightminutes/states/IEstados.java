@@ -11,7 +11,7 @@ public interface IEstados {
     IEstados defineNumJogadores(int numJogadores);
     IEstados defineDadosJogadores(String nome, Cor cor);
     IEstados comecaApostas();
-    IEstados defineApostasJogadores(int numMoedas);
+    IEstados defineApostasJogadores(Jogador jogador,int numMoedas);
     IEstados comecaJogo();  
     IEstados escolheCartas(int idx);    
     IEstados verificaPontuacao();

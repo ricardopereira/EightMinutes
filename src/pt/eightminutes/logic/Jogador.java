@@ -26,6 +26,7 @@ public class Jogador extends Base implements Serializable {
         this.owner = owner;
         this.nome = nome;
         this.moedas = moedas;
+        this.aposta = -1;
         
         for(int i=0;i<qtdExercito;i++)
             listaExercitos.add(new Exercito(cor,this));

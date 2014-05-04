@@ -157,10 +157,7 @@ public class Jogo extends Base implements Serializable {
             jogadores.add(new Jogador(this,nome,cor,moedasPorJogador,14,3));             
         }
     }
-    
-    public void defineApostasJogadores(int numMoedas) {
-        setEstado(estadoActual.defineApostasJogadores(numMoedas));
-    }
+   
     
     public void comecaJogo() {
         escolheJogadorInicial();
@@ -173,8 +170,12 @@ public class Jogo extends Base implements Serializable {
         setEstado(estadoActual.passaVez());
     }
     
+    public void defineApostasJogadores(Jogador jogador, int aposta){        
+        setEstado(estadoActual.defineApostasJogadores(jogador,aposta));
+    }
+            
     public void apostaJogador(Jogador jogador, int aposta){        
-        jogador.setAposta(aposta);        
+        jogador.setAposta(aposta);  
     }
     
     public void escolheJogadorInicial(){
