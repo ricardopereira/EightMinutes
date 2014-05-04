@@ -210,10 +210,58 @@ public class IUTexto {
     
     public void menuJokersJogo() throws InterruptedException{                
         int opInt;
+        Jogador jogador;
+        Carta carta;
                 
-        System.out.println("############## Pontuação ##############");        
-        Thread.sleep(1000);
-        jogo.passaVez();
+        System.out.println("############## Escolher Jokers ##############");        
+        if(jogo.isJokersAtribuidos()){
+            jogador = jogo.getListaJogadoresJokers().get(0);
+            System.out.println("### Jogador:"+jogador.getNome()+" ###");
+            for(int i=0;i<jogador.getListaCartaJokers().size();i++){
+                System.out.println("Carta joker:"+i);    
+            }  
+            System.out.println("Seleccione uma opcção(0-"+(jogador.getListaCartaJokers().size()-1)+"):");           
+            do {                                        
+                opInt = obterNumero();                                    
+            } while (opInt < 0 || opInt > jogador.getListaCartaJokers().size()-1);
+
+            carta  =jogador.getListaCartaJokers().get(opInt);
+
+            System.out.println("Recurso Alimento:0");
+            System.out.println("Recurso Ferro:1");
+            System.out.println("Recurso Joia:2");
+            System.out.println("Recurso Madeira:3");
+            System.out.println("Recurso Utensilio:4");
+
+            do {                                        
+                opInt = obterNumero();                                    
+            } while (opInt < 0 || opInt > jogador.getListaCartaJokers().size()-1);  
+            
+            switch (opInt) {
+            case 0:
+                jogo.defineRecurso(carta, new RecursoAlimento());
+                break;
+            case 1:
+                jogo.defineRecurso(carta, new RecursoFerro());
+                break;
+            case 2:
+                jogo.defineRecurso(carta, new RecursoJoia());
+                break;
+            case 3:
+                jogo.defineRecurso(carta, new RecursoMadeira());
+                break;
+            case 4:
+                jogo.defineRecurso(carta, new RecursoUtensilio());
+                break;
+            default:
+                break;
+            }
+        }
+        else
+        {
+            System.out.println("E o VENCEDOR é:"+jogo.getJogadorVencedor().getNome());
+            jogo.mostraPontuacao();
+        }
     }
     
     public void menuEscolheCarta() throws IOException{                

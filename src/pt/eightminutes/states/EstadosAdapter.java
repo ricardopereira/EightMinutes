@@ -93,4 +93,10 @@ public class EstadosAdapter implements IEstados, Serializable {
     
     @Override
     public IEstados abandonaJogo() { return this; }
+
+    @Override
+    public IEstados defineRecurso(Carta carta, Recurso recurso) { return this; }
+    
+    @Override
+    public IEstados mostraPontuacao() { return this; }
 }

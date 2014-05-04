@@ -308,6 +308,14 @@ public class Jogo extends Base implements Serializable {
         setEstado(estadoActual.destroiExercito(exercito));
     }
     
+    public void defineRecurso(Carta carta, Recurso recurso){                
+        setEstado(estadoActual.defineRecurso(carta, recurso));
+    }
+    
+    public void mostraPontuacao(){                
+        setEstado(estadoActual.mostraPontuacao());
+    }
+    
     public Regiao escolheRegiao(Continente continente,int idx){
         if(continente!=null){
             if(idx<continente.getRegioes().size())
@@ -435,16 +443,18 @@ public class Jogo extends Base implements Serializable {
         return myCusto;        
     }
     
+    public boolean isJokersAtribuidos(){        
+        return (getListaJogadoresJokers().isEmpty());
+    }
+    
     public ArrayList<Jogador> getListaJogadoresJokers(){
         ArrayList<Jogador> jogadoresAux = new ArrayList<>();
         //Listar jogadores
         for(int i=0;i<getJogadores().size();i++){
             //Listar cartas por jogador
-            for(int m=0;m<getJogadores().get(i).getCartas().size();m++){
-                //Adiciona se tiverem jokers
-                if(getJogadores().get(i).getCartas().get(m).getRecurso().getClass() == RecursoJoker.class){
-                    jogadoresAux.add(getJogadores().get(i));
-                }
+            for(int m=0;m<getJogadores().get(i).getListaCartaJokers().size();m++){
+                //Adiciona se tiverem jokers                
+                jogadoresAux.add(getJogadores().get(i));                
             }
         }
         return jogadoresAux;

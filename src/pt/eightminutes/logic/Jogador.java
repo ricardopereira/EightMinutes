@@ -242,6 +242,19 @@ public class Jogador extends Base implements Serializable {
         
         return exercitosAux;
     }
+    
+    public ArrayList<Carta> getListaCartaJokers(){
+        ArrayList<Carta> cartasAux = new ArrayList<>();
+        
+        for(int m=0;m<getCartas().size();m++){
+            //Adiciona se tiverem jokers
+            if(getCartas().get(m).getRecurso().getClass() == RecursoJoker.class){
+                cartasAux.add(getCartas().get(m));
+            }
+        }
+        
+        return cartasAux;
+    }
     /**
      * @return the nome
      */

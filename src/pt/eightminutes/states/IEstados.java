@@ -28,4 +28,6 @@ public interface IEstados {
     IEstados carregaJogo() throws FileNotFoundException, IOException;
     IEstados gravaJogo();
     IEstados abandonaJogo();
+    IEstados defineRecurso(Carta carta, Recurso recurso);
+    IEstados mostraPontuacao();
 }
