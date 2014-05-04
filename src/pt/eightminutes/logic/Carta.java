@@ -25,6 +25,15 @@ public class Carta implements Serializable{
         this.accoes.addAll(accoes);
     }
 
+    public boolean isTodasAccoesUsadas(){
+        boolean myResult=true;
+        for(int i=0;i<accoes.size();i++){
+            if(!accoes.get(i).isUsada())
+                myResult = false;
+        }
+        
+        return myResult;
+    }
     /**
      * @return the recurso
      */

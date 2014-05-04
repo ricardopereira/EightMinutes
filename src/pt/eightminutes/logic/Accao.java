@@ -14,6 +14,7 @@ public abstract class Accao extends Base implements Serializable {
     private String nome;
     private int qtd;
     private boolean usada;
+    private Carta carta;
     
     public Accao(String nome, int qtd){
         this.nome = nome;
@@ -75,6 +76,20 @@ public abstract class Accao extends Base implements Serializable {
     
     public void decrementaQtd() {
         setQtd(getQtd() - 1);
+    }
+
+    /**
+     * @return the carta
+     */
+    public Carta getCarta() {
+        return carta;
+    }
+
+    /**
+     * @param carta the carta to set
+     */
+    public void setCarta(Carta carta) {
+        this.carta = carta;
     }
 
 }

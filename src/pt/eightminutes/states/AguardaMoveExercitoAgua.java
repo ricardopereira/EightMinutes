@@ -8,6 +8,7 @@ package pt.eightminutes.states;
 
 import java.util.ArrayList;
 import pt.eightminutes.logic.Accao;
+import pt.eightminutes.logic.Carta;
 import pt.eightminutes.logic.Exercito;
 import pt.eightminutes.logic.Jogo;
 import pt.eightminutes.logic.Regiao;
@@ -26,7 +27,8 @@ public class AguardaMoveExercitoAgua extends EstadosAdapter{
         params.add(regiao);
         params.add(exercitos);
         
-        Accao accao = getJogo().getJogadorActivo().getCartaActiva().getAccaoActiva();
+        Carta carta = getJogo().getJogadorActivo().getCartaActiva();
+        Accao accao = carta.getAccaoActiva();
         if(accao==null)
             return this;
         
@@ -36,8 +38,22 @@ public class AguardaMoveExercitoAgua extends EstadosAdapter{
         if(!accao.isUsada())
             return this;
         else
-        if (getJogo().getEstadoAnterior().getClass() == AguardaEscolheAccao.class)
-            return new AguardaEscolheAccao(getJogo());
+        if (getJogo().getEstadoAnterior().getClass() == AguardaEscolheAccao.class){            
+            //Verifica o tipo de carta ("E/OU")
+            if(carta.isExecutaTodasAccoes()){
+                if(carta.isTodasAccoesUsadas()){
+                    getJogo().mudaJogador();
+                    return new AguardaEscolheCarta(getJogo());
+                }
+                else
+                    return new AguardaEscolheAccao(getJogo());
+            }
+            else
+            {
+                getJogo().mudaJogador();
+                return new AguardaEscolheCarta(getJogo());
+            }
+        }
         else
         {
             getJogo().mudaJogador();

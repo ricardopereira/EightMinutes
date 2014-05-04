@@ -218,8 +218,16 @@ public class IUTexto {
         System.out.println("### Jogadas:"+jogo.getJogadorActivo().getCartas().size()+" ###");
         System.out.println("Opções:0");
         for(int i=0; i<jogo.getCartasViradas().size();i++){
-            System.out.println("Carta:"+(i+1));
-            System.out.print(jogo.getCartasViradas().get(i));
+            
+            System.out.print("Carta:"+(i+1));
+            //verifica se tem duas acções
+            if(jogo.getCartasViradas().get(i).getAccoes().get(1)!=null){
+                if(jogo.getCartasViradas().get(i).isExecutaTodasAccoes())
+                    System.out.print("(E)");
+                else
+                    System.out.print("(OU)");
+            }
+            System.out.print("\n"+jogo.getCartasViradas().get(i));
         }
            
         System.out.println("Seleccione uma opcção(0-6):");           
