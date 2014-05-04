@@ -28,31 +28,35 @@ public class AguardaEscolheCarta extends EstadosAdapter{
         } else {
             Carta cartaAux;
             
-            getJogo().compraCarta(idx);
-            cartaAux = getJogo().getJogadorActivo().getCartaActiva();
-            
-            if (cartaAux.getAccoes().get(1) == null) {
-                getJogo().getJogadorActivo().getCartaActiva().setAccaoActiva(cartaAux.getAccoes().get(0));
-                
-                if(cartaAux.getAccoes().get(0).getClass() == AccaoMoveExercito.class)
-                    return new AguardaMoveExercito(getJogo());
+            if(getJogo().getCustoPorIdx(idx)<=getJogo().getJogadorActivo().getMoedas()){
+                getJogo().compraCarta(idx);
+                cartaAux = getJogo().getJogadorActivo().getCartaActiva();
+
+                if (cartaAux.getAccoes().get(1) == null) {
+                    getJogo().getJogadorActivo().getCartaActiva().setAccaoActiva(cartaAux.getAccoes().get(0));
+
+                    if(cartaAux.getAccoes().get(0).getClass() == AccaoMoveExercito.class)
+                        return new AguardaMoveExercito(getJogo());
+                    else
+                    if(cartaAux.getAccoes().get(0).getClass() == AccaoMoveExercitoAgua.class)
+                        return new AguardaMoveExercitoAgua(getJogo());
+                    else
+                    if(cartaAux.getAccoes().get(0).getClass() == AccaoDestroiExercito.class)
+                        return new AguardaDestroiExercito(getJogo());
+                    else
+                    if(cartaAux.getAccoes().get(0).getClass() == AccaoColocaExercito.class)
+                        return new AguardaColocaExercito(getJogo());
+                    else
+                    if(cartaAux.getAccoes().get(0).getClass() == AccaoColocaCidade.class)
+                        return new AguardaColocaCidade(getJogo());
+                    else
+                        return new AguardaEscolheAccao(getJogo());
+                }
                 else
-                if(cartaAux.getAccoes().get(0).getClass() == AccaoMoveExercitoAgua.class)
-                    return new AguardaMoveExercitoAgua(getJogo());
-                else
-                if(cartaAux.getAccoes().get(0).getClass() == AccaoDestroiExercito.class)
-                    return new AguardaDestroiExercito(getJogo());
-                else
-                if(cartaAux.getAccoes().get(0).getClass() == AccaoColocaExercito.class)
-                    return new AguardaColocaExercito(getJogo());
-                else
-                if(cartaAux.getAccoes().get(0).getClass() == AccaoColocaCidade.class)
-                    return new AguardaColocaCidade(getJogo());
-                else
-                    return new AguardaEscolheAccao(getJogo());
+                    return new AguardaEscolheAccao(getJogo()); 
             }
             else
-                return new AguardaEscolheAccao(getJogo()); 
+                return this;
         }
     }
     
