@@ -19,6 +19,7 @@ import java.util.Random;
 import pt.eightminutes.states.AguardaOpcoesJogo;
 import pt.eightminutes.states.IEstados;
 import pt.eightminutes.logic.*;
+import pt.eightminutes.states.AguardaJokers;
 
 public class Jogo extends Base implements Serializable {
     
@@ -126,7 +127,7 @@ public class Jogo extends Base implements Serializable {
         boolean myResult = true;
         
         for(int i=0;i< getJogadores().size();i++){
-            if(getJogadores().get(i).getCartas().size()!= getNumCartasFinal())
+            if(getJogadores().get(i).getCartas().size()< getNumCartasFinal())
                 myResult = false;
         }
         return myResult;
@@ -168,7 +169,7 @@ public class Jogo extends Base implements Serializable {
     }
     
     public void passaVez() {
-        mudaJogador();
+        mudaJogador();        
         setEstado(estadoActual.passaVez());
     }
     
@@ -206,13 +207,13 @@ public class Jogo extends Base implements Serializable {
         getJogadorActivo().gastaMoedas(apostaMax);
     }
     
-    public void mudaJogador(){
+    private void mudaJogador(){
         int idxJog = getJogadores().indexOf(getJogadorActivo());
         
         if(idxJog<getJogadores().size()-1)
             setJogadorActivo(getJogadores().get((idxJog+1)));
         else
-            setJogadorActivo(getJogadores().get(0));
+            setJogadorActivo(getJogadores().get(0));       
     }
     
     public void escolheCarta(int idx) {
@@ -272,7 +273,7 @@ public class Jogo extends Base implements Serializable {
         int numCartasFinal=0;
         
         switch (numJog){
-            case 2: numCartasFinal = 13;
+            case 2: numCartasFinal = 1;
                     break;
             case 3: numCartasFinal = 10;
                     break;                

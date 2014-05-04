@@ -259,7 +259,7 @@ public class IUTexto {
         }
         else
         {
-            System.out.println("E o VENCEDOR é:"+jogo.getJogadorVencedor().getNome());
+            System.out.println("E o VENCEDOR é........ "+jogo.getJogadorVencedor().getNome());
             jogo.mostraPontuacao();
         }
     }
@@ -450,7 +450,7 @@ public class IUTexto {
             opInt = obterNumero();                                    
         } while (opInt < 0 || opInt >myCont);
        
-        if(jogo.getEstadoAnterior().getClass() != AguardaEscolheAccao.class)
+        if(jogo.getEstadoAnterior().getClass() != AguardaEscolheAccao.class && opInt!=0)
             opInt++;
             
         if(opInt==0)
@@ -505,7 +505,7 @@ public class IUTexto {
             }
         }
         
-        if(jogo.getEstadoAnterior().getClass() != AguardaEscolheAccao.class)
+        if(jogo.getEstadoAnterior().getClass() != AguardaEscolheAccao.class && opInt!=0)
             opInt++;
             
         System.out.println("Seleccione uma opcção:");
@@ -563,7 +563,7 @@ public class IUTexto {
             opInt = obterNumero();                                    
         } while (opInt < 0|| opInt >myCont);
         
-        if(jogo.getEstadoAnterior().getClass() != AguardaEscolheAccao.class)
+        if(jogo.getEstadoAnterior().getClass() != AguardaEscolheAccao.class && opInt!=0)
             opInt++;
         // Verificar opção tomada
         if(opInt == 0)
@@ -651,7 +651,7 @@ public class IUTexto {
         } while (opInt < 0|| opInt >myCont);
         
         
-        if(jogo.getEstadoAnterior().getClass() != AguardaEscolheAccao.class)
+        if(jogo.getEstadoAnterior().getClass() != AguardaEscolheAccao.class && opInt!=0)
             opInt++;
             
         if(opInt==0)

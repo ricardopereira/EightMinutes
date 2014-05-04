@@ -81,7 +81,10 @@ public class AguardaEscolheCarta extends EstadosAdapter{
     }
     
     @Override
-    public IEstados passaVez() {
-        return this;           
+    public IEstados passaVez() {      
+        if(getJogo().verificaJogadoresFimDoJogo())
+            return new AguardaJokers(getJogo());
+        else
+            return this;
     }
 }

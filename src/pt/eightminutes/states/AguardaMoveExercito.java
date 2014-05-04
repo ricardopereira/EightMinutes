@@ -40,32 +40,26 @@ public class AguardaMoveExercito extends EstadosAdapter{
             return this;
         else
         {
-            if(getJogo().verificaJogadoresFimDoJogo()){
-                return new AguardaJokers(getJogo());
-            }
-            else
-            {
-                if (getJogo().getEstadoAnterior().getClass() == AguardaEscolheAccao.class){
-                    //Verifica o tipo de carta ("E/OU")
-                    if(carta.isExecutaTodasAccoes()){
-                        if(carta.isTodasAccoesUsadas()){
-                            getJogo().mudaJogador();
-                            return new AguardaEscolheCarta(getJogo());
-                        }
-                        else
-                            return new AguardaEscolheAccao(getJogo());
-                    }
-                    else
-                    {
-                        getJogo().mudaJogador();
+            if (getJogo().getEstadoAnterior().getClass() == AguardaEscolheAccao.class){
+                //Verifica o tipo de carta ("E/OU")
+                if(carta.isExecutaTodasAccoes()){
+                    if(carta.isTodasAccoesUsadas()){
+                        getJogo().passaVez();
                         return new AguardaEscolheCarta(getJogo());
                     }
+                    else
+                        return new AguardaEscolheAccao(getJogo());
                 }
                 else
                 {
-                    getJogo().mudaJogador();
+                    getJogo().passaVez();
                     return new AguardaEscolheCarta(getJogo());
                 }
+            }
+            else
+            {
+                getJogo().passaVez();
+                return new AguardaEscolheCarta(getJogo());
             }
         }
     }
@@ -78,8 +72,11 @@ public class AguardaMoveExercito extends EstadosAdapter{
     }
     
     @Override
-    public IEstados passaVez() {                
-        return new AguardaEscolheCarta(getJogo()); 
+    public IEstados passaVez() {      
+        if(getJogo().verificaJogadoresFimDoJogo())
+            return new AguardaJokers(getJogo());
+        else
+            return new AguardaEscolheCarta(getJogo()); 
     }
     
     @Override

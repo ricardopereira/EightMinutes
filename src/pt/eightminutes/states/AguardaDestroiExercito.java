@@ -37,32 +37,26 @@ public class AguardaDestroiExercito extends EstadosAdapter{
             return this;
         else
         {
-            if(getJogo().verificaJogadoresFimDoJogo()){
-                return new AguardaJokers(getJogo());
-            }
-            else
-            {
-                if (getJogo().getEstadoAnterior().getClass() == AguardaEscolheAccao.class){
-                    //Verifica o tipo de carta ("E/OU")
-                    if(carta.isExecutaTodasAccoes()){
-                        if(carta.isTodasAccoesUsadas()){
-                            getJogo().mudaJogador();
-                            return new AguardaEscolheCarta(getJogo());
-                        }
-                        else
-                            return new AguardaEscolheAccao(getJogo());
-                    }
-                    else
-                    {
-                        getJogo().mudaJogador();
+            if (getJogo().getEstadoAnterior().getClass() == AguardaEscolheAccao.class){
+                //Verifica o tipo de carta ("E/OU")
+                if(carta.isExecutaTodasAccoes()){
+                    if(carta.isTodasAccoesUsadas()){
+                        getJogo().passaVez();
                         return new AguardaEscolheCarta(getJogo());
                     }
+                    else
+                        return new AguardaEscolheAccao(getJogo());
                 }
                 else
                 {
-                    getJogo().mudaJogador();
+                    getJogo().passaVez();
                     return new AguardaEscolheCarta(getJogo());
                 }
+            }
+            else
+            {
+                getJogo().passaVez();
+                return new AguardaEscolheCarta(getJogo());
             }
         }    
     }
@@ -72,5 +66,13 @@ public class AguardaDestroiExercito extends EstadosAdapter{
         // ToDo: Verificar com o Serrano
         //Abandonar jogo vai para as Opções ou para a Pontuação?
         return new AguardaOpcoesJogo(getJogo());
+    }
+    
+    @Override
+    public IEstados passaVez() {      
+        if(getJogo().verificaJogadoresFimDoJogo())
+            return new AguardaJokers(getJogo());
+        else
+            return new AguardaEscolheCarta(getJogo()); 
     }
 }
