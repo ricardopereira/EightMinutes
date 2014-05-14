@@ -6,15 +6,19 @@
 
 package pt.eightminutes.gui;
 
+import java.util.Observable;
+import pt.eightminutes.logic.Jogo;
+
 /**
  *
  * @author ricardopereira
  */
-public class ModeloGrafico {
- 
-    public ModeloGrafico()
-    {
-        
+public class DataController extends Observable {
+    
+    Jogo jogo;
+    
+    public DataController(Jogo jogo) {
+        this.jogo = jogo;
     }
     
 }

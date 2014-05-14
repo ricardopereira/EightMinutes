@@ -8,27 +8,32 @@ package pt.eightminutes.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.util.Observable;
+import java.util.Observer;
 import javax.swing.JFrame;
 
 /**
  *
  * @author ricardopereira
  */
-public class FrameMain extends JFrame {
+public class FrameMain extends JFrame implements Observer {
     
-    private ModeloGrafico model;
+    private DataController controller;
     private Container mainContainer;
     
-    public FrameMain(ModeloGrafico model)
+    // Componentes
+    
+    
+    public FrameMain(DataController controller)
     {
-        this(model, 150, 150, 800, 600);
+        this(controller, 150, 150, 800, 600);
     }
     
-    public FrameMain(ModeloGrafico model, int x, int y, int width, int height)
+    public FrameMain(DataController controller, int x, int y, int width, int height)
     {
         // Cabeçalho
-        super("Eight Minutes");
-        this.model = model;
+        super("Eight Minutes Empire");
+        this.controller = controller;
         
         mainContainer = getContentPane();
         
@@ -58,5 +63,13 @@ public class FrameMain extends JFrame {
     {
         
     }
+        
+    @Override
+    public void update(Observable t, Object o) {
+
+    }
+    
+    //Listeners
+    
     
 }

@@ -20,7 +20,8 @@ public class EightMinutes {
     
     public static void modoGrafico()
     {
-        new FrameMain(new ModeloGrafico());
+        IUGrafico iuGrafico = new IUGrafico(new Jogo());
+        iuGrafico.start();
     }
     
     public static void modoTexto()
