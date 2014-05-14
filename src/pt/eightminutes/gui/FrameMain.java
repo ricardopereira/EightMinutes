@@ -6,11 +6,19 @@
 
 package pt.eightminutes.gui;
 
-import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
+import java.awt.Font;
+import java.awt.event.KeyEvent;
 import java.util.Observable;
 import java.util.Observer;
+import javax.swing.Box;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JScrollPane;
+import javax.swing.border.LineBorder;
 
 /**
  *
@@ -22,6 +30,15 @@ public class FrameMain extends JFrame implements Observer {
     private Container mainContainer;
     
     // Componentes
+    private JMenuBar mainMenuBar;
+    private JMenu menuFicheiro;
+    private JMenuItem menuItemGravar;
+    
+    // Paineis
+    private PanelMapa panelMapa;
+    private PanelCartas panelCartas;
+    
+    private static Font typo = new Font("Verdana", Font.PLAIN, 12);
     
     
     public FrameMain(DataController controller)
@@ -51,12 +68,31 @@ public class FrameMain extends JFrame implements Observer {
     
     protected void initialize()
     {
-        //
+        mainMenuBar = new JMenuBar();
+        
+        // ToDo: criar classe para Menu?
+        menuFicheiro = new JMenu("Ficheiro");
+        menuFicheiro.setFont(typo);
+        menuFicheiro.setMnemonic(KeyEvent.VK_F);
+
+        menuItemGravar = new JMenuItem("Gravar jogo", KeyEvent.VK_G);
+        menuItemGravar.setFont(typo);
+        menuItemGravar.setMnemonic(KeyEvent.VK_L);
+        
+        // Zonas
+        panelMapa = new PanelMapa(controller);
+        panelCartas = new PanelCartas(controller);
     }
     
     protected void createLayout()
     {
+        setJMenuBar(mainMenuBar);
+        mainMenuBar.add(menuFicheiro);
+        menuFicheiro.add(menuItemGravar);
         
+        // Container desta frame
+        Container cp = getContentPane();
+        cp.add(panelMapa);
     }
     
     protected void registerListeners()
