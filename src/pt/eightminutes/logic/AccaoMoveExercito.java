@@ -69,6 +69,15 @@ public class AccaoMoveExercito extends Accao {
                         // As regioes só sao criadas uma vez, logo podemos usar o ==
                         // Sao as mesmas instancias para todo o programa
                         trajecto = mapa.getTrajecto(origem, destino);
+                        
+                        
+                        if (debugMode)
+                        if (trajecto == null || trajecto.size() == 0) {
+                            // Bug
+                            System.out.println("Bug: origem="+ origem.getNome() +" destino="+ destino.getNome() +" trajecto a null");
+                        }
+                        
+                        
                         // Encontrou trajecto?
                         if (trajecto != null && trajecto.size() > 0) {
                             //Ultima regiao do trajecto

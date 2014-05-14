@@ -305,7 +305,7 @@ public class IUTexto {
            jogo.escolheCarta(opInt-1);
     }
     
-    public void menuEscolheAccao(){                
+    public void menuEscolheAccao(){              
         int opInt=0;
         int opStr;
         int accoesCount=0;
@@ -329,8 +329,10 @@ public class IUTexto {
         do {                                        
             opInt = obterNumero();                                                
         } while (opInt < 0 || opInt > accoesCount);
+        
+        // ToDo: falha na interface, #42 - Carta E, qtd da segunda acção aparece a zero
        
-        if(opInt==0)
+        if (opInt == 0)
             jogo.passaVez();
         else
             jogo.escolheAccao(jogo.getJogadorActivo().getCartaActiva().getAccoes().get(opInt-1));

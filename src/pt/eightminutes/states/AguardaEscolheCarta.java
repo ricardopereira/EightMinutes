@@ -28,8 +28,11 @@ public class AguardaEscolheCarta extends EstadosAdapter{
         } else {
             Carta cartaAux;
             
-            if(getJogo().getCustoPorIdx(idx)<=getJogo().getJogadorActivo().getMoedas()){
+            // Verificar número de moedas
+            if(getJogo().getCustoPorIdx(idx) <= getJogo().getJogadorActivo().getMoedas()) {
+                // Compra da carta
                 getJogo().compraCarta(idx);
+                
                 cartaAux = getJogo().getJogadorActivo().getCartaActiva();
 
                 if (cartaAux.getAccoes().get(1) == null) {
@@ -53,10 +56,13 @@ public class AguardaEscolheCarta extends EstadosAdapter{
                         return new AguardaEscolheAccao(getJogo());
                 }
                 else
-                    return new AguardaEscolheAccao(getJogo()); 
+                    return new AguardaEscolheAccao(getJogo());
             }
-            else
+            else {
+                if (Jogo.debugMode)
+                    System.out.println("DEBUG: Sem moedas");
                 return this;
+            }
         }
     }
     
