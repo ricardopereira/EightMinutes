@@ -8,17 +8,20 @@ package pt.eightminutes.gui;
 
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JScrollPane;
-import javax.swing.border.LineBorder;
+import javax.swing.JPanel;
 
 /**
  *
@@ -90,9 +93,58 @@ public class FrameMain extends JFrame implements Observer {
         mainMenuBar.add(menuFicheiro);
         menuFicheiro.add(menuItemGravar);
         
-        // Container desta frame
         Container cp = getContentPane();
-        cp.add(panelMapa);
+        cp.setLayout(new BoxLayout(cp,BoxLayout.Y_AXIS));
+        
+        JPanel panelCentral = new JPanel();
+        panelCentral.setBackground(Color.RED);
+        cp.add(panelCentral);
+        
+        JPanel panelBottom = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        panelBottom.setBackground(Color.BLUE);
+        //ToDo: panelBottom.setMinimumSize(new Dimension(0, 50));
+        cp.add(panelBottom);
+        
+        // Central
+        panelCentral.setLayout(new BoxLayout(panelCentral,BoxLayout.X_AXIS));        
+        
+        JPanel panelJogo = new JPanel();
+        panelJogo.setBackground(Color.YELLOW);
+        panelCentral.add(panelJogo);
+        
+        JPanel panelInfo = new JPanel(new FlowLayout(FlowLayout.LEADING));
+        panelInfo.setBackground(Color.GREEN);
+        panelCentral.add(panelInfo);
+        
+        // Jogo
+        panelJogo.setLayout(new BoxLayout(panelJogo,BoxLayout.Y_AXIS));
+        
+        JPanel panelMapa = new JPanel();
+        panelMapa.setBackground(Color.ORANGE);
+        panelJogo.add(panelMapa);
+        
+        JPanel panelCartas = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        panelCartas.setBackground(Color.LIGHT_GRAY);
+        //panelCartas.setMinimumSize(new Dimension(0, 100));
+        panelJogo.add(panelCartas);
+                
+        // Teste
+        panelCartas.add(Box.createRigidArea(new Dimension(10,0)));
+        panelCartas.add(new JButton("Carta"));
+        panelCartas.add(Box.createRigidArea(new Dimension(10,0)));
+        panelCartas.add(new JButton("Carta"));
+        panelCartas.add(Box.createRigidArea(new Dimension(10,0)));
+        panelCartas.add(new JButton("Carta"));
+        panelCartas.add(Box.createRigidArea(new Dimension(10,0)));
+        panelCartas.add(new JButton("Carta"));
+        panelCartas.add(Box.createRigidArea(new Dimension(10,0)));
+        panelCartas.add(new JButton("Carta"));
+        panelCartas.add(Box.createRigidArea(new Dimension(10,0)));
+        panelCartas.add(new JButton("Carta"));
+        
+        // Container desta frame
+        //Container cp = getContentPane();
+        //cp.add(new JButton("Teste"));
     }
     
     protected void registerListeners()
