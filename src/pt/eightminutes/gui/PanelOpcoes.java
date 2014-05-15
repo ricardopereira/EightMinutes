@@ -12,22 +12,22 @@ import javax.swing.JPanel;
  *
  * @author ricardopereira
  */
-public class PanelMapa extends JPanel {
+public class PanelOpcoes extends JPanel {
     
     private DataController controller;
     
-    public PanelMapa(DataController controller) {
+    public PanelOpcoes(DataController controller) {
         this.controller = controller;
     }
     
     @Override
     public int getWidth() {
-        return 700;
+        return 800;
     }
     
     @Override
     public int getHeight() {
-        return 400;
+        return 100;
     }
-
+    
 }

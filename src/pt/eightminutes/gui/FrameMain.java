@@ -8,15 +8,12 @@ package pt.eightminutes.gui;
 
 import java.awt.Color;
 import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.KeyEvent;
 import java.util.Observable;
 import java.util.Observer;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -94,57 +91,36 @@ public class FrameMain extends JFrame implements Observer {
         menuFicheiro.add(menuItemGravar);
         
         Container cp = getContentPane();
-        cp.setLayout(new BoxLayout(cp,BoxLayout.Y_AXIS));
+        cp.setLayout(new GridBagLayout());
         
-        JPanel panelCentral = new JPanel();
-        panelCentral.setBackground(Color.RED);
-        cp.add(panelCentral);
+        GridBagConstraints grid = new GridBagConstraints();
         
-        JPanel panelBottom = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        panelBottom.setBackground(Color.BLUE);
-        //ToDo: panelBottom.setMinimumSize(new Dimension(0, 50));
-        cp.add(panelBottom);
+        PanelMapa pnlMapa = new PanelMapa(controller);
+        pnlMapa.setBackground(Color.ORANGE);
+        grid.gridx = 0;
+        grid.gridy = 0;
+        cp.add(pnlMapa, grid);
         
-        // Central
-        panelCentral.setLayout(new BoxLayout(panelCentral,BoxLayout.X_AXIS));        
+        PanelCartas pnlCartas = new PanelCartas(controller);
+        pnlCartas.setBackground(Color.YELLOW);
+        grid.gridx = 0;
+        grid.gridy = 1;
+        cp.add(pnlCartas, grid);
         
-        JPanel panelJogo = new JPanel();
-        panelJogo.setBackground(Color.YELLOW);
-        panelCentral.add(panelJogo);
+        PanelInformacao pnlInfo = new PanelInformacao(controller);
+        pnlInfo.setBackground(Color.GREEN);
+        //grid.gridheight = 2;
+        grid.gridx = 1;
+        grid.gridy = 0;
+        cp.add(pnlInfo, grid);
         
-        JPanel panelInfo = new JPanel(new FlowLayout(FlowLayout.LEADING));
-        panelInfo.setBackground(Color.GREEN);
-        panelCentral.add(panelInfo);
-        
-        // Jogo
-        panelJogo.setLayout(new BoxLayout(panelJogo,BoxLayout.Y_AXIS));
-        
-        JPanel panelMapa = new JPanel();
-        panelMapa.setBackground(Color.ORANGE);
-        panelJogo.add(panelMapa);
-        
-        JPanel panelCartas = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        panelCartas.setBackground(Color.LIGHT_GRAY);
-        //panelCartas.setMinimumSize(new Dimension(0, 100));
-        panelJogo.add(panelCartas);
-                
-        // Teste
-        panelCartas.add(Box.createRigidArea(new Dimension(10,0)));
-        panelCartas.add(new JButton("Carta"));
-        panelCartas.add(Box.createRigidArea(new Dimension(10,0)));
-        panelCartas.add(new JButton("Carta"));
-        panelCartas.add(Box.createRigidArea(new Dimension(10,0)));
-        panelCartas.add(new JButton("Carta"));
-        panelCartas.add(Box.createRigidArea(new Dimension(10,0)));
-        panelCartas.add(new JButton("Carta"));
-        panelCartas.add(Box.createRigidArea(new Dimension(10,0)));
-        panelCartas.add(new JButton("Carta"));
-        panelCartas.add(Box.createRigidArea(new Dimension(10,0)));
-        panelCartas.add(new JButton("Carta"));
-        
-        // Container desta frame
-        //Container cp = getContentPane();
-        //cp.add(new JButton("Teste"));
+        PanelOpcoes pnlOpcoes = new PanelOpcoes(controller);
+        pnlOpcoes.setBackground(Color.BLUE);
+        //grid.gridwidth = 2;
+        grid.gridx = 0;
+        grid.gridy = 2;
+        cp.add(pnlOpcoes, grid);
+  
     }
     
     protected void registerListeners()
