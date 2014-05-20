@@ -6,6 +6,9 @@
 
 package pt.eightminutes.gui;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import javax.swing.JPanel;
 
 /**
@@ -18,6 +21,13 @@ public class PanelOpcoes extends JPanel {
     
     public PanelOpcoes(DataController controller) {
         this.controller = controller;
+        
+        // Teste
+        this.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        this.setBackground(Color.BLUE);
+        this.setPreferredSize(new Dimension(800,100));
+        this.setMinimumSize(new Dimension(800,100));
+        this.setMaximumSize(new Dimension(800,100));
     }
     
 }

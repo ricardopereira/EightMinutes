@@ -107,11 +107,6 @@ public class FrameMain extends JFrame implements Observer {
         cp.add(panelCentral,BorderLayout.CENTER);
         
         PanelOpcoes panelOpcoes = new PanelOpcoes(controller);
-        panelOpcoes.setLayout(new FlowLayout(FlowLayout.RIGHT));
-        panelOpcoes.setBackground(Color.BLUE);
-        panelOpcoes.setPreferredSize(new Dimension(800,100));
-        panelOpcoes.setMinimumSize(new Dimension(800,100));
-        panelOpcoes.setMaximumSize(new Dimension(800,100));
         cp.add(panelOpcoes,BorderLayout.SOUTH);
              
         // Zona 2
@@ -124,40 +119,14 @@ public class FrameMain extends JFrame implements Observer {
         panelCentral.add(panelJogo,BorderLayout.CENTER);
         
         PanelInformacao panelInfo = new PanelInformacao(controller);
-        panelInfo.setLayout(new FlowLayout(FlowLayout.LEADING));
-        panelInfo.setBackground(Color.GREEN);
-        panelInfo.setPreferredSize(new Dimension(200,500));
-        panelInfo.setMinimumSize(new Dimension(200,500));
-        panelInfo.setMaximumSize(new Dimension(200,500));
         panelCentral.add(panelInfo,BorderLayout.EAST);
         
         // Zona 3
         PanelMapa panelMapa = new PanelMapa(controller);
-        panelMapa.setBackground(Color.YELLOW);
-        panelMapa.setPreferredSize(new Dimension(600,400));
-        panelMapa.setMinimumSize(new Dimension(600,400));
-        panelMapa.setMaximumSize(new Dimension(600,400));
         panelJogo.add(panelMapa,BorderLayout.CENTER);
         
         PanelCartas panelCartas = new PanelCartas(controller);
-        panelCartas.setLayout(new FlowLayout(FlowLayout.CENTER));
-        panelCartas.setBackground(Color.ORANGE);
-        panelCartas.setPreferredSize(new Dimension(600,100));
-        panelCartas.setMinimumSize(new Dimension(600,100));
-        panelCartas.setMaximumSize(new Dimension(600,100));
         panelJogo.add(panelCartas,BorderLayout.SOUTH);
-                
-        // Teste
-        panelCartas.add(new JButton("Carta 1"));
-        panelCartas.add(new JButton("Carta 2"));
-        panelCartas.add(new JButton("Carta 3"));
-        panelCartas.add(new JButton("Carta 4"));
-        panelCartas.add(new JButton("Carta 5"));
-        panelCartas.add(new JButton("Carta 6"));
-        
-        // Container desta frame
-        //Container cp = getContentPane();
-        //cp.add(new JButton("Teste"));
     }
     
     protected void registerListeners()

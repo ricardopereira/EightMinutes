@@ -6,6 +6,8 @@
 
 package pt.eightminutes.gui;
 
+import java.awt.Color;
+import java.awt.Dimension;
 import javax.swing.JPanel;
 
 /**
@@ -18,6 +20,12 @@ public class PanelMapa extends JPanel {
     
     public PanelMapa(DataController controller) {
         this.controller = controller;
+        
+        // Teste
+        this.setBackground(Color.YELLOW);
+        this.setPreferredSize(new Dimension(600,400));
+        this.setMinimumSize(new Dimension(600,400));
+        this.setMaximumSize(new Dimension(600,400));
     }
 
 }
