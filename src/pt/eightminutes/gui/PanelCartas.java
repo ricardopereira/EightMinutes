@@ -19,15 +19,5 @@ public class PanelCartas extends JPanel {
     public PanelCartas(DataController controller) {
         this.controller = controller;
     }
-    
-    @Override
-    public int getWidth() {
-        return 700;
-    }
-    
-    @Override
-    public int getHeight() {
-        return 100;
-    }
 
 }

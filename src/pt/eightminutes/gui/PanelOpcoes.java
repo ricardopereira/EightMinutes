@@ -20,14 +20,4 @@ public class PanelOpcoes extends JPanel {
         this.controller = controller;
     }
     
-    @Override
-    public int getWidth() {
-        return 800;
-    }
-    
-    @Override
-    public int getHeight() {
-        return 100;
-    }
-    
 }

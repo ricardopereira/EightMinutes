@@ -19,15 +19,5 @@ public class PanelMapa extends JPanel {
     public PanelMapa(DataController controller) {
         this.controller = controller;
     }
-    
-    @Override
-    public int getWidth() {
-        return 700;
-    }
-    
-    @Override
-    public int getHeight() {
-        return 400;
-    }
 
 }
