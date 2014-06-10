@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package pt.eightminutes.gui;
+package pt.eightminutes.ui.graphical;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -24,10 +24,10 @@ public class PanelOpcoes extends JPanel {
         
         // Teste
         this.setLayout(new FlowLayout(FlowLayout.RIGHT));
-        this.setBackground(Color.BLUE);
-        this.setPreferredSize(new Dimension(800,100));
-        this.setMinimumSize(new Dimension(800,100));
-        this.setMaximumSize(new Dimension(800,100));
+        this.setBackground(new Color(232,232,232));
+        this.setPreferredSize(new Dimension(800,220));
+        this.setMinimumSize(new Dimension(800,220));
+        this.setMaximumSize(new Dimension(800,220));
     }
     
 }

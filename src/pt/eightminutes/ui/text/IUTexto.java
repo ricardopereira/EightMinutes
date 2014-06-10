@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package pt.eightminutes.tui;
+package pt.eightminutes.ui.text;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

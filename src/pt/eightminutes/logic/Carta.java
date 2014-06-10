@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 public class Carta implements Serializable{
     
+    private int ID;
     private Recurso recurso;
     private int qtdRecurso;
     private boolean comprada;

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package pt.eightminutes.gui;
+package pt.eightminutes.ui.graphical;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -20,6 +20,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import pt.eightminutes.logic.*;
+
 /**
  *
  * @author ricardopereira
@@ -33,7 +35,7 @@ public class PanelCartas extends JPanel {
         
         // Teste
         this.setLayout(new FlowLayout(FlowLayout.CENTER));
-        this.setBackground(Color.ORANGE);
+        this.setBackground(Color.WHITE);
         this.setPreferredSize(new Dimension(600,100));
         this.setMinimumSize(new Dimension(600,100));
         this.setMaximumSize(new Dimension(600,100));
@@ -53,15 +55,29 @@ public class PanelCartas extends JPanel {
     }
     
     public void createCartas() {
+        // Limpar todas as cartas da mesa
+        this.removeAll();
+        
+        // Cartas viradas
+        Carta itemCarta;
+        for (int i = 0; i < controller.jogo.getCartasViradas().size(); i++) {
+            itemCarta = controller.jogo.getCartasViradas().get(i);
+            //itemCarta.;
+        }
+        
+        // ID da Carta
+        int ID = 1;
+        
+        // ToDo: imagem quando não encontra a carta
+
         // Teste
         JButton btCarta1 = new JButton();
-        
         // Exemplo de carta
         btCarta1.setMargin(new Insets(0,0,0,0));
         btCarta1.setContentAreaFilled(false);
         btCarta1.setFocusPainted(false);
         btCarta1.setBorder(BorderFactory.createEmptyBorder());
-        btCarta1.setIcon(new ImageIcon(createImage("src/pt/eightminutes/cards/card001.png")));
+        btCarta1.setIcon(new ImageIcon(createImage("src/pt/eightminutes/ui/cards/card"+String.format("%03d",ID)+".png")));
         
         this.add(btCarta1);
         this.add(new JButton("Carta 2"));

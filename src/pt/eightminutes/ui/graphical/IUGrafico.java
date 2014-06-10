@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package pt.eightminutes.gui;
+package pt.eightminutes.ui.graphical;
 
 import pt.eightminutes.logic.Jogo;
 

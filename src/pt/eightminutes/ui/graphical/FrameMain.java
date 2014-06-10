@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package pt.eightminutes.gui;
+package pt.eightminutes.ui.graphical;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -47,7 +47,7 @@ public class FrameMain extends JFrame implements Observer {
     
     public FrameMain(DataController controller)
     {
-        this(controller, 150, 150, 800, 600);
+        this(controller, 150, 150, 1000, 800);
     }
     
     public FrameMain(DataController controller, int x, int y, int width, int height)
@@ -61,7 +61,7 @@ public class FrameMain extends JFrame implements Observer {
         initialize();
         createLayout();
         registerListeners();
-        
+                
         setLocation(x,y);
         setSize(width, height);
         setVisible(true);
@@ -90,6 +90,8 @@ public class FrameMain extends JFrame implements Observer {
     
     protected void createLayout()
     {
+        this.setResizable(false);
+
         setJMenuBar(mainMenuBar);
         mainMenuBar.add(menuFicheiro);
         menuFicheiro.add(menuItemGravar);

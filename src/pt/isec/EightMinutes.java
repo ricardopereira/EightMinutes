@@ -6,8 +6,8 @@
 
 package pt.isec;
 
-import pt.eightminutes.tui.IUTexto;
-import pt.eightminutes.gui.*;
+import pt.eightminutes.ui.graphical.IUGrafico;
+import pt.eightminutes.ui.text.IUTexto;
 import java.io.IOException;
 import pt.eightminutes.logic.*;
 
