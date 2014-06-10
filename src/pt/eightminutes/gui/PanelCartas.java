@@ -61,7 +61,7 @@ public class PanelCartas extends JPanel {
         btCarta1.setContentAreaFilled(false);
         btCarta1.setFocusPainted(false);
         btCarta1.setBorder(BorderFactory.createEmptyBorder());
-        btCarta1.setIcon(new ImageIcon(createImage("src/pt/eightminutes/cards/Group.gif")));
+        btCarta1.setIcon(new ImageIcon(createImage("src/pt/eightminutes/cards/card001.png")));
         
         this.add(btCarta1);
         this.add(new JButton("Carta 2"));
