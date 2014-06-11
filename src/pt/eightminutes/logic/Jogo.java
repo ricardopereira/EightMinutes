@@ -138,28 +138,27 @@ public class Jogo extends Base implements Serializable {
         colocaExercitoInicial();
     }
     
-    public void defineNumJogadores(int numJogadores){
+    public void defineNumJogadores(int numJogadores) {
         setNumJogadores(numJogadores);
         baralho = new Baralho(numJogadores);
         setEstado(estadoActual.defineNumJogadores(numJogadores));
     }
     
     public void defineDadosJogadores(String nome, Cor cor) {
-        setEstado(estadoActual.defineDadosJogadores(nome, cor));        
+        setEstado(estadoActual.defineDadosJogadores(nome));        
     }
     
     public void comecaApostas() {
         setEstado(estadoActual.comecaApostas());
     }
     
-    public void criaJogador(String nome,Cor cor){
+    public void criaJogador(String nome) {
         if(!nome.isEmpty()){
             int moedasPorJogador = getMoedasPorJogador();
-            jogadores.add(new Jogador(this,nome,cor,moedasPorJogador,14,3));             
+            jogadores.add(new Jogador(this,nome,Cor.preto,moedasPorJogador,14,3));             
         }
     }
    
-    
     public void comecaJogo() {
         escolheJogadorInicial();
         iniciaJogo();
@@ -171,7 +170,7 @@ public class Jogo extends Base implements Serializable {
         setEstado(estadoActual.passaVez());
     }
     
-    public void defineApostasJogadores(Jogador jogador, int aposta){        
+    public void defineApostasJogadores(Jogador jogador, int aposta) {        
         setEstado(estadoActual.defineApostasJogadores(jogador,aposta));
     }
             
@@ -179,7 +178,7 @@ public class Jogo extends Base implements Serializable {
         jogador.setAposta(aposta);  
     }
     
-    public void escolheJogadorInicial(){
+    public void escolheJogadorInicial() {
         int apostaMax=0;       
         int apostaJog=0;
         ArrayList<Jogador> jogadoresAux = new ArrayList<>();
@@ -249,7 +248,7 @@ public class Jogo extends Base implements Serializable {
     }
     
     public void escolheAccao(Accao accao) {
-        if(accao==null){            
+        if (accao == null){            
             mudaJogador();
             setEstado(estadoActual.compraCarta());
         }
@@ -257,25 +256,25 @@ public class Jogo extends Base implements Serializable {
             setEstado(estadoActual.escolheAccao(accao));
     }
     
-    public void mudaAccao(){
+    public void mudaAccao() {
         setEstado(estadoActual.mudaAccao());
     }
     
-    public void getListaExercitosTodosUtilizadores(ArrayList<Exercito> exercitos){
+    public void getListaExercitosTodosUtilizadores(ArrayList<Exercito> exercitos) {
         exercitos.clear();
-        for(int i=0;i<getJogadores().size();i++){
-            for(int m=0;i<getJogadores().get(i).getListaExercitos().size();m++){
+        for(int i=0;i<getJogadores().size();i++) {
+            for(int m=0;i<getJogadores().get(i).getListaExercitos().size();m++) {
                 if(getJogadores().get(i).getListaExercitos().get(m).getRegiao()!=null)
                     exercitos.add(getJogadores().get(i).getListaExercitos().get(m));
             }
         }
     }
     
-    public int getNumCartasFinal(){
+    public int getNumCartasFinal() {
         int numJog = getNumJogadores();
         int numCartasFinal=0;
         
-        switch (numJog){
+        switch (numJog) {
             case 2: numCartasFinal = 13;
                     break;
             case 3: numCartasFinal = 10;

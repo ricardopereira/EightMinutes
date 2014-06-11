@@ -9,7 +9,7 @@ public interface IEstados {
     Jogo getJogo();
     
     IEstados defineNumJogadores(int numJogadores);
-    IEstados defineDadosJogadores(String nome, Cor cor);
+    IEstados defineDadosJogadores(String nome);
     IEstados comecaApostas();
     IEstados defineApostasJogadores(Jogador jogador,int numMoedas);
     IEstados comecaJogo();  

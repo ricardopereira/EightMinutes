@@ -38,7 +38,7 @@ public class EstadosAdapter implements IEstados, Serializable {
     public IEstados defineNumJogadores(int numJogadores) { return this; }
 
     @Override
-    public IEstados defineDadosJogadores(String nome, Cor cor) {  return this; }
+    public IEstados defineDadosJogadores(String nome) {  return this; }
 
     @Override
     public IEstados comecaApostas() {  return this; }

@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package pt.eightminutes.ui.graphical;
 
 import java.awt.BorderLayout;
@@ -24,10 +18,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
-/**
- *
- * @author ricardopereira
- */
 public class FrameMain extends JFrame implements Observer {
     
     private DataController controller;
@@ -42,7 +32,7 @@ public class FrameMain extends JFrame implements Observer {
     private PanelMapa panelMapa;
     private PanelCartas panelCartas;
     private PanelInformacao panelInfo;
-    private PanelOpcoes panelOpcoes;
+    private PanelComandos panelOpcoes;
     
     private static Font typo = new Font("Verdana", Font.PLAIN, 12);
     
@@ -81,7 +71,7 @@ public class FrameMain extends JFrame implements Observer {
         panelMapa = new PanelMapa(controller);
         panelCartas = new PanelCartas(controller);
         panelInfo = new PanelInformacao(controller);
-        panelOpcoes = new PanelOpcoes(controller);
+        panelOpcoes = new PanelComandos(controller);
         
         // Observers
         controller.addObserver(panelMapa);

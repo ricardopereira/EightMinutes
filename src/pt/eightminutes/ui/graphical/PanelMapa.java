@@ -30,6 +30,7 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JPanel;
+import pt.eightminutes.states.*;
 
 // Classe auxiliar para o mapa
 class MapBackground extends JPanel implements Observer {
@@ -143,7 +144,18 @@ public class PanelMapa extends PanelBase implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        
+        // Acção
+        if (getJogo().getEstadoActual().getClass() == AguardaColocaCidade.class ||
+            getJogo().getEstadoActual().getClass() == AguardaColocaExercito.class ||
+            getJogo().getEstadoActual().getClass() == AguardaDestroiExercito.class ||
+            getJogo().getEstadoActual().getClass() == AguardaMoveExercito.class ||
+            getJogo().getEstadoActual().getClass() == AguardaMoveExercitoAgua.class)
+        {
+            setEnabled(true);
+        }
+        else {
+            setEnabled(false);
+        }
     }
 
 }

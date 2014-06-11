@@ -10,7 +10,7 @@ import pt.eightminutes.logic.Cor;
 import pt.eightminutes.logic.Jogo;
 
 
-public class AguardaPreparaJogo extends EstadosAdapter{
+public class AguardaPreparaJogo extends EstadosAdapter {
 
     public AguardaPreparaJogo(Jogo jogo) {
         super(jogo);
@@ -23,8 +23,8 @@ public class AguardaPreparaJogo extends EstadosAdapter{
     }
     
     @Override
-    public IEstados defineDadosJogadores(String nome, Cor cor) {
-        getJogo().criaJogador(nome, cor);        
+    public IEstados defineDadosJogadores(String nome) {
+        getJogo().criaJogador(nome);
         return this; 
     }
     

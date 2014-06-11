@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package pt.eightminutes.ui.text;
 
 import java.io.FileNotFoundException;
@@ -131,7 +125,7 @@ public class IUTexto {
             System.out.println("Definir nome do jogador:"+i);                      
             opStr = obterString();
             if(!opStr.isEmpty()){
-                jogo.criaJogador(opStr, Cor.preto);
+                jogo.criaJogador(opStr);
                 i++;
             }
         }    

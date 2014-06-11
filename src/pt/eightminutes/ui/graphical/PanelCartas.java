@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package pt.eightminutes.ui.graphical;
 
 import java.awt.Color;
@@ -23,11 +17,9 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import pt.eightminutes.logic.*;
+import pt.eightminutes.states.AguardaEscolheCarta;
+import pt.eightminutes.states.AguardaOpcoesJogo;
 
-/**
- *
- * @author ricardopereira
- */
 public class PanelCartas extends PanelBase implements Observer {
         
     public PanelCartas(DataController controller) {
@@ -56,7 +48,7 @@ public class PanelCartas extends PanelBase implements Observer {
     
     public void showCartas() {
         // Limpar todas as cartas da mesa
-        this.removeAll();
+        clear();
         
         // Cartas viradas
         Carta itemCarta;
@@ -85,11 +77,20 @@ public class PanelCartas extends PanelBase implements Observer {
         this.add(new JButton("Carta 4"));
         this.add(new JButton("Carta 5"));
         this.add(new JButton("Carta 6"));
+        
+        validate();
+        repaint();
     }
 
     @Override
     public void update(Observable o, Object arg) {
-        
+        // Escolha da carta
+        if (getJogo().getEstadoActual().getClass() == AguardaEscolheCarta.class) {
+            setEnabled(true);
+        }
+        else {
+            setEnabled(false);
+        }
     }
 
 }
