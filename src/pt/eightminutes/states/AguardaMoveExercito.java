@@ -8,7 +8,6 @@ package pt.eightminutes.states;
 
 import java.util.ArrayList;
 import pt.eightminutes.logic.Accao;
-import pt.eightminutes.logic.AccaoMoveExercito;
 import pt.eightminutes.logic.Carta;
 import pt.eightminutes.logic.Exercito;
 import pt.eightminutes.logic.Jogo;
