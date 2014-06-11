@@ -15,9 +15,6 @@ public class PanelComandosOpcoesJogo extends PanelBase {
             @Override
             public void actionPerformed(ActionEvent e) {
                 getJogo().novoJogo();
-                // ToDo: Indicar o número de jogadores
-                getJogo().defineNumJogadores(2);
-                getController().update();
             }
         });
         this.add(btNovo, BorderLayout.CENTER);

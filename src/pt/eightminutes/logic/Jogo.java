@@ -14,12 +14,13 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 import pt.eightminutes.states.AguardaOpcoesJogo;
 import pt.eightminutes.states.IEstados;
-import pt.eightminutes.logic.*;
-import pt.eightminutes.states.AguardaJokers;
+import pt.eightminutes.states.EstadoListener;
 
 public class Jogo extends Base implements Serializable {
     
@@ -31,6 +32,7 @@ public class Jogo extends Base implements Serializable {
     private Mapa mapa;
     private ArrayList<Jogador> jogadores = new ArrayList<>();
     private Jogador jogadorActivo;
+    List<EstadoListener> listeners = new ArrayList<EstadoListener>();
 
     public Jogo(){
         mapa = new Mapa();
@@ -42,9 +44,9 @@ public class Jogo extends Base implements Serializable {
     }
     
     public Jogador getJogadorVencedor(){
-        Jogador jogadorAux=null;
-        int myPontos=0;
-        int myPontosMax=0;
+        Jogador jogadorAux = null;
+        int myPontos;
+        int myPontosMax = 0;
         for(int i=0;i<getJogadores().size();i++){
             myPontos = getJogadores().get(i).getPontuacao(this);
             if(myPontos>myPontosMax){
@@ -83,10 +85,21 @@ public class Jogo extends Base implements Serializable {
         return jogoAux;
     }
     
+    public void addListener(EstadoListener toAdd) {
+        listeners.add(toAdd);
+    }
+    
     public void setEstado(IEstados estado)
     {
         this.setEstadoAnterior(this.estadoActual);
         this.setEstadoActual(estado);
+        
+        // Notifica a todos os listeners o setEstado
+        for (EstadoListener event : listeners)
+            event.onSetEstado();
+        
+        if (debugMode)
+            System.out.println((new Date())+ ": setEstado - " + estado.getClass().getSimpleName());
     }
     
     public void opcoesJogo() {

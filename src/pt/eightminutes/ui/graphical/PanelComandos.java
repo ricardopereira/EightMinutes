@@ -17,7 +17,6 @@ public class PanelComandos extends PanelBase implements Observer {
     public PanelComandos(DataController controller) {
         super(controller);
         
-        // Teste
         this.setLayout(new FlowLayout(FlowLayout.CENTER));
         this.setBackground(new Color(232,232,232));
         this.setPreferredSize(new Dimension(800,220));

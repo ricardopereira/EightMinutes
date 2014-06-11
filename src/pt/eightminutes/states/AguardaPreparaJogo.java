@@ -6,7 +6,6 @@
 
 package pt.eightminutes.states;
 
-import pt.eightminutes.logic.Cor;
 import pt.eightminutes.logic.Jogo;
 
 

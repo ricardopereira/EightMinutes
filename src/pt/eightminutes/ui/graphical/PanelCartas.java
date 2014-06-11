@@ -25,7 +25,6 @@ public class PanelCartas extends PanelBase implements Observer {
     public PanelCartas(DataController controller) {
         super(controller);
         
-        // Teste
         this.setLayout(new FlowLayout(FlowLayout.CENTER));
         this.setBackground(Color.WHITE);
         this.setPreferredSize(new Dimension(600,100));

@@ -14,7 +14,6 @@ public class PanelInformacao extends PanelBase implements Observer {
     public PanelInformacao(DataController controller) {
         super(controller);
         
-        // Teste
         this.setLayout(new FlowLayout(FlowLayout.LEADING));
         this.setBackground(new Color(219,219,219));
         this.setPreferredSize(new Dimension(300,500));
@@ -27,7 +26,7 @@ public class PanelInformacao extends PanelBase implements Observer {
         clear();
         if (getJogo().getEstadoActual() == null)
             return;
-        this.add(new JLabel(getJogo().getEstadoActual().getClass().getName()), BorderLayout.CENTER);  
+        this.add(new JLabel(getJogo().getEstadoActual().getClass().getSimpleName()), BorderLayout.CENTER);  
         validate();
         
         if (getJogo().getEstadoActual().getClass() == AguardaPreparaJogo.class) {

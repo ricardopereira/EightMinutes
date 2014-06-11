@@ -9,6 +9,9 @@ public class IUGrafico {
     
     public IUGrafico(Jogo jogo) {
         controller = new DataController(jogo);
+        
+        // Testes
+        jogo.debugMode = true;
     }
    
     public void start() {
