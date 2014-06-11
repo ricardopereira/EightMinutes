@@ -33,10 +33,16 @@ public class PanelInformacao extends PanelBase implements Observer {
         this.add(new JLabel(getJogo().getEstadoActual().getClass().getSimpleName()));  
         validate();
         
-        if (getJogo().getEstadoActual().getClass() == AguardaPreparaJogo.class) {
+        if (getJogo().getEstadoActual().getClass() == AguardaOpcoesJogo.class) {
+            
+        }
+        else if (getJogo().getEstadoActual().getClass() == AguardaPreparaJogo.class) {
             
         }
         else if (getJogo().getEstadoActual().getClass() == AguardaAposta.class) {
+            
+        }
+        else {
             showThis(new PanelInformacaoJogadores(this,getController()));
         }
 

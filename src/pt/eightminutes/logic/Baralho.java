@@ -33,64 +33,64 @@ public class Baralho implements Serializable{
         Recurso recursoJoker = new RecursoJoker();
         
         // Recurso, qtdRecurso,(and=true, or=false),accao 1, accao 2, numcartas
-        adicionaCarta(recursoJoia,1,true,new AccaoColocaExercito(1),null,1);
-        adicionaCarta(recursoJoia,1,true,new AccaoColocaExercito(2),null,2);
-        adicionaCarta(recursoJoia,1,true,new AccaoMoveExercito(2),null,1);
-        if(numJogadores >=5)//não é suposto no máximo existirem 5 jogadores
-            adicionaCarta(recursoJoia,1,true,new AccaoMoveExercito(2),null,1);
+        adicionaCarta(28,recursoJoia,1,true,new AccaoColocaExercito(1),null,1);
+        adicionaCarta(26,recursoJoia,1,true,new AccaoColocaExercito(2),null,2); //27
+        adicionaCarta(7,recursoJoia,1,true,new AccaoMoveExercito(2),null,1);
+        if (numJogadores >= 5)//não é suposto no máximo existirem 5 jogadores
+            adicionaCarta(33,recursoJoia,1,true,new AccaoMoveExercito(2),null,1);
               
-        adicionaCarta(recursoAlimento,1,true,new AccaoColocaCidade(1),null,2);
-        adicionaCarta(recursoAlimento,1,true,new AccaoMoveExercito(3),null,1);      
-        adicionaCarta(recursoAlimento,2,true,new AccaoMoveExercito(3),null,1);
-        adicionaCarta(recursoAlimento,1,true,new AccaoMoveExercito(4),null,2);
-        adicionaCarta(recursoAlimento,1,true,new AccaoMoveExercito(5),null,1);
-        adicionaCarta(recursoAlimento,1,true,new AccaoMoveExercitoAgua(3),null,1);
-        if(numJogadores >=5)//não é suposto no máximo existirem 5 jogadores
-            adicionaCarta(recursoAlimento,1,false,new AccaoColocaExercito(4),new AccaoMoveExercito(2),1);        
-        adicionaCarta(recursoAlimento,1,true,new AccaoColocaExercito(1),new AccaoDestroiExercito(1),1);
+        adicionaCarta(3,recursoAlimento,1,true,new AccaoColocaCidade(1),null,2); //39
+        adicionaCarta(35,recursoAlimento,1,true,new AccaoMoveExercito(3),null,1);
+        adicionaCarta(37,recursoAlimento,2,true,new AccaoMoveExercito(3),null,1);
+        adicionaCarta(11,recursoAlimento,1,true,new AccaoMoveExercito(4),null,2); //41
+        adicionaCarta(17,recursoAlimento,1,true,new AccaoMoveExercito(5),null,1);
+        adicionaCarta(5,recursoAlimento,1,true,new AccaoMoveExercitoAgua(3),null,1);
+        if (numJogadores >= 5)//não é suposto no máximo existirem 5 jogadores
+            adicionaCarta(32,recursoAlimento,1,false,new AccaoColocaExercito(4),new AccaoMoveExercito(2),1);        
+        adicionaCarta(36,recursoAlimento,1,true,new AccaoColocaExercito(1),new AccaoDestroiExercito(1),1);
         
-        adicionaCarta(recursoMadeira,1,true,new AccaoColocaCidade(1),null,1);
-        adicionaCarta(recursoMadeira,1,true,new AccaoColocaExercito(3),null,1);
-        adicionaCarta(recursoMadeira,1,true,new AccaoMoveExercito(3),null,1);
-        adicionaCarta(recursoMadeira,1,false,new AccaoMoveExercito(2),new AccaoMoveExercito(3),1);// Esta carta nao faz sentido visto que o utilizador pode mover so dois se lhe apetecer
-        adicionaCarta(recursoMadeira,1,true,new AccaoMoveExercitoAgua(3),null,1);
-        adicionaCarta(recursoMadeira,1,true,new AccaoMoveExercitoAgua(4),null,1);
-        if(numJogadores >=5)//não é suposto no máximo existirem 5 jogadores
-            adicionaCarta(recursoMadeira,1,true,new AccaoMoveExercito(6),null,1);
-        adicionaCarta(recursoMadeira,1,false,new AccaoDestroiExercito(1),new AccaoColocaCidade(1),1);
+        adicionaCarta(18,recursoMadeira,1,true,new AccaoColocaCidade(1),null,1);
+        adicionaCarta(38,recursoMadeira,1,true,new AccaoColocaExercito(3),null,1);
+        adicionaCarta(20,recursoMadeira,1,true,new AccaoMoveExercito(3),null,1);
+        adicionaCarta(42,recursoMadeira,1,false,new AccaoMoveExercito(2),new AccaoMoveExercito(3),1);// Esta carta nao faz sentido visto que o utilizador pode mover so dois se lhe apetecer
+        adicionaCarta(12,recursoMadeira,1,true,new AccaoMoveExercitoAgua(3),null,1);
+        adicionaCarta(40,recursoMadeira,1,true,new AccaoMoveExercitoAgua(4),null,1);
+        if (numJogadores >= 5)//não é suposto no máximo existirem 5 jogadores
+            adicionaCarta(34,recursoMadeira,1,true,new AccaoMoveExercito(6),null,1);
+        adicionaCarta(19,recursoMadeira,1,false,new AccaoDestroiExercito(1),new AccaoColocaCidade(1),1);
         
-        adicionaCarta(recursoFerro,1,true,new AccaoColocaExercito(2),null,1);
-        adicionaCarta(recursoFerro,1,true,new AccaoColocaExercito(3),null,2);
-        adicionaCarta(recursoFerro,1,true,new AccaoMoveExercito(2),null,1);
-        adicionaCarta(recursoFerro,1,true,new AccaoMoveExercitoAgua(2),null,1);
-        if(numJogadores >=5)//não é suposto no máximo existirem 5 jogadores
-            adicionaCarta(recursoFerro,1,true,new AccaoMoveExercitoAgua(2),null,1);
-        adicionaCarta(recursoFerro,1,true,new AccaoMoveExercitoAgua(3),null,1);
+        adicionaCarta(1,recursoFerro,1,true,new AccaoColocaExercito(2),null,1);
+        adicionaCarta(2,recursoFerro,1,true,new AccaoColocaExercito(3),null,2); //23
+        adicionaCarta(8,recursoFerro,1,true,new AccaoMoveExercito(2),null,1);
+        adicionaCarta(13,recursoFerro,1,true,new AccaoMoveExercitoAgua(2),null,1); //31
+        if (numJogadores >= 5)//não é suposto no máximo existirem 5 jogadores
+            adicionaCarta(13,recursoFerro,1,true,new AccaoMoveExercitoAgua(2),null,1);
+        adicionaCarta(22,recursoFerro,1,true,new AccaoMoveExercitoAgua(3),null,1);
         
-        adicionaCarta(recursoUtensilio,1,true,new AccaoColocaCidade(1),null,1);
-        adicionaCarta(recursoUtensilio,1,true,new AccaoColocaExercito(3),null,2);
-        adicionaCarta(recursoUtensilio,1,true,new AccaoMoveExercitoAgua(3),null,1);
-        adicionaCarta(recursoUtensilio,1,true,new AccaoMoveExercito(4),null,1);
-        adicionaCarta(recursoUtensilio,1,false,new AccaoColocaExercito(2),new AccaoMoveExercito(3),1);
-        adicionaCarta(recursoUtensilio,1,false,new AccaoColocaExercito(2),new AccaoMoveExercito(4),1);
-        if(numJogadores >=5)//não é suposto no máximo existirem 5 jogadores
-            adicionaCarta(recursoUtensilio,2,true,new AccaoMoveExercito(4),null,1);
-        adicionaCarta(recursoUtensilio,1,true,new AccaoMoveExercito(5),null,1);
+        adicionaCarta(6,recursoUtensilio,1,true,new AccaoColocaCidade(1),null,1);
+        adicionaCarta(15,recursoUtensilio,1,true,new AccaoColocaExercito(3),null,2); //24
+        adicionaCarta(9,recursoUtensilio,1,true,new AccaoMoveExercitoAgua(3),null,1);
+        adicionaCarta(16,recursoUtensilio,1,true,new AccaoMoveExercito(4),null,1);
+        adicionaCarta(25,recursoUtensilio,1,false,new AccaoColocaExercito(3),new AccaoMoveExercito(3),1);
+        adicionaCarta(10,recursoUtensilio,1,false,new AccaoColocaExercito(3),new AccaoMoveExercito(4),1);
+        if (numJogadores >= 5)//não é suposto no máximo existirem 5 jogadores
+            adicionaCarta(30,recursoUtensilio,2,true,new AccaoMoveExercito(4),null,1);
+        adicionaCarta(4,recursoUtensilio,1,true,new AccaoMoveExercito(5),null,1);
         
-        adicionaCarta(recursoJoker,1,true,new AccaoColocaExercito(2),null,1);
-        adicionaCarta(recursoJoker,1,true,new AccaoMoveExercitoAgua(2),null,2);
+        adicionaCarta(21,recursoJoker,1,true,new AccaoColocaExercito(2),null,1);
+        adicionaCarta(14,recursoJoker,1,true,new AccaoMoveExercitoAgua(2),null,2); //29
         
         baralhaCartas();
     }
     
-    private void adicionaCarta(Recurso recurso, int qtdRecursos,boolean execTodasAccoes,Accao accao1, Accao accao2, int numCartas){
+    private void adicionaCarta(int id, Recurso recurso, int qtdRecursos,boolean execTodasAccoes,Accao accao1, Accao accao2, int numCartas){
         accoesAux.clear();
         // Accao pode ser nula
         accoesAux.add(accao1);
         accoesAux.add(accao2);
         
         for(int i=0;i<numCartas;i++)
-            getCartas().add(new Carta(recurso,qtdRecursos,execTodasAccoes,accoesAux));
+            getCartas().add(new Carta(id,recurso,qtdRecursos,execTodasAccoes,accoesAux));
     }
        
     private void baralhaCartas(){

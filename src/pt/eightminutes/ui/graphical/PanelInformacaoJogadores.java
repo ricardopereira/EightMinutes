@@ -1,10 +1,11 @@
 package pt.eightminutes.ui.graphical;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import static javax.swing.BoxLayout.Y_AXIS;
 import javax.swing.JLabel;
+import pt.eightminutes.logic.Jogador;
 
 public class PanelInformacaoJogadores extends PanelBase {
     
@@ -19,14 +20,23 @@ public class PanelInformacaoJogadores extends PanelBase {
         this.add(Box.createRigidArea(new Dimension(5,15)));
         
         JLabel label;
+        Jogador itemJogador;
         for (int i = 0; i < getJogo().getJogadores().size(); i++) {
-            label = new JLabel("Jogador " +(i+1)+ ": " + getJogo().getJogadores().get(i).getNome());
+            itemJogador = getJogo().getJogadores().get(i);
+                    
+            label = new JLabel("Jogador " +(i+1)+ ": " + itemJogador.getNome());
             this.add(label);
             
             this.add(Box.createRigidArea(new Dimension(5,5)));
             
-            label = new JLabel("  Moedas: " + getJogo().getJogadores().get(i).getMoedas());
+            label = new JLabel("  Moedas: " + itemJogador.getMoedas());
             this.add(label);
+            
+            if (getJogo().getJogadorActivo() == itemJogador) {
+                label = new JLabel("Jogador activo");
+                label.setForeground(Color.red);
+                this.add(label);
+            }
             
             this.add(Box.createRigidArea(new Dimension(5,5)));
             this.add(Box.createRigidArea(new Dimension(5,15)));
