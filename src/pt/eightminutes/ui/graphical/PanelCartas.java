@@ -87,7 +87,10 @@ public class PanelCartas extends PanelBase implements Observer {
             btCarta.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    System.out.println("Carta seleccionada " + ((ButtonCarta)e.getSource()).getIndex());
+                    // Clique na carta
+                    int indexCarta = ((ButtonCarta)e.getSource()).getIndex();
+                    System.out.println("Carta seleccionada " + indexCarta);
+                    getJogo().escolheCarta(indexCarta);
                 }
             });
         }
