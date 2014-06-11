@@ -14,6 +14,8 @@ import java.awt.Insets;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Observable;
+import java.util.Observer;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -26,12 +28,10 @@ import pt.eightminutes.logic.*;
  *
  * @author ricardopereira
  */
-public class PanelCartas extends JPanel {
-    
-    private DataController controller;
-    
+public class PanelCartas extends PanelBase implements Observer {
+        
     public PanelCartas(DataController controller) {
-        this.controller = controller;
+        super(controller);
         
         // Teste
         this.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -40,7 +40,7 @@ public class PanelCartas extends JPanel {
         this.setMinimumSize(new Dimension(600,100));
         this.setMaximumSize(new Dimension(600,100));
         
-        createCartas();
+        showCartas();
     }
     
     protected static Image createImage(String path) {
@@ -54,21 +54,21 @@ public class PanelCartas extends JPanel {
         return imagem;
     }
     
-    public void createCartas() {
+    public void showCartas() {
         // Limpar todas as cartas da mesa
         this.removeAll();
         
         // Cartas viradas
         Carta itemCarta;
-        for (int i = 0; i < controller.jogo.getCartasViradas().size(); i++) {
-            itemCarta = controller.jogo.getCartasViradas().get(i);
+        for (int i = 0; i < getJogo().getCartasViradas().size(); i++) {
+            itemCarta = getJogo().getCartasViradas().get(i);
             //itemCarta.;
         }
         
         // ID da Carta
         int ID = 1;
         
-        // ToDo: imagem quando não encontra a carta
+        // ToDo: imagem para quando não encontra a carta
 
         // Teste
         JButton btCarta1 = new JButton();
@@ -85,6 +85,11 @@ public class PanelCartas extends JPanel {
         this.add(new JButton("Carta 4"));
         this.add(new JButton("Carta 5"));
         this.add(new JButton("Carta 6"));
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        
     }
 
 }

@@ -41,6 +41,8 @@ public class FrameMain extends JFrame implements Observer {
     // Paineis
     private PanelMapa panelMapa;
     private PanelCartas panelCartas;
+    private PanelInformacao panelInfo;
+    private PanelOpcoes panelOpcoes;
     
     private static Font typo = new Font("Verdana", Font.PLAIN, 12);
     
@@ -58,19 +60,42 @@ public class FrameMain extends JFrame implements Observer {
         
         mainContainer = getContentPane();
         
-        initialize();
-        createLayout();
-        registerListeners();
-                
+        init();
+        validate();
+        
         setLocation(x,y);
         setSize(width, height);
         setVisible(true);
+        setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
-        validate();
+        // READY
+        controller.notifyObservers();
     }
     
-    protected void initialize()
+    protected void init()
+    {
+        controller.init();
+        
+        // Zonas
+        panelMapa = new PanelMapa(controller);
+        panelCartas = new PanelCartas(controller);
+        panelInfo = new PanelInformacao(controller);
+        panelOpcoes = new PanelOpcoes(controller);
+        
+        // Observers
+        controller.addObserver(panelMapa);
+        controller.addObserver(panelCartas);
+        controller.addObserver(panelInfo);
+        controller.addObserver(panelOpcoes);
+        
+        // Layout
+        createLayout();
+        // Listeners
+        registerListeners();
+    }
+    
+    protected void createLayout()
     {
         mainMenuBar = new JMenuBar();
         
@@ -82,15 +107,6 @@ public class FrameMain extends JFrame implements Observer {
         menuItemGravar = new JMenuItem("Gravar jogo", KeyEvent.VK_G);
         menuItemGravar.setFont(typo);
         menuItemGravar.setMnemonic(KeyEvent.VK_L);
-        
-        // Zonas
-        panelMapa = new PanelMapa(controller);
-        panelCartas = new PanelCartas(controller);
-    }
-    
-    protected void createLayout()
-    {
-        this.setResizable(false);
 
         setJMenuBar(mainMenuBar);
         mainMenuBar.add(menuFicheiro);
@@ -99,7 +115,7 @@ public class FrameMain extends JFrame implements Observer {
         Container cp = getContentPane();
         cp.setLayout(new BorderLayout());
         
-        // Zona 1
+        // Central
         JPanel panelCentral = new JPanel();
         panelCentral.setLayout(new BorderLayout());
         panelCentral.setBackground(Color.RED);
@@ -108,10 +124,10 @@ public class FrameMain extends JFrame implements Observer {
         panelCentral.setMaximumSize(new Dimension(800,500));
         cp.add(panelCentral,BorderLayout.CENTER);
         
-        PanelOpcoes panelOpcoes = new PanelOpcoes(controller);
+        // Rodapé
         cp.add(panelOpcoes,BorderLayout.SOUTH);
              
-        // Zona 2
+        // Central - mapa e cartas viradas
         JPanel panelJogo = new JPanel();
         panelJogo.setLayout(new BorderLayout());
         panelJogo.setBackground(Color.PINK);
@@ -120,14 +136,12 @@ public class FrameMain extends JFrame implements Observer {
         panelJogo.setMaximumSize(new Dimension(600,500));
         panelCentral.add(panelJogo,BorderLayout.CENTER);
         
-        PanelInformacao panelInfo = new PanelInformacao(controller);
+        // Informação da direita
         panelCentral.add(panelInfo,BorderLayout.EAST);
         
-        // Zona 3
-        PanelMapa panelMapa = new PanelMapa(controller);
+        // Mapa
         panelJogo.add(panelMapa,BorderLayout.CENTER);
-        
-        PanelCartas panelCartas = new PanelCartas(controller);
+        // Cartas
         panelJogo.add(panelCartas,BorderLayout.SOUTH);
     }
     

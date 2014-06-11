@@ -6,21 +6,25 @@
 
 package pt.eightminutes.ui.graphical;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import javax.swing.JPanel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Observable;
+import java.util.Observer;
+import javax.swing.JButton;
+import pt.eightminutes.states.*;
 
 /**
  *
  * @author ricardopereira
  */
-public class PanelInformacao extends JPanel {
-    
-    private DataController controller;
+public class PanelInformacao extends PanelBase implements Observer {
     
     public PanelInformacao(DataController controller) {
-        this.controller = controller;
+        super(controller);
         
         // Teste
         this.setLayout(new FlowLayout(FlowLayout.LEADING));
@@ -28,6 +32,32 @@ public class PanelInformacao extends JPanel {
         this.setPreferredSize(new Dimension(300,500));
         this.setMinimumSize(new Dimension(300,500));
         this.setMaximumSize(new Dimension(300,500));
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        // Opções do Jogo
+        if (getJogo().getEstadoActual().getClass() == AguardaOpcoesJogo.class) {
+            
+            JButton btNew = new JButton("Novo jogo");
+            btNew.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    getJogo().novoJogo();
+                    getController().update();
+                }
+            });
+            this.add(btNew, BorderLayout.CENTER);
+            
+            this.validate();
+        }
+        else
+        {
+            this.removeAll();
+            
+            this.validate();
+            this.repaint();
+        }
     }
     
 }

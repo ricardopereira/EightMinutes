@@ -31,40 +31,35 @@ import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JPanel;
 
-
+// Classe auxiliar para o mapa
 class MapBackground extends JPanel implements Observer {
 
     MapDataModel model;
     String overLocation = null;
     Shape highlight = null;
 
-    MapBackground(MapDataModel themodel) {
-        themodel.addObserver(this);
-        this.model = themodel;
+    MapBackground(final MapDataModel model) {
+        model.addObserver(this);
+        this.model = model;
         
         this.setPreferredSize(new Dimension(512,400));
         this.setMinimumSize(new Dimension(512,400));
         this.setMaximumSize(new Dimension(512,400));
 
+        // Evento para o clique do rato
         addMouseListener(new MouseAdapter() {
-            public void mousePressed(MouseEvent ev){
-                model.addNewPoint(getMousePosition());
+            public void mousePressed(MouseEvent ev) {
+            
             }
         });
 
-        addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentResized(ComponentEvent e) {
-
-            }
-        });
-
+        // Evento MouseOver para apresentar nome da região
         addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseMoved(MouseEvent ev) {
                 String s = model.getRegion(ev.getPoint());
                 if (s != overLocation){
-                    overLocation=s;
+                    overLocation = s;
                     repaint();
                 }
             }
@@ -86,35 +81,10 @@ class MapBackground extends JPanel implements Observer {
         if (img != null)
             g.drawImage(img, x, y, null);
         else
-            g.drawString("Abra uma imagem antes de continuar", x+10, y+10);
+            g.drawString("Sem mapa", x+10, y+10);
 
         if (overLocation != null) {
             g.drawString(overLocation, x+10, y+10);
-        }
-
-        List<Point> lst = model.getPoints();
-
-        if (lst.size() >= 1) {
-            Point p1 = lst.get(0);
-            int diameter = 10;
-            int x1 = (int)(p1.getX());
-            int y1 = (int)(p1.getY());
-            g.drawOval(x1-diameter/2, y1-diameter/2, diameter, diameter);
-        }
-
-        for (int i = 0; i < lst.size()-1; i++)
-        {
-            Point p1 = lst.get(i);
-            Point p2 = lst.get(i+1);
-
-            int x1 = (int)(p1.getX());
-            int x2 = (int)(p2.getX());
-            int y1 = (int)(p1.getY());
-            int y2 = (int)(p2.getY());
-
-            g.drawLine(x1, y1, x2, y2);
-            int diameter = 10;
-            g.drawOval(x2-diameter/2, y2-diameter/2, diameter, diameter);	
         }
 
         for (Shape a : model.getRegions())
@@ -134,35 +104,25 @@ class MapBackground extends JPanel implements Observer {
     }	
 }
 
-public class PanelMapa extends JPanel {
-    
-    private DataController controller;
-    
-    MapDataModel model = new MapDataModel(new MapData());
+public class PanelMapa extends PanelBase implements Observer {
+        
+    private MapDataModel model = new MapDataModel(new MapData());
     private MapBackground mapPanel;
     
-    //private BufferedImage mapa;
-    
     public PanelMapa(DataController controller) {
-        this.controller = controller;
+        super(controller);
         
         // Teste
         this.setBackground(Color.WHITE);
         this.setPreferredSize(new Dimension(600,400));
         this.setMinimumSize(new Dimension(600,400));
         this.setMaximumSize(new Dimension(600,400));
-                
-        //try {
-        //   mapa = ImageIO.read(new File("src/pt/eightminutes/map/Map.png"));
-        //} catch (IOException err) {
-
-        //}
         
-        //JLabel mapaContainer = new JLabel(new ImageIcon(mapa));
-        //add(mapaContainer);
-        
+        // Mapa
         mapPanel = new MapBackground(model);
         
+        // ToDo: Obter caminho pelo getResources
+        //poderá causar problemas com a criação do jar final
         loadMap(new File("src/pt/eightminutes/ui/graphical/resources/map/eightminutes.map"));
         
         add(mapPanel, BorderLayout.CENTER);
@@ -179,6 +139,11 @@ public class PanelMapa extends JPanel {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        
     }
 
 }

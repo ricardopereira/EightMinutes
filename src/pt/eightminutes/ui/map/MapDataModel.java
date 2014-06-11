@@ -4,10 +4,10 @@ import java.awt.Image;
 import java.awt.Point;
 import java.io.File;
 
-public class MapDataModel extends RegionModel implements IMapData{
+public class MapDataModel extends RegionModel implements IMapData {
 
 	private static final long serialVersionUID = 1L;
-	public static int modelCount=0;
+	public static int modelCount = 0;
 	
 	public MapDataModel(IMapData m) {
             super(m);

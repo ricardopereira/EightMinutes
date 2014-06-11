@@ -6,6 +6,7 @@
 
 package pt.eightminutes.ui.graphical;
 
+import java.io.IOException;
 import pt.eightminutes.logic.Jogo;
 
 /**

@@ -3,7 +3,6 @@ package pt.eightminutes.ui.map;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 
 import javax.imageio.ImageIO;
 
@@ -23,7 +22,10 @@ public class MapData extends RegionData implements IMapData {
             if (mapBackground == null && (mapBackgroundName != null))
                 try {
                     System.out.println("Loading "+mapBackgroundName);
+                    // ToDo: Obter caminho pelo getResources
+                    //poderá causar problemas com a criação do jar final
                     mapBackground = ImageIO.read(new File("src/pt/eightminutes/ui/graphical/resources/images/"+mapBackgroundName));
+                    System.out.println("Loaded successfully "+mapBackgroundName);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
