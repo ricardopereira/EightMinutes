@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class RegionData implements IRegion, Serializable{
+public class RegionData implements IRegion, Serializable {
 
 	private static final long serialVersionUID = 1L;
 
