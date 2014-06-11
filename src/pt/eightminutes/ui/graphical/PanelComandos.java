@@ -14,8 +14,8 @@ import pt.eightminutes.states.*;
 
 public class PanelComandos extends PanelBase implements Observer {
     
-    public PanelComandos(DataController controller) {
-        super(controller);
+    public PanelComandos(PanelBase owner, DataController controller) {
+        super(owner,controller);
         
         this.setLayout(new FlowLayout(FlowLayout.CENTER));
         this.setBackground(new Color(232,232,232));
@@ -28,13 +28,14 @@ public class PanelComandos extends PanelBase implements Observer {
     public void update(Observable o, Object arg) {
         clear();
         // Opções do Jogo
-        if (getJogo().getEstadoActual().getClass() == AguardaOpcoesJogo.class)
-        {
-            showThis(new PanelComandosOpcoesJogo(getController()));
+        if (getJogo().getEstadoActual().getClass() == AguardaOpcoesJogo.class) {
+            showThis(new PanelComandosOpcoesJogo(this,getController()));
         }
-        else if (getJogo().getEstadoActual().getClass() == AguardaPreparaJogo.class)
-        {
-            showThis(new PanelComandosPreparaJogo(getController()));
+        else if (getJogo().getEstadoActual().getClass() == AguardaPreparaJogo.class) {
+            showThis(new PanelComandosPreparaJogo(this,getController()));
+        }
+        else if (getJogo().getEstadoActual().getClass() == AguardaAposta.class) {
+            showThis(new PanelComandosApostas(this,getController()));
         }
     }
     

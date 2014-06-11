@@ -22,8 +22,8 @@ import pt.eightminutes.states.AguardaOpcoesJogo;
 
 public class PanelCartas extends PanelBase implements Observer {
         
-    public PanelCartas(DataController controller) {
-        super(controller);
+    public PanelCartas(PanelBase owner, DataController controller) {
+        super(owner,controller);
         
         this.setLayout(new FlowLayout(FlowLayout.CENTER));
         this.setBackground(Color.WHITE);

@@ -8,13 +8,19 @@ import pt.eightminutes.logic.Jogo;
 public class PanelBase extends JPanel {
     
     private DataController controller;
+    private PanelBase owner;
     
-    public PanelBase(DataController controller) {
+    public PanelBase(PanelBase owner, DataController controller) {
         this.controller = controller;
+        this.owner = owner;
     }
 
     public DataController getController() {
         return controller;
+    }
+    
+    public PanelBase getOwner() {
+        return owner;
     }
     
     public Jogo getJogo() {
@@ -29,6 +35,7 @@ public class PanelBase extends JPanel {
     }
     
     public void showThis(PanelBase panel) {
+        panel.setBackground(this.getBackground());
         add(panel, BorderLayout.CENTER);
         validate();
     }

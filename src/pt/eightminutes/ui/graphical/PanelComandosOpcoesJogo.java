@@ -7,8 +7,8 @@ import javax.swing.JButton;
 
 public class PanelComandosOpcoesJogo extends PanelBase {
     
-    public PanelComandosOpcoesJogo(DataController controller) {
-        super(controller);
+    public PanelComandosOpcoesJogo(PanelBase owner, DataController controller) {
+        super(owner,controller);
         
         JButton btNovo = new JButton("Novo jogo");
         btNovo.addActionListener(new ActionListener() {

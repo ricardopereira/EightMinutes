@@ -11,8 +11,8 @@ import javax.swing.JTextField;
 
 public class PanelComandosPreparaJogo extends PanelBase {
     
-    public PanelComandosPreparaJogo(DataController controller) {
-        super(controller);
+    public PanelComandosPreparaJogo(PanelBase owner, DataController controller) {
+        super(owner,controller);
         
         if (getJogo().getNumJogadores() == 0)
         {

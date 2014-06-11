@@ -68,10 +68,10 @@ public class FrameMain extends JFrame implements Observer {
         controller.init();
         
         // Zonas
-        panelMapa = new PanelMapa(controller);
-        panelCartas = new PanelCartas(controller);
-        panelInfo = new PanelInformacao(controller);
-        panelOpcoes = new PanelComandos(controller);
+        panelMapa = new PanelMapa(null,controller);
+        panelCartas = new PanelCartas(null,controller);
+        panelInfo = new PanelInformacao(null,controller);
+        panelOpcoes = new PanelComandos(null,controller);
         
         // Observers
         controller.addObserver(panelMapa);

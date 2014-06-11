@@ -6,13 +6,14 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.util.Observable;
 import java.util.Observer;
+import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import pt.eightminutes.states.*;
 
 public class PanelInformacao extends PanelBase implements Observer {
     
-    public PanelInformacao(DataController controller) {
-        super(controller);
+    public PanelInformacao(PanelBase owner, DataController controller) {
+        super(owner,controller);
         
         this.setLayout(new FlowLayout(FlowLayout.LEADING));
         this.setBackground(new Color(219,219,219));
@@ -24,14 +25,21 @@ public class PanelInformacao extends PanelBase implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         clear();
+        
+        setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+        
         if (getJogo().getEstadoActual() == null)
             return;
-        this.add(new JLabel(getJogo().getEstadoActual().getClass().getSimpleName()), BorderLayout.CENTER);  
+        this.add(new JLabel(getJogo().getEstadoActual().getClass().getSimpleName()));  
         validate();
         
         if (getJogo().getEstadoActual().getClass() == AguardaPreparaJogo.class) {
             
         }
+        else if (getJogo().getEstadoActual().getClass() == AguardaAposta.class) {
+            showThis(new PanelInformacaoJogadores(this,getController()));
+        }
+
     }
     
 }

@@ -104,8 +104,8 @@ public class PanelMapa extends PanelBase implements Observer {
     private MapDataModel model = new MapDataModel(new MapData());
     private MapBackground mapPanel;
     
-    public PanelMapa(DataController controller) {
-        super(controller);
+    public PanelMapa(PanelBase owner, DataController controller) {
+        super(owner,controller);
 
         this.setBackground(Color.WHITE);
         this.setPreferredSize(new Dimension(600,400));

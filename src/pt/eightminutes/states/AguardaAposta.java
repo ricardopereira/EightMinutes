@@ -19,11 +19,11 @@ public class AguardaAposta extends EstadosAdapter{
     @Override
     public IEstados defineApostasJogadores(Jogador jogador,int numMoedas) {
         getJogo().apostaJogador(jogador, numMoedas);       
-        return this; 
+        return this;
     }
 
     @Override
-    public IEstados comecaJogo() { 
+    public IEstados comecaJogo() {
         return new AguardaEscolheCarta(getJogo()); 
     }
     
