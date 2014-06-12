@@ -1,5 +1,6 @@
 package pt.eightminutes.ui.text;
 
+import java.awt.Color;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -125,7 +126,7 @@ public class IUTexto {
             System.out.println("Definir nome do jogador:"+i);                      
             opStr = obterString();
             if(!opStr.isEmpty()){
-                jogo.criaJogador(opStr);
+                jogo.criaJogador(opStr,Color.BLACK);
                 i++;
             }
         }    

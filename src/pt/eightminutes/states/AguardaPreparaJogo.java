@@ -6,7 +6,7 @@
 
 package pt.eightminutes.states;
 
-import pt.eightminutes.ia.IA;
+import java.awt.Color;
 import pt.eightminutes.logic.Jogo;
 
 
@@ -23,8 +23,8 @@ public class AguardaPreparaJogo extends EstadosAdapter {
     }
     
     @Override
-    public IEstados defineDadosJogadores(String nome) {
-        getJogo().criaJogador(nome);
+    public IEstados defineDadosJogadores(String nome, Color cor) {
+        getJogo().criaJogador(nome,cor);
         return this; 
     }
     

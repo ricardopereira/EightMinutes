@@ -33,9 +33,7 @@ import pt.eightminutes.states.*;
 class MapBackground extends JPanel implements Observer {
 
     MapDataModel model;
-    String overLocation = null;
-    String selected = null;
-    Shape highlight = null;
+    String nameRegiao = null;
     
     Robot robot;
 
@@ -57,26 +55,22 @@ class MapBackground extends JPanel implements Observer {
                 //    return;
                 
                 Point center = ev.getPoint();
-                String region = model.getRegion(center);
                 
-                Point mouseLocation = MouseInfo.getPointerInfo().getLocation();
-                Color color = robot.getPixelColor(mouseLocation.x, mouseLocation.y);
-                System.out.println("Cor "+color.getRed()+"."+color.getGreen()+"."+color.getBlue());
+                center = model.getCenterPoint(model.getRegion(center));
                 
-                ButtonPeca btPeca = new ButtonPeca();
-                btPeca.setBounds(center.x, center.y, 10, 10);
-                btPeca.setToolTipText("<html>This is the first line<br>This is the second line</html>");
-                //btnAddFlight.setBackground(Color.GREEN);
-                //btnAddFlight.setOpaque(true);
-                //btnAddFlight.setBorderPainted(false);
-                //btnAddFlight.setEnabled(false);
+                ButtonPeca btPeca;
+                // Teste
+                btPeca = new ButtonPeca(0,center,ButtonPeca.ButtonPecaType.CIDADE_INICIAL,null);
                 add(btPeca);
-                
-                highlight = null;
-                for (Shape a: model.getRegions())
-                    if (a.contains(center))
-                        highlight = a;
-                
+                btPeca = new ButtonPeca(1,center,ButtonPeca.ButtonPecaType.EXERCITO,null);
+                add(btPeca);
+                btPeca = new ButtonPeca(2,center,ButtonPeca.ButtonPecaType.CIDADE_COM_EXERCITOS,null);
+                add(btPeca);
+                btPeca = new ButtonPeca(3,center,ButtonPeca.ButtonPecaType.CIDADE_COM_EXERCITOS,null);
+                add(btPeca);
+                btPeca = new ButtonPeca(4,center,ButtonPeca.ButtonPecaType.CIDADE_INICIAL,null);
+                add(btPeca);
+                                
                 repaint();
             }
         });
@@ -86,8 +80,8 @@ class MapBackground extends JPanel implements Observer {
             @Override
             public void mouseMoved(MouseEvent ev) {
                 String s = model.getRegion(ev.getPoint());
-                if (s != overLocation){
-                    overLocation = s;
+                if (s != nameRegiao){
+                    nameRegiao = s;
                     repaint();
                 }
             }
@@ -112,40 +106,15 @@ class MapBackground extends JPanel implements Observer {
         else
             g.drawString("Sem mapa", x+10, y+10);
 
-        if (overLocation != null) {
-            g.drawString(overLocation, x+10, y+10);
+        if (nameRegiao != null) {
+            g.drawString(nameRegiao, x+10, y+10);
         }
 
         for (Shape a : model.getRegions())
         {
-            Graphics2D g2d = (Graphics2D)g;
-            //g2d.draw(a);
+
         }
 
-        //if (!model.getRegions().isEmpty())
-        //    highlight = model.getRegions().get(model.getRegions().size()-1);
-        
-        if (highlight != null)
-        {
-            //Graphics2D g2d = (Graphics2D)g;
-            //g2d.fill(highlight);
-            
-            if (selected == null)
-                selected = overLocation;
-            
-            if (selected != null && !selected.equals("")) {
-                Point center = model.getCenterPoint(selected);
-                g.setColor(Color.GREEN);
-                int cx = (int)center.getX();
-                int cy = (int)center.getY();
-                g.fillOval(cx-5,cy-5,10,10);
-            }
-            
-            //g.setColor(Color.GREEN);
-            //int cx = (int)center.getX();
-            //int cy = (int)center.getY();
-            //g.fillOval(cx-5,cy-5,10,10);
-       }
     }	
 }
 

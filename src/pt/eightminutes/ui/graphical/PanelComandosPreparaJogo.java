@@ -1,6 +1,7 @@
 package pt.eightminutes.ui.graphical;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -47,7 +48,8 @@ public class PanelComandosPreparaJogo extends PanelBase {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     for (JTextField item : edits) {
-                        getJogo().criaJogador(item.getText());
+                        // ToDo: Cores
+                        getJogo().criaJogador(item.getText(), Color.RED);
                     }
                     getJogo().comecaApostas();
                 }

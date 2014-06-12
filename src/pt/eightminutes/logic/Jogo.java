@@ -1,11 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package pt.eightminutes.logic;
 
+import java.awt.Color;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -157,18 +152,17 @@ public class Jogo extends Base implements Serializable {
         setEstado(estadoActual.defineNumJogadores(numJogadores));
     }
     
-    public void defineDadosJogadores(String nome, Cor cor) {
-        setEstado(estadoActual.defineDadosJogadores(nome));        
+    public void defineDadosJogadores(String nome, Color cor) {
+        setEstado(estadoActual.defineDadosJogadores(nome,cor));        
     }
     
     public void comecaApostas() {
         setEstado(estadoActual.comecaApostas());
     }
     
-    public void criaJogador(String nome) {
-        if(!nome.isEmpty()){
-            int moedasPorJogador = getMoedasPorJogador();
-            jogadores.add(new Jogador(this,nome,Cor.preto,moedasPorJogador,14,3));             
+    public void criaJogador(String nome, Color cor) {
+        if (!nome.isEmpty()) {
+            jogadores.add(new Jogador(this, nome, cor, getMoedasPorJogador(), 14, 3));             
         }
     }
    

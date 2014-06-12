@@ -6,6 +6,7 @@
 
 package pt.eightminutes.states;
 
+import java.awt.Color;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
@@ -38,7 +39,7 @@ public class EstadosAdapter implements IEstados, Serializable {
     public IEstados defineNumJogadores(int numJogadores) { return this; }
 
     @Override
-    public IEstados defineDadosJogadores(String nome) {  return this; }
+    public IEstados defineDadosJogadores(String nome, Color cor) {  return this; }
 
     @Override
     public IEstados comecaApostas() {  return this; }
