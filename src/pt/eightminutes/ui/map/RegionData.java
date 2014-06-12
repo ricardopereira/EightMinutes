@@ -25,37 +25,20 @@ public class RegionData implements IRegion, Serializable {
 	public String getAreaName(Shape p) {
             return names.get(p);
 	}
-	
-	@Override
-	public void addNewPoint(Point p) {
-            lst.add(p);
-	}
-
+        
 	@Override
 	public List<Shape> getRegions() {
             return areas;
 	}
 	
 	@Override
+	public void addNewPoint(Point p) {
+            // Implementado só para o editor
+	}
+	
+	@Override
 	public void defineNewShape(String name) {
-            if(lst.size()<2)
-                return;
-            
-            Path2D.Double perimetro = new Path2D.Double();
-            Point first = lst.get(0);
-            perimetro.moveTo(first.getX(), first.getY());
-            
-            for (int i = 1; i < lst.size(); i++)
-                perimetro.lineTo(lst.get(i).getX(), lst.get(i).getY());
-            
-            Area a = new Area(perimetro);
-            //area is not serializable, so we'll get an equivalent Shape instead
-            Shape s = AffineTransform.getTranslateInstance(0,0).createTransformedShape(a); 
-
-            lst.clear();
-
-            areas.add(s);
-            names.put(s,name);
+            // Implementado só para o editor
 	}
 	
 	@Override
@@ -68,6 +51,7 @@ public class RegionData implements IRegion, Serializable {
 
 	@Override
 	public List<Point> getPoints() {
+            // Implementado só para o editor
             return lst;
 	}
 
@@ -82,6 +66,14 @@ public class RegionData implements IRegion, Serializable {
 
 	@Override
 	public Shape getShape(String name) {
+            for (Shape s: names.keySet())
+                if (names.get(s).equals(name))
+                    return s;
+            return null;
+	}
+        
+	@Override
+	public Shape getRule(String name) {
             for (Shape s: names.keySet())
                 if (names.get(s).equals(name))
                     return s;

@@ -1,25 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package pt.eightminutes.logic;
 
 import java.io.Serializable;
 
-public abstract class Peca implements Serializable{
+public abstract class Peca implements Serializable {
+    
     private String nome;
     private Regiao regiao;
-    private Cor cor;
     private Jogador jogador;
 
-    public Peca(String nome,Regiao regiao,Cor cor,Jogador jogador){
+    public Peca(String nome,Regiao regiao, Jogador jogador) {
         this.nome = nome;
         this.regiao = regiao;
-        this.cor = cor;
         this.jogador = jogador;
     }
+    
     /**
      * @return the nome
      */

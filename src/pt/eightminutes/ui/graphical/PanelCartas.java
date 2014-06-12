@@ -50,9 +50,12 @@ public class PanelCartas extends PanelBase implements Observer {
     
     private ButtonCarta addButtonCarta(Carta carta)
     {
-        ButtonCarta btCarta = new ButtonCarta();
+        ButtonCarta btCarta = new ButtonCarta(carta);
         
         // Nome da carta consoante o ID
+        
+        
+        
         Image imgCarta = createImage("src/pt/eightminutes/ui/cards/card"+String.format("%03d",carta.getId())+".jpg");
         
         if (imgCarta != null) {

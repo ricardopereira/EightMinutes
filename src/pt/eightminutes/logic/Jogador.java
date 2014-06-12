@@ -6,6 +6,7 @@
 
 package pt.eightminutes.logic;
 
+import java.awt.Color;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -20,19 +21,22 @@ public class Jogador extends Base implements Serializable {
     private ArrayList<Exercito> listaExercitos = new ArrayList<>();
     private ArrayList<Cidade> listaCidades = new ArrayList<>();    
     private Carta cartaActiva;
+    private Color cor;
     
-    public Jogador(Object owner, String nome,Cor cor, int moedas, int qtdExercito, int qtdCidades){
+    public Jogador(Object owner, String nome, Color cor, int moedas, int qtdExercito, int qtdCidades) {
         super();
+        
         this.owner = owner;
         this.nome = nome;
         this.moedas = moedas;
         this.aposta = -1;
+        this.cor = cor;
         
         for(int i=0;i<qtdExercito;i++)
-            listaExercitos.add(new Exercito(cor,this));
+            listaExercitos.add(new Exercito(this));
         
         for(int m=0;m<qtdCidades;m++)
-            listaCidades.add(new Cidade(cor,this));                   
+            listaCidades.add(new Cidade(this));                   
     }
     
     //Pontuação= pontuação de recursos + Pontuação do mapa(regioes e continentes)
@@ -269,6 +273,7 @@ public class Jogador extends Base implements Serializable {
         
         return cartasAux;
     }
+    
     /**
      * @return the nome
      */
@@ -295,6 +300,20 @@ public class Jogador extends Base implements Serializable {
      */
     public void setMoedas(int moedas) {
         this.moedas = moedas;
+    }
+    
+    /**
+     * @return the cor
+     */
+    public Color getCor() {
+        return cor;
+    }
+    
+    /**
+     * @param cor the cor to set
+     */
+    public void setCor(Color cor) {
+        this.cor = cor;
     }
 
     /**

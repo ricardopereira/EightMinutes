@@ -1,5 +1,6 @@
 package pt.eightminutes.ui.graphical;
 
+import java.awt.AWTException;
 import pt.eightminutes.ui.map.MapData;
 import pt.eightminutes.ui.map.IMapData;
 import pt.eightminutes.ui.map.MapDataModel;
@@ -7,12 +8,10 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
+import java.awt.Robot;
 import java.awt.Shape;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -20,10 +19,14 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
+import pt.eightminutes.logic.Exercito;
+import pt.eightminutes.logic.Peca;
+import pt.eightminutes.logic.Regiao;
 
 import pt.eightminutes.states.*;
 
@@ -31,29 +34,44 @@ import pt.eightminutes.states.*;
 class MapBackground extends JPanel implements Observer {
 
     MapDataModel model;
-    String overLocation = null;
-    String selected = null;
-    Shape highlight = null;
+    String nameRegiao = null;
+    
+    Robot robot;
 
-    MapBackground(final MapDataModel model) {
+    MapBackground(final MapDataModel model) throws AWTException {
+        this.robot = new Robot();
         model.addObserver(this);
         this.model = model;
         
+        this.setLayout(null);
         this.setPreferredSize(new Dimension(512,400));
         this.setMinimumSize(new Dimension(512,400));
         this.setMaximumSize(new Dimension(512,400));
-
+        
         // Evento para o clique do rato
-        addMouseListener(new MouseAdapter() {
+        addMouseListener(new MouseAdapter()  {
             public void mousePressed(MouseEvent ev) {
+                
+                //if (!isEnabled())
+                //    return;
+                
                 Point center = ev.getPoint();
-                String region = model.getRegion(center);
                 
-                highlight = null;
-                for (Shape a: model.getRegions())
-                    if (a.contains(center))
-                        highlight = a;
+                center = model.getCenterPoint(model.getRegion(center));
                 
+                ButtonPeca btPeca;
+                // Teste
+                btPeca = new ButtonPeca(0,center,ButtonPeca.ButtonPecaType.CIDADE_INICIAL,null);
+                add(btPeca);
+                btPeca = new ButtonPeca(1,center,ButtonPeca.ButtonPecaType.EXERCITO,null);
+                add(btPeca);
+                btPeca = new ButtonPeca(2,center,ButtonPeca.ButtonPecaType.CIDADE_COM_EXERCITOS,null);
+                add(btPeca);
+                btPeca = new ButtonPeca(3,center,ButtonPeca.ButtonPecaType.CIDADE_COM_EXERCITOS,null);
+                add(btPeca);
+                btPeca = new ButtonPeca(4,center,ButtonPeca.ButtonPecaType.CIDADE_INICIAL,null);
+                add(btPeca);
+                                
                 repaint();
             }
         });
@@ -63,8 +81,8 @@ class MapBackground extends JPanel implements Observer {
             @Override
             public void mouseMoved(MouseEvent ev) {
                 String s = model.getRegion(ev.getPoint());
-                if (s != overLocation){
-                    overLocation = s;
+                if (s != nameRegiao){
+                    nameRegiao = s;
                     repaint();
                 }
             }
@@ -89,40 +107,15 @@ class MapBackground extends JPanel implements Observer {
         else
             g.drawString("Sem mapa", x+10, y+10);
 
-        if (overLocation != null) {
-            g.drawString(overLocation, x+10, y+10);
+        if (nameRegiao != null) {
+            g.drawString(nameRegiao, x+10, y+10);
         }
 
         for (Shape a : model.getRegions())
         {
-            Graphics2D g2d = (Graphics2D)g;
-            g2d.draw(a);
+
         }
 
-        //if (!model.getRegions().isEmpty())
-        //    highlight = model.getRegions().get(model.getRegions().size()-1);
-        
-        if (highlight != null)
-        {
-            //Graphics2D g2d = (Graphics2D)g;
-            //g2d.fill(highlight);
-            
-            if (selected == null)
-                selected = overLocation;
-            
-            if (selected != null && !selected.equals("")) {
-                Point center = model.getCenterPoint(selected);
-                g.setColor(Color.GREEN);
-                int cx = (int)center.getX();
-                int cy = (int)center.getY();
-                g.fillOval(cx-12,cy-12,24,24);
-            }
-            
-            //g.setColor(Color.GREEN);
-            //int cx = (int)center.getX();
-            //int cy = (int)center.getY();
-            //g.fillOval(cx-12,cy-12,24,24);
-       }
     }	
 }
 
@@ -139,13 +132,17 @@ public class PanelMapa extends PanelBase implements Observer {
         this.setMinimumSize(new Dimension(600,400));
         this.setMaximumSize(new Dimension(600,400));
         
-        // Mapa
-        mapPanel = new MapBackground(model);
-        
+        try {
+            // Mapa
+            mapPanel = new MapBackground(model);
+        } catch (AWTException ex) {
+            Logger.getLogger(PanelMapa.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                
         // ToDo: Obter caminho pelo getResources
         //poderá causar problemas com a criação do jar final
         loadMap(new File("src/pt/eightminutes/ui/graphical/resources/map/eightminutes.map"));
-        
+                
         add(mapPanel, BorderLayout.CENTER);
     }
     
@@ -164,6 +161,9 @@ public class PanelMapa extends PanelBase implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
+        
+        updateLogic();
+        
         // Acção
         if (getJogo().getEstadoActual().getClass() == AguardaColocaCidade.class ||
             getJogo().getEstadoActual().getClass() == AguardaColocaExercito.class ||
@@ -176,6 +176,32 @@ public class PanelMapa extends PanelBase implements Observer {
         else {
             setEnabled(false);
         }
+    }
+    
+    public void updateLogic() {
+        
+        // Fase de testes
+        //ToDo: sem duplicação de dados na parte das regiões do mapa
+        
+        mapPanel.removeAll();
+        
+        Regiao regiaoInicial = getController().getJogo().getMapa().getRegiaoInicial();
+        Point center = model.getCenterPoint(regiaoInicial.getAreaName());
+        Peca itemPeca;
+        for (int i = 0; i < regiaoInicial.getPecas().size(); i++) {
+            itemPeca = regiaoInicial.getPecas().get(i);
+            
+            // ToDo: Várias cidades?
+
+            if (itemPeca instanceof Exercito) {
+                mapPanel.add(new ButtonPeca(i,center,ButtonPeca.ButtonPecaType.CIDADE_INICIAL,itemPeca.getJogador()));
+            }
+            
+            break;
+        }
+        
+        mapPanel.repaint();
+        
     }
 
 }

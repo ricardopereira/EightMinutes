@@ -5,7 +5,7 @@ import java.awt.Shape;
 import java.util.List;
 import java.util.Observable;
 
-public class RegionModel  extends Observable implements IRegion {
+public class RegionModel extends Observable implements IRegion {
 
 	private static final long serialVersionUID = 1L;
 	IRegion r;
@@ -67,5 +67,10 @@ public class RegionModel  extends Observable implements IRegion {
 	public Shape getShape(String name) {
             return r.getShape(name);
 	}
-
+        
+	@Override
+	public Shape getRule(String name) {
+            return r.getRule(name);
+	}
+        
 }

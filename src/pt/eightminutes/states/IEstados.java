@@ -1,5 +1,6 @@
 package pt.eightminutes.states;
 
+import java.awt.Color;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ public interface IEstados {
     Jogo getJogo();
     
     IEstados defineNumJogadores(int numJogadores);
-    IEstados defineDadosJogadores(String nome);
+    IEstados defineDadosJogadores(String nome, Color cor);
     IEstados comecaApostas();
     IEstados defineApostasJogadores(Jogador jogador,int numMoedas);
     IEstados comecaJogo();  

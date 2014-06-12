@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package pt.eightminutes.logic;
 
 import java.io.Serializable;
@@ -32,25 +26,25 @@ public class Regiao implements Serializable {
     }
         
     public Jogador getJogadorControlaRegiao(Jogo jogo){
-        int myQtdExerc=0;        
-        int myQtdMax=0;
-        Jogador jogadorControla=null;
+        int myQtdExerc = 0;
+        int myQtdMax = 0;
+        Jogador jogadorControla = null;
         
-        for(int m=0;m<jogo.getJogadores().size();m++){            
+        for (int m = 0; m < jogo.getJogadores().size(); m++) {
             myQtdExerc = 0;
-            for(int i=0;i<getPecas().size();i++){
-                if(getPecas().get(i) instanceof Exercito){
-                    if(getPecas().get(i).getJogador() == jogo.getJogadores().get(m)){
+            for (int i = 0; i < getPecas().size(); i++) {
+                if (getPecas().get(i) instanceof Exercito) {
+                    if (getPecas().get(i).getJogador() == jogo.getJogadores().get(m)) {
                         myQtdExerc++;
                     }
                 }
             }
-            if (myQtdExerc>myQtdMax){
+            if (myQtdExerc > myQtdMax) {
                 // se tiver mais do que o ultimo verificado passa a ser o jogador que controla a regiao
                 jogadorControla = jogo.getJogadores().get(m);
             }
             else
-            if(myQtdExerc==myQtdMax){
+            if (myQtdExerc == myQtdMax) {
                 //se tiver o mesmo numero do jogador que controla deixam os dois de controlar
                 jogadorControla = null;
             }
@@ -59,11 +53,10 @@ public class Regiao implements Serializable {
         return jogadorControla;
     }
     
-    
     public boolean RegiaoTemExercitosDoJogador(Jogador jogador){
-        boolean myResult=false;
-        for(int i=0;i<getPecas().size();i++){
-            if(getPecas().get(i).getJogador()==jogador){
+        boolean myResult = false;
+        for (int i = 0; i < getPecas().size(); i++) {
+            if (getPecas().get(i).getJogador() == jogador) {
                 myResult = true;
                 break;
             }
@@ -71,6 +64,11 @@ public class Regiao implements Serializable {
 
         return myResult;        
     }
+    
+    public String getAreaName() {
+        return getContinente().getNome() + "-" + getNome();
+    }
+    
     /**
      * @return the continente
      */
