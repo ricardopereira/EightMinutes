@@ -6,7 +6,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import javax.swing.JButton;
 
-public class ButtonCidade extends JButton {
+public class ButtonPeca extends JButton {
     
     public void paintComponent(Graphics g)
     {

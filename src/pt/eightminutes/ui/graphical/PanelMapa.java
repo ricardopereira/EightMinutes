@@ -25,7 +25,6 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import pt.eightminutes.states.*;
@@ -49,10 +48,14 @@ class MapBackground extends JPanel implements Observer {
         this.setPreferredSize(new Dimension(512,400));
         this.setMinimumSize(new Dimension(512,400));
         this.setMaximumSize(new Dimension(512,400));
-
+        
         // Evento para o clique do rato
         addMouseListener(new MouseAdapter()  {
             public void mousePressed(MouseEvent ev) {
+                
+                //if (!isEnabled())
+                //    return;
+                
                 Point center = ev.getPoint();
                 String region = model.getRegion(center);
                 
@@ -60,14 +63,14 @@ class MapBackground extends JPanel implements Observer {
                 Color color = robot.getPixelColor(mouseLocation.x, mouseLocation.y);
                 System.out.println("Cor "+color.getRed()+"."+color.getGreen()+"."+color.getBlue());
                 
-                ButtonCidade btnAddFlight = new ButtonCidade();
-                btnAddFlight.setBounds(center.x, center.y, 10, 10);
-                btnAddFlight.setToolTipText("<html>This is the first line<br>This is the second line</html>");
+                ButtonPeca btPeca = new ButtonPeca();
+                btPeca.setBounds(center.x, center.y, 10, 10);
+                btPeca.setToolTipText("<html>This is the first line<br>This is the second line</html>");
                 //btnAddFlight.setBackground(Color.GREEN);
                 //btnAddFlight.setOpaque(true);
                 //btnAddFlight.setBorderPainted(false);
                 //btnAddFlight.setEnabled(false);
-                add(btnAddFlight);
+                add(btPeca);
                 
                 highlight = null;
                 for (Shape a: model.getRegions())
