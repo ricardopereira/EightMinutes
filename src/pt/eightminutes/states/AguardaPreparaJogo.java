@@ -6,6 +6,7 @@
 
 package pt.eightminutes.states;
 
+import pt.eightminutes.ia.IA;
 import pt.eightminutes.logic.Jogo;
 
 
@@ -28,7 +29,7 @@ public class AguardaPreparaJogo extends EstadosAdapter {
     }
     
     @Override
-    public IEstados comecaApostas() {
+    public IEstados comecaApostas() {        
         return new AguardaAposta(getJogo()); 
     }
     
