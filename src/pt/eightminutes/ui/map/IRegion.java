@@ -17,5 +17,7 @@ public interface IRegion extends Serializable {
     public abstract String getAreaName(Shape p);
     public Point getCenterPoint(String location);
     public Shape getShape(String name);
+    
+    public Shape getRule(String name);
 
 }

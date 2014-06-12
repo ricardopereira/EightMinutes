@@ -87,5 +87,13 @@ public class RegionData implements IRegion, Serializable {
                     return s;
             return null;
 	}
+        
+	@Override
+	public Shape getRule(String name) {
+            for (Shape s: names.keySet())
+                if (names.get(s).equals(name))
+                    return s;
+            return null;
+	}
 
 }
