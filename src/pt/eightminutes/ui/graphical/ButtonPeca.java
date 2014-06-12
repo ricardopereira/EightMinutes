@@ -5,7 +5,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 import javax.swing.JButton;
 
-import pt.eightminutes.logic.Peca;
+import pt.eightminutes.logic.Jogador;
 
 public class ButtonPeca extends JButton {
     
@@ -14,9 +14,9 @@ public class ButtonPeca extends JButton {
     }
     
     private ButtonPecaType type;
-    private Peca peca;    
+    private Jogador jogador;    
     
-    public ButtonPeca(int index, Point center, ButtonPecaType type, Peca peca) {
+    public ButtonPeca(int index, Point center, ButtonPecaType type, Jogador jogador) {
         
         Point location = null;
         
@@ -51,7 +51,7 @@ public class ButtonPeca extends JButton {
             return;
         }
         
-        this.peca = peca;
+        this.jogador = jogador;
         this.type = type;
         
         // Posiçao e tamanho
@@ -72,8 +72,8 @@ public class ButtonPeca extends JButton {
     }
     
     public void paintComponent(Graphics g) {
-        if (peca != null)
-            g.setColor(peca.getJogador().getCor());
+        if (jogador != null)
+            g.setColor(jogador.getCor());
         else
             g.setColor(Color.RED);
                 

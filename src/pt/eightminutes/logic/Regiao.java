@@ -65,6 +65,10 @@ public class Regiao implements Serializable {
         return myResult;        
     }
     
+    public String getAreaName() {
+        return getContinente().getNome() + "-" + getNome();
+    }
+    
     /**
      * @return the continente
      */

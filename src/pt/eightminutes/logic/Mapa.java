@@ -33,7 +33,7 @@ public class Mapa extends Base implements Serializable {
 
     public void defineRegiaoInicial(){
         Random rand = new Random();
-        int i = rand.nextInt(continentes.size()-1)+1;             
+        int i = rand.nextInt(continentes.size()-1)+1;
         int m = rand.nextInt(continentes.get(i).getRegioes().size()-1)+1;
         
         setRegiaoInicial(continentes.get(i).getRegioes().get(m));
@@ -48,7 +48,7 @@ public class Mapa extends Base implements Serializable {
         
         // Mapa        
         // CONTINENTE 1
-        Continente continente1 = new Continente("C1",this);
+        Continente continente1 = new Continente("c1",this);
         continentes.add(continente1);
         regioes.add(continente1.adicionaRegiao(new Regiao("1",1,continente1)));
         regioes.add(continente1.adicionaRegiao(new Regiao("2",2,continente1)));
@@ -91,7 +91,7 @@ public class Mapa extends Base implements Serializable {
         continente1.getRegioes().get(6).adicionaRegiaoVizinha(regioesAux); //R7
         
         // CONTINENTE 2
-        Continente continente2 = new Continente("C2",this);
+        Continente continente2 = new Continente("c2",this);
         continentes.add(continente2);
         regioes.add(continente2.adicionaRegiao(new Regiao("8",8,continente2)));
         regioes.add(continente2.adicionaRegiao(new Regiao("9",9,continente2)));
@@ -104,7 +104,7 @@ public class Mapa extends Base implements Serializable {
         continente2.getRegioes().get(1).adicionaRegiaoVizinha(regioesAux); //R9
         
         // CONTINENTE 3
-        Continente continente3 = new Continente("C3",this);
+        Continente continente3 = new Continente("c3",this);
         continentes.add(continente3);       
         regioes.add(continente3.adicionaRegiao(new Regiao("10",10,continente3)));
         regioes.add(continente3.adicionaRegiao(new Regiao("11",11,continente3)));
@@ -174,7 +174,7 @@ public class Mapa extends Base implements Serializable {
         continente3.getRegioes().get(10).adicionaRegiaoVizinha(regioesAux); //R20
         
         // CONTINENTE 4
-        Continente continente4 = new Continente("C4",this);
+        Continente continente4 = new Continente("c4",this);
         continentes.add(continente4);
         regioes.add(continente4.adicionaRegiao(new Regiao("21",21,continente4)));
         regioes.add(continente4.adicionaRegiao(new Regiao("22",22,continente4)));
@@ -360,6 +360,14 @@ public class Mapa extends Base implements Serializable {
         }
         return continentesAux;
     }
+    
+    /**
+     * @return the regioes
+     */
+    public ArrayList<Regiao> getRegioes() {
+        return regioes;
+    }
+    
     /**
      * @return the continentes
      */

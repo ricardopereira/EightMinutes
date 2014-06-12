@@ -8,9 +8,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.Robot;
 import java.awt.Shape;
@@ -26,6 +24,9 @@ import java.util.Observer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
+import pt.eightminutes.logic.Exercito;
+import pt.eightminutes.logic.Peca;
+import pt.eightminutes.logic.Regiao;
 
 import pt.eightminutes.states.*;
 
@@ -137,11 +138,11 @@ public class PanelMapa extends PanelBase implements Observer {
         } catch (AWTException ex) {
             Logger.getLogger(PanelMapa.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+                
         // ToDo: Obter caminho pelo getResources
         //poderá causar problemas com a criação do jar final
         loadMap(new File("src/pt/eightminutes/ui/graphical/resources/map/eightminutes.map"));
-        
+                
         add(mapPanel, BorderLayout.CENTER);
     }
     
@@ -160,6 +161,9 @@ public class PanelMapa extends PanelBase implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
+        
+        updateLogic();
+        
         // Acção
         if (getJogo().getEstadoActual().getClass() == AguardaColocaCidade.class ||
             getJogo().getEstadoActual().getClass() == AguardaColocaExercito.class ||
@@ -172,6 +176,32 @@ public class PanelMapa extends PanelBase implements Observer {
         else {
             setEnabled(false);
         }
+    }
+    
+    public void updateLogic() {
+        
+        // Fase de testes
+        //ToDo: sem duplicação de dados na parte das regiões do mapa
+        
+        mapPanel.removeAll();
+        
+        Regiao regiaoInicial = getController().getJogo().getMapa().getRegiaoInicial();
+        Point center = model.getCenterPoint(regiaoInicial.getAreaName());
+        Peca itemPeca;
+        for (int i = 0; i < regiaoInicial.getPecas().size(); i++) {
+            itemPeca = regiaoInicial.getPecas().get(i);
+            
+            // ToDo: Várias cidades?
+
+            if (itemPeca instanceof Exercito) {
+                mapPanel.add(new ButtonPeca(i,center,ButtonPeca.ButtonPecaType.CIDADE_INICIAL,itemPeca.getJogador()));
+            }
+            
+            break;
+        }
+        
+        mapPanel.repaint();
+        
     }
 
 }

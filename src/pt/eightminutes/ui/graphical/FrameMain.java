@@ -4,19 +4,16 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.util.Observable;
 import java.util.Observer;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import pt.eightminutes.logic.Regiao;
 
 public class FrameMain extends JFrame implements Observer {
     
