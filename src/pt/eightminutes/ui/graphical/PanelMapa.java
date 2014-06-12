@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JPanel;
+
 import pt.eightminutes.states.*;
 
 // Classe auxiliar para o mapa
@@ -31,6 +32,7 @@ class MapBackground extends JPanel implements Observer {
 
     MapDataModel model;
     String overLocation = null;
+    String selected = null;
     Shape highlight = null;
 
     MapBackground(final MapDataModel model) {
@@ -44,7 +46,15 @@ class MapBackground extends JPanel implements Observer {
         // Evento para o clique do rato
         addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent ev) {
-            
+                Point center = ev.getPoint();
+                String region = model.getRegion(center);
+                
+                highlight = null;
+                for (Shape a: model.getRegions())
+                    if (a.contains(center))
+                        highlight = a;
+                
+                repaint();
             }
         });
 
@@ -73,6 +83,7 @@ class MapBackground extends JPanel implements Observer {
         int x = 0, y = 0;
         Image img = model.getMapBackground();
 
+        // Desenha o mapa
         if (img != null)
             g.drawImage(img, x, y, null);
         else
@@ -88,14 +99,30 @@ class MapBackground extends JPanel implements Observer {
             g2d.draw(a);
         }
 
-        if (!model.getRegions().isEmpty())
-            highlight = model.getRegions().get(model.getRegions().size()-1);
-
+        //if (!model.getRegions().isEmpty())
+        //    highlight = model.getRegions().get(model.getRegions().size()-1);
+        
         if (highlight != null)
         {
-            Graphics2D g2d = (Graphics2D)g;
-            g2d.fill(highlight);
-        }
+            //Graphics2D g2d = (Graphics2D)g;
+            //g2d.fill(highlight);
+            
+            if (selected == null)
+                selected = overLocation;
+            
+            if (selected != null && !selected.equals("")) {
+                Point center = model.getCenterPoint(selected);
+                g.setColor(Color.GREEN);
+                int cx = (int)center.getX();
+                int cy = (int)center.getY();
+                g.fillOval(cx-12,cy-12,24,24);
+            }
+            
+            //g.setColor(Color.GREEN);
+            //int cx = (int)center.getX();
+            //int cy = (int)center.getY();
+            //g.fillOval(cx-12,cy-12,24,24);
+       }
     }	
 }
 
