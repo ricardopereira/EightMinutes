@@ -6,6 +6,7 @@ import java.util.Observer;
 import java.util.Random;
 import pt.eightminutes.logic.Accao;
 import pt.eightminutes.logic.Continente;
+import pt.eightminutes.logic.Exercito;
 import pt.eightminutes.logic.Jogador;
 import pt.eightminutes.logic.Jogo;
 import pt.eightminutes.logic.Regiao;
@@ -64,7 +65,7 @@ public class JogadorIABasico extends JogadorIA{
         }
         else
         if(estado.getClass() == AguardaColocaExercito.class) {
-            //escolhe aleatoriament uma regiao dentro das possiveis
+            //escolhe aleatoriament uma regiao dentro das possiveis(terra)
             Jogo jogo = ctrl.getJogo();
             Jogador jogador = jogo.getJogadorActivo();            
             ArrayList<Regiao> listRegioes = new ArrayList<>();
@@ -73,7 +74,7 @@ public class JogadorIABasico extends JogadorIA{
             listRegioes.add(jogo.getMapa().getRegiaoInicial());
             
             //percorre a lista de cidades com regioes e adiciona à lista
-            for(int i=0;i<(jogador.getListaCidadeComRegiao().size()-1);i++)
+            for(int i=0;i<(jogador.getListaCidadeComRegiao().size());i++)
             {
                listRegioes.add(jogador.getListaCidadeComRegiao().get(i).getRegiao());
             }
@@ -87,15 +88,49 @@ public class JogadorIABasico extends JogadorIA{
         }
         else
         if(estado.getClass() == AguardaMoveExercito.class) {
-            //
+            //Escolhe um exercito e uma região aleatoria dentro das possiveis(terra e agua)
+            Jogador jogador = ctrl.getJogo().getJogadorActivo();
+            int x= utils.randInt(0, jogador.getListaExercitoComRegiao().size()-1);            
+            ArrayList<Regiao> listRegiao = new ArrayList<>();
+            ArrayList<Exercito> listExercito = new ArrayList<>();
+            listExercito.add(jogador.getListaExercitoComRegiao().get(x));
+            
+            Accao accao = jogador.getCartaActiva().getAccaoActiva();
+            
+            //O jogador IA Basico move o exercito a qtd total que esta disponivel na accao
+            ctrl.getJogo().getRegioesPossiveisTerra(listExercito.get(0).getRegiao(),accao.getQtd(),listRegiao);
+            
+            int m= utils.randInt(0, listRegiao.size()-1);
+            
+            ctrl.getJogo().moveExercito(listRegiao.get(m),listExercito);
         }
         else
         if(estado.getClass() == AguardaMoveExercitoAgua.class) {
-            //
+            //Escolhe um exercito e uma região aleatoria dentro das possiveis
+            Jogador jogador = ctrl.getJogo().getJogadorActivo();
+            int x= utils.randInt(0, jogador.getListaExercitoComRegiao().size()-1);            
+            ArrayList<Regiao> listRegiao = new ArrayList<>();
+            ArrayList<Exercito> listExercito = new ArrayList<>();
+            listExercito.add(jogador.getListaExercitoComRegiao().get(x));
+            
+            Accao accao = jogador.getCartaActiva().getAccaoActiva();
+            
+            //O jogador IA Basico move o exercito a qtd total que esta disponivel na accao
+            ctrl.getJogo().getRegioesPossiveisAgua(listExercito.get(0).getRegiao(),accao.getQtd(),listRegiao);
+            
+            int m= utils.randInt(0, listRegiao.size()-1);
+            
+            ctrl.getJogo().moveExercitoAgua(listRegiao.get(m),listExercito);
         }
         else
         if(estado.getClass() == AguardaDestroiExercito.class) {
-            //
+            //Escolhe um exercito aleatoriamente e apaga
+            ArrayList<Exercito> listExercito = new ArrayList<>();
+            ctrl.getJogo().getListaExercitosTodosUtilizadores(listExercito);
+            
+            int x= utils.randInt(0, listExercito.size()-1);
+            
+            ctrl.getJogo().destroiExercito(listExercito.get(x));
         }
         else
         if(estado.getClass() == AguardaOpcoesJogo.class) {
