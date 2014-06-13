@@ -13,10 +13,11 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import pt.eightminutes.ia.IA;
 
 public class PanelComandosPreparaJogo extends PanelBase {
     
-    public PanelComandosPreparaJogo(PanelBase owner, DataController controller) {
+    public PanelComandosPreparaJogo(PanelBase owner, final DataController controller) {
         super(owner,controller);
         
         if (getJogo().getNumJogadores() == 0)
@@ -81,6 +82,9 @@ public class PanelComandosPreparaJogo extends PanelBase {
                     for (JTextField item : edits) {
                         getJogo().criaJogador(item.getText(), cores.get(getJogo().getJogadores().size()));
                     }
+                    
+                    //TODO- colocar sem ser fixo
+                    IA.attachIA(getJogo().getJogadores().get(1), controller);
                     getJogo().comecaApostas();
                 }
             });
