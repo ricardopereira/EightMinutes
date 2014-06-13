@@ -11,13 +11,13 @@ import java.awt.Shape;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
+import javax.swing.ImageIcon;
 
 import pt.eightminutes.ui.map.IMapData;
 import pt.eightminutes.ui.map.MapDataModel;
@@ -44,9 +44,9 @@ public class PanelMapa extends PanelBase implements Observer {
         this.setMinimumSize(new Dimension(600,480));
         this.setMaximumSize(new Dimension(600,480));
                 
-        // ToDo: Obter caminho pelo getResources
-        //poderá causar problemas com a criação do jar final
-        loadMap(new File("src/pt/eightminutes/ui/graphical/resources/map/eightminutes.map"));
+        // Caminho do mapa
+        URL url = Resources.getResourceFile("resources/map/eightminutes.map");
+        loadMap(url);
 
         // Evento para o clique do rato
         addMouseListener(new MouseAdapter() {
@@ -76,9 +76,9 @@ public class PanelMapa extends PanelBase implements Observer {
         });
     }
     
-    public void loadMap(File f) {
+    public void loadMap(URL url) {
         try {
-            ObjectInputStream oiStream = new ObjectInputStream(new FileInputStream(f));
+            ObjectInputStream oiStream = new ObjectInputStream(url.openStream());
             IMapData mr = (IMapData)(oiStream.readObject());
             model.setMapData(mr);
             oiStream.close();
@@ -197,10 +197,6 @@ public class PanelMapa extends PanelBase implements Observer {
             //g2d.draw(a);
         }
         
-        // Região inicial
-        Regiao regiaoInicial = getController().getJogo().getMapa().getRegiaoInicial();
-        paintRegiao(g,regiaoInicial,new Color(250,229,220));
-        
         // Região seleccionada
         paintRegiao(g,getController().getSelectedRegiao(),Color.YELLOW);
         
@@ -209,6 +205,14 @@ public class PanelMapa extends PanelBase implements Observer {
             for (Regiao focus : getController().getFocusRegioes()) {
                 paintRegiao(g,focus,Color.LIGHT_GRAY);
             }
+        }
+        
+        // Região inicial
+        Regiao regiaoInicial = getController().getJogo().getMapa().getRegiaoInicial();
+        if (regiaoInicial != null) {
+            ImageIcon icon = new ImageIcon(Resources.getResourceFile("resources/images/flag.gif"));
+            Point center = model.getCenterPoint(regiaoInicial.getAreaName());
+            g.drawImage(icon.getImage(), center.x, center.y - icon.getIconHeight(), null);
         }
     }
     
