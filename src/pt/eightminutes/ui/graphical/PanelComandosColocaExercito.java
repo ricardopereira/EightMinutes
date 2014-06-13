@@ -27,27 +27,27 @@ public class PanelComandosColocaExercito extends PanelBase {
             
         this.add(edQtdExercitos, BorderLayout.CENTER);
         JButton btColocaExercito = new JButton("Coloca Exercito");
-            btColocaExercito.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) 
+        btColocaExercito.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                Regiao regiao = getController().getSelectedRegiao();
+                Accao accao = getJogo().getJogadorActivo().getCartaActiva().getAccaoActiva();
+                int myQtd = Integer.parseInt(edQtdExercitos.getText());                  
+
+                if (myQtd >= 1 && myQtd <= accao.getQtd())
                 {
-                    //Todo-ir buscar a região selecionada
-                    Accao accao = getJogo().getJogadorActivo().getCartaActiva().getAccaoActiva();
-                    int myQtd = Integer.parseInt(edQtdExercitos.getText());                  
-                    
-                    if (myQtd>=1 && myQtd<= accao.getQtd())
-                    {
-                        Regiao regiao = null;
-                        getJogo().colocaExercito(regiao, Integer.parseInt(edQtdExercitos.getText()));
-                    }   
-                    else
-                    {                        
-                        String msg= String.format("Deve definir uma quantidade entre 1 e %s", accao.getQtd());
-                        JOptionPane.showMessageDialog(null,msg,"Coloca Exercito",JOptionPane.WARNING_MESSAGE);
-                    }
+                    regiao = null;
+                    getJogo().colocaExercito(regiao, Integer.parseInt(edQtdExercitos.getText()));
+                }   
+                else
+                {                        
+                    String msg = String.format("Deve definir uma quantidade entre 1 e %s", accao.getQtd());
+                    JOptionPane.showMessageDialog(null,msg,"Coloca Exercito",JOptionPane.WARNING_MESSAGE);
                 }
-            });
-            this.add(btColocaExercito, BorderLayout.CENTER);                       
+            }
+        });
+        this.add(btColocaExercito, BorderLayout.CENTER);                       
     }
 
 }

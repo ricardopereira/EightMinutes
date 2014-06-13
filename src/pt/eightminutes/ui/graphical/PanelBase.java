@@ -7,7 +7,7 @@ import pt.eightminutes.logic.Jogo;
 
 public class PanelBase extends JPanel {
     
-    private DataController controller;
+    final private DataController controller;
     private PanelBase owner;
     
     public PanelBase(PanelBase owner, DataController controller) {

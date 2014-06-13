@@ -16,14 +16,14 @@ import pt.eightminutes.logic.Regiao;
 
 public class PanelComandosColocaCidade extends PanelBase {
     
-    public PanelComandosColocaCidade(PanelBase owner, final DataController controller) {
+    public PanelComandosColocaCidade(PanelBase owner, DataController controller) {
         super(owner,controller);
         
         // Eventos
         Jogador jogador = controller.getJogo().getJogadorActivo();        
         
         controller.addListener(new actionOnSelectRegiao());
-        controller.setFocusRegioes(jogador.getListaRegioesComExercito());       
+        controller.setFocusRegioes(jogador.getListaRegioesComExercito());
         
         this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         this.add(new JLabel("Acção Coloca Cidade"), BorderLayout.CENTER);
@@ -32,19 +32,18 @@ public class PanelComandosColocaCidade extends PanelBase {
         JButton btColocaCidade = new JButton("Coloca Cidade");
             btColocaCidade.addActionListener(new ActionListener() {
                 @Override
-                public void actionPerformed(ActionEvent e) 
+                public void actionPerformed(ActionEvent e)
                 {
-                    //Todo-ir buscar a região selecionada
-                    Regiao regiao = controller.getSelectedRegiao();
-                    if(regiao != getJogo().getMapa().getRegiaoInicial())
+                    Regiao regiao = getController().getSelectedRegiao();
+                    if (regiao != getJogo().getMapa().getRegiaoInicial())
                     {
-                        if(regiao!=null)
+                        if (regiao != null)
                         {
                             getJogo().colocaCidade(regiao);
                         }
                         else
                         {
-                           String msg= String.format("Deve definir uma região.");
+                           String msg = String.format("Deve definir uma região.");
                            JOptionPane.showMessageDialog(null,msg,"Coloca Cidade",JOptionPane.WARNING_MESSAGE);
                         }
                     }
