@@ -8,6 +8,7 @@ import java.util.Observable;
 import java.util.Observer;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
+
 import pt.eightminutes.states.*;
 
 public class PanelInformacao extends PanelBase implements Observer {

@@ -130,6 +130,7 @@ public class PanelMapa extends PanelBase implements Observer {
                 continue;
             
             buttons = new ArrayList<>();
+            currentButton = null;
             
             for (int j = 0; j < itemRegiao.getPecas().size(); j++) {
                 itemPeca = itemRegiao.getPecas().get(j);
