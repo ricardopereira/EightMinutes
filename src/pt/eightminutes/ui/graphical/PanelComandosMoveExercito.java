@@ -71,10 +71,13 @@ public class PanelComandosMoveExercito extends PanelBase {
             this.add(btMoveExercito, BorderLayout.CENTER);                       
     }
 
-    final public class actionOnSelectRegiao implements PanelMapaListener {
+    final public class actionOnSelectRegiao implements DataControllerListener {
         @Override
         public void onSelectRegiao() {
             System.out.println("Teste: seleccionado região para mover exército");
+        }
+        public void onFocusRegioes() {
+            
         }
     }
     

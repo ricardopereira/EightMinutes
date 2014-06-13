@@ -14,7 +14,7 @@ public class DataController extends Observable {
     private Jogo jogo;
     
     // Eventos
-    List<PanelMapaListener> listeners = new ArrayList<PanelMapaListener>();
+    List<DataControllerListener> listeners = new ArrayList<>();
     
     // Dados partilhados
     private Regiao selectedRegiao = null;
@@ -59,7 +59,7 @@ public class DataController extends Observable {
         notifyObservers();
     }
     
-    public void addListener(PanelMapaListener toAdd) {
+    public void addListener(DataControllerListener toAdd) {
         listeners.add(toAdd);
     }
     
@@ -78,7 +78,7 @@ public class DataController extends Observable {
             this.selectedRegiao = selectedRegiao;
             
             // Notifica a todos os listeners o setSelectedRegiao
-            for (PanelMapaListener event : listeners)
+            for (DataControllerListener event : listeners)
                 event.onSelectRegiao();
         }
     }
@@ -95,6 +95,10 @@ public class DataController extends Observable {
      */
     public void setFocusRegioes(ArrayList<Regiao> focusRegioes) {
         this.focusRegioes = focusRegioes;
+
+        // Notifica a todos os listeners o setSelectedRegiao
+        for (DataControllerListener event : listeners)
+            event.onFocusRegioes();
     }
     
 }

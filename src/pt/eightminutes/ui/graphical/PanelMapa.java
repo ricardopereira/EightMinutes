@@ -36,6 +36,8 @@ public class PanelMapa extends PanelBase implements Observer {
         
         model.addObserver(this);
         this.model = model;
+        
+        controller.addListener(new actionOnSetFocusRegioes());
 
         this.setLayout(null);
 
@@ -222,6 +224,16 @@ public class PanelMapa extends PanelBase implements Observer {
         Graphics2D g2d = (Graphics2D)g;
         g2d.setColor(cor);
         g2d.fill(regionShape);
+    }
+    
+    final public class actionOnSetFocusRegioes implements DataControllerListener {
+        @Override
+        public void onSelectRegiao() {
+
+        }
+        public void onFocusRegioes() {
+            repaint();
+        }
     }
 
 }

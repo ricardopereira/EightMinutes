@@ -43,10 +43,13 @@ public class PanelComandosColocaCidade extends PanelBase {
             this.add(btColocaCidade, BorderLayout.CENTER);                       
     }
 
-    final public class actionOnSelectRegiao implements PanelMapaListener {
+    final public class actionOnSelectRegiao implements DataControllerListener {
         @Override
         public void onSelectRegiao() {
             System.out.println("Teste: seleccionado para colocar cidade");
+        }
+        public void onFocusRegioes() {
+            
         }
     }
     

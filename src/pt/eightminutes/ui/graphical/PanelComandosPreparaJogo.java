@@ -22,30 +22,38 @@ public class PanelComandosPreparaJogo extends PanelBase {
         if (getJogo().getNumJogadores() == 0)
         {
             this.add(new JLabel("Número de Jogadores: "), BorderLayout.CENTER);
-            
-            final JTextField edNrJogadores = new JTextField("0");
-            
-            this.add(edNrJogadores, BorderLayout.CENTER);
+                        
+            final JComboBox cboJogadores = new JComboBox();
+            for (int i = 0; i < 5; i++)
+                cboJogadores.addItem(i+1);
+            cboJogadores.setSelectedIndex(1);
+                        
+            this.add(cboJogadores, BorderLayout.CENTER);
             
             JButton btJogadores = new JButton("Iniciar jogadores");
             btJogadores.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     // Número de Jogadores
-                    getJogo().defineNumJogadores(Integer.parseInt(edNrJogadores.getText()));
+                    getJogo().defineNumJogadores((Integer)cboJogadores.getSelectedItem());
                 }
             });
             this.add(btJogadores, BorderLayout.CENTER);
         }
         else
         {
-            this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+            JPanel coluna1 = new JPanel();
+            coluna1.setBackground(this.getBackground());
+            coluna1.setLayout(new BoxLayout(coluna1,BoxLayout.Y_AXIS));
             
-            final List<JTextField> edits = new ArrayList<>();            
+            this.add(coluna1, BorderLayout.CENTER);
+            
+            final List<JTextField> edits = new ArrayList<>();        
             
             JPanel panelJogador;
             for (int i = 0; i < getJogo().getNumJogadores(); i++) {
                 panelJogador = new JPanel();
+                panelJogador.setBackground(this.getBackground());
                 
                 // Criar edit para o nome do jogador
                 edits.add(new JTextField("nome jogador "+(i+1)));
@@ -54,7 +62,7 @@ public class PanelComandosPreparaJogo extends PanelBase {
                 JCheckBox ia = new JCheckBox("IA");
                 panelJogador.add(ia);
                 
-                this.add(panelJogador);
+                coluna1.add(panelJogador);
             }
 
             JButton btApostas = new JButton("Iniciar apostas");
