@@ -5,7 +5,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 import javax.swing.JButton;
 
-import pt.eightminutes.logic.Jogador;
+import pt.eightminutes.logic.*;
 
 public class ButtonPeca extends JButton {
     
@@ -15,8 +15,9 @@ public class ButtonPeca extends JButton {
     
     private ButtonPecaType type;
     private Jogador jogador;
+    private Regiao regiao;
     
-    public ButtonPeca(int index, Point center, ButtonPecaType type, Jogador jogador) {
+    public ButtonPeca(int index, Point center, ButtonPecaType type, Regiao regiao, Jogador jogador) {
         
         Point location = null;
         
@@ -53,19 +54,25 @@ public class ButtonPeca extends JButton {
         
         this.jogador = jogador;
         this.type = type;
+        this.regiao = regiao;
         
         // Posiçao e tamanho
         setBounds(location.x, location.y, diameter, diameter);
-        
+                
+        setToolTipText("<html>"+jogador.getNome()+
+                "<br>Cidades: "+jogador.getListaCidades(regiao).size()+
+                "<br>Exércitos: "+jogador.getListaExercitos(regiao).size()+
+                "</html>");
+
         switch (type) {
             case CIDADE_SEM_EXERCITOS:
-                setToolTipText("<html>Cidade sem exércitos<br>Sem informação</html>");
+
                 break;
             case CIDADE_COM_EXERCITOS:
-                setToolTipText("<html>Cidade com exércitos<br>Sem informação</html>");
+
                 break;
             case EXERCITO:
-                setToolTipText("<html>Exército<br>Sem informação</html>");
+
                 break;
         }
         

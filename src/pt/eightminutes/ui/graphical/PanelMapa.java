@@ -35,9 +35,10 @@ class MapBackground extends JPanel implements Observer {
 
     DataController controller;
     MapDataModel model;
-    String nameRegiao = null;
     
     Robot robot;
+    
+    String nameRegiao = null;
 
     MapBackground(final MapDataModel model, DataController controller) throws AWTException {
         this.robot = new Robot();
@@ -54,18 +55,19 @@ class MapBackground extends JPanel implements Observer {
         addMouseListener(new MouseAdapter()  {
             public void mousePressed(MouseEvent ev) {
                 
-                //if (!isEnabled())
-                //    return;
+                if (!isEnabled())
+                    return;
                 
                 Point center = ev.getPoint();
                 
                 center = model.getCenterPoint(model.getRegion(center));
                 
-                ButtonPeca btPeca;
+                //ButtonPeca btPeca;
+                
                 // Teste
-                btPeca = new ButtonPeca(4,center,ButtonPeca.ButtonPecaType.CIDADE_COM_EXERCITOS,null);
-                add(btPeca);
-                                
+                //btPeca = new ButtonPeca(4,center,ButtonPeca.ButtonPecaType.CIDADE_COM_EXERCITOS,null);
+                //add(btPeca);
+
                 repaint();
             }
         });
@@ -213,7 +215,7 @@ public class PanelMapa extends PanelBase implements Observer {
                 if (currentButton == null) {
                     // Nova marca
                     centerRegiao = model.getCenterPoint(itemRegiao.getAreaName());
-                    currentButton = new ButtonPeca(itemPeca.getJogador().getIndex(),centerRegiao,ButtonPeca.ButtonPecaType.EXERCITO,itemPeca.getJogador());
+                    currentButton = new ButtonPeca(itemPeca.getJogador().getIndex(),centerRegiao,ButtonPeca.ButtonPecaType.EXERCITO,itemRegiao,itemPeca.getJogador());
                     buttons.add(currentButton);
                     
                     if (itemPeca.getClass() == Cidade.class) {
@@ -224,7 +226,7 @@ public class PanelMapa extends PanelBase implements Observer {
                     }
                 }
                 else {
-                    // Marca já existente, verificar se precisa de ser actualizado
+                    // Marca já existente, verificar se precisa de ser actualizado para outro tipo
                     if (currentButton.getType() == ButtonPeca.ButtonPecaType.CIDADE_SEM_EXERCITOS &&
                         itemPeca.getClass() == Exercito.class)
                     {

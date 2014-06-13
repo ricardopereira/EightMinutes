@@ -332,7 +332,6 @@ public class Jogador extends Base implements Serializable {
         this.cartas = cartas;
     }
 
-
     /**
      * @return the aposta
      */
@@ -367,12 +366,21 @@ public class Jogador extends Base implements Serializable {
     public ArrayList<Exercito> getListaExercitos() {
         return listaExercitos;
     }
-
+    
     /**
-     * @param listaExercitos the listaExercitos to set
+     * @param regiao @return the listaExercitos
      */
-    public void setListaExercitos(ArrayList<Exercito> listaExercitos) {
-        this.listaExercitos = listaExercitos;
+    public ArrayList<Exercito> getListaExercitos(Regiao regiao) {
+        ArrayList<Exercito> list = new ArrayList<>();
+        
+        for (int i = 0; i < getListaExercitos().size(); i++) {
+            // Adiciona com a mesma regiao
+            if (getListaExercitos().get(i).getRegiao() == regiao) {
+                list.add(getListaExercitos().get(i));
+            }
+        }
+        
+        return list;
     }
 
     /**
@@ -381,12 +389,21 @@ public class Jogador extends Base implements Serializable {
     public ArrayList<Cidade> getListaCidades() {
         return listaCidades;
     }
-
+    
     /**
-     * @param listaCidades the listaCidades to set
+     * @param regiao @return the listaCidades
      */
-    public void setListaCidades(ArrayList<Cidade> listaCidades) {
-        this.listaCidades = listaCidades;
+    public ArrayList<Cidade> getListaCidades(Regiao regiao) {
+        ArrayList<Cidade> list = new ArrayList<>();
+        
+        for (int i = 0; i < getListaCidades().size(); i++) {
+            // Adiciona com a mesma regiao
+            if (getListaCidades().get(i).getRegiao() == regiao) {
+                list.add(getListaCidades().get(i));
+            }
+        }
+        
+        return list;
     }
 
     /**
