@@ -23,7 +23,7 @@ public class ButtonPeca extends JButton {
         
         final int diameter = 10;
         final int radius = diameter/2;
-        final int margin = 0;
+        final int margin = 1;
         
         switch (index) {
             case 0: //Posicao 1

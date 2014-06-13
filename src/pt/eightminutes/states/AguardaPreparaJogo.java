@@ -29,8 +29,11 @@ public class AguardaPreparaJogo extends EstadosAdapter {
     }
     
     @Override
-    public IEstados comecaApostas() {        
-        return new AguardaAposta(getJogo()); 
+    public IEstados comecaApostas() {
+        if (getJogo().getJogadores().isEmpty())
+            return this; 
+        else
+            return new AguardaAposta(getJogo()); 
     }
     
 }

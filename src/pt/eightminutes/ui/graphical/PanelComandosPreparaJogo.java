@@ -14,11 +14,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import pt.eightminutes.ia.IA;
+import pt.eightminutes.logic.Jogador;
 
 public class PanelComandosPreparaJogo extends PanelBase {
     
     public PanelComandosPreparaJogo(PanelBase owner, final DataController controller) {
         super(owner,controller);
+        
+        setBackground(owner.getBackground());
         
         if (getJogo().getNumJogadores() == 0)
         {
@@ -43,27 +46,36 @@ public class PanelComandosPreparaJogo extends PanelBase {
         }
         else
         {
-            JPanel coluna1 = new JPanel();
-            coluna1.setBackground(this.getBackground());
-            coluna1.setLayout(new BoxLayout(coluna1,BoxLayout.Y_AXIS));
+            JPanel coluna = new JPanel();
+            coluna.setBackground(this.getBackground());
+            coluna.setLayout(new BoxLayout(coluna,BoxLayout.Y_AXIS));
+            this.add(coluna, BorderLayout.CENTER);
             
-            this.add(coluna1, BorderLayout.CENTER);
-            
-            final List<JTextField> edits = new ArrayList<>();        
+            final List<JTextField> listEdits = new ArrayList<>();
+            final List<JCheckBox> listIAChecks = new ArrayList<>();
             
             JPanel panelJogador;
             for (int i = 0; i < getJogo().getNumJogadores(); i++) {
                 panelJogador = new JPanel();
-                panelJogador.setBackground(this.getBackground());
+                panelJogador.setBackground(coluna.getBackground());
                 
                 // Criar edit para o nome do jogador
-                edits.add(new JTextField("nome jogador "+(i+1)));
-                panelJogador.add(edits.get(edits.size()-1), BorderLayout.CENTER);
+                JTextField edNome = new JTextField("nome jogador "+(i+1));
+                listEdits.add(edNome);
+                panelJogador.add(edNome, BorderLayout.CENTER);
                 
-                JCheckBox ia = new JCheckBox("IA");
-                panelJogador.add(ia);
+                JCheckBox chkIA = new JCheckBox("IA");
+                listIAChecks.add(chkIA);
+                panelJogador.add(chkIA);
                 
-                coluna1.add(panelJogador);
+                if (i == 3) {
+                    coluna = new JPanel();
+                    coluna.setBackground(this.getBackground());
+                    coluna.setLayout(new BoxLayout(coluna,BoxLayout.Y_AXIS));
+                    this.add(coluna, BorderLayout.CENTER);
+                }
+                
+                coluna.add(panelJogador);
             }
 
             JButton btApostas = new JButton("Iniciar apostas");
@@ -72,19 +84,23 @@ public class PanelComandosPreparaJogo extends PanelBase {
                 public void actionPerformed(ActionEvent e) {
                     
                     // ToDo: Cores num local adequado
-                    ArrayList<Color> cores = new ArrayList<Color>();
+                    ArrayList<Color> cores = new ArrayList<>();
                     cores.add(new Color(250,199,122));
                     cores.add(new Color(149,111,155));
                     cores.add(new Color(213,120,135));
                     cores.add(new Color(254,180,163));
                     cores.add(new Color(184,104,133));
                     
-                    for (JTextField item : edits) {
-                        getJogo().criaJogador(item.getText(), cores.get(getJogo().getJogadores().size()));
+                    // Criar jogadores
+                    Jogador jogador;
+                    for (int i = 0; i < listEdits.size(); i++) {
+                        jogador = getJogo().criaJogador(listEdits.get(i).getText(), cores.get(i));
+                        // Jogador de IA
+                        if (listIAChecks.get(i).isSelected())
+                            IA.attachIA(jogador, controller);
                     }
-                    
-                    //TODO- colocar sem ser fixo
-                    IA.attachIA(getJogo().getJogadores().get(1), controller);
+
+                    // Jogadore criados...
                     getJogo().comecaApostas();
                 }
             });
