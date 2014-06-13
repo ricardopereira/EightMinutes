@@ -31,14 +31,14 @@ public class PanelComandosColocaExercito extends PanelBase {
         Accao accao = jogador.getCartaActiva().getAccaoActiva();
         
         this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+        
         this.add(new JLabel("Acção Coloca Exercito"), BorderLayout.CENTER);
         this.add(new JLabel("Escolha uma região com a cor xpto"), BorderLayout.CENTER);
         this.add(new JLabel("Defina a quantidade de exercitos que deseja colocar(entre 1 e "+String.format("%d",accao.getQtd())+")"), BorderLayout.CENTER);
-        final JTextField edQtdExercitos = new JTextField("1");
-            
+        final JTextField edQtdExercitos = new JTextField("1");    
         this.add(edQtdExercitos, BorderLayout.CENTER);
+
         JButton btColocaExercito = new JButton("Coloca Exercito");        
-        
         btColocaExercito.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e)
@@ -70,7 +70,18 @@ public class PanelComandosColocaExercito extends PanelBase {
                 }
             }
         });
-        this.add(btColocaExercito, BorderLayout.CENTER);                       
+
+        JButton btPassaVez = new JButton("Passa vez");
+        btPassaVez.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                getJogo().passaVez();
+            }
+        });
+        
+        this.add(btColocaExercito, BorderLayout.CENTER);
+        this.add(btPassaVez, BorderLayout.CENTER);
     }
     
     final public class actionOnSelectRegiao implements DataControllerListener {

@@ -32,7 +32,7 @@ public class AccaoColocaCidade extends Accao{
     }
     
     private void internalColocaCidades(Jogador jogador, Regiao regiao) {
-        if(regiao!=null)
+        if (regiao != null)
         {                
             if(regiao.RegiaoTemExercitosDoJogador(jogador)){
                 if(jogador.getListaCidadeSemRegiao() != null){                
