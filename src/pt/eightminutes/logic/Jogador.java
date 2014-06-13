@@ -263,6 +263,18 @@ public class Jogador extends Base implements Serializable {
         return exercitosAux;
     }
     
+    //Lista de exercitos que ja foram atribuidos a uma regiao
+    public ArrayList<Regiao> getListaRegioesComExercito(){
+        ArrayList<Regiao> regioesAux = new ArrayList<>();
+        
+        for(int i=0;i<listaExercitos.size();i++){
+            if(listaExercitos.get(i).getRegiao()!=null)
+                regioesAux.add(listaExercitos.get(i).getRegiao());
+        }
+        
+        return regioesAux;
+    }
+    
     public ArrayList<Carta> getListaCartaJokers(){
         ArrayList<Carta> cartasAux = new ArrayList<>();
         
