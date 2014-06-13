@@ -16,8 +16,11 @@ import pt.eightminutes.logic.Regiao;
 public class PanelComandosMoveExercito extends PanelBase {
     
     public PanelComandosMoveExercito(PanelBase owner, DataController controller) {
-        super(owner,controller);    
+        super(owner,controller);
         
+        // Eventos
+        controller.addListener(new actionOnSelectRegiao());
+
         final Accao accao = getJogo().getJogadorActivo().getCartaActiva().getAccaoActiva();
         int count=0;
                                                                  
@@ -68,4 +71,11 @@ public class PanelComandosMoveExercito extends PanelBase {
             this.add(btMoveExercito, BorderLayout.CENTER);                       
     }
 
+    final public class actionOnSelectRegiao implements PanelMapaListener {
+        @Override
+        public void onSelectRegiao() {
+            System.out.println("Teste: seleccionado região para mover exército");
+        }
+    }
+    
 }

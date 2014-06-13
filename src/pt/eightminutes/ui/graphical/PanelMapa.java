@@ -201,12 +201,12 @@ public class PanelMapa extends PanelBase implements Observer {
         paintRegiao(g,regiaoInicial,new Color(250,229,220));
         
         // Região seleccionada
-        paintRegiao(g,getController().getSelectedRegiao(),Color.GREEN);
+        paintRegiao(g,getController().getSelectedRegiao(),Color.YELLOW);
         
         // Focus nas regiões
         if (getController().getFocusRegioes() != null) {
             for (Regiao focus : getController().getFocusRegioes()) {
-                paintRegiao(g,focus,Color.GRAY);
+                paintRegiao(g,focus,Color.LIGHT_GRAY);
             }
         }
     }

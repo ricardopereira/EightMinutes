@@ -19,7 +19,7 @@ import pt.eightminutes.states.EstadoListener;
 
 public class Jogo extends Base implements Serializable {
     
-    private IEstados estadoActual; 
+    private IEstados estadoActual;
     private IEstados estadoAnterior;
     private int numJogadores;
     private Baralho baralho;
@@ -27,6 +27,8 @@ public class Jogo extends Base implements Serializable {
     private Mapa mapa;
     private ArrayList<Jogador> jogadores = new ArrayList<>();
     private Jogador jogadorActivo;
+    
+    // Eventos
     List<EstadoListener> listeners = new ArrayList<EstadoListener>();
 
     public Jogo(){

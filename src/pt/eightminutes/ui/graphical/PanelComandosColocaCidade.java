@@ -7,12 +7,16 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+
 import pt.eightminutes.logic.Regiao;
 
 public class PanelComandosColocaCidade extends PanelBase {
     
     public PanelComandosColocaCidade(PanelBase owner, DataController controller) {
         super(owner,controller);
+        
+        // Eventos
+        controller.addListener(new actionOnSelectRegiao());
         
         this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         this.add(new JLabel("Acção Coloca Cidade"), BorderLayout.CENTER);
@@ -39,4 +43,11 @@ public class PanelComandosColocaCidade extends PanelBase {
             this.add(btColocaCidade, BorderLayout.CENTER);                       
     }
 
+    final public class actionOnSelectRegiao implements PanelMapaListener {
+        @Override
+        public void onSelectRegiao() {
+            System.out.println("Teste: seleccionado para colocar cidade");
+        }
+    }
+    
 }
