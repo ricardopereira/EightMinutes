@@ -369,6 +369,19 @@ public class Mapa extends Base implements Serializable {
     }
     
     /**
+     * @param name @return the regiao
+     */
+    public Regiao getRegiaoByAreaName(String name) {
+        Regiao item;
+        for (int i = 0; i < getRegioes().size(); i++) {
+            item = getRegioes().get(i);
+            if (item.getAreaName().equals(name))
+                return item;
+        }
+        return null;
+    }
+    
+    /**
      * @return the continentes
      */
     public ArrayList<Continente> getContinentes() {

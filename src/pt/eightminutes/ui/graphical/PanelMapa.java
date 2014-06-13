@@ -29,7 +29,8 @@ public class PanelMapa extends PanelBase implements Observer {
     
     final private MapDataModel model;
     
-    String nameRegiao = null;
+    private Regiao selectedRegiao = null;
+    private String nameRegiao = null;
     
     public PanelMapa(PanelBase owner, DataController controller, final MapDataModel model) throws AWTException {
         super(owner,controller);
@@ -54,8 +55,10 @@ public class PanelMapa extends PanelBase implements Observer {
                 if (!isEnabled())
                     return;
                 
-                
-
+                String areaName = model.getRegion(ev.getPoint());
+                if (selectedRegiao != null && selectedRegiao.getAreaName().equals(areaName))
+                    return;
+                selectedRegiao = getController().getJogo().getMapa().getRegiaoByAreaName(areaName);
                 repaint();
             }
         });
@@ -196,10 +199,25 @@ public class PanelMapa extends PanelBase implements Observer {
         
         // Região inicial
         Regiao regiaoInicial = getController().getJogo().getMapa().getRegiaoInicial();
-        Shape regionShape = model.getShape(regiaoInicial.getAreaName());
+        paintRegiao(g,regiaoInicial,new Color(250,229,220));
+        
+        // Região seleccionada
+        paintRegiao(g,selectedRegiao,Color.GREEN);
+        
+        // Lista de regiões
+        
+    }
+    
+    public void paintRegiao(Graphics g, Regiao regiao, Color cor) {
+        if (regiao == null) return;
+        Shape regionShape = model.getShape(regiao.getAreaName());
         Graphics2D g2d = (Graphics2D)g;
-        g2d.setColor(new Color(250,229,220));
+        g2d.setColor(cor);
         g2d.fill(regionShape);
-    }	
+    }
+    
+    public Regiao getSelectedRegiao() {
+        return selectedRegiao;
+    }
 
 }

@@ -1,6 +1,8 @@
 package pt.eightminutes.ui.graphical;
 
+import java.awt.Color;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Observable;
 import pt.eightminutes.states.EstadoListener;
 import pt.eightminutes.logic.Jogo;
