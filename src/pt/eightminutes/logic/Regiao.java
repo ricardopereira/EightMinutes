@@ -65,6 +65,18 @@ public class Regiao implements Serializable {
         return myResult;        
     }
     
+    public void getExercitosByJogador(Jogador jogador,ArrayList<Exercito> exercitoList){
+        boolean myResult = false;
+        for (int i = 0; i < getPecas().size(); i++) 
+        {
+            if (getPecas().get(i).getJogador() == jogador) 
+            {
+                if(getPecas().get(i) instanceof Exercito)
+                    exercitoList.add((Exercito)getPecas().get(i));
+            }
+        }        
+    }
+    
     public String getAreaName() {
         return getContinente().getNome() + "-" + getNome();
     }
