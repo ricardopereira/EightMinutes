@@ -41,14 +41,7 @@ public class PanelComandosPreparaJogo extends PanelBase {
         {
             this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
             
-            final List<JTextField> edits = new ArrayList<>();
-            
-            final JComboBox cores = new JComboBox();
-            cores.addItem(Color.GREEN);
-            cores.addItem(Color.CYAN);
-            cores.addItem(Color.RED);
-            cores.addItem(Color.ORANGE);
-            cores.addItem(Color.BLUE);
+            final List<JTextField> edits = new ArrayList<>();            
             
             JPanel panelJogador;
             for (int i = 0; i < getJogo().getNumJogadores(); i++) {
@@ -68,10 +61,17 @@ public class PanelComandosPreparaJogo extends PanelBase {
             btApostas.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    int i = 0;
+                    
+                    // ToDo: Cores num local adequado
+                    ArrayList<Color> cores = new ArrayList<Color>();
+                    cores.add(Color.GREEN);
+                    cores.add(Color.RED);
+                    cores.add(Color.BLUE);
+                    cores.add(Color.CYAN);
+                    cores.add(Color.ORANGE);
+                    
                     for (JTextField item : edits) {
-                        // ToDo: Cores
-                        getJogo().criaJogador(item.getText(), (Color)cores.getItemAt(i++));
+                        getJogo().criaJogador(item.getText(), cores.get(getJogo().getJogadores().size()));
                     }
                     getJogo().comecaApostas();
                 }

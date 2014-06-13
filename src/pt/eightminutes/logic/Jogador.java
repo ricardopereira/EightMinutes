@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 public class Jogador extends Base implements Serializable {
     
+    private int index;
     private Object owner;
     private String nome;
     private int moedas;
@@ -23,7 +24,7 @@ public class Jogador extends Base implements Serializable {
     private Carta cartaActiva;
     private Color cor;
     
-    public Jogador(Object owner, String nome, Color cor, int moedas, int qtdExercito, int qtdCidades) {
+    public Jogador(Object owner, String nome, Color cor, int moedas, int qtdExercito, int qtdCidades, int index) {
         super();
         
         this.owner = owner;
@@ -31,6 +32,7 @@ public class Jogador extends Base implements Serializable {
         this.moedas = moedas;
         this.aposta = -1;
         this.cor = cor;
+        this.index = index;
         
         for(int i=0;i<qtdExercito;i++)
             listaExercitos.add(new Exercito(this));
@@ -385,5 +387,12 @@ public class Jogador extends Base implements Serializable {
      */
     public void setListaCidades(ArrayList<Cidade> listaCidades) {
         this.listaCidades = listaCidades;
+    }
+
+    /**
+     * @return the index
+     */
+    public int getIndex() {
+        return index;
     }
 }

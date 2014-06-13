@@ -8,6 +8,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Robot;
@@ -19,29 +20,30 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
-import pt.eightminutes.logic.Exercito;
-import pt.eightminutes.logic.Peca;
-import pt.eightminutes.logic.Regiao;
 
+import pt.eightminutes.logic.*;
 import pt.eightminutes.states.*;
 
 // Classe auxiliar para o mapa
 class MapBackground extends JPanel implements Observer {
 
+    DataController controller;
     MapDataModel model;
     String nameRegiao = null;
     
     Robot robot;
 
-    MapBackground(final MapDataModel model) throws AWTException {
+    MapBackground(final MapDataModel model, DataController controller) throws AWTException {
         this.robot = new Robot();
         model.addObserver(this);
         this.model = model;
+        this.controller = controller;
         
         this.setLayout(null);
         this.setPreferredSize(new Dimension(512,400));
@@ -61,15 +63,7 @@ class MapBackground extends JPanel implements Observer {
                 
                 ButtonPeca btPeca;
                 // Teste
-                btPeca = new ButtonPeca(0,center,ButtonPeca.ButtonPecaType.CIDADE_INICIAL,null);
-                add(btPeca);
-                btPeca = new ButtonPeca(1,center,ButtonPeca.ButtonPecaType.EXERCITO,null);
-                add(btPeca);
-                btPeca = new ButtonPeca(2,center,ButtonPeca.ButtonPecaType.CIDADE_COM_EXERCITOS,null);
-                add(btPeca);
-                btPeca = new ButtonPeca(3,center,ButtonPeca.ButtonPecaType.CIDADE_COM_EXERCITOS,null);
-                add(btPeca);
-                btPeca = new ButtonPeca(4,center,ButtonPeca.ButtonPecaType.CIDADE_INICIAL,null);
+                btPeca = new ButtonPeca(4,center,ButtonPeca.ButtonPecaType.CIDADE_COM_EXERCITOS,null);
                 add(btPeca);
                                 
                 repaint();
@@ -113,9 +107,16 @@ class MapBackground extends JPanel implements Observer {
 
         for (Shape a : model.getRegions())
         {
-
+            //Graphics2D g2d = (Graphics2D)g;
+            //g2d.draw(a);
         }
-
+        
+        // Região inicial
+        Regiao regiaoInicial = controller.getJogo().getMapa().getRegiaoInicial();
+        Shape regionShape = model.getShape(regiaoInicial.getAreaName());
+        Graphics2D g2d = (Graphics2D)g;
+        g2d.setColor(new Color(250,229,220));
+        g2d.fill(regionShape);
     }	
 }
 
@@ -134,7 +135,7 @@ public class PanelMapa extends PanelBase implements Observer {
         
         try {
             // Mapa
-            mapPanel = new MapBackground(model);
+            mapPanel = new MapBackground(model,getController());
         } catch (AWTException ex) {
             Logger.getLogger(PanelMapa.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -143,7 +144,7 @@ public class PanelMapa extends PanelBase implements Observer {
         //poderá causar problemas com a criação do jar final
         loadMap(new File("src/pt/eightminutes/ui/graphical/resources/map/eightminutes.map"));
                 
-        add(mapPanel, BorderLayout.CENTER);
+        this.add(mapPanel, BorderLayout.CENTER);
     }
     
     public void loadMap(File f) {
@@ -180,28 +181,69 @@ public class PanelMapa extends PanelBase implements Observer {
     
     public void updateLogic() {
         
-        // Fase de testes
-        //ToDo: sem duplicação de dados na parte das regiões do mapa
-        
         mapPanel.removeAll();
         
-        Regiao regiaoInicial = getController().getJogo().getMapa().getRegiaoInicial();
-        Point center = model.getCenterPoint(regiaoInicial.getAreaName());
+        ArrayList<ButtonPeca> buttons;
+        
+        Regiao itemRegiao;
         Peca itemPeca;
-        for (int i = 0; i < regiaoInicial.getPecas().size(); i++) {
-            itemPeca = regiaoInicial.getPecas().get(i);
+        Point centerRegiao;
+        ButtonPeca currentButton = null;
+        
+        for (int i = 0; i < getController().getJogo().getMapa().getRegioes().size(); i++) {
+            itemRegiao = getController().getJogo().getMapa().getRegioes().get(i);
             
-            // ToDo: Várias cidades?
-
-            if (itemPeca instanceof Exercito) {
-                mapPanel.add(new ButtonPeca(i,center,ButtonPeca.ButtonPecaType.CIDADE_INICIAL,itemPeca.getJogador()));
+            // Tem peças
+            if (itemRegiao.getPecas().isEmpty())
+                continue;
+            
+            buttons = new ArrayList<>();
+            
+            for (int j = 0; j < itemRegiao.getPecas().size(); j++) {
+                itemPeca = itemRegiao.getPecas().get(j);
+                
+                // Apenas uma marca por jogador na região
+                for (int k = 0; k < buttons.size(); k++) {
+                    currentButton = buttons.get(k);
+                    if (currentButton.getJogador() == itemPeca.getJogador())
+                        break;
+                    currentButton = null;
+                }
+                
+                if (currentButton == null) {
+                    // Nova marca
+                    centerRegiao = model.getCenterPoint(itemRegiao.getAreaName());
+                    currentButton = new ButtonPeca(itemPeca.getJogador().getIndex(),centerRegiao,ButtonPeca.ButtonPecaType.EXERCITO,itemPeca.getJogador());
+                    buttons.add(currentButton);
+                    
+                    if (itemPeca.getClass() == Cidade.class) {
+                        currentButton.setType(ButtonPeca.ButtonPecaType.CIDADE_SEM_EXERCITOS);
+                    }
+                    else if (itemPeca.getClass() == Exercito.class) {
+                        currentButton.setType(ButtonPeca.ButtonPecaType.EXERCITO);
+                    }
+                }
+                else {
+                    // Marca já existente, verificar se precisa de ser actualizado
+                    if (currentButton.getType() == ButtonPeca.ButtonPecaType.CIDADE_SEM_EXERCITOS &&
+                        itemPeca.getClass() == Exercito.class)
+                    {
+                        currentButton.setType(ButtonPeca.ButtonPecaType.CIDADE_COM_EXERCITOS);
+                    }
+                    else if (currentButton.getType() == ButtonPeca.ButtonPecaType.EXERCITO &&
+                             itemPeca.getClass() == Cidade.class)
+                    {
+                        currentButton.setType(ButtonPeca.ButtonPecaType.CIDADE_COM_EXERCITOS);
+                    }
+                }
             }
             
-            break;
+            // Adicionar marcas à região
+            for (int k = 0; k < buttons.size(); k++)
+                mapPanel.add(buttons.get(k));
         }
         
         mapPanel.repaint();
-        
     }
 
 }

@@ -10,11 +10,11 @@ import pt.eightminutes.logic.Jogador;
 public class ButtonPeca extends JButton {
     
     public enum ButtonPecaType {
-        CIDADE_INICIAL, CIDADE_COM_EXERCITOS, EXERCITO
+        CIDADE_SEM_EXERCITOS, CIDADE_COM_EXERCITOS, EXERCITO
     }
     
     private ButtonPecaType type;
-    private Jogador jogador;    
+    private Jogador jogador;
     
     public ButtonPeca(int index, Point center, ButtonPecaType type, Jogador jogador) {
         
@@ -58,11 +58,11 @@ public class ButtonPeca extends JButton {
         setBounds(location.x, location.y, diameter, diameter);
         
         switch (type) {
-            case CIDADE_INICIAL:
-                setToolTipText("<html>Cidade Inicial<br>Sem informação</html>");
+            case CIDADE_SEM_EXERCITOS:
+                setToolTipText("<html>Cidade sem exércitos<br>Sem informação</html>");
                 break;
             case CIDADE_COM_EXERCITOS:
-                setToolTipText("<html>Cidade com Exércitos<br>Sem informação</html>");
+                setToolTipText("<html>Cidade com exércitos<br>Sem informação</html>");
                 break;
             case EXERCITO:
                 setToolTipText("<html>Exército<br>Sem informação</html>");
@@ -72,13 +72,13 @@ public class ButtonPeca extends JButton {
     }
     
     public void paintComponent(Graphics g) {
-        if (jogador != null)
-            g.setColor(jogador.getCor());
+        if (getJogador() != null)
+            g.setColor(getJogador().getCor());
         else
-            g.setColor(Color.RED);
+            g.setColor(Color.BLACK);
                 
-        switch (type) {
-            case CIDADE_INICIAL:
+        switch (getType()) {
+            case CIDADE_SEM_EXERCITOS:
                 g.drawOval(getHorizontalAlignment(), getVerticalAlignment(), getWidth()-1, getHeight()-1);
                 break;
             case CIDADE_COM_EXERCITOS:
@@ -88,6 +88,18 @@ public class ButtonPeca extends JButton {
                 g.fillRect(getHorizontalAlignment(), getVerticalAlignment(), getWidth(), getHeight());
                 break;
         }
+    }
+    
+    public Jogador getJogador() {
+        return jogador;
+    }
+    
+    public ButtonPecaType getType() {
+        return type;
+    }
+
+    public void setType(ButtonPecaType type) {
+        this.type = type;
     }
     
 }

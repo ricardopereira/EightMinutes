@@ -153,7 +153,7 @@ public class Jogo extends Base implements Serializable {
     }
     
     public void defineDadosJogadores(String nome, Color cor) {
-        setEstado(estadoActual.defineDadosJogadores(nome,cor));        
+        setEstado(estadoActual.defineDadosJogadores(nome,cor));
     }
     
     public void comecaApostas() {
@@ -162,7 +162,7 @@ public class Jogo extends Base implements Serializable {
     
     public void criaJogador(String nome, Color cor) {
         if (!nome.isEmpty()) {
-            jogadores.add(new Jogador(this, nome, cor, getMoedasPorJogador(), 14, 3));             
+            jogadores.add(new Jogador(this, nome, cor, getMoedasPorJogador(), 14, 3, jogadores.size()));             
         }
     }
    
