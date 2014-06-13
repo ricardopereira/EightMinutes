@@ -41,7 +41,7 @@ public class Baralho implements Serializable{
               
         adicionaCarta(3,recursoAlimento,1,true,new AccaoColocaCidade(1),null,2); //39
         adicionaCarta(35,recursoAlimento,1,true,new AccaoMoveExercito(3),null,1);
-        adicionaCarta(37,recursoAlimento,2,true,new AccaoMoveExercito(3),null,1);
+        adicionaCarta(37,recursoAlimento,2,true,new AccaoColocaExercito(3),null,1);
         adicionaCarta(11,recursoAlimento,1,true,new AccaoMoveExercito(4),null,2); //41
         adicionaCarta(17,recursoAlimento,1,true,new AccaoMoveExercito(5),null,1);
         adicionaCarta(5,recursoAlimento,1,true,new AccaoMoveExercitoAgua(3),null,1);
