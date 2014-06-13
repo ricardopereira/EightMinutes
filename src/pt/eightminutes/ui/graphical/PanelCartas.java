@@ -28,9 +28,9 @@ public class PanelCartas extends PanelBase implements Observer {
         
         this.setLayout(new FlowLayout(FlowLayout.CENTER));
         this.setBackground(Color.WHITE);
-        this.setPreferredSize(new Dimension(600,100));
-        this.setMinimumSize(new Dimension(600,100));
-        this.setMaximumSize(new Dimension(600,100));
+        this.setPreferredSize(new Dimension(600,150));
+        this.setMinimumSize(new Dimension(600,150));
+        this.setMaximumSize(new Dimension(600,150));
         
         showCartas();
     }
@@ -52,7 +52,11 @@ public class PanelCartas extends PanelBase implements Observer {
         
         // ToDo: Nome da carta consoante o ID
         
-        Image imgCarta = createImage("src/pt/eightminutes/ui/cards/card"+String.format("%03d",carta.getId())+".jpg");
+        Image imgCarta;
+        if (carta == null)
+            imgCarta = createImage("src/pt/eightminutes/ui/cards/card.jpg");
+        else
+            imgCarta = createImage("src/pt/eightminutes/ui/cards/card"+String.format("%03d",carta.getId())+".jpg");
         
         if (imgCarta != null) {
             // Formatar botão consoante a imagem
@@ -71,15 +75,28 @@ public class PanelCartas extends PanelBase implements Observer {
         return btCarta;
     }
     
-    public void showCartas() {        
-        if (getJogo().getCartasViradas().isEmpty())
-            return;
+    public void showCartas() {     
+        if (getJogo().getCartasViradas().isEmpty()) {
+            ButtonCarta btCarta;
+            for (int i = 0; i < 6; i++) {
+                btCarta = addButtonCarta(null);
+                btCarta.setIndex(i);
+            }
+        }
         
         // Cartas viradas
         Carta itemCarta;
         ButtonCarta btCarta;
         for (int i = 0; i < getJogo().getCartasViradas().size(); i++) {
             itemCarta = getJogo().getCartasViradas().get(i);
+            
+            // Verificar carta escolhida
+            if (getJogo().getJogadorActivo().getCartaActiva() == itemCarta) {
+                btCarta = addButtonCarta(null);
+                btCarta.setIndex(i);
+                continue;
+            }
+            
             // Cria botão
             btCarta = addButtonCarta(itemCarta);
             btCarta.setIndex(i);
@@ -109,7 +126,7 @@ public class PanelCartas extends PanelBase implements Observer {
             setEnabled(true);
         }
         else {
-            setEnabled(false);
+            //setEnabled(false);
         }
     }
 

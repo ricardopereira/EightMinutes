@@ -19,9 +19,9 @@ public class PanelComandos extends PanelBase implements Observer {
         
         this.setLayout(new FlowLayout(FlowLayout.CENTER));
         this.setBackground(new Color(232,232,232));
-        this.setPreferredSize(new Dimension(800,220));
-        this.setMinimumSize(new Dimension(800,220));
-        this.setMaximumSize(new Dimension(800,220));
+        this.setPreferredSize(new Dimension(800,170));
+        this.setMinimumSize(new Dimension(800,170));
+        this.setMaximumSize(new Dimension(800,170));
     }
 
     @Override

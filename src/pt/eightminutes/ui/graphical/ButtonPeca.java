@@ -30,16 +30,16 @@ public class ButtonPeca extends JButton {
                 location = new Point(center.x-diameter-margin,center.y-diameter-margin);
                 break;
             case 1: //Posicao 2
-                location = new Point(center.x-diameter-margin,center.y+diameter+margin);
-                break;
-            case 2: //Posicao 3
                 location = new Point(center.x+diameter+margin,center.y-diameter-margin);
                 break;
+            case 2: //Posicao 3
+                location = new Point(center.x,center.y);
+                break;
             case 3: //Posicao 4
-                location = new Point(center.x+diameter+margin,center.y+diameter+margin);
+                location = new Point(center.x-diameter-margin,center.y+diameter+margin);
                 break;
             case 4: //Posicao 5
-                location = new Point(center.x,center.y);
+                location = new Point(center.x+diameter+margin,center.y+diameter+margin);
                 break;
             default:
                 // Inválido

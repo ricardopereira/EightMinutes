@@ -38,10 +38,11 @@ public class PanelMapa extends PanelBase implements Observer {
         this.model = model;
 
         this.setLayout(null);
-        this.setBackground(Color.WHITE);
-        this.setPreferredSize(new Dimension(512,400));
-        this.setMinimumSize(new Dimension(512,400));
-        this.setMaximumSize(new Dimension(512,400));
+
+        this.setBackground(new Color(13,53,114));
+        this.setPreferredSize(new Dimension(600,480));
+        this.setMinimumSize(new Dimension(600,480));
+        this.setMaximumSize(new Dimension(600,480));
                 
         // ToDo: Obter caminho pelo getResources
         //poderá causar problemas com a criação do jar final

@@ -41,7 +41,7 @@ public class FrameMain extends JFrame implements Observer {
     
     public FrameMain(DataController controller)
     {
-        this(controller, 150, 150, 1000, 800);
+        this(controller, 150, 0, 1000, 850);
     }
     
     public FrameMain(DataController controller, int x, int y, int width, int height)
