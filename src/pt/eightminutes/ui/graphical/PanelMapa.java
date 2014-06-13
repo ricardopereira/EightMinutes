@@ -1,17 +1,12 @@
 package pt.eightminutes.ui.graphical;
 
 import java.awt.AWTException;
-import pt.eightminutes.ui.map.MapData;
-import pt.eightminutes.ui.map.IMapData;
-import pt.eightminutes.ui.map.MapDataModel;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
-import java.awt.Robot;
 import java.awt.Shape;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -23,57 +18,50 @@ import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JPanel;
+
+import pt.eightminutes.ui.map.IMapData;
+import pt.eightminutes.ui.map.MapDataModel;
 
 import pt.eightminutes.logic.*;
 import pt.eightminutes.states.*;
 
-// Classe auxiliar para o mapa
-class MapBackground extends JPanel implements Observer {
-
-    DataController controller;
-    MapDataModel model;
+public class PanelMapa extends PanelBase implements Observer {
     
-    Robot robot;
+    final private MapDataModel model;
     
     String nameRegiao = null;
-
-    MapBackground(final MapDataModel model, DataController controller) throws AWTException {
-        this.robot = new Robot();
+    
+    public PanelMapa(PanelBase owner, DataController controller, final MapDataModel model) throws AWTException {
+        super(owner,controller);
+        
         model.addObserver(this);
         this.model = model;
-        this.controller = controller;
-        
+
         this.setLayout(null);
+        this.setBackground(Color.WHITE);
         this.setPreferredSize(new Dimension(512,400));
         this.setMinimumSize(new Dimension(512,400));
         this.setMaximumSize(new Dimension(512,400));
-        
+                
+        // ToDo: Obter caminho pelo getResources
+        //poderá causar problemas com a criação do jar final
+        loadMap(new File("src/pt/eightminutes/ui/graphical/resources/map/eightminutes.map"));
+
         // Evento para o clique do rato
-        addMouseListener(new MouseAdapter()  {
+        addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent ev) {
                 
                 if (!isEnabled())
                     return;
                 
-                Point center = ev.getPoint();
                 
-                center = model.getCenterPoint(model.getRegion(center));
-                
-                //ButtonPeca btPeca;
-                
-                // Teste
-                //btPeca = new ButtonPeca(4,center,ButtonPeca.ButtonPecaType.CIDADE_COM_EXERCITOS,null);
-                //add(btPeca);
 
                 repaint();
             }
         });
 
         // Evento MouseOver para apresentar nome da região
-        addMouseMotionListener(new MouseMotionAdapter() {
+        addMouseMotionListener(new MouseMotionAdapter() {            
             @Override
             public void mouseMoved(MouseEvent ev) {
                 String s = model.getRegion(ev.getPoint());
@@ -83,70 +71,6 @@ class MapBackground extends JPanel implements Observer {
                 }
             }
         });
-    }
-
-    @Override
-    public void update(Observable o, Object arg) {
-        repaint();
-    }
-
-    @Override
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-
-        int x = 0, y = 0;
-        Image img = model.getMapBackground();
-
-        // Desenha o mapa
-        if (img != null)
-            g.drawImage(img, x, y, null);
-        else
-            g.drawString("Sem mapa", x+10, y+10);
-
-        if (nameRegiao != null) {
-            g.drawString(nameRegiao, x+10, y+10);
-        }
-
-        for (Shape a : model.getRegions())
-        {
-            //Graphics2D g2d = (Graphics2D)g;
-            //g2d.draw(a);
-        }
-        
-        // Região inicial
-        Regiao regiaoInicial = controller.getJogo().getMapa().getRegiaoInicial();
-        Shape regionShape = model.getShape(regiaoInicial.getAreaName());
-        Graphics2D g2d = (Graphics2D)g;
-        g2d.setColor(new Color(250,229,220));
-        g2d.fill(regionShape);
-    }	
-}
-
-public class PanelMapa extends PanelBase implements Observer {
-        
-    private MapDataModel model = new MapDataModel(new MapData());
-    private MapBackground mapPanel;
-    
-    public PanelMapa(PanelBase owner, DataController controller) {
-        super(owner,controller);
-
-        this.setBackground(Color.WHITE);
-        this.setPreferredSize(new Dimension(600,400));
-        this.setMinimumSize(new Dimension(600,400));
-        this.setMaximumSize(new Dimension(600,400));
-        
-        try {
-            // Mapa
-            mapPanel = new MapBackground(model,getController());
-        } catch (AWTException ex) {
-            Logger.getLogger(PanelMapa.class.getName()).log(Level.SEVERE, null, ex);
-        }
-                
-        // ToDo: Obter caminho pelo getResources
-        //poderá causar problemas com a criação do jar final
-        loadMap(new File("src/pt/eightminutes/ui/graphical/resources/map/eightminutes.map"));
-                
-        this.add(mapPanel, BorderLayout.CENTER);
     }
     
     public void loadMap(File f) {
@@ -164,8 +88,7 @@ public class PanelMapa extends PanelBase implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        
-        updateLogic();
+        updateJogadores();
         
         // Acção
         if (getJogo().getEstadoActual().getClass() == AguardaColocaCidade.class ||
@@ -179,11 +102,13 @@ public class PanelMapa extends PanelBase implements Observer {
         else {
             setEnabled(false);
         }
+        
+        repaint();
     }
     
-    public void updateLogic() {
+    public void updateJogadores() {
         
-        mapPanel.removeAll();
+        removeAll();
         
         ArrayList<ButtonPeca> buttons;
         
@@ -242,10 +167,39 @@ public class PanelMapa extends PanelBase implements Observer {
             
             // Adicionar marcas à região
             for (int k = 0; k < buttons.size(); k++)
-                mapPanel.add(buttons.get(k));
+                add(buttons.get(k));
+        }
+    }
+
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        int x = 0, y = 0;
+        Image img = model.getMapBackground();
+
+        // Desenha o mapa
+        if (img != null)
+            g.drawImage(img, x, y, null);
+        else
+            g.drawString("Sem mapa", x+10, y+10);
+
+        if (nameRegiao != null) {
+            g.drawString(nameRegiao, x+10, y+10);
+        }
+
+        for (Shape a : model.getRegions())
+        {
+            //Graphics2D g2d = (Graphics2D)g;
+            //g2d.draw(a);
         }
         
-        mapPanel.repaint();
-    }
+        // Região inicial
+        Regiao regiaoInicial = getController().getJogo().getMapa().getRegiaoInicial();
+        Shape regionShape = model.getShape(regiaoInicial.getAreaName());
+        Graphics2D g2d = (Graphics2D)g;
+        g2d.setColor(new Color(250,229,220));
+        g2d.fill(regionShape);
+    }	
 
 }

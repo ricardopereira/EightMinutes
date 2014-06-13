@@ -1,5 +1,6 @@
 package pt.eightminutes.ui.graphical;
 
+import java.awt.AWTException;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
@@ -8,12 +9,16 @@ import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import pt.eightminutes.logic.Regiao;
+import pt.eightminutes.ui.map.MapData;
+import pt.eightminutes.ui.map.MapDataModel;
 
 public class FrameMain extends JFrame implements Observer {
     
@@ -60,12 +65,20 @@ public class FrameMain extends JFrame implements Observer {
         controller.notifyObservers();
     }
     
+    private MapDataModel model = new MapDataModel(new MapData());
+    
     protected void init()
     {
         controller.init();
         
         // Zonas
-        panelMapa = new PanelMapa(null,controller);
+        try {
+            // Mapa
+            panelMapa = new PanelMapa(null,controller,model);
+        } catch (AWTException ex) {
+            Logger.getLogger(PanelMapa.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        // Restante zonas
         panelCartas = new PanelCartas(null,controller);
         panelInfo = new PanelInformacao(null,controller);
         panelOpcoes = new PanelComandos(null,controller);
@@ -127,7 +140,10 @@ public class FrameMain extends JFrame implements Observer {
         panelCentral.add(panelInfo,BorderLayout.EAST);
         
         // Mapa
-        panelJogo.add(panelMapa,BorderLayout.CENTER);
+        JPanel map = new JPanel();
+        map.setBackground(panelMapa.getBackground());
+        map.add(panelMapa, BorderLayout.CENTER);
+        panelJogo.add(map, BorderLayout.CENTER);
         // Cartas
         panelJogo.add(panelCartas,BorderLayout.SOUTH);
     }

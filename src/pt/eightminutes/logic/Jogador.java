@@ -34,10 +34,10 @@ public class Jogador extends Base implements Serializable {
         this.cor = cor;
         this.index = index;
         
-        for(int i=0;i<qtdExercito;i++)
+        for (int i = 0; i < qtdExercito; i++)
             listaExercitos.add(new Exercito(this));
         
-        for(int m=0;m<qtdCidades;m++)
+        for (int m = 0; m < qtdCidades; m++)
             listaCidades.add(new Cidade(this));                   
     }
     
