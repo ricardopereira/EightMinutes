@@ -18,6 +18,8 @@ public class AccaoColocaExercito extends Accao{
     
     public int executa(Object sender, List params) {
         Integer qtd;
+        Regiao regiaoInicial = null;
+        
         if (sender == null) return 0;
         if (params == null) return 0;
         if (!(sender instanceof Jogo)) return 0;
@@ -28,16 +30,21 @@ public class AccaoColocaExercito extends Accao{
         if(params.get(1)!=null)
             qtd = (Integer)params.get(1);
         else
-            qtd =0;
+            qtd = 0;
+        if(params.get(2)!=null)
+            regiaoInicial = (Regiao)params.get(2);
         // Execução
-        internalColocaExercito(j.getJogadorActivo(),regiao,qtd);
+        internalColocaExercito(j.getJogadorActivo(),regiao,qtd,regiaoInicial);
         // Ok
         return 0;
     }
     
-    private void internalColocaExercito(Jogador jogador, Regiao regiao, Integer qtd) {
+    private void internalColocaExercito(Jogador jogador, Regiao regiao, Integer qtd, Regiao regiaoInicial) {
         if(regiao!=null)
         {
+            if (regiao != regiaoInicial && !regiao.RegiaoTemCidadesDoJogador(jogador))
+                return;
+
             // Número de exercitos a colocar
             for (int i=0;i<qtd;i++){
                 // Lista de exercitos do Jogador

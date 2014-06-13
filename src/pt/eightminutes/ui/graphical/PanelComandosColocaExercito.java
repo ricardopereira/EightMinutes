@@ -3,13 +3,14 @@ package pt.eightminutes.ui.graphical;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 import pt.eightminutes.logic.Accao;
+import pt.eightminutes.logic.Jogador;
 import pt.eightminutes.logic.Regiao;
 
 public class PanelComandosColocaExercito extends PanelBase {
@@ -17,7 +18,17 @@ public class PanelComandosColocaExercito extends PanelBase {
     public PanelComandosColocaExercito(PanelBase owner, DataController controller) {
         super(owner,controller);
         
-        Accao accao = getJogo().getJogadorActivo().getCartaActiva().getAccaoActiva();
+        // Eventos
+        controller.addListener(new actionOnSelectRegiao());
+                
+        Jogador jogador = getJogo().getJogadorActivo();        
+        
+        // Regiões válidas
+        ArrayList<Regiao> regioesValidas = jogador.getListaRegioesComCidade();
+        regioesValidas.add(getJogo().getMapa().getRegiaoInicial());
+        controller.setFocusRegioes(regioesValidas);
+
+        Accao accao = jogador.getCartaActiva().getAccaoActiva();
         
         this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         this.add(new JLabel("Acção Coloca Exercito"), BorderLayout.CENTER);
@@ -26,7 +37,8 @@ public class PanelComandosColocaExercito extends PanelBase {
         final JTextField edQtdExercitos = new JTextField("1");
             
         this.add(edQtdExercitos, BorderLayout.CENTER);
-        JButton btColocaExercito = new JButton("Coloca Exercito");
+        JButton btColocaExercito = new JButton("Coloca Exercito");        
+        
         btColocaExercito.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e)
@@ -49,6 +61,7 @@ public class PanelComandosColocaExercito extends PanelBase {
                 {
                     getJogo().colocaExercito(regiao, myQtd);
                     getController().setSelectedRegiao(null);
+                    getController().setFocusRegioes(null);
                 }   
                 else
                 {                        
@@ -58,6 +71,30 @@ public class PanelComandosColocaExercito extends PanelBase {
             }
         });
         this.add(btColocaExercito, BorderLayout.CENTER);                       
+    }
+    
+    final public class actionOnSelectRegiao implements DataControllerListener {
+        @Override
+        public void onSelectRegiao() {
+            Regiao regiao = getController().getSelectedRegiao();
+            if (regiao == null) 
+                return;
+            
+            boolean escolhaValida = false;
+            if (getController().getFocusRegioes() != null)
+                for (Regiao item : getController().getFocusRegioes()) {
+                    if (item == regiao) {
+                        escolhaValida = true;
+                        break;
+                    }
+                }
+            
+            if (!escolhaValida)
+                getController().setSelectedRegiao(null);
+        }
+        public void onFocusRegioes() {
+            
+        }
     }
 
 }

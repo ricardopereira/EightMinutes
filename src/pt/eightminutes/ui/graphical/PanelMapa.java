@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 import pt.eightminutes.ui.map.IMapData;
 import pt.eightminutes.ui.map.MapDataModel;
@@ -49,7 +50,7 @@ public class PanelMapa extends PanelBase implements Observer {
         // Caminho do mapa
         URL url = Resources.getResourceFile("resources/map/eightminutes.map");
         loadMap(url);
-
+        
         // Evento para o clique do rato
         addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent ev) {
@@ -200,9 +201,6 @@ public class PanelMapa extends PanelBase implements Observer {
             //g2d.draw(a);
         }
         
-        // Região seleccionada
-        paintRegiao(g,getController().getSelectedRegiao(),Color.YELLOW);
-        
         // Focus nas regiões
         if (getController().getFocusRegioes() != null) {
             for (Regiao focus : getController().getFocusRegioes()) {
@@ -210,12 +208,19 @@ public class PanelMapa extends PanelBase implements Observer {
             }
         }
         
+        // Região seleccionada
+        paintRegiao(g,getController().getSelectedRegiao(),Color.YELLOW);
+        
         // Região inicial
         Regiao regiaoInicial = getController().getJogo().getMapa().getRegiaoInicial();
         if (regiaoInicial != null) {
-            ImageIcon icon = new ImageIcon(Resources.getResourceFile("resources/images/flag.gif"));
+            ImageIcon iconFlag = new ImageIcon(Resources.getResourceFile("resources/images/flag.gif"));
             Point center = model.getCenterPoint(regiaoInicial.getAreaName());
-            g.drawImage(icon.getImage(), center.x, center.y - icon.getIconHeight(), null);
+            // ToDo: Animação
+            //JLabel flag = new JLabel(icon);
+            //flag.setBounds(center.x, center.y - icon.getIconHeight(), icon.getIconWidth(), icon.getIconHeight());
+            //this.add(flag);
+            g.drawImage(iconFlag.getImage(), center.x, center.y - iconFlag.getIconHeight(), null);
         }
     }
     

@@ -56,7 +56,21 @@ public class Regiao implements Serializable {
     public boolean RegiaoTemExercitosDoJogador(Jogador jogador){
         boolean myResult = false;
         for (int i = 0; i < getPecas().size(); i++) {
-            if (getPecas().get(i).getJogador() == jogador) {
+            if (getPecas().get(i).getClass() == Exercito.class &&
+                getPecas().get(i).getJogador() == jogador) {
+                myResult = true;
+                break;
+            }
+        }
+
+        return myResult;        
+    }
+    
+    public boolean RegiaoTemCidadesDoJogador(Jogador jogador){
+        boolean myResult = false;
+        for (int i = 0; i < getPecas().size(); i++) {
+            if (getPecas().get(i).getClass() == Cidade.class &&
+                getPecas().get(i).getJogador() == jogador) {
                 myResult = true;
                 break;
             }

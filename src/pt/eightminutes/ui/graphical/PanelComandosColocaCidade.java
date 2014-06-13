@@ -20,9 +20,10 @@ public class PanelComandosColocaCidade extends PanelBase {
         super(owner,controller);
         
         // Eventos
-        Jogador jogador = controller.getJogo().getJogadorActivo();        
-        
         controller.addListener(new actionOnSelectRegiao());
+        
+        Jogador jogador = controller.getJogo().getJogadorActivo();
+        
         controller.setFocusRegioes(jogador.getListaRegioesComExercito());
         
         this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));

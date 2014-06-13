@@ -26,6 +26,7 @@ public class AguardaColocaExercito extends EstadosAdapter{
         ArrayList<Object> params = new ArrayList<>();
         params.add(regiao);
         params.add(qtd);
+        params.add(getJogo().getMapa().getRegiaoInicial());
         Carta carta = getJogo().getJogadorActivo().getCartaActiva();
         Accao accao = carta.getAccaoActiva();
         if(accao==null)
