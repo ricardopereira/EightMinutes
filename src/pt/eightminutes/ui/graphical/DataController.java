@@ -4,12 +4,17 @@ import java.awt.Color;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Observable;
+
 import pt.eightminutes.states.EstadoListener;
-import pt.eightminutes.logic.Jogo;
+import pt.eightminutes.logic.*;
 
 public class DataController extends Observable {
     
     private Jogo jogo;
+    
+    // Dados partilhados
+    private Regiao selectedRegiao = null;
+    private ArrayList<Regiao> focusRegioes = null;
     
     final private class updateOnSetEstado implements EstadoListener {
         @Override
@@ -48,6 +53,34 @@ public class DataController extends Observable {
     public void update() {
         setChanged();
         notifyObservers();
+    }
+    
+    /**
+     * @return the selectedRegiao
+     */
+    public Regiao getSelectedRegiao() {
+        return selectedRegiao;
+    }
+
+    /**
+     * @param selectedRegiao the selectedRegiao to set
+     */
+    public void setSelectedRegiao(Regiao selectedRegiao) {
+        this.selectedRegiao = selectedRegiao;
+    }
+    
+    /**
+     * @return the focusRegioes
+     */
+    public ArrayList<Regiao> getFocusRegioes() {
+        return focusRegioes;
+    }
+
+    /**
+     * @param focusRegioes the focusRegioes to set
+     */
+    public void setFocusRegioes(ArrayList<Regiao> focusRegioes) {
+        this.focusRegioes = focusRegioes;
     }
     
 }

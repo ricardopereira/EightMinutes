@@ -29,7 +29,6 @@ public class PanelMapa extends PanelBase implements Observer {
     
     final private MapDataModel model;
     
-    private Regiao selectedRegiao = null;
     private String nameRegiao = null;
     
     public PanelMapa(PanelBase owner, DataController controller, final MapDataModel model) throws AWTException {
@@ -56,9 +55,9 @@ public class PanelMapa extends PanelBase implements Observer {
                     return;
                 
                 String areaName = model.getRegion(ev.getPoint());
-                if (selectedRegiao != null && selectedRegiao.getAreaName().equals(areaName))
+                if (getController().getSelectedRegiao() != null && getController().getSelectedRegiao().getAreaName().equals(areaName))
                     return;
-                selectedRegiao = getController().getJogo().getMapa().getRegiaoByAreaName(areaName);
+                getController().setSelectedRegiao(getController().getJogo().getMapa().getRegiaoByAreaName(areaName));
                 repaint();
             }
         });
@@ -202,10 +201,14 @@ public class PanelMapa extends PanelBase implements Observer {
         paintRegiao(g,regiaoInicial,new Color(250,229,220));
         
         // Região seleccionada
-        paintRegiao(g,selectedRegiao,Color.GREEN);
+        paintRegiao(g,getController().getSelectedRegiao(),Color.GREEN);
         
-        // Lista de regiões
-        
+        // Focus nas regiões
+        if (getController().getFocusRegioes() != null) {
+            for (Regiao focus : getController().getFocusRegioes()) {
+                paintRegiao(g,focus,Color.GRAY);
+            }
+        }
     }
     
     public void paintRegiao(Graphics g, Regiao regiao, Color cor) {
@@ -214,10 +217,6 @@ public class PanelMapa extends PanelBase implements Observer {
         Graphics2D g2d = (Graphics2D)g;
         g2d.setColor(cor);
         g2d.fill(regionShape);
-    }
-    
-    public Regiao getSelectedRegiao() {
-        return selectedRegiao;
     }
 
 }

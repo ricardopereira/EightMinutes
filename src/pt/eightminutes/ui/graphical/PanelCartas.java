@@ -10,18 +10,16 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JPanel;
 
 import pt.eightminutes.logic.*;
 import pt.eightminutes.states.AguardaEscolheCarta;
-import pt.eightminutes.states.AguardaOpcoesJogo;
 
 public class PanelCartas extends PanelBase implements Observer {
         
