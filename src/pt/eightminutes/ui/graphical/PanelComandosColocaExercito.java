@@ -31,14 +31,24 @@ public class PanelComandosColocaExercito extends PanelBase {
             @Override
             public void actionPerformed(ActionEvent e)
             {
+                // Região seleccionada
                 Regiao regiao = getController().getSelectedRegiao();
+                
+                if (regiao == null)
+                {
+                   String msg = String.format("Deve definir uma região.");
+                   JOptionPane.showMessageDialog(null,msg,"Coloca Cidade",JOptionPane.WARNING_MESSAGE);
+                   return;
+                }
+                
+                // Acção activa
                 Accao accao = getJogo().getJogadorActivo().getCartaActiva().getAccaoActiva();
-                int myQtd = Integer.parseInt(edQtdExercitos.getText());                  
+                int myQtd = Integer.parseInt(edQtdExercitos.getText());
 
                 if (myQtd >= 1 && myQtd <= accao.getQtd())
                 {
-                    regiao = null;
-                    getJogo().colocaExercito(regiao, Integer.parseInt(edQtdExercitos.getText()));
+                    getJogo().colocaExercito(regiao, myQtd);
+                    getController().setSelectedRegiao(null);
                 }   
                 else
                 {                        

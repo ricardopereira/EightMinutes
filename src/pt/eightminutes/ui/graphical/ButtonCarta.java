@@ -26,4 +26,11 @@ public class ButtonCarta extends JButton {
         this.index = index;
     }
 
+    /**
+     * @return the carta
+     */
+    public Carta getCarta() {
+        return carta;
+    }
+
 }

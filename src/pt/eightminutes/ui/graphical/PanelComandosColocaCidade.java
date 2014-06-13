@@ -49,7 +49,7 @@ public class PanelComandosColocaCidade extends PanelBase {
                     }
                     else
                     {
-                       String msg = "Não pode colocar cidades na regiãi inicial!";
+                       String msg = "Não pode colocar cidades na região inicial!";
                        JOptionPane.showMessageDialog(null,msg,"Coloca Cidade",JOptionPane.WARNING_MESSAGE);
                     }
                 }
