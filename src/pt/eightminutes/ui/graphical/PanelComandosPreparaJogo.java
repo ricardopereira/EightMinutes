@@ -64,11 +64,11 @@ public class PanelComandosPreparaJogo extends PanelBase {
                     
                     // ToDo: Cores num local adequado
                     ArrayList<Color> cores = new ArrayList<Color>();
-                    cores.add(Color.GREEN);
-                    cores.add(Color.RED);
-                    cores.add(Color.BLUE);
-                    cores.add(Color.CYAN);
-                    cores.add(Color.ORANGE);
+                    cores.add(new Color(250,199,122));
+                    cores.add(new Color(149,111,155));
+                    cores.add(new Color(213,120,135));
+                    cores.add(new Color(254,180,163));
+                    cores.add(new Color(184,104,133));
                     
                     for (JTextField item : edits) {
                         getJogo().criaJogador(item.getText(), cores.get(getJogo().getJogadores().size()));
