@@ -7,7 +7,7 @@ public class PanelComandosJokers extends PanelBase {
     
     public PanelComandosJokers(PanelBase owner, DataController controller) {
         super(owner,controller);
-        
+                        
         this.add(new JLabel("Jokers"), BorderLayout.CENTER);
     }
     
