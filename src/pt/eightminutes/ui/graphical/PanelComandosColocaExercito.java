@@ -62,7 +62,8 @@ public class PanelComandosColocaExercito extends PanelBase {
                 {
                     getJogo().colocaExercito(regiao, myQtd);
                     getController().setSelectedRegiao(null);
-                    getController().setFocusRegioes(null);
+                    if (accao.getQtd() == 0)
+                        getController().setFocusRegioes(null);
                 }   
                 else
                 {                        

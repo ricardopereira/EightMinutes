@@ -22,6 +22,8 @@ import pt.eightminutes.logic.*;
 import pt.eightminutes.states.AguardaEscolheCarta;
 
 public class PanelCartas extends PanelBase implements Observer {
+    
+    private boolean ready = false;
         
     public PanelCartas(PanelBase owner, DataController controller) {
         super(owner,controller);
@@ -103,6 +105,8 @@ public class PanelCartas extends PanelBase implements Observer {
             btCarta.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    if (!ready)
+                        return;
                     // Clique na carta
                     ButtonCarta btCarta = ((ButtonCarta)e.getSource());
                     int indexCarta = btCarta.getIndex();
@@ -124,10 +128,12 @@ public class PanelCartas extends PanelBase implements Observer {
         showCartas();
         // Escolha da carta
         if (getJogo().getEstadoActual().getClass() == AguardaEscolheCarta.class) {
-            setEnabled(true);
+            //setEnabled(true);
+            ready = true;
         }
         else {
             //setEnabled(false);
+            ready = false;
         }
     }
 

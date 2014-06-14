@@ -67,11 +67,11 @@ public class PanelMapa extends PanelBase implements Observer {
         });
 
         // Evento MouseOver para apresentar nome da região
-        addMouseMotionListener(new MouseMotionAdapter() {            
+        addMouseMotionListener(new MouseMotionAdapter() {          
             @Override
             public void mouseMoved(MouseEvent ev) {
                 String s = model.getRegion(ev.getPoint());
-                if (s != nameRegiao){
+                if (s != nameRegiao) {
                     nameRegiao = s;
                     repaint();
                 }
