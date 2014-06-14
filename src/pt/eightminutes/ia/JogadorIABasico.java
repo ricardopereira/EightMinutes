@@ -33,7 +33,7 @@ public class JogadorIABasico extends JogadorIA{
             //define aleatoriamente qual é a aposta num intervalo definido entre 0 e o máximo das moedas
             int x = utils.randInt(0, ctrl.getJogo().getMoedasPorJogador());
             
-            ctrl.getJogo().apostaJogador(jogadorIA, x);
+            ctrl.getJogo().defineApostasJogadores(ctrl.getJogo().getJogadorActivo(), x);
         }
         else
         if(estado.getClass() == AguardaEscolheCarta.class) {

@@ -11,23 +11,13 @@ import pt.eightminutes.logic.*;
 public class PanelComandosApostas extends PanelBase {
     
     public PanelComandosApostas(PanelBase owner, DataController controller) {
-        super(owner,controller);
+        super(owner,controller);          
         
-        Jogador jogador = null;
-                        
-        for (int i = 0; i < getJogo().getJogadores().size(); i++) {
-            jogador = getJogo().getJogadores().get(i);
-            if (jogador.getAposta() == -1) {
-                break;
-            }
-            jogador = null;
-        }
+        final Jogador jogadorActivo = getJogo().getJogadorActivo();
         
-        final Jogador jogadorActivo = jogador;
-        
-        if (jogador != null) {
+        if (jogadorActivo != null) {
             
-            this.add(new JLabel("Aposta para Jogador: "+jogador.getNome()), BorderLayout.CENTER);
+            this.add(new JLabel("Aposta para Jogador: "+jogadorActivo.getNome()), BorderLayout.CENTER);
             
             final JTextField edAposta = new JTextField("0");
             
@@ -42,10 +32,7 @@ public class PanelComandosApostas extends PanelBase {
                 }
             });
             this.add(btAposta, BorderLayout.CENTER);
-        }
-        else
-            getJogo().comecaJogo();
-        
+        }      
     }
     
 }

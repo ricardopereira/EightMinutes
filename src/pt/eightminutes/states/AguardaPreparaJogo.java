@@ -23,9 +23,16 @@ public class AguardaPreparaJogo extends EstadosAdapter {
     }
     
     @Override
-    public IEstados defineDadosJogadores(String nome, Color cor) {
+    public IEstados defineDadosJogadores(String nome, Color cor) {        
         getJogo().criaJogador(nome,cor);
-        return this; 
+        
+        if(getJogo().getJogadores().size() == getJogo().getNumJogadores())
+        {
+            getJogo().setJogadorActivo(getJogo().getJogadores().get(0));
+            return new AguardaAposta(getJogo());
+        }
+        else
+            return this; 
     }
     
     @Override

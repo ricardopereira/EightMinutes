@@ -18,9 +18,27 @@ public class AguardaAposta extends EstadosAdapter{
     
     @Override
     public IEstados defineApostasJogadores(Jogador jogador,int numMoedas) {
+        boolean faltaApostar = false;
+        getJogo().apostaJogador(jogador, numMoedas);    
+        for(int i=0;i<getJogo().getJogadores().size();i++)
+        {
+            if(getJogo().getJogadores().get(i).getAposta()==-1)
+            {
+                faltaApostar = true;
+                break;
+            }
+        }
         
-        getJogo().apostaJogador(jogador, numMoedas);       
-        return this;
+        if(faltaApostar)        
+        {
+            getJogo().passaVez();            
+            return this;
+        }
+        else       
+        {            
+            getJogo().comecaJogo();
+            return new AguardaEscolheCarta(getJogo());
+        }        
     }
 
     @Override

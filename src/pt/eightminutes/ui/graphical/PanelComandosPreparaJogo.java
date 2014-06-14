@@ -101,6 +101,7 @@ public class PanelComandosPreparaJogo extends PanelBase {
                     }
 
                     // Jogadore criados...
+                    getJogo().setJogadorActivo(getJogo().getJogadores().get(0));
                     getJogo().comecaApostas();
                 }
             });
