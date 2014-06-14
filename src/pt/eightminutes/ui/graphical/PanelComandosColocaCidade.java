@@ -67,6 +67,8 @@ public class PanelComandosColocaCidade extends PanelBase {
             public void actionPerformed(ActionEvent e)
             {
                 getJogo().passaVez();
+                getController().setSelectedRegiao(null);
+                getController().setFocusRegioes(null);
             }
         });
         

@@ -38,7 +38,7 @@ public class PanelComandosColocaExercito extends PanelBase {
         final JTextField edQtdExercitos = new JTextField("1");    
         this.add(edQtdExercitos, BorderLayout.CENTER);
 
-        JButton btColocaExercito = new JButton("Coloca Exercito");        
+        JButton btColocaExercito = new JButton("Coloca Exército");        
         btColocaExercito.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e)
@@ -49,7 +49,7 @@ public class PanelComandosColocaExercito extends PanelBase {
                 if (regiao == null)
                 {
                    String msg = String.format("Deve definir uma região.");
-                   JOptionPane.showMessageDialog(null,msg,"Coloca Cidade",JOptionPane.WARNING_MESSAGE);
+                   JOptionPane.showMessageDialog(null,msg,"Coloca Exército",JOptionPane.WARNING_MESSAGE);
                    return;
                 }
                 
@@ -66,7 +66,7 @@ public class PanelComandosColocaExercito extends PanelBase {
                 else
                 {                        
                     String msg = String.format("Deve definir uma quantidade entre 1 e %s", accao.getQtd());
-                    JOptionPane.showMessageDialog(null,msg,"Coloca Exercito",JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null,msg,"Coloca Exército",JOptionPane.WARNING_MESSAGE);
                 }
             }
         });
@@ -77,6 +77,8 @@ public class PanelComandosColocaExercito extends PanelBase {
             public void actionPerformed(ActionEvent e)
             {
                 getJogo().passaVez();
+                getController().setSelectedRegiao(null);
+                getController().setFocusRegioes(null);
             }
         });
         

@@ -486,15 +486,17 @@ public class IUTexto {
         }
     }
     
-    public void menuDestroiExercito(){                        
+    public void menuDestroiExercito() {
         int opInt=0;
         int myCont=0;
         int opcoes=1;
+        
         ArrayList<Exercito> exercitos= new ArrayList<>();
         ArrayList<Exercito> exercitosAux= new ArrayList<>();
+        
         System.out.println("######## Destroi Exercito ########");  
         System.out.println("#### Jogador:"+jogo.getJogadorActivo().getNome()+"(Moedas:"+jogo.getJogadorActivo().getMoedas()+") ###");
-        System.out.println("Passa vez:0");   
+        System.out.println("Passa vez:0");
         if(jogo.getEstadoAnterior().getClass() == AguardaEscolheAccao.class){
             opcoes++;
             myCont++;

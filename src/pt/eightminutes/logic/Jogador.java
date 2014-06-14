@@ -436,4 +436,9 @@ public class Jogador extends Base implements Serializable {
     public int getIndex() {
         return index;
     }
+    
+    @Override
+    public String toString() {
+        return getNome();
+    }
 }

@@ -17,6 +17,7 @@ import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import pt.eightminutes.logic.Accao;
 import pt.eightminutes.logic.Carta;
@@ -35,7 +36,20 @@ public class PanelComandosEscolheAccao extends PanelBase implements Observer{
         this.setMinimumSize(new Dimension(600,100));
         this.setMaximumSize(new Dimension(600,100));
         
-        showAccoes();                
+        showAccoes();
+        
+        JButton btPassaVez = new JButton("Passa vez");
+        btPassaVez.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                getJogo().passaVez();
+                getController().setSelectedRegiao(null);
+                getController().setFocusRegioes(null);
+            }
+        });
+        
+        this.add(btPassaVez, BorderLayout.CENTER);
     }
     
     public void showAccoes() {               

@@ -369,6 +369,20 @@ public class Mapa extends Base implements Serializable {
     }
     
     /**
+     * @return the regioes
+     */
+    public ArrayList<Regiao> getRegioesComExercitos() {
+        ArrayList<Regiao> list = new ArrayList<>();
+        
+        for (Regiao regiao : getRegioes()) {
+            if (!regiao.getExercitos().isEmpty())
+                list.add(regiao);
+        }
+        
+        return list;
+    }
+    
+    /**
      * @param name @return the regiao
      */
     public Regiao getRegiaoByAreaName(String name) {

@@ -50,7 +50,7 @@ public class PanelComandos extends PanelBase implements Observer {
             showThis(new PanelComandosColocaExercito(this,getController()));
         }
         else if (getJogo().getEstadoActual().getClass() == AguardaDestroiExercito.class) {
-            showThis(new PanelComandosEsperaAccao(this,getController(),"Destruír exércitos dos adversário"));
+            showThis(new PanelComandosDestroiExercito(this,getController()));
         }
         else if (getJogo().getEstadoActual().getClass() == AguardaMoveExercito.class) {
             showThis(new PanelComandosMoveExercito(this,getController()));

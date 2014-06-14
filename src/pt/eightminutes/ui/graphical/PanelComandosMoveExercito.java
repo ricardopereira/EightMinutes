@@ -113,12 +113,12 @@ public class PanelComandosMoveExercito extends PanelBase {
                     getController().setSelectedRegiao(null);
                 }
             });
-        
+
        btMoveExercito.setVisible(false);
        cboExercito.setVisible(false);
        jLabelDest.setVisible(false);
        
-       this.add(btPassaVez, BorderLayout.CENTER); 
+       this.add(btPassaVez, BorderLayout.CENTER);
     }
 
     final public class actionOnSelectRegiao implements DataControllerListener {
