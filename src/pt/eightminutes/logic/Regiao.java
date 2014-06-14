@@ -108,6 +108,76 @@ public class Regiao implements Serializable {
     public void setContinente(Continente continente) {
         this.continente = continente;
     }
+    
+    /**
+     * @return the cidades
+     */
+    public ArrayList<Cidade> getCidades() {
+        ArrayList<Cidade> list = new ArrayList<>();
+        
+        for (Peca item : getPecas()) {
+            if (item.getClass() == Cidade.class)
+                list.add((Cidade)item);
+        }
+        
+        return list;
+    }
+    
+    /**
+     * @return the jogadores
+     */
+    public ArrayList<Jogador> getJogadores() {
+        ArrayList<Jogador> list = new ArrayList<>();
+        
+        boolean jaExiste = false;
+        for (Peca peca : getPecas()) {
+            if (list.isEmpty())
+                list.add(peca.getJogador());
+            else {
+                jaExiste = false;
+                for (Jogador jogador : list) {
+                    if (peca.getJogador() == jogador) {
+                        jaExiste = true;
+                        break;
+                    }
+                }
+                if (!jaExiste)
+                    list.add(peca.getJogador());
+            }
+        }
+        
+        return list;
+    }
+    
+    /**
+     * @return the exercitos
+     */
+    public ArrayList<Exercito> getExercitos() {
+        ArrayList<Exercito> list = new ArrayList<>();
+        
+        for (Peca item : getPecas()) {
+            if (item.getClass() == Exercito.class)
+                list.add((Exercito)item);
+        }
+        
+        return list;
+    }
+    
+    /**
+     * @return the exercitos
+     */
+    public ArrayList<Exercito> getExercitosInimigos(Jogador jogador) {
+        ArrayList<Exercito> list = new ArrayList<>();
+        if (jogador == null)
+            return list;
+        
+        for (Peca item : getPecas()) {
+            if (item.getJogador() != jogador && item.getClass() == Exercito.class)
+                list.add((Exercito)item);
+        }
+        
+        return list;
+    }
 
     /**
      * @return the pecas
