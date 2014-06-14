@@ -350,17 +350,23 @@ public class Jogo extends Base implements Serializable {
     
     public void getRegioesPossiveisTerra(Regiao regiao, int qtdMovimentos, ArrayList <Regiao> regioesPossiveis){        
         //guardar as regioes possiveis num map com o valor de distancia?
-        if(qtdMovimentos >0){
+        if (regiao == null)
+            return;
+        
+        if (qtdMovimentos > 0)
+        {
             qtdMovimentos--;
-            for(int i=0; i<regiao.getRegioesVizinhas().size();i++)
+            
+            for(int i = 0; i < regiao.getRegioesVizinhas().size();i++)
             {
-                if(regiao.getRegioesVizinhas().get(i).getContinente() == regiao.getContinente()){ 
-                    if((regioesPossiveis.indexOf(regiao.getRegioesVizinhas().get(i))==-1)&&
-                            (regiao.getRegioesVizinhas().get(i)!=regiao)){
-                        regioesPossiveis.add(regiao.getRegioesVizinhas().get(i));                        
+                Regiao regiaoVizinha = regiao.getRegioesVizinhas().get(i);
+                if (regiaoVizinha.getContinente() == regiao.getContinente()) {
+                    if ((regioesPossiveis.indexOf(regiaoVizinha) == -1) && (regiaoVizinha != regiao))
+                    {
+                        regioesPossiveis.add(regiaoVizinha);
                     }
                     
-                    getRegioesPossiveisTerra(regiao.getRegioesVizinhas().get(i),qtdMovimentos,regioesPossiveis);
+                    getRegioesPossiveisTerra(regiaoVizinha,qtdMovimentos,regioesPossiveis);
                 }
             }
         }        
@@ -368,30 +374,36 @@ public class Jogo extends Base implements Serializable {
     
     public void getRegioesPossiveisAgua(Regiao regiao, int qtdMovimentos, ArrayList<Regiao> regioesPossiveis){
         //guardar as regioes possiveis num map com o valor de distancia?
-        if(qtdMovimentos >0){
+        if (regiao == null)
+            return;
+        
+        if (qtdMovimentos > 0)
+        {
             qtdMovimentos--;
-            for(int i=0; i<regiao.getRegioesVizinhas().size();i++)
+            
+            for (int i = 0; i < regiao.getRegioesVizinhas().size(); i++)
             {
-                if((regioesPossiveis.indexOf(regiao.getRegioesVizinhas().get(i))==-1)&&
-                        (regiao.getRegioesVizinhas().get(i)!=regiao)){
-                    regioesPossiveis.add(regiao.getRegioesVizinhas().get(i));                    
+                Regiao regiaoVizinha = regiao.getRegioesVizinhas().get(i);
+                if ((regioesPossiveis.indexOf(regiaoVizinha) == -1) && (regiaoVizinha != regiao))
+                {
+                    regioesPossiveis.add(regiaoVizinha);                    
                 }
                 
-                getRegioesPossiveisAgua(regiao.getRegioesVizinhas().get(i),qtdMovimentos,regioesPossiveis);
+                getRegioesPossiveisAgua(regiaoVizinha,qtdMovimentos,regioesPossiveis);
             }            
         }        
     }
     
     public void colocaExercitoInicial(){
-        ArrayList<Exercito> exercitoAux=new ArrayList<>();
+        ArrayList<Exercito> exercitoAux = new ArrayList<>();
         
-        for(int i=0;i<jogadores.size();i++)
+        for (int i = 0; i < jogadores.size(); i++)
         {            
             exercitoAux.clear();
-            for(int m=0;m<jogadores.get(i).getListaExercitos().size();m++){                
+            for (int m = 0; m < jogadores.get(i).getListaExercitos().size(); m++) {
                 exercitoAux.add((Exercito)jogadores.get(i).getListaExercitos().get(m));                
                 
-                if(exercitoAux.size()==3)
+                if (exercitoAux.size() == 3)
                     break;
             }
             

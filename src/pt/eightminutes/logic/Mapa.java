@@ -332,9 +332,9 @@ public class Mapa extends Base implements Serializable {
             return null;
         
         // Validacoes
-        if (origem.getMapIndex() >= regioes.size())
+        if (origem.getMapIndex() > regioes.size())
             return null;
-        if (destino.getMapIndex() >= regioes.size())
+        if (destino.getMapIndex() > regioes.size())
             return null;
 
         // Obtem o trajecto: origem ate destino

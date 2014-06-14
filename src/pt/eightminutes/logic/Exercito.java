@@ -8,7 +8,8 @@ public class Exercito extends Peca{
         super("Exercito", null, jogador);
     }
     
-    public void moveExercito(Regiao regiao){
+    public void moveExercito(Regiao regiao) {
+        getRegiao().getPecas().remove(this);
         setRegiao(regiao);
         regiao.getPecas().add(this);
     }

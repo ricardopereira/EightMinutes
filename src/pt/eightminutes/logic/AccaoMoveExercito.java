@@ -102,7 +102,7 @@ public class AccaoMoveExercito extends Accao {
                             // ToDo: É necessario validar o numero de movimentos?!
                             
                             // Efectua a alteração
-                            exercito.moveExercito(regiao);
+                            exercito.moveExercito(item);
                             // Decrementa movimentos possiveis
                             decrementaQtd();
                             
