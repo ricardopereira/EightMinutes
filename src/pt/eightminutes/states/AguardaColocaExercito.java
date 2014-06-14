@@ -27,17 +27,17 @@ public class AguardaColocaExercito extends EstadosAdapter{
         params.add(regiao);
         params.add(qtd);
         params.add(getJogo().getMapa().getRegiaoInicial());
+        
         Carta carta = getJogo().getJogadorActivo().getCartaActiva();
+        
         Accao accao = carta.getAccaoActiva();
-        if(accao==null)
+        if (accao == null)
             return this;
         
         accao.executa(getJogo(),params);
         
-        // ToDo: Testar proximo passo
-        
         // Próximo estado
-        if(!accao.isUsada())
+        if (!accao.isUsada())
             return this;
         else
         {
