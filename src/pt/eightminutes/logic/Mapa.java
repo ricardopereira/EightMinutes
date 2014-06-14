@@ -15,6 +15,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import pt.eightminutes.utils.utils;
 
 public class Mapa extends Base implements Serializable {
     
@@ -31,10 +32,9 @@ public class Mapa extends Base implements Serializable {
         defineRegiaoInicial();
     }
 
-    public void defineRegiaoInicial(){
-        Random rand = new Random();
-        int i = rand.nextInt(continentes.size()-1)+1;
-        int m = rand.nextInt(continentes.get(i).getRegioes().size()-1)+1;
+    public void defineRegiaoInicial(){        
+        int i = utils.randInt(0, 3);
+        int m = utils.randInt(0, continentes.get(i).getRegioes().size()-1);
         
         setRegiaoInicial(continentes.get(i).getRegioes().get(m));
     }

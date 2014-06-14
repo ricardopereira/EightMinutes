@@ -16,6 +16,7 @@ import java.util.Random;
 import pt.eightminutes.states.AguardaOpcoesJogo;
 import pt.eightminutes.states.IEstados;
 import pt.eightminutes.states.EstadoListener;
+import pt.eightminutes.utils.utils;
 
 public class Jogo extends Base implements Serializable {
     
@@ -208,8 +209,7 @@ public class Jogo extends Base implements Serializable {
         }
         
         if(jogadoresAux.size()>1){
-            Random rand = new Random();
-            int i = rand.nextInt(jogadoresAux.size()-1)+1;             
+            int i = utils.randInt(0, jogadoresAux.size()-1);
         
             setJogadorActivo(jogadoresAux.get(i));
         }
