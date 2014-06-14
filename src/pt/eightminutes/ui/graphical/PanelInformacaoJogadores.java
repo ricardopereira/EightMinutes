@@ -16,6 +16,7 @@ public class PanelInformacaoJogadores extends PanelBase {
         setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         
         this.add(new JLabel("Número de Jogadores: " + getJogo().getNumJogadores()));
+        this.add(new JLabel("Cartas Compradas: " + getJogo().getJogadorActivo().getCartas().size()));
         
         this.add(Box.createRigidArea(new Dimension(5,5)));
         this.add(Box.createRigidArea(new Dimension(5,15)));

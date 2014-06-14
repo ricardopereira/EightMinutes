@@ -38,7 +38,7 @@ public class JogadorIABasico extends JogadorIA{
         else
         if(estado.getClass() == AguardaEscolheCarta.class) {
             //escolhe aleatoriamente uma carta            
-            int x= utils.randInt(0,ctrl.getJogo().getNumCartasFinal());
+            int x= utils.randInt(0,5);
             
             ctrl.getJogo().escolheCarta(x);
         }

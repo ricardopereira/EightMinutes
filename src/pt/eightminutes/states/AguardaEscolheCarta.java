@@ -93,4 +93,9 @@ public class AguardaEscolheCarta extends EstadosAdapter{
         else
             return this;
     }
+    
+    @Override
+    public IEstados comecaJogo() {
+        return this; 
+    }
 }

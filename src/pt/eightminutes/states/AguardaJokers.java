@@ -19,8 +19,15 @@ public class AguardaJokers extends EstadosAdapter{
     
     @Override
     public IEstados defineRecurso(Carta carta, Recurso recurso) { 
-        carta.setRecurso(recurso);
-        return this; 
+        if(getJogo().getJogadorActivo().getListaCartaJokers().isEmpty())
+        {         
+            getJogo().passaVez();
+        }
+        else
+        {
+            carta.setRecurso(recurso);
+        }
+        return this;
     }
     
     @Override

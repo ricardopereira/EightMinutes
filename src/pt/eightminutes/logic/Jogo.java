@@ -469,8 +469,19 @@ public class Jogo extends Base implements Serializable {
         return myCusto;        
     }
     
-    public boolean isJokersAtribuidos(){        
-        return (!getListaJogadoresJokers().isEmpty());
+    public boolean isJokersAtribuidos(){  
+        
+        boolean result = true;
+        
+        for(int i=0;i< getJogadores().size();i++)
+        {
+            if(!getJogadores().get(i).getListaCartaJokers().isEmpty())
+            {
+                result = false;
+                break;
+            }            
+        }
+        return result;
     }
     
     public ArrayList<Jogador> getListaJogadoresJokers(){
