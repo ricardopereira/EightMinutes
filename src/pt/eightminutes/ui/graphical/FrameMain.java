@@ -6,17 +6,24 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import pt.eightminutes.logic.Regiao;
+import pt.eightminutes.states.AguardaEscolheCarta;
+
 import pt.eightminutes.ui.map.MapData;
 import pt.eightminutes.ui.map.MapDataModel;
 
@@ -28,7 +35,8 @@ public class FrameMain extends JFrame implements Observer {
     // Componentes
     private JMenuBar mainMenuBar;
     private JMenu menuFicheiro;
-    private JMenuItem menuItemGravar;
+    private JMenuItem menuItemGravarJogo;
+    private JMenuItem menuItemCarregarJogo;
     
     // Paineis
     private PanelMapa panelMapa;
@@ -104,13 +112,17 @@ public class FrameMain extends JFrame implements Observer {
         menuFicheiro.setFont(typo);
         menuFicheiro.setMnemonic(KeyEvent.VK_F);
 
-        menuItemGravar = new JMenuItem("Gravar jogo", KeyEvent.VK_G);
-        menuItemGravar.setFont(typo);
-        menuItemGravar.setMnemonic(KeyEvent.VK_L);
+        menuItemGravarJogo = new JMenuItem("Gravar jogo", KeyEvent.VK_G);
+        menuItemGravarJogo.setFont(typo);
+        menuItemGravarJogo.setMnemonic(KeyEvent.VK_L);
 
+        menuItemCarregarJogo = new JMenuItem("Carregar jogo");
+        menuItemCarregarJogo.setFont(typo);
+        
         setJMenuBar(mainMenuBar);
         mainMenuBar.add(menuFicheiro);
-        menuFicheiro.add(menuItemGravar);
+        menuFicheiro.add(menuItemGravarJogo);
+        menuFicheiro.add(menuItemCarregarJogo);
         
         Container cp = getContentPane();
         cp.setLayout(new BorderLayout());
@@ -150,7 +162,8 @@ public class FrameMain extends JFrame implements Observer {
     
     protected void registerListeners()
     {
-        
+        menuItemGravarJogo.addActionListener(saveJogoListener);
+        menuItemCarregarJogo.addActionListener(loadJogoListener);
     }
         
     @Override
@@ -159,6 +172,43 @@ public class FrameMain extends JFrame implements Observer {
     }
     
     //Listeners
+    final private ActionListener saveJogoListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (controller.getJogo().getEstadoActual().getClass() != AguardaEscolheCarta.class) {
+                JOptionPane.showMessageDialog(null,"Só é possível gravar na escolha de uma carta.","8 Minutes",JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+            
+            JFileChooser jfc = new JFileChooser();
+            jfc.setDialogTitle("Gravar jogo");
+            int result = jfc.showSaveDialog(FrameMain.this);
+            if (result == JFileChooser.APPROVE_OPTION) {
+                try {
+                    controller.saveJogo(jfc.getSelectedFile().getPath());
+                    JOptionPane.showMessageDialog(null,"Gravado com sucesso.","8 Minutes",JOptionPane.INFORMATION_MESSAGE);
+                } catch (IOException ex) {
+                    Logger.getLogger(FrameMain.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    };
     
+    final private ActionListener loadJogoListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {            
+            JFileChooser jfc = new JFileChooser();
+            jfc.setDialogTitle("Carregar jogo");
+            int result = jfc.showOpenDialog(FrameMain.this);
+            if (result == JFileChooser.APPROVE_OPTION) {
+                try {
+                    controller.loadJogo(jfc.getSelectedFile().getPath());
+                    JOptionPane.showMessageDialog(null,"Carregado com sucesso.","8 Minutes",JOptionPane.INFORMATION_MESSAGE);                    
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(FrameMain.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    };
     
 }

@@ -1,6 +1,6 @@
 package pt.eightminutes.ui.graphical;
 
-import java.awt.Color;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,13 +8,14 @@ import java.util.Observable;
 
 import pt.eightminutes.states.EstadoListener;
 import pt.eightminutes.logic.*;
+import pt.eightminutes.states.AguardaEscolheCarta;
 
 public class DataController extends Observable {
     
     private Jogo jogo;
     
     // Eventos
-    List<DataControllerListener> listeners = new ArrayList<>();
+    private List<DataControllerListener> listeners = new ArrayList<>();
     
     // Dados partilhados
     private Regiao selectedRegiao = null;
@@ -99,6 +100,17 @@ public class DataController extends Observable {
         // Notifica a todos os listeners o setSelectedRegiao
         for (DataControllerListener event : listeners)
             event.onFocusRegioes();
+    }
+    
+    public void saveJogo(String filePath) throws IOException {
+        getJogo().gravaInstanciaJogo(filePath);
+    }
+    
+    public void loadJogo(String filePath) throws FileNotFoundException {
+        jogo = getJogo().carregaInstanciaJogo(filePath);
+        // Como o jogo foi gravado com o estado OpçõesJogo, é preciso forçar o novo estado        
+        jogo.setEstadoActual(new AguardaEscolheCarta(jogo));
+        update();
     }
     
 }

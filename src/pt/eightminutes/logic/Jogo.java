@@ -29,7 +29,7 @@ public class Jogo extends Base implements Serializable {
     private Jogador jogadorActivo;
     
     // Eventos
-    List<EstadoListener> listeners = new ArrayList<EstadoListener>();
+    private transient List<EstadoListener> listeners = new ArrayList<EstadoListener>();
 
     public Jogo(){
         mapa = new Mapa();
@@ -58,17 +58,17 @@ public class Jogo extends Base implements Serializable {
         return jogadorAux;
     }
        
-    public void gravaInstanciaJogo() throws IOException {
-        FileOutputStream fo = new FileOutputStream("jogo.db");
+    public void gravaInstanciaJogo(String fileName) throws IOException {
+        FileOutputStream fo = new FileOutputStream(fileName);
         ObjectOutputStream oo = new ObjectOutputStream(fo);
         oo.writeObject(this);
         oo.close();
     }
     
-    public Jogo carregaInstanciaJogo() throws FileNotFoundException {
+    public Jogo carregaInstanciaJogo(String fileName) throws FileNotFoundException {
         Jogo jogoAux= this;
         try {         
-            FileInputStream fi = new FileInputStream("jogo.db");            
+            FileInputStream fi = new FileInputStream(fileName);
             ObjectInputStream oi = new ObjectInputStream(fi);
             jogoAux = ((Jogo) oi.readObject());       
             oi.close();
