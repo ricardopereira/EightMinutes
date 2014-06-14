@@ -29,9 +29,9 @@ public class Jogo extends Base implements Serializable {
     private Jogador jogadorActivo;
     
     // Eventos
-    private transient List<EstadoListener> listeners = new ArrayList<EstadoListener>();
+    private transient List<EstadoListener> listeners = null;
 
-    public Jogo(){
+    public Jogo() {
         mapa = new Mapa();
     }
 
@@ -40,21 +40,20 @@ public class Jogo extends Base implements Serializable {
         mapa.lerTrajectos();
     }
     
-    public Jogador getJogadorVencedor(){
+    public Jogador getJogadorVencedor() {
         Jogador jogadorAux = null;
         int myPontos;
         int myPontosMax = 0;
-        for(int i=0;i<getJogadores().size();i++){
+        for(int i = 0; i < getJogadores().size(); i++) {
             myPontos = getJogadores().get(i).getPontuacao(this);
-            if(myPontos>myPontosMax){
+            if (myPontos > myPontosMax) {
                 jogadorAux = getJogadores().get(i);
             }
             else
-            if(myPontos==myPontosMax){
+            if (myPontos == myPontosMax) {
                 jogadorAux = null;
             }    
         }
-        
         return jogadorAux;
     }
        
@@ -83,7 +82,7 @@ public class Jogo extends Base implements Serializable {
     }
     
     public void addListener(EstadoListener toAdd) {
-        listeners.add(toAdd);
+        getListeners().add(toAdd);
     }
     
     public void setEstado(IEstados estado)
@@ -92,7 +91,7 @@ public class Jogo extends Base implements Serializable {
         this.setEstadoActual(estado);
         
         // Notifica a todos os listeners o setEstado
-        for (EstadoListener event : listeners)
+        for (EstadoListener event : getListeners())
             event.onSetEstado();
         
         if (debugMode)
@@ -609,4 +608,13 @@ public class Jogo extends Base implements Serializable {
     public boolean isEstadoAnterior(Class estado) {
         return estadoAnterior != null && estadoAnterior.getClass() == estado;
     }
+    
+    public List<EstadoListener> getListeners() {
+        if (listeners == null)
+        {
+            listeners = new ArrayList<>();
+        }
+        return listeners;
+    }
+
 }

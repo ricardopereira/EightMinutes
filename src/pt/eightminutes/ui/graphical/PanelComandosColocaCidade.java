@@ -17,10 +17,10 @@ import pt.eightminutes.logic.Regiao;
 public class PanelComandosColocaCidade extends PanelBase {
     
     public PanelComandosColocaCidade(PanelBase owner, DataController controller) {
-        
         super(owner,controller);
         
         // Eventos
+        controller.clearListeners();
         controller.addListener(new actionOnSelectRegiao());
         
         Jogador jogador = controller.getJogo().getJogadorActivo();

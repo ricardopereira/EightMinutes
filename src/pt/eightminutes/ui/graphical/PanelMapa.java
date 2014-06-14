@@ -38,7 +38,7 @@ public class PanelMapa extends PanelBase implements Observer {
         model.addObserver(this);
         this.model = model;
         
-        controller.addListener(new actionOnSetFocusRegioes());
+        controller.addPersistentListener(new actionOnSetFocusRegioes());
 
         this.setLayout(null);
 

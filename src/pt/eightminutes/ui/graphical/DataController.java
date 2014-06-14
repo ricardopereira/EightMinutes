@@ -15,7 +15,8 @@ public class DataController extends Observable {
     private Jogo jogo;
     
     // Eventos
-    private List<DataControllerListener> listeners = new ArrayList<>();
+    final private List<DataControllerListener> persistentListeners = new ArrayList<>();
+    final private List<DataControllerListener> listeners = new ArrayList<>();
     
     // Dados partilhados
     private Regiao selectedRegiao = null;
@@ -64,6 +65,14 @@ public class DataController extends Observable {
         listeners.add(toAdd);
     }
     
+    public void addPersistentListener(DataControllerListener toAdd) {
+        persistentListeners.add(toAdd);
+    }
+    
+    public void clearListeners() {
+        listeners.clear();
+    }
+    
     /**
      * @return the selectedRegiao
      */
@@ -98,7 +107,7 @@ public class DataController extends Observable {
         this.focusRegioes = focusRegioes;
 
         // Notifica a todos os listeners o setSelectedRegiao
-        for (DataControllerListener event : listeners)
+        for (DataControllerListener event : persistentListeners)
             event.onFocusRegioes();
     }
     

@@ -23,6 +23,7 @@ public class PanelComandosDestroiExercito extends PanelBase {
         super(owner,controller);
         
         // Eventos
+        controller.clearListeners();
         controller.addListener(new actionOnSelectRegiao());
         
         this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));

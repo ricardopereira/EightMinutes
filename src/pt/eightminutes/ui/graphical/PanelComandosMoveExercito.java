@@ -40,8 +40,8 @@ public class PanelComandosMoveExercito extends PanelBase {
         super(owner,controller);
         
         // Eventos
+        controller.clearListeners();
         controller.addListener(new actionOnSelectRegiao());
-        
         
         if(getJogo().getEstadoActual().getClass() == AguardaMoveExercito.class)
             moveTerra = true;

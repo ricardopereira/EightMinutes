@@ -19,6 +19,7 @@ public class PanelComandosColocaExercito extends PanelBase {
         super(owner,controller);
         
         // Eventos
+        controller.clearListeners();
         controller.addListener(new actionOnSelectRegiao());
                 
         Jogador jogador = getJogo().getJogadorActivo();        
