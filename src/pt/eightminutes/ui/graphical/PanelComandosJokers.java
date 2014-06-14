@@ -79,15 +79,11 @@ public class PanelComandosJokers extends PanelBase implements Observer{
         Carta carta = jogador.getCartaActiva();
         Recurso itemRecurso;
         
-        JPanel coluna = new JPanel();
-        coluna.setBackground(this.getBackground());
-        coluna.setLayout(new BoxLayout(coluna,BoxLayout.Y_AXIS));
-        this.add(coluna, BorderLayout.CENTER);
         
         JPanel panelJogador;
         panelJogador = new JPanel();
-        panelJogador.setBackground(coluna.getBackground());
-        coluna.add(panelJogador, BorderLayout.EAST); 
+        panelJogador.setBackground(this.getBackground());
+        this.add(panelJogador, BorderLayout.CENTER); 
 
         //Alimento
         itemRecurso = new RecursoAlimento();
@@ -115,8 +111,8 @@ public class PanelComandosJokers extends PanelBase implements Observer{
         });
 
         panelJogador = new JPanel();
-        panelJogador.setBackground(coluna.getBackground());
-        coluna.add(panelJogador, BorderLayout.CENTER);         
+        panelJogador.setBackground(this.getBackground());
+        this.add(panelJogador, BorderLayout.CENTER);         
         
         
         //Joia
@@ -144,8 +140,8 @@ public class PanelComandosJokers extends PanelBase implements Observer{
         });
         
         panelJogador = new JPanel();
-        panelJogador.setBackground(coluna.getBackground());
-        coluna.add(panelJogador, BorderLayout.WEST);     
+        panelJogador.setBackground(this.getBackground());
+        this.add(panelJogador, BorderLayout.CENTER);     
         
         //Utensilios
         itemRecurso = new RecursoUtensilio();
