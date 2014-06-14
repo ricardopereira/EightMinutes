@@ -36,6 +36,12 @@ public class PanelComandosEscolheAccao extends PanelBase implements Observer{
         this.setMinimumSize(new Dimension(600,100));
         this.setMaximumSize(new Dimension(600,100));
         
+        String tipo;
+        if (getJogo().getJogadorActivo().getCartaActiva().isExecutaTodasAccoes())
+            tipo = "Escolha uma acção(E)";
+        else
+            tipo = "Escolha uma das acções(OU)";
+        this.add(new JLabel(tipo), BorderLayout.CENTER);
         showAccoes();
         
         JButton btPassaVez = new JButton("Passa vez");
@@ -63,15 +69,18 @@ public class PanelComandosEscolheAccao extends PanelBase implements Observer{
         {       
             itemAccao = carta.getAccoes().get(i);
             // Cria botão
-            btAccao = addButtonAccao(itemAccao);            
-            btAccao.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    // Clique na carta
-                    Accao accao= ((ButtonAccao)e.getSource()).getAccao();                    
-                    getJogo().escolheAccao(accao);
-                }
-            });
+            if(!itemAccao.isUsada())
+            {
+                btAccao = addButtonAccao(itemAccao);            
+                btAccao.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        // Clique na carta
+                        Accao accao= ((ButtonAccao)e.getSource()).getAccao();                    
+                        getJogo().escolheAccao(accao);
+                    }
+                });
+            }
         }
         
         // Refrescar
