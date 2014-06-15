@@ -82,7 +82,7 @@ public class JogadorIABasico extends JogadorIA{
             
             //escolhe aleatoriamente um indice para a lista de regiões         
             int x = utils.randInt(0, listRegioes.size()-1);
-            
+
             int qtd = jogador.getCartaActiva().getAccaoActiva().getQtd();
             //escolhe aleatoriamente uma quantidade da acção seleccionada
             if (qtd > 0) {

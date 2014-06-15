@@ -5,8 +5,8 @@ import java.util.Random;
 public class utils {
     
     public static int randInt(int min, int max) {
-        if (max == 0) 
-            max = 1;
+        if (max <= 0) 
+            return 1;
         
         Random rand = new Random();
 

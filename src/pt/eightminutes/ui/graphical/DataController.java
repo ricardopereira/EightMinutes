@@ -9,6 +9,8 @@ import java.util.Observable;
 import pt.eightminutes.states.EstadoListener;
 import pt.eightminutes.logic.*;
 import pt.eightminutes.states.AguardaEscolheCarta;
+import pt.eightminutes.states.AguardaOpcoesJogo;
+import pt.eightminutes.states.AguardaPreparaJogo;
 
 public class DataController extends Observable {
     
@@ -109,6 +111,13 @@ public class DataController extends Observable {
         // Notifica a todos os listeners o setSelectedRegiao
         for (DataControllerListener event : persistentListeners)
             event.onFocusRegioes();
+    }
+    
+    public void novoJogo() {
+        jogo = new Jogo();
+        // Ao mudar de estado no jogo, irá refrescar o ambiente gráfico
+        jogo.addListener(new updateOnSetEstado());
+        jogo.novoJogo();
     }
     
     public void saveJogo(String filePath) throws IOException {

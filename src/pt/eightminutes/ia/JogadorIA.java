@@ -19,7 +19,7 @@ public abstract class JogadorIA implements Serializable, Observer{
         
         this.ctrl = ctrl;
         this.ctrl.addObserver(this);
-        jogadorIA=jogador;
+        jogadorIA = jogador;
     }
         
     public abstract void update(Observable o, Object arg);
