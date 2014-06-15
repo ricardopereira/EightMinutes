@@ -272,11 +272,13 @@ public class Jogo extends Base implements Serializable {
     }
     
     public void getListaExercitosTodosUtilizadores(ArrayList<Exercito> exercitos) {
+        if (exercitos == null) return;
         exercitos.clear();
-        for(int i=0;i<getJogadores().size();i++) {
-            for(int m=0;i<getJogadores().get(i).getListaExercitos().size();m++) {
-                if(getJogadores().get(i).getListaExercitos().get(m).getRegiao()!=null)
-                    exercitos.add(getJogadores().get(i).getListaExercitos().get(m));
+        
+        for (Jogador jogador : getJogadores()) {
+            for (Exercito exercito : jogador.getListaExercitos()) {
+                if (exercito.getRegiao() != null)
+                    exercitos.add(exercito);
             }
         }
     }

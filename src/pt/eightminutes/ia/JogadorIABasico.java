@@ -32,9 +32,9 @@ public class JogadorIABasico extends JogadorIA{
                
         if(estado.getClass() == AguardaAposta.class) {     
             //define aleatoriamente qual é a aposta num intervalo definido entre 0 e o máximo das moedas
-       //     int x = utils.randInt(0, ctrl.getJogo().getMoedasPorJogador());
+            int x = utils.randInt(0, ctrl.getJogo().getMoedasPorJogador());
             
-       //     ctrl.getJogo().defineApostasJogadores(ctrl.getJogo().getJogadorActivo(), x);
+            ctrl.getJogo().defineApostasJogadores(ctrl.getJogo().getJogadorActivo(), x);
         }
         else
         if(estado.getClass() == AguardaEscolheCarta.class) {
@@ -81,11 +81,16 @@ public class JogadorIABasico extends JogadorIA{
             }
             
             //escolhe aleatoriamente um indice para a lista de regiões         
-            int x= utils.randInt(0, listRegioes.size()-1);
-            //escolhe aleatoriamente uma quantidade da acção seleccionada
-            int c= utils.randInt(1, jogador.getCartaActiva().getAccaoActiva().getQtd());
+            int x = utils.randInt(0, listRegioes.size()-1);
             
-            jogo.colocaExercito(listRegioes.get(x),c);
+            int qtd = jogador.getCartaActiva().getAccaoActiva().getQtd();
+            //escolhe aleatoriamente uma quantidade da acção seleccionada
+            if (qtd > 0) {
+                int c = utils.randInt(1, qtd);
+                jogo.colocaExercito(listRegioes.get(x),c);
+            }
+            else
+                jogo.passaVez();
         }
         else
         if(estado.getClass() == AguardaMoveExercito.class) {
@@ -129,9 +134,15 @@ public class JogadorIABasico extends JogadorIA{
             ArrayList<Exercito> listExercito = new ArrayList<>();
             ctrl.getJogo().getListaExercitosTodosUtilizadores(listExercito);
             
-            int x= utils.randInt(0, listExercito.size()-1);
+            if (Jogo.debugMode)
+                System.out.println("DEBUG: listExercito is empty!");
             
-            ctrl.getJogo().destroiExercito(listExercito.get(x));
+            if (listExercito.size() > 0) {
+                int  x= utils.randInt(0, listExercito.size()-1);
+                ctrl.getJogo().destroiExercito(listExercito.get(x));
+            }
+            else
+                ctrl.getJogo().passaVez();
         }
         else
         if(estado.getClass() == AguardaOpcoesJogo.class) {
