@@ -9,6 +9,7 @@ import pt.eightminutes.logic.Continente;
 import pt.eightminutes.logic.Exercito;
 import pt.eightminutes.logic.Jogador;
 import pt.eightminutes.logic.Jogo;
+import pt.eightminutes.logic.RecursoAlimento;
 import pt.eightminutes.logic.Regiao;
 import pt.eightminutes.states.*;
 import pt.eightminutes.states.IEstados;
@@ -138,7 +139,10 @@ public class JogadorIABasico extends JogadorIA{
         }
         else
         if(estado.getClass() == AguardaJokers.class) {
-            //
+            for(int i=0;i<ctrl.getJogo().getJogadorActivo().getListaCartaJokers().size();i++)
+            {                
+                ctrl.getJogo().defineRecurso(ctrl.getJogo().getJogadorActivo().getListaCartaJokers().get(i), new RecursoAlimento());
+            }
         }                
     }       
 }

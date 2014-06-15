@@ -37,7 +37,7 @@ public class AguardaAposta extends EstadosAdapter{
         else       
         {            
             getJogo().comecaJogo();
-            return new AguardaEscolheCarta(getJogo());
+            return new AguardaEscolheCarta(getJogo()); 
         }        
     }
 

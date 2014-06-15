@@ -11,20 +11,15 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
-import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import pt.eightminutes.logic.Carta;
 import pt.eightminutes.logic.Jogador;
 import pt.eightminutes.logic.Recurso;
@@ -41,7 +36,7 @@ public class PanelComandosJokers extends PanelBase implements Observer{
     public PanelComandosJokers(PanelBase owner, DataController controller) {
         super(owner,controller);
         
-        Jogador jogador = getJogo().getJogadorActivo();
+        Jogador jogador = getJogo().getJogadorActivo();      
         
         this.setLayout(new FlowLayout());
         this.setBackground(Color.WHITE);
@@ -80,14 +75,14 @@ public class PanelComandosJokers extends PanelBase implements Observer{
         Recurso itemRecurso;
         
         
-        JPanel panelJogador;
-        panelJogador = new JPanel();
-        panelJogador.setBackground(this.getBackground());
-        this.add(panelJogador, BorderLayout.CENTER); 
+        JPanel panelRecurso;
+        panelRecurso = new JPanel();
+        panelRecurso.setBackground(this.getBackground());
+        this.add(panelRecurso, BorderLayout.CENTER); 
 
         //Alimento
         itemRecurso = new RecursoAlimento();
-        btRecurso = addButtonRecurso(panelJogador,itemRecurso);            
+        btRecurso = addButtonRecurso(panelRecurso,itemRecurso);            
         btRecurso.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -100,7 +95,7 @@ public class PanelComandosJokers extends PanelBase implements Observer{
         
         //Ferro
         itemRecurso = new RecursoFerro();
-        btRecurso = addButtonRecurso(panelJogador,itemRecurso);            
+        btRecurso = addButtonRecurso(panelRecurso,itemRecurso);            
         btRecurso.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -110,14 +105,14 @@ public class PanelComandosJokers extends PanelBase implements Observer{
             }
         });
 
-        panelJogador = new JPanel();
-        panelJogador.setBackground(this.getBackground());
-        this.add(panelJogador, BorderLayout.CENTER);         
+        panelRecurso = new JPanel();
+        panelRecurso.setBackground(this.getBackground());
+        this.add(panelRecurso, BorderLayout.CENTER);         
         
         
         //Joia
         itemRecurso = new RecursoJoia();
-        btRecurso = addButtonRecurso(panelJogador,itemRecurso);            
+        btRecurso = addButtonRecurso(panelRecurso,itemRecurso);            
         btRecurso.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -129,7 +124,7 @@ public class PanelComandosJokers extends PanelBase implements Observer{
         
         //Madeira
         itemRecurso = new RecursoMadeira();
-        btRecurso = addButtonRecurso(panelJogador,itemRecurso);            
+        btRecurso = addButtonRecurso(panelRecurso,itemRecurso);            
         btRecurso.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -139,13 +134,13 @@ public class PanelComandosJokers extends PanelBase implements Observer{
             }
         });
         
-        panelJogador = new JPanel();
-        panelJogador.setBackground(this.getBackground());
-        this.add(panelJogador, BorderLayout.CENTER);     
+        panelRecurso = new JPanel();
+        panelRecurso.setBackground(this.getBackground());
+        this.add(panelRecurso, BorderLayout.CENTER);     
         
         //Utensilios
         itemRecurso = new RecursoUtensilio();
-        btRecurso = addButtonRecurso(panelJogador,itemRecurso);            
+        btRecurso = addButtonRecurso(panelRecurso,itemRecurso);            
         btRecurso.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -154,9 +149,6 @@ public class PanelComandosJokers extends PanelBase implements Observer{
                 getJogo().defineRecurso(joker, recurso);
             }
         });
-            
-        
-        
         // Refrescar
         validate();
         repaint();
@@ -191,7 +183,29 @@ public class PanelComandosJokers extends PanelBase implements Observer{
         }
         else
             btRecurso.setText("Recurso "+String.format("%s",recurso.getNome()));
-
+        String imgUrl="";
+        
+        if(recurso.getClass()==RecursoAlimento.class)
+            imgUrl = "src/pt/eightminutes/ui/cards/card"+String.format("%03d",3)+".jpg";
+        else
+        if(recurso.getClass()==RecursoFerro.class)
+            imgUrl = "src/pt/eightminutes/ui/cards/card"+String.format("%03d",1)+".jpg";
+        else
+        if(recurso.getClass()==RecursoUtensilio.class)
+            imgUrl = "src/pt/eightminutes/ui/cards/card"+String.format("%03d",6)+".jpg";
+        else
+        if(recurso.getClass()==RecursoJoia.class)
+            imgUrl = "src/pt/eightminutes/ui/cards/card"+String.format("%03d",28)+".jpg";
+        else
+        if(recurso.getClass()==RecursoMadeira.class)
+            imgUrl = "src/pt/eightminutes/ui/cards/card"+String.format("%03d",18)+".jpg";
+        
+        btRecurso.setToolTipText(
+         "<html><img src=\"" +
+            ButtonRecurso.class.getResource(imgUrl) +
+        "\"> Recurso "
+         );
+             
         panel.add(btRecurso);
         panel.add(Box.createRigidArea(new Dimension(15,15)));
         
