@@ -11,7 +11,7 @@ public class IUGrafico {
         controller = new DataController(jogo);
         
         // Testes
-        jogo.debugMode = true;
+        Jogo.debugMode = true;
     }
    
     public void start() {

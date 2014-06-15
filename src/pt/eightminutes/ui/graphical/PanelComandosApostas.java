@@ -27,8 +27,9 @@ public class PanelComandosApostas extends PanelBase {
             btAposta.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    // Número de Jogadores
-                    getJogo().defineApostasJogadores(jogadorActivo,Integer.parseInt(edAposta.getText()));
+                    if (jogadorActivo.getAposta() == -1)
+                        // Número de Jogadores
+                        getJogo().defineApostasJogadores(jogadorActivo,Integer.parseInt(edAposta.getText()));
                 }
             });
             this.add(btAposta, BorderLayout.CENTER);

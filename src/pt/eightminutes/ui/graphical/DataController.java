@@ -30,7 +30,7 @@ public class DataController extends Observable {
     }
     
     public DataController(Jogo jogo) {
-        this.jogo = jogo;        
+        this.jogo = jogo;  
         // Ao mudar de estado no jogo, irá refrescar o ambiente gráfico
         this.jogo.addListener(new updateOnSetEstado());
     }

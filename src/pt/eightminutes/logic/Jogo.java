@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Random;
 
 import pt.eightminutes.states.AguardaOpcoesJogo;
+import pt.eightminutes.states.AguardaPreparaJogo;
 import pt.eightminutes.states.IEstados;
 import pt.eightminutes.states.EstadoListener;
 import pt.eightminutes.utils.utils;
@@ -38,7 +39,7 @@ public class Jogo extends Base implements Serializable {
 
     public void verificarDependencias() throws FileNotFoundException, IOException {
         // Trajectos possiveis
-        mapa.lerTrajectos();
+        mapa.lerTrajectos();   
     }
     
     public Jogador getJogadorVencedor() {
@@ -91,12 +92,12 @@ public class Jogo extends Base implements Serializable {
         this.setEstadoAnterior(this.estadoActual);
         this.setEstadoActual(estado);
         
+        if (debugMode)
+            System.out.println((new Date())+ ": setEstado - " + estado.getClass().getSimpleName());
+        
         // Notifica a todos os listeners o setEstado
         for (EstadoListener event : getListeners())
             event.onSetEstado();
-        
-        if (debugMode)
-            System.out.println((new Date())+ ": setEstado - " + estado.getClass().getSimpleName());
     }
     
     public void opcoesJogo() {
@@ -182,7 +183,7 @@ public class Jogo extends Base implements Serializable {
         setEstado(estadoActual.passaVez());
     }
     
-    public void defineApostasJogadores(Jogador jogador, int aposta) {        
+    public void defineApostasJogadores(Jogador jogador, int aposta) {
         setEstado(estadoActual.defineApostasJogadores(jogador,aposta));
     }
             
