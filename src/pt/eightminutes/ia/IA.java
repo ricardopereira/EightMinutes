@@ -8,7 +8,7 @@ public class IA {
     private static JogadorIABasico jogadorIA=new JogadorIABasico();
     
     public static void attachIA(Jogador jogador,DataController ctrl){
-        ctrl.deleteObserver(jogadorIA);
+        //ctrl.deleteObserver(jogadorIA);
         jogadorIA.setIA(jogador,ctrl);
     }
     

@@ -22,22 +22,32 @@ public class AguardaAposta extends EstadosAdapter{
         getJogo().apostaJogador(jogador, numMoedas);    
         for(int i=0;i<getJogo().getJogadores().size();i++)
         {
-            if(getJogo().getJogadores().get(i).getAposta()==-1)
+            if(getJogo().getJogadores().get(i).getAposta() == -1)
             {
                 faltaApostar = true;
                 break;
             }
         }
         
-        if(faltaApostar)        
+        if (faltaApostar)
         {
-            getJogo().passaVez();            
-            return this;
+            getJogo().passaVez();
+            // Verificação por causa do IA
+            if (getJogo().getEstadoActual().getClass() != AguardaEscolheCarta.class)
+                return this;
+            else
+                // Manter o estado atual
+                return getJogo().getEstadoActual();
         }
         else       
         {            
             getJogo().comecaJogo();
-            return new AguardaEscolheCarta(getJogo()); 
+            // Verificação por causa do IA
+            if (getJogo().getEstadoActual().getClass() != AguardaEscolheCarta.class)
+                return new AguardaEscolheCarta(getJogo());
+            else
+                // Manter o estado atual
+                return getJogo().getEstadoActual();
         }        
     }
 

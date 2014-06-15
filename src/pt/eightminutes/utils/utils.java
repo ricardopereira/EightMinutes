@@ -6,7 +6,7 @@ public class utils {
     
     public static int randInt(int min, int max) {
         if (max <= 0) 
-            return 1;
+            return 0;
         
         Random rand = new Random();
 

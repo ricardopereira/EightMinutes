@@ -39,7 +39,7 @@ public class Jogo extends Base implements Serializable {
 
     public void verificarDependencias() throws FileNotFoundException, IOException {
         // Trajectos possiveis
-        mapa.lerTrajectos();
+        mapa.lerTrajectos();   
     }
     
     public Jogador getJogadorVencedor() {
@@ -92,12 +92,12 @@ public class Jogo extends Base implements Serializable {
         this.setEstadoAnterior(this.estadoActual);
         this.setEstadoActual(estado);
         
+        if (debugMode)
+            System.out.println((new Date())+ ": setEstado - " + estado.getClass().getSimpleName());
+        
         // Notifica a todos os listeners o setEstado
         for (EstadoListener event : getListeners())
             event.onSetEstado();
-        
-        if (debugMode)
-            System.out.println((new Date())+ ": setEstado - " + estado.getClass().getSimpleName());
     }
     
     public void opcoesJogo() {
@@ -106,7 +106,7 @@ public class Jogo extends Base implements Serializable {
     }
 
     public void novoJogo() {
-        setEstado(new AguardaPreparaJogo(this));
+        setEstado(estadoActual.novoJogo());
     }
     
     public Jogo carregaJogo() throws FileNotFoundException {
@@ -183,7 +183,7 @@ public class Jogo extends Base implements Serializable {
         setEstado(estadoActual.passaVez());
     }
     
-    public void defineApostasJogadores(Jogador jogador, int aposta) {        
+    public void defineApostasJogadores(Jogador jogador, int aposta) {
         setEstado(estadoActual.defineApostasJogadores(jogador,aposta));
     }
             

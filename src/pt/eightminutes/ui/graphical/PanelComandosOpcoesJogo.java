@@ -14,7 +14,7 @@ public class PanelComandosOpcoesJogo extends PanelBase {
         btNovo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                getController().novoJogo();
+                getJogo().novoJogo();
             }
         });
         this.add(btNovo, BorderLayout.CENTER);

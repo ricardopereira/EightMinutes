@@ -3,7 +3,7 @@ package pt.eightminutes.ia;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.Random;
+
 import pt.eightminutes.logic.Accao;
 import pt.eightminutes.logic.Continente;
 import pt.eightminutes.logic.Exercito;
@@ -16,35 +16,42 @@ import pt.eightminutes.states.IEstados;
 import pt.eightminutes.ui.graphical.DataController;
 import pt.eightminutes.utils.utils;
 
-public class JogadorIABasico extends JogadorIA{
+public class JogadorIABasico extends JogadorIA {
     
     public JogadorIABasico() {
+        
+    }
+    
+    @Override
+    public void setIA(Jogador jogador, DataController ctrl) {
+        super.setIA(jogador,ctrl);
+        ctrl.getJogo().addListener(new updateOnSetEstado());
     }
            
-    @Override
-    public void update(Observable o, Object arg) {
+    public void updateLogic() {
        
-        IEstados estado= ctrl.getJogo().getEstadoActual();
+        IEstados estado = ctrl.getJogo().getEstadoActual();
 
-        if(ctrl.getJogo().getJogadorActivo()!=jogadorIA){
+        if (ctrl.getJogo().getJogadorActivo() != jogadorIA) {
             return;
         }
                
-        if(estado.getClass() == AguardaAposta.class) {     
+        if (estado.getClass() == AguardaAposta.class) {
             //define aleatoriamente qual é a aposta num intervalo definido entre 0 e o máximo das moedas
             int x = utils.randInt(0, ctrl.getJogo().getMoedasPorJogador());
             
-            ctrl.getJogo().defineApostasJogadores(ctrl.getJogo().getJogadorActivo(), x);
+            if (ctrl.getJogo().getJogadorActivo().getAposta() == -1)
+                ctrl.getJogo().defineApostasJogadores(ctrl.getJogo().getJogadorActivo(), x);
         }
         else
-        if(estado.getClass() == AguardaEscolheCarta.class) {
+        if (estado.getClass() == AguardaEscolheCarta.class) {
             //escolhe aleatoriamente uma carta            
             int x= utils.randInt(0,5);
             
             ctrl.getJogo().escolheCarta(x);
         }
         else
-        if(estado.getClass() == AguardaEscolheAccao.class) {
+        if (estado.getClass() == AguardaEscolheAccao.class) {
             //escolhe aleatoriamente uma acção e executa
             ArrayList<Accao> listAccoes = ctrl.getJogo().getJogadorActivo().getCartaActiva().getAccoes();
             int x= utils.randInt(0, listAccoes.size()-1);
@@ -52,7 +59,7 @@ public class JogadorIABasico extends JogadorIA{
             ctrl.getJogo().escolheAccao(listAccoes.get(x));            
         }
         else
-        if(estado.getClass() == AguardaColocaCidade.class) {         
+        if (estado.getClass() == AguardaColocaCidade.class) {         
             //escolhe aleatoriamente uma regiao dentro das possiveis
             Jogo jogo = ctrl.getJogo();
             Jogador jogador = jogo.getJogadorActivo();            
@@ -65,7 +72,7 @@ public class JogadorIABasico extends JogadorIA{
             jogo.colocaCidade(listRegioes.get(x));
         }
         else
-        if(estado.getClass() == AguardaColocaExercito.class) {
+        if (estado.getClass() == AguardaColocaExercito.class) {
             //escolhe aleatoriament uma regiao dentro das possiveis(terra)
             Jogo jogo = ctrl.getJogo();
             Jogador jogador = jogo.getJogadorActivo();            
@@ -93,10 +100,10 @@ public class JogadorIABasico extends JogadorIA{
                 jogo.passaVez();
         }
         else
-        if(estado.getClass() == AguardaMoveExercito.class) {
+        if (estado.getClass() == AguardaMoveExercito.class) {
             //Escolhe um exercito e uma região aleatoria dentro das possiveis(terra e agua)
             Jogador jogador = ctrl.getJogo().getJogadorActivo();
-            int x= utils.randInt(0, jogador.getListaExercitoComRegiao().size()-1);            
+            int x = utils.randInt(0, jogador.getListaExercitoComRegiao().size()-1);            
             ArrayList<Regiao> listRegiao = new ArrayList<>();
             ArrayList<Exercito> listExercito = new ArrayList<>();
             listExercito.add(jogador.getListaExercitoComRegiao().get(x));
@@ -106,12 +113,19 @@ public class JogadorIABasico extends JogadorIA{
             //O jogador IA Basico move o exercito a qtd total que esta disponivel na accao
             ctrl.getJogo().getRegioesPossiveisTerra(listExercito.get(0).getRegiao(),accao.getQtd(),listRegiao);
             
-            int m= utils.randInt(0, listRegiao.size()-1);
+            int m = utils.randInt(0, listRegiao.size()-1);
+
+            for (Exercito exercito : listExercito) {
+                if (exercito.getRegiao() == listRegiao.get(m)) {
+                    ctrl.getJogo().passaVez();
+                    return;
+                }
+            }
             
             ctrl.getJogo().moveExercito(listRegiao.get(m),listExercito);
         }
         else
-        if(estado.getClass() == AguardaMoveExercitoAgua.class) {
+        if (estado.getClass() == AguardaMoveExercitoAgua.class) {
             //Escolhe um exercito e uma região aleatoria dentro das possiveis
             Jogador jogador = ctrl.getJogo().getJogadorActivo();
             int x= utils.randInt(0, jogador.getListaExercitoComRegiao().size()-1);            
@@ -129,7 +143,7 @@ public class JogadorIABasico extends JogadorIA{
             ctrl.getJogo().moveExercitoAgua(listRegiao.get(m),listExercito);
         }
         else
-        if(estado.getClass() == AguardaDestroiExercito.class) {
+        if (estado.getClass() == AguardaDestroiExercito.class) {
             //Escolhe um exercito aleatoriamente e apaga
             ArrayList<Exercito> listExercito = new ArrayList<>();
             ctrl.getJogo().getListaExercitosTodosUtilizadores(listExercito);
@@ -145,15 +159,28 @@ public class JogadorIABasico extends JogadorIA{
                 ctrl.getJogo().passaVez();
         }
         else
-        if(estado.getClass() == AguardaOpcoesJogo.class) {
+        if (estado.getClass() == AguardaOpcoesJogo.class) {
             //
         }
         else
-        if(estado.getClass() == AguardaJokers.class) {
+        if (estado.getClass() == AguardaJokers.class) {
             for(int i=0;i<ctrl.getJogo().getJogadorActivo().getListaCartaJokers().size();i++)
             {                
                 ctrl.getJogo().defineRecurso(ctrl.getJogo().getJogadorActivo().getListaCartaJokers().get(i), new RecursoAlimento());
             }
         }                
     }       
+    
+    protected class updateOnSetEstado implements EstadoListener {
+        @Override
+        public void onSetEstado() {
+            updateLogic();
+        }
+    }
+    
+    @Override
+    public void update(Observable o, Object arg) {
+        
+    }
+            
 }
