@@ -17,6 +17,7 @@ import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 import pt.eightminutes.logic.*;
 import pt.eightminutes.states.AguardaEscolheCarta;
@@ -111,7 +112,10 @@ public class PanelCartas extends PanelBase implements Observer {
                     ButtonCarta btCarta = ((ButtonCarta)e.getSource());
                     int indexCarta = btCarta.getIndex();
                     System.out.println("Carta seleccionada " + indexCarta + " - ID" + btCarta.getCarta().getId());
-                    getJogo().escolheCarta(indexCarta);
+                    if(getJogo().getJogadorActivo().getMoedas()>= getJogo().getCustoPorIdx(indexCarta))
+                        getJogo().escolheCarta(indexCarta);
+                    else
+                        JOptionPane.showMessageDialog(null,"Não tem moedas para a carta escolhida","8 Minutes",JOptionPane.WARNING_MESSAGE);
                 }
             });
         }
