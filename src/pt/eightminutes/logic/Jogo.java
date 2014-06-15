@@ -437,12 +437,15 @@ public class Jogo extends Base implements Serializable {
         for(int i=0;i<baralho.getCartas().size();i++){
             if(baralho.getCartas().get(i)!=null)
             {
-                if(!baralho.getCartas().get(i).isComprada()){                                    
-                    if(cartasViradas.size()<6){
-                        cartasViradas.add(baralho.getCartas().get(i));                    
-                    }                                 
-                    else
-                        break;
+                if(!baralho.getCartas().get(i).isComprada()){
+                    if(baralho.getCartas().get(i).getAccoes().get(0).getQtd()>0)
+                    {
+                        if(cartasViradas.size()<6){
+                            cartasViradas.add(baralho.getCartas().get(i));                    
+                        }
+                        else
+                            break;
+                    }                                                     
                 }
             }
         }
