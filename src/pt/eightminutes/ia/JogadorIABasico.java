@@ -68,8 +68,11 @@ public class JogadorIABasico extends JogadorIA {
             
             int x= utils.randInt(0, listContinentes.size()-1);
             listContinentes.get(x).carregaListaRegioesComExercitosPorJogador(jogador, listRegioes, false);
-            x= utils.randInt(0, listRegioes.size()-1);                      
-            jogo.colocaCidade(listRegioes.get(x));
+            x= utils.randInt(0, listRegioes.size()-1);  
+            if(listRegioes.get(x)!=null)
+                jogo.colocaCidade(listRegioes.get(x));
+            else
+                jogo.passaVez();
         }
         else
         if (estado.getClass() == AguardaColocaExercito.class) {
@@ -92,8 +95,8 @@ public class JogadorIABasico extends JogadorIA {
 
             int qtd = jogador.getCartaActiva().getAccaoActiva().getQtd();
             //escolhe aleatoriamente uma quantidade da acção seleccionada
-            if (qtd > 0) {
-                int c = utils.randInt(1, qtd);
+            if ((qtd > 0) || (listRegioes.get(x)==null)) {
+                int c = utils.randInt(1, qtd);                
                 jogo.colocaExercito(listRegioes.get(x),c);
             }
             else
