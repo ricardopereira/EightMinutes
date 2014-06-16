@@ -1,15 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package pt.eightminutes.logic;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Carta implements Serializable{
+public class Carta implements Serializable {
     
     private int id;
     private Recurso recurso;
@@ -35,6 +29,7 @@ public class Carta implements Serializable{
         }
         return myResult;
     }
+    
     /**
      * @return the id
      */

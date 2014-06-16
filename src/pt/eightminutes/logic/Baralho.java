@@ -1,30 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package pt.eightminutes.logic;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
-
-public class Baralho implements Serializable{
+public class Baralho implements Serializable {
     
     private ArrayList<Carta> cartas = new ArrayList<>();
     private ArrayList<Accao> accoesAux = new ArrayList<>();//usado para adicionar acções às cartas
     
-    public Baralho(){
+    public Baralho() {
         
     }
     
-    public Baralho(int numJogadores){
+    public Baralho(int numJogadores) {
         defineBaralho(numJogadores);
     };
     
-    public void defineBaralho(int numJogadores){  
+    public void defineBaralho(int numJogadores) {
         Recurso recursoJoia = new RecursoJoia();
         Recurso recursoAlimento = new RecursoAlimento();
         Recurso recursoMadeira = new RecursoMadeira();
@@ -93,7 +86,7 @@ public class Baralho implements Serializable{
             getCartas().add(new Carta(id,recurso,qtdRecursos,execTodasAccoes,accoesAux));
     }
        
-    private void baralhaCartas(){
+    private void baralhaCartas() {
         Collections.shuffle(getCartas());
     }    
     
